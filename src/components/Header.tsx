@@ -43,9 +43,11 @@ export function Header() {
       <div className="container mx-auto px-4 flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-3 group">
-          <div className="w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-2xl flex items-center justify-center text-white font-bold text-xl transition-all duration-300 group-hover:scale-110 group-hover:rotate-3 shadow-lg hover-glow animate-bounce-slow">
-            R
-          </div>
+          <img
+            src="/logo_ro.png"
+            alt="Respiração Oral"
+            className="w-12 h-12 object-contain transition-all duration-300 group-hover:scale-110 group-hover:rotate-3"
+          />
           <span className="font-bold text-2xl bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent hidden sm:block transition-all duration-300 group-hover:scale-105">
             Respiração Oral
           </span>

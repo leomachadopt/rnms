@@ -16,9 +16,11 @@ export function Footer() {
           {/* Company Info */}
           <div className="space-y-4 animate-fade-in-up">
             <div className="flex items-center gap-2 group">
-              <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white font-bold transition-all duration-300 group-hover:scale-110 group-hover:rotate-6 hover-glow">
-                R
-              </div>
+              <img
+                src="/logo_ro.png"
+                alt="Respiração Oral"
+                className="w-8 h-8 object-contain"
+              />
               <span className="font-bold text-lg text-primary transition-all duration-300 group-hover:scale-105">
                 Respiração Oral
               </span>
