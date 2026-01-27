@@ -12,6 +12,8 @@ import { analyzeEvaluation } from '@/services/aiAnalysis'
 import { findBestSpecialist, getUserLocation } from '@/services/specialistMatching'
 import { createEvaluation, updateEvaluation } from '@/services/evaluations'
 import useAppStore from '@/stores/useAppStore'
+import { useFacebookPixel } from '@/hooks/useFacebookPixel'
+import { useUTMParams } from '@/hooks/useUTMParams'
 
 const PORTUGAL_REGIONS: PortugalRegion[] = [
   'Norte',
@@ -35,6 +37,8 @@ type Message = {
 export function AIChat() {
   const navigate = useNavigate()
   const { specialists } = useAppStore()
+  const { trackEvent } = useFacebookPixel()
+  const { getUTMParams } = useUTMParams()
   const [messages, setMessages] = useState<Message[]>([])
   const [step, setStep] = useState(0)
   const [userData, setUserData] = useState<EvaluationData>({})
@@ -46,6 +50,7 @@ export function AIChat() {
   const [selectedSpecialistId, setSelectedSpecialistId] = useState<number | null>(null)
   const scrollRef = useRef<HTMLDivElement>(null)
   const initializedRef = useRef(false)
+  const leadTrackedRef = useRef(false)
 
   // Calcula regiões disponíveis baseado nos profissionais cadastrados
   const availableRegions = useMemo(() => {
@@ -222,20 +227,41 @@ export function AIChat() {
   const saveEvaluation = useCallback(
     async (data: EvaluationData) => {
       try {
+        const utmParams = getUTMParams()
+        const dataWithUTM = {
+          ...data,
+          utmSource: utmParams.utm_source,
+          utmMedium: utmParams.utm_medium,
+          utmCampaign: utmParams.utm_campaign,
+          utmContent: utmParams.utm_content,
+          utmTerm: utmParams.utm_term,
+        }
+
         if (evaluationId) {
           // Atualiza avaliação existente
-          await updateEvaluation(evaluationId, data)
+          await updateEvaluation(evaluationId, dataWithUTM)
         } else if (data.name && data.phone) {
           // Cria nova avaliação (apenas após ter nome e whatsapp)
-          const newEvaluation = await createEvaluation(data)
+          const newEvaluation = await createEvaluation(dataWithUTM)
           setEvaluationId(newEvaluation.id)
+
+          // Dispara evento Lead (apenas uma vez)
+          if (!leadTrackedRef.current) {
+            trackEvent('Lead', {
+              eventData: {
+                content_name: 'Avaliação Iniciada',
+                content_category: 'evaluation',
+              },
+            })
+            leadTrackedRef.current = true
+          }
         }
       } catch (error) {
         console.error('Erro ao salvar avaliação:', error)
         // Não bloqueia o fluxo se der erro ao salvar
       }
     },
-    [evaluationId],
+    [evaluationId, getUTMParams, trackEvent],
   )
 
   const processInput = useCallback(
@@ -445,6 +471,14 @@ export function AIChat() {
           recommendedSpecialistId: recommendedSpecialist?.id || null,
         })
       }
+
+      // Dispara evento CompleteRegistration (avaliação concluída)
+      trackEvent('CompleteRegistration', {
+        eventData: {
+          content_name: 'Avaliação Completa',
+          status: finalData.riskLevel || 'unknown',
+        },
+      })
 
       // Salva resultado no sessionStorage para exibir
       sessionStorage.setItem('aiReport', report)

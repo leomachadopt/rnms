@@ -5,6 +5,8 @@ import { TooltipProvider } from '@/components/ui/tooltip'
 import { AppStoreProvider } from '@/stores/useAppStore'
 import { AuthProvider } from '@/contexts/AuthContext'
 import { ProtectedRoute } from '@/components/ProtectedRoute'
+import { FacebookPixel } from '@/components/FacebookPixel'
+import { CookieConsent } from '@/components/CookieConsent'
 import Layout from './components/Layout'
 import AdminLayout from './components/AdminLayout'
 import Index from './pages/Index'
@@ -20,6 +22,7 @@ import NotFound from './pages/NotFound'
 
 // Admin Pages
 import Dashboard from './pages/admin/Dashboard'
+import Analytics from './pages/admin/Analytics'
 import SpecialistList from './pages/admin/specialists/SpecialistList'
 import SpecialistForm from './pages/admin/specialists/SpecialistForm'
 import PostList from './pages/admin/blog/PostList'
@@ -28,6 +31,7 @@ import TestimonialList from './pages/admin/testimonials/TestimonialList'
 import TestimonialForm from './pages/admin/testimonials/TestimonialForm'
 import EvaluationList from './pages/admin/evaluations/EvaluationList'
 import Settings from './pages/admin/Settings'
+import TrackingSettings from './pages/admin/TrackingSettings'
 
 const router = createBrowserRouter([
   {
@@ -84,6 +88,10 @@ const router = createBrowserRouter([
         element: <Dashboard />,
       },
       {
+        path: 'analytics',
+        element: <Analytics />,
+      },
+      {
         path: 'specialists',
         element: <SpecialistList />,
       },
@@ -127,6 +135,10 @@ const router = createBrowserRouter([
         path: 'settings',
         element: <Settings />,
       },
+      {
+        path: 'tracking',
+        element: <TrackingSettings />,
+      },
     ],
   },
   {
@@ -140,6 +152,8 @@ const App = () => {
     <AuthProvider>
       <AppStoreProvider>
         <TooltipProvider>
+          <FacebookPixel />
+          <CookieConsent />
           <Toaster />
           <Sonner />
           <RouterProvider router={router} />

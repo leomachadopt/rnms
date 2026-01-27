@@ -56,6 +56,13 @@ export const evaluations = pgTable('evaluations', {
   riskLevel: varchar('risk_level', { length: 20 }), // baixo, moderado, alto
   analysisResult: jsonb('analysis_result'), // Resultado completo da análise IA
   recommendedSpecialistId: integer('recommended_specialist_id').references(() => specialists.id, { onDelete: 'set null' }),
+  // Campos de tracking
+  utmSource: varchar('utm_source', { length: 100 }),
+  utmMedium: varchar('utm_medium', { length: 100 }),
+  utmCampaign: varchar('utm_campaign', { length: 100 }),
+  utmContent: varchar('utm_content', { length: 100 }),
+  utmTerm: varchar('utm_term', { length: 100 }),
+  trackingEventId: integer('tracking_event_id'),
   createdAt: timestamp('created_at').defaultNow().notNull(),
 })
 
@@ -83,6 +90,31 @@ export const settings = pgTable('settings', {
   updatedAt: timestamp('updated_at').defaultNow().notNull(),
 })
 
+// Tabela de Eventos de Tracking
+export const trackingEvents = pgTable('tracking_events', {
+  id: serial('id').primaryKey(),
+  eventName: varchar('event_name', { length: 100 }).notNull(), // PageView, Lead, Contact, etc.
+  eventId: varchar('event_id', { length: 255 }).unique(), // Para deduplicação
+  userFingerprint: varchar('user_fingerprint', { length: 255 }), // Hash único do visitante
+  fbp: varchar('fbp', { length: 255 }), // Cookie _fbp
+  fbc: varchar('fbc', { length: 255 }), // Cookie _fbc
+  // Parâmetros UTM
+  utmSource: varchar('utm_source', { length: 100 }),
+  utmMedium: varchar('utm_medium', { length: 100 }),
+  utmCampaign: varchar('utm_campaign', { length: 100 }),
+  utmContent: varchar('utm_content', { length: 100 }),
+  utmTerm: varchar('utm_term', { length: 100 }),
+  // Dados do navegador
+  ipAddress: varchar('ip_address', { length: 45 }),
+  userAgent: text('user_agent'),
+  referrer: text('referrer'),
+  // Dados customizados do evento
+  eventData: jsonb('event_data'), // Dados específicos do evento
+  // Relação com avaliação (se aplicável)
+  evaluationId: integer('evaluation_id').references(() => evaluations.id, { onDelete: 'set null' }),
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+})
+
 export type Specialist = typeof specialists.$inferSelect
 export type NewSpecialist = typeof specialists.$inferInsert
 export type BlogPost = typeof blogPosts.$inferSelect
@@ -93,3 +125,5 @@ export type Testimonial = typeof testimonials.$inferSelect
 export type NewTestimonial = typeof testimonials.$inferInsert
 export type Setting = typeof settings.$inferSelect
 export type NewSetting = typeof settings.$inferInsert
+export type TrackingEvent = typeof trackingEvents.$inferSelect
+export type NewTrackingEvent = typeof trackingEvents.$inferInsert

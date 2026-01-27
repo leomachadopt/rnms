@@ -328,6 +328,21 @@ export default function EvaluationList() {
                           </div>
                         </div>
 
+                        {/* Origem (UTM) */}
+                        {(evaluation.utmSource || evaluation.utmCampaign) && (
+                          <div className="mt-2 p-2 bg-blue-50 rounded-md text-sm">
+                            <span className="font-medium text-blue-900">Origem:</span>{' '}
+                            <span className="text-blue-700">
+                              {evaluation.utmCampaign ? (
+                                `${evaluation.utmSource || 'Unknown'} - ${evaluation.utmCampaign}`
+                              ) : (
+                                evaluation.utmSource
+                              )}
+                              {evaluation.utmMedium && ` (${evaluation.utmMedium})`}
+                            </span>
+                          </div>
+                        )}
+
                         {specialist && (
                           <div className="mt-2 text-sm">
                             <span className="font-medium">Profissional recomendado:</span>{' '}
