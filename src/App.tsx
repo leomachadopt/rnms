@@ -3,16 +3,19 @@ import { Toaster } from '@/components/ui/toaster'
 import { Toaster as Sonner } from '@/components/ui/sonner'
 import { TooltipProvider } from '@/components/ui/tooltip'
 import { AppStoreProvider } from '@/stores/useAppStore'
+import { AuthProvider } from '@/contexts/AuthContext'
+import { ProtectedRoute } from '@/components/ProtectedRoute'
 import Layout from './components/Layout'
 import AdminLayout from './components/AdminLayout'
 import Index from './pages/Index'
-import QuemSomos from './pages/QuemSomos'
+import Equipa from './pages/Equipa'
 import Problema from './pages/Problema'
 import Blog from './pages/Blog'
 import BlogPost from './pages/BlogPost'
 import Avaliacao from './pages/Avaliacao'
 import ResultadoAvaliacao from './pages/ResultadoAvaliacao'
 import Agendamento from './pages/Agendamento'
+import Login from './pages/Login'
 import NotFound from './pages/NotFound'
 
 // Admin Pages
@@ -36,7 +39,11 @@ const router = createBrowserRouter([
       },
       {
         path: '/quem-somos',
-        element: <QuemSomos />,
+        element: <Equipa />,
+      },
+      {
+        path: '/equipa',
+        element: <Equipa />,
       },
       {
         path: '/problema',
@@ -65,8 +72,16 @@ const router = createBrowserRouter([
     ],
   },
   {
+    path: '/login',
+    element: <Login />,
+  },
+  {
     path: '/admin',
-    element: <AdminLayout />,
+    element: (
+      <ProtectedRoute>
+        <AdminLayout />
+      </ProtectedRoute>
+    ),
     children: [
       {
         index: true,
@@ -126,13 +141,15 @@ const router = createBrowserRouter([
 
 const App = () => {
   return (
-    <AppStoreProvider>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <RouterProvider router={router} />
-      </TooltipProvider>
-    </AppStoreProvider>
+    <AuthProvider>
+      <AppStoreProvider>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <RouterProvider router={router} />
+        </TooltipProvider>
+      </AppStoreProvider>
+    </AuthProvider>
   )
 }
 

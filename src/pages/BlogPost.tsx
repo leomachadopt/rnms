@@ -75,12 +75,19 @@ const BlogPost = () => {
         </div>
 
         <img
-          src={`https://img.usecurling.com/p/800/400?q=${post.image}&dpr=2`}
+          src={
+            post.image.startsWith('http')
+              ? post.image
+              : `https://img.usecurling.com/p/800/400?q=${post.image}&dpr=2`
+          }
           alt={post.title}
-          className="w-full rounded-2xl shadow-lg mb-8 object-cover"
+          className="w-full rounded-2xl shadow-lg mb-8 object-cover aspect-video"
         />
 
-        <div className="whitespace-pre-wrap">{post.content}</div>
+        <div
+          className="prose-content"
+          dangerouslySetInnerHTML={{ __html: post.content }}
+        />
 
         <div className="bg-blue-50 p-6 rounded-xl border border-blue-100 my-8 not-prose">
           <h4 className="text-xl font-bold text-primary mb-2">

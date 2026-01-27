@@ -55,7 +55,7 @@ export const evaluations = pgTable('evaluations', {
   previousTreatment: varchar('previous_treatment', { length: 100 }),
   riskLevel: varchar('risk_level', { length: 20 }), // baixo, moderado, alto
   analysisResult: jsonb('analysis_result'), // Resultado completo da análise IA
-  recommendedSpecialistId: integer('recommended_specialist_id').references(() => specialists.id),
+  recommendedSpecialistId: integer('recommended_specialist_id').references(() => specialists.id, { onDelete: 'set null' }),
   createdAt: timestamp('created_at').defaultNow().notNull(),
 })
 

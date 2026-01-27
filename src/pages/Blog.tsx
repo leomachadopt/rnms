@@ -27,7 +27,11 @@ const Blog = () => {
             >
               <div className="aspect-video w-full overflow-hidden">
                 <img
-                  src={`https://img.usecurling.com/p/400/250?q=${post.image}&dpr=2`}
+                  src={
+                    post.image.startsWith('http')
+                      ? post.image
+                      : `https://img.usecurling.com/p/400/250?q=${post.image}&dpr=2`
+                  }
                   alt={post.title}
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                 />

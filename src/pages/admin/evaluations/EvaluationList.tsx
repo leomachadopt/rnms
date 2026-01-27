@@ -1,16 +1,27 @@
 import { useState, useMemo } from 'react'
-import { FileText, Download, Eye, Users, CheckCircle, Clock, TrendingUp } from 'lucide-react'
+import { FileText, Download, Eye, Users, CheckCircle, Clock, TrendingUp, Trash2 } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog'
 import useAppStore from '@/stores/useAppStore'
 import { format } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 import jsPDF from 'jspdf'
 
 export default function EvaluationList() {
-  const { evaluations, specialists } = useAppStore()
+  const { evaluations, specialists, deleteEvaluation } = useAppStore()
   const [filter, setFilter] = useState<'all' | 'started' | 'completed'>('all')
   const [selectedEvaluation, setSelectedEvaluation] = useState<any>(null)
+  const [evaluationToDelete, setEvaluationToDelete] = useState<any>(null)
 
   // Estatísticas
   const stats = useMemo(() => {
@@ -46,6 +57,18 @@ export default function EvaluationList() {
         return evaluations
     }
   }, [evaluations, filter])
+
+  // Função para deletar avaliação
+  const handleDeleteEvaluation = async () => {
+    if (!evaluationToDelete) return
+
+    try {
+      await deleteEvaluation(evaluationToDelete.id)
+      setEvaluationToDelete(null)
+    } catch (error) {
+      console.error('Erro ao deletar avaliação:', error)
+    }
+  }
 
   // Função para download em PDF
   const handleDownloadPDF = async (evaluation: any) => {
@@ -322,7 +345,7 @@ export default function EvaluationList() {
                               onClick={() => setSelectedEvaluation(evaluation)}
                             >
                               <Eye className="w-4 h-4 mr-1" />
-                              Ver Relatório
+                              Ver
                             </Button>
                             <Button
                               variant="outline"
@@ -334,6 +357,14 @@ export default function EvaluationList() {
                             </Button>
                           </>
                         )}
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => setEvaluationToDelete(evaluation)}
+                          className="text-destructive hover:bg-destructive hover:text-destructive-foreground"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </Button>
                       </div>
                     </div>
                   </div>
@@ -390,6 +421,30 @@ export default function EvaluationList() {
           </div>
         </div>
       )}
+
+      {/* Dialog de confirmação de exclusão */}
+      <AlertDialog open={!!evaluationToDelete} onOpenChange={() => setEvaluationToDelete(null)}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Confirmar Exclusão</AlertDialogTitle>
+            <AlertDialogDescription>
+              Tem certeza que deseja excluir a avaliação de <strong>{evaluationToDelete?.name}</strong>?
+              <br />
+              <br />
+              Esta ação não pode ser desfeita. O relatório e todos os dados associados serão permanentemente removidos do sistema.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancelar</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={handleDeleteEvaluation}
+              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+            >
+              Excluir Avaliação
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
 
       {/* Profissionais mais recomendados */}
       {Object.keys(stats.professionalsCount).length > 0 && (

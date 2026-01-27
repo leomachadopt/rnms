@@ -30,13 +30,22 @@ export function Footer() {
             </p>
             <div className="flex gap-4">
               {[
-                { icon: Facebook, label: 'Facebook' },
-                { icon: Instagram, label: 'Instagram' },
-                { icon: Linkedin, label: 'LinkedIn' },
-              ].map(({ icon: Icon, label }, idx) => (
+                { 
+                  icon: Facebook, 
+                  label: 'Facebook', 
+                  href: 'https://www.facebook.com/clinicacristianemartins' 
+                },
+                { 
+                  icon: Instagram, 
+                  label: 'Instagram', 
+                  href: 'https://www.instagram.com/dracristianemartins' 
+                },
+              ].map(({ icon: Icon, label, href }, idx) => (
                 <a
                   key={label}
-                  href="#"
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-muted-foreground hover:text-primary transition-all duration-300 hover:scale-125 hover:rotate-6"
                   style={{ animationDelay: `${idx * 100}ms` }}
                 >
@@ -55,7 +64,7 @@ export function Footer() {
             <ul className="space-y-2">
               {[
                 { path: '/', label: 'Home' },
-                { path: '/quem-somos', label: 'Quem Somos' },
+                { path: '/quem-somos', label: 'Método' },
                 { path: '/problema', label: 'O Problema' },
                 { path: '/blog', label: 'Blog' },
               ].map((link, idx) => (
@@ -107,27 +116,27 @@ export function Footer() {
               <li className="flex items-start gap-3 text-sm text-muted-foreground">
                 <MapPin className="w-5 h-5 text-primary shrink-0" />
                 <span>
-                  Av. da Liberdade, 100
+                  Avenida Doutor António José de Almeida, 293
                   <br />
-                  Lisboa, Portugal
+                  3720-293, Oliveira de Azeméis, Portugal
                 </span>
               </li>
               <li className="flex items-center gap-3 text-sm text-muted-foreground">
                 <Phone className="w-5 h-5 text-primary shrink-0" />
                 <a
-                  href="tel:+351210000000"
+                  href="tel:+351916209737"
                   className="hover:text-primary transition-colors"
                 >
-                  +351 210 000 000
+                  +351 916 209 737
                 </a>
               </li>
               <li className="flex items-center gap-3 text-sm text-muted-foreground">
                 <Mail className="w-5 h-5 text-primary shrink-0" />
                 <a
-                  href="mailto:contato@respiracaooral.pt"
+                  href="mailto:info@cristianemartins.pt"
                   className="hover:text-primary transition-colors"
                 >
-                  contato@respiracaooral.pt
+                  info@cristianemartins.pt
                 </a>
               </li>
             </ul>

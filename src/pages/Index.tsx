@@ -51,10 +51,15 @@ const Index = () => {
                 size="lg"
                 className="rounded-full text-base sm:text-lg px-8 sm:px-10 py-6 sm:py-7 bg-gradient-to-r from-blue-500 to-purple-600 hover:shadow-2xl hover:shadow-purple-500/50 transition-all duration-300 hover:scale-105 hover-lift"
               >
-                <Link to="/avaliacao">
-                  Avalie a respiração agora
+                <a
+                  href="https://wa.link/uyxjm5"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center"
+                >
+                  Agendar Checkup 360°
                   <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </Link>
+                </a>
               </Button>
               <Button
                 asChild
