@@ -72,13 +72,19 @@ export default async function handler(
   try {
     const emailData: EmailData = req.body
 
-    console.log('Enviando email de notificação para avaliação:', emailData.name)
+    console.log('=== INICIANDO ENVIO DE EMAIL ===')
+    console.log('Nome:', emailData.name)
+    console.log('Email Data:', JSON.stringify(emailData, null, 2))
 
     // Buscar configurações
+    console.log('Buscando configurações do banco...')
     const [notificationEmail, resendKey] = await Promise.all([
       getEmailSettings(),
       getResendKey(),
     ])
+
+    console.log('Email de notificação:', notificationEmail ? 'Configurado' : 'NÃO configurado')
+    console.log('Chave Resend:', resendKey ? 'Configurada' : 'NÃO configurada')
 
     if (!notificationEmail) {
       console.log('Email de notificação não configurado - pulando envio')
@@ -155,23 +161,34 @@ export default async function handler(
 `
 
     // Enviar email via Resend
+    console.log('Enviando email via Resend...')
+    console.log('Para:', notificationEmail)
+    console.log('De: Respira Oral <onboarding@resend.dev>')
+
+    const emailPayload = {
+      from: 'Respira Oral <onboarding@resend.dev>', // Usar domínio verificado em produção
+      to: [notificationEmail],
+      subject: `🔔 Nova Avaliação - ${emailData.name}`,
+      html: emailHtml,
+    }
+
+    console.log('Payload:', JSON.stringify(emailPayload, null, 2))
+
     const response = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${resendKey}`,
       },
-      body: JSON.stringify({
-        from: 'Respira Oral <onboarding@resend.dev>', // Usar domínio verificado em produção
-        to: [notificationEmail],
-        subject: `🔔 Nova Avaliação - ${emailData.name}`,
-        html: emailHtml,
-      }),
+      body: JSON.stringify(emailPayload),
     })
+
+    console.log('Resposta Resend - Status:', response.status)
 
     if (!response.ok) {
       const errorData = await response.json()
-      throw new Error(errorData.message || 'Erro ao enviar email via Resend')
+      console.error('Erro da API Resend:', JSON.stringify(errorData, null, 2))
+      throw new Error(JSON.stringify(errorData))
     }
 
     const result = await response.json()
@@ -183,11 +200,15 @@ export default async function handler(
       emailId: result.id,
     })
   } catch (error: any) {
-    console.error('Erro ao enviar email:', error)
+    console.error('=== ERRO AO ENVIAR EMAIL ===')
+    console.error('Tipo:', error?.constructor?.name)
+    console.error('Mensagem:', error?.message)
+    console.error('Stack:', error?.stack)
 
     return res.status(500).json({
       error: 'Erro ao enviar email',
       details: error?.message || 'Erro desconhecido',
+      stack: error?.stack,
     })
   }
 }
