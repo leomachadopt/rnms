@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useCallback, useMemo } from 'react'
+import { useState, useRef, useEffect, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Send, Bot, Loader2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -7,23 +7,10 @@ import { ScrollArea } from '@/components/ui/scroll-area'
 import { cn } from '@/lib/utils'
 import { toast } from 'sonner'
 import ReactMarkdown from 'react-markdown'
-import { EvaluationData, PortugalRegion, Specialist } from '@/types'
-import { analyzeEvaluation } from '@/services/aiAnalysis'
-import { findBestSpecialist, getUserLocation } from '@/services/specialistMatching'
+import { EvaluationData } from '@/types'
 import { createEvaluation, updateEvaluation } from '@/services/evaluations'
-import useAppStore from '@/stores/useAppStore'
 import { useFacebookPixel } from '@/hooks/useFacebookPixel'
 import { useUTMParams } from '@/hooks/useUTMParams'
-
-const PORTUGAL_REGIONS: PortugalRegion[] = [
-  'Norte',
-  'Centro',
-  'Lisboa e Vale do Tejo',
-  'Alentejo',
-  'Algarve',
-  'Açores',
-  'Madeira',
-]
 
 type Message = {
   id: string
@@ -36,7 +23,6 @@ type Message = {
 
 export function AIChat() {
   const navigate = useNavigate()
-  const { specialists } = useAppStore()
   const { trackEvent } = useFacebookPixel()
   const { getUTMParams } = useUTMParams()
   const [messages, setMessages] = useState<Message[]>([])
@@ -46,22 +32,10 @@ export function AIChat() {
   const [inputValue, setInputValue] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [selectedOptions, setSelectedOptions] = useState<string[]>([])
-  const [regionSpecialists, setRegionSpecialists] = useState<Specialist[]>([])
-  const [selectedSpecialistId, setSelectedSpecialistId] = useState<number | null>(null)
   const scrollRef = useRef<HTMLDivElement>(null)
   const initializedRef = useRef(false)
   const leadTrackedRef = useRef(false)
 
-  // Calcula regiões disponíveis baseado nos profissionais cadastrados
-  const availableRegions = useMemo(() => {
-    const regions = new Set<PortugalRegion>()
-    specialists.forEach((specialist) => {
-      if (specialist.region) {
-        regions.add(specialist.region)
-      }
-    })
-    return Array.from(regions).sort()
-  }, [specialists])
 
   const addMessage = useCallback((msg: Omit<Message, 'id'>) => {
     setMessages((prev) => [
@@ -195,19 +169,7 @@ export function AIChat() {
         })
         break
       case 11:
-        addMessage({
-          sender: 'ai',
-          text: 'Para encontrarmos o especialista mais próximo, em qual região de Portugal você se encontra?',
-          type: 'options',
-          options: availableRegions,
-        })
-        break
-      case 12:
-        // A mensagem de seleção de profissionais já foi mostrada no case 11 do processInput
-        // Este case fica vazio pois só processamos a seleção do usuário no processInput
-        break
-      case 13:
-        // Não pergunta mais o email, vai direto para análise
+        // Vai direto para análise, sem perguntar região
         addMessage({
           sender: 'ai',
           text: 'Perfeito! Estou a analisar todas as suas respostas para identificar os sinais que o seu filho(a) apresenta e gerar um relatório detalhado...',
@@ -221,7 +183,7 @@ export function AIChat() {
       default:
         break
     }
-  }, [step, addMessage, regionSpecialists, availableRegions])
+  }, [step, addMessage])
 
   // Função auxiliar para salvar/atualizar avaliação no banco
   const saveEvaluation = useCallback(
@@ -345,84 +307,15 @@ export function AIChat() {
           await saveEvaluation(updatedWithTreatment)
           nextStep()
           break
-        case 11: // Region
-          const selectedRegion = input as PortugalRegion
-          console.log('Região selecionada:', selectedRegion)
-          console.log('Total de profissionais:', specialists.length)
-          console.log('Profissionais com região:', specialists.map(s => ({ nome: s.name, região: s.region })))
-
-          const updatedWithRegion = {
-            ...userData,
-            region: selectedRegion,
-            location: {
-              ...userData.location,
-              region: selectedRegion,
-            },
-          }
-          setUserData(updatedWithRegion)
-          await saveEvaluation(updatedWithRegion)
-
-          // Busca profissionais da região
-          const specialistsInRegion = specialists.filter(
-            (s) => s.region === selectedRegion
-          )
-          console.log('Profissionais encontrados na região:', specialistsInRegion.length)
-          console.log('Profissionais:', specialistsInRegion.map(s => ({ nome: s.name, região: s.region })))
-          setRegionSpecialists(specialistsInRegion)
-
-          // Mostra mensagem baseado nos profissionais encontrados AGORA
-          if (specialistsInRegion.length > 0) {
-            const specialistOptions = specialistsInRegion.map(
-              (s) => `${s.name} - ${s.role} (${s.city})`
-            )
-            addMessage({
-              sender: 'ai',
-              text: `Encontrei ${specialistsInRegion.length} profissional(is) na região ${selectedRegion}. Selecione o de sua preferência:`,
-              type: 'options',
-              options: specialistOptions,
-            })
-            setStep(12) // Vai para step 12 para processar a seleção
-          } else {
-            addMessage({
-              sender: 'ai',
-              text: 'Infelizmente não encontramos profissionais cadastrados nesta região ainda. Vamos continuar com a avaliação e entraremos em contacto.',
-              type: 'text',
-            })
-            setTimeout(() => setStep(13), 1500) // Pula direto para email
-          }
-          break
-        case 12: // Specialist Selection
-          if (regionSpecialists.length > 0) {
-            // Extrai o índice do profissional selecionado
-            const selectedIndex = regionSpecialists.findIndex((s) =>
-              input.includes(s.name)
-            )
-            if (selectedIndex !== -1) {
-              const selectedSpecialist = regionSpecialists[selectedIndex]
-              setSelectedSpecialistId(selectedSpecialist.id)
-
-              const updatedWithSpecialist = {
-                ...userData,
-                location: {
-                  ...userData.location,
-                  city: selectedSpecialist.city,
-                },
-              }
-              setUserData(updatedWithSpecialist)
-              await saveEvaluation(updatedWithSpecialist)
-            }
-          }
-          nextStep()
-          break
-        case 13: // Análise final - não processa input, apenas aguarda o processEvaluation automático
-          // O processEvaluation é chamado automaticamente no nextStep do case 13
+        case 11: // Análise final - não processa input, apenas aguarda o processEvaluation automático
+          // O processEvaluation é chamado automaticamente no nextStep do case 11
           break
         default:
           break
       }
       setIsLoading(false)
     },
-    [step, nextStep, userData, selectedOptions, saveEvaluation, specialists, regionSpecialists],
+    [step, nextStep, userData, selectedOptions, saveEvaluation],
   )
 
   const processEvaluation = async (finalData: EvaluationData) => {
@@ -450,16 +343,6 @@ export function AIChat() {
 
       const { report } = await response.json()
 
-      // Encontra especialista (usa o selecionado ou filtra por região)
-      let recommendedSpecialist = null
-      if (selectedSpecialistId) {
-        recommendedSpecialist = specialists.find((s) => s.id === selectedSpecialistId) || null
-      } else if (finalData.region) {
-        // Busca primeiro especialista da região
-        const regionSpecialists = specialists.filter((s) => s.region === finalData.region)
-        recommendedSpecialist = regionSpecialists[0] || null
-      }
-
       // Salvar relatório no banco de dados
       if (evaluationId) {
         await updateEvaluation(evaluationId, {
@@ -468,7 +351,6 @@ export function AIChat() {
             report: report,
             generatedAt: new Date().toISOString(),
           },
-          recommendedSpecialistId: recommendedSpecialist?.id || null,
         })
       }
 
@@ -483,27 +365,14 @@ export function AIChat() {
       // Salva resultado no sessionStorage para exibir
       sessionStorage.setItem('aiReport', report)
       sessionStorage.setItem('evaluationData', JSON.stringify(finalData))
-      if (recommendedSpecialist) {
-        sessionStorage.setItem('recommendedSpecialist', JSON.stringify(recommendedSpecialist))
-      }
 
-      // Mostrar o relatório no próprio chat
+      // Mostrar o relatório no próprio chat (já inclui o contacto da Clínica Kids & Family)
       setTimeout(() => {
         addMessage({
           sender: 'ai',
           text: report,
         })
       }, 1000)
-
-      // Mensagem com especialista se houver
-      if (recommendedSpecialist) {
-        setTimeout(() => {
-          addMessage({
-            sender: 'ai',
-            text: `Recomendamos agendar uma consulta com ${recommendedSpecialist.name} - ${recommendedSpecialist.role}, que atende na região ${recommendedSpecialist.region}. Entre em contacto através do WhatsApp: ${recommendedSpecialist.whatsapp}`,
-          })
-        }, 3000)
-      }
 
       // Mensagem final
       setTimeout(() => {
@@ -512,7 +381,7 @@ export function AIChat() {
           text: 'O relatório detalhado será enviado para o seu WhatsApp em breve. Caso tenha alguma dúvida, não hesite em entrar em contacto!',
         })
         setIsLoading(false)
-      }, 5000)
+      }, 3000)
 
     } catch (error: any) {
       console.error('Erro ao processar avaliação:', error)
