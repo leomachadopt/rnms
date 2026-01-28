@@ -260,17 +260,17 @@ export default function Settings() {
 
         <div className="space-y-2">
           <label className="text-sm font-medium text-foreground">
-            Email para Notificações
+            Email(s) para Notificações
           </label>
           <input
-            type="email"
+            type="text"
             value={notificationEmail}
             onChange={(e) => setNotificationEmail(e.target.value)}
-            placeholder="seuemail@exemplo.com"
+            placeholder="email1@exemplo.com, email2@exemplo.com"
             className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
           />
           <p className="text-xs text-muted-foreground">
-            Email que receberá notificações quando uma nova avaliação for concluída
+            Email(s) que receberão notificações quando uma nova avaliação for concluída. Para múltiplos emails, separe com vírgula (,) ou ponto-e-vírgula (;)
           </p>
         </div>
 

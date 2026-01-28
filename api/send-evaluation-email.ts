@@ -102,6 +102,14 @@ export default async function handler(
       })
     }
 
+    // Processar múltiplos emails (separados por vírgula, ponto-e-vírgula ou espaço)
+    const emailList = notificationEmail
+      .split(/[,;\s]+/)
+      .map(email => email.trim())
+      .filter(email => email.length > 0)
+
+    console.log('Emails de destino:', emailList)
+
     // Formatar o relatório para HTML
     const reportHtml = emailData.report
       .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
@@ -162,12 +170,12 @@ export default async function handler(
 
     // Enviar email via Resend
     console.log('Enviando email via Resend...')
-    console.log('Para:', notificationEmail)
+    console.log('Para:', emailList.join(', '))
     console.log('De: Respira Oral <onboarding@resend.dev>')
 
     const emailPayload = {
       from: 'Respira Oral <onboarding@resend.dev>', // Usar domínio verificado em produção
-      to: [notificationEmail],
+      to: emailList,
       subject: `🔔 Nova Avaliação - ${emailData.name}`,
       html: emailHtml,
     }
