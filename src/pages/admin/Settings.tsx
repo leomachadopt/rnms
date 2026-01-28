@@ -82,6 +82,9 @@ export default function Settings() {
   const [prompt, setPrompt] = useState(DEFAULT_PROMPT)
   const [openaiKey, setOpenaiKey] = useState('')
   const [isKeyConfigured, setIsKeyConfigured] = useState(false)
+  const [resendKey, setResendKey] = useState('')
+  const [isResendConfigured, setIsResendConfigured] = useState(false)
+  const [notificationEmail, setNotificationEmail] = useState('')
   const [isLoading, setIsLoading] = useState(true)
   const [isSaving, setIsSaving] = useState(false)
 
@@ -92,9 +95,11 @@ export default function Settings() {
   const loadSettings = async () => {
     try {
       setIsLoading(true)
-      const [promptSetting, keySetting] = await Promise.all([
+      const [promptSetting, keySetting, resendSetting, emailSetting] = await Promise.all([
         getSetting('ai_report_prompt'),
         getSetting('openai_api_key'),
+        getSetting('resend_api_key'),
+        getSetting('notification_email'),
       ])
 
       if (promptSetting) {
@@ -104,6 +109,13 @@ export default function Settings() {
         // A chave vem mascarada do backend por segurança
         setIsKeyConfigured(keySetting.value === '***configurada***')
         setOpenaiKey('') // Nunca mostrar a chave real
+      }
+      if (resendSetting) {
+        setIsResendConfigured(resendSetting.value === '***configurada***')
+        setResendKey('')
+      }
+      if (emailSetting) {
+        setNotificationEmail(emailSetting.value)
       }
     } catch (error) {
       console.error('Erro ao carregar configurações:', error)
@@ -125,7 +137,7 @@ export default function Settings() {
         ),
       ]
 
-      // Só salvar a chave se o usuário digitou uma nova
+      // Só salvar a chave OpenAI se o usuário digitou uma nova
       if (openaiKey.trim().length > 0) {
         promises.push(
           saveSetting(
@@ -136,11 +148,38 @@ export default function Settings() {
         )
       }
 
+      // Só salvar a chave Resend se o usuário digitou uma nova
+      if (resendKey.trim().length > 0) {
+        promises.push(
+          saveSetting(
+            'resend_api_key',
+            resendKey,
+            'Chave da API Resend para enviar emails'
+          )
+        )
+      }
+
+      // Salvar email de notificação se preenchido
+      if (notificationEmail.trim().length > 0) {
+        promises.push(
+          saveSetting(
+            'notification_email',
+            notificationEmail,
+            'Email para receber notificações de novas avaliações'
+          )
+        )
+      }
+
       await Promise.all(promises)
 
       if (openaiKey.trim().length > 0) {
         setIsKeyConfigured(true)
         setOpenaiKey('') // Limpar o campo após salvar
+      }
+
+      if (resendKey.trim().length > 0) {
+        setIsResendConfigured(true)
+        setResendKey('') // Limpar o campo após salvar
       }
 
       toast.success('Configurações salvas com sucesso!')
@@ -217,6 +256,59 @@ export default function Settings() {
           </p>
         </div>
 
+        <hr className="my-6" />
+
+        <div className="space-y-2">
+          <label className="text-sm font-medium text-foreground">
+            Email para Notificações
+          </label>
+          <input
+            type="email"
+            value={notificationEmail}
+            onChange={(e) => setNotificationEmail(e.target.value)}
+            placeholder="seuemail@exemplo.com"
+            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+          />
+          <p className="text-xs text-muted-foreground">
+            Email que receberá notificações quando uma nova avaliação for concluída
+          </p>
+        </div>
+
+        <div className="space-y-2">
+          <label className="text-sm font-medium text-foreground">
+            Chave da API Resend
+          </label>
+          {isResendConfigured && (
+            <div className="bg-green-50 border border-green-200 rounded-lg p-3 mb-2">
+              <p className="text-sm text-green-800">
+                ✓ Chave Resend já configurada e armazenada de forma segura no servidor
+              </p>
+            </div>
+          )}
+          <input
+            type="password"
+            value={resendKey}
+            onChange={(e) => setResendKey(e.target.value)}
+            placeholder={isResendConfigured ? "Digite para atualizar a chave..." : "re_..."}
+            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+          />
+          <p className="text-xs text-muted-foreground">
+            {isResendConfigured
+              ? 'A chave atual está armazenada de forma segura. Digite uma nova chave apenas se desejar atualizá-la.'
+              : 'Obtenha sua chave em'}{' '}
+            <a
+              href="https://resend.com/api-keys"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary hover:underline"
+            >
+              resend.com/api-keys
+            </a>
+          </p>
+        </div>
+
+        <hr className="my-6" />
+
         <div className="space-y-2">
           <div className="flex items-center justify-between">
             <label className="text-sm font-medium text-foreground">
@@ -284,19 +376,39 @@ export default function Settings() {
         </div>
       </div>
 
+      <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
+        <h3 className="font-semibold text-blue-900 mb-2 flex items-center gap-2">
+          📧 Notificações por Email
+        </h3>
+        <ul className="text-sm text-blue-800 space-y-1 list-disc list-inside">
+          <li>
+            Configure o email para receber notificações automáticas quando uma avaliação for concluída
+          </li>
+          <li>
+            O email incluirá os dados do responsável e o relatório completo gerado pela IA
+          </li>
+          <li>
+            É necessário configurar uma conta no <a href="https://resend.com" target="_blank" rel="noopener noreferrer" className="underline font-semibold">Resend</a> (serviço gratuito até 3.000 emails/mês)
+          </li>
+          <li>
+            Se não configurar, a aplicação funcionará normalmente sem enviar emails
+          </li>
+        </ul>
+      </div>
+
       <div className="bg-green-50 border border-green-200 rounded-xl p-4">
         <h3 className="font-semibold text-green-900 mb-2 flex items-center gap-2">
           🔒 Segurança
         </h3>
         <ul className="text-sm text-green-800 space-y-1 list-disc list-inside">
           <li>
-            A chave OpenAI é armazenada de forma <strong>criptografada</strong> no servidor
+            As chaves OpenAI e Resend são armazenadas de forma <strong>criptografada</strong> no servidor
           </li>
           <li>
-            A chave <strong>NUNCA</strong> é enviada ao navegador ou exposta no frontend
+            As chaves <strong>NUNCA</strong> são enviadas ao navegador ou expostas no frontend
           </li>
           <li>
-            Todas as chamadas à OpenAI são feitas exclusivamente pelo backend
+            Todas as chamadas às APIs são feitas exclusivamente pelo backend
           </li>
         </ul>
       </div>

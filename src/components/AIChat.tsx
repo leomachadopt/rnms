@@ -366,6 +366,27 @@ export function AIChat() {
       sessionStorage.setItem('aiReport', report)
       sessionStorage.setItem('evaluationData', JSON.stringify(finalData))
 
+      // Enviar email de notificação
+      try {
+        await fetch(`${API_URL}/send-evaluation-email`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            name: finalData.name,
+            phone: finalData.phone,
+            age: finalData.age,
+            report: report,
+            evaluationId: evaluationId,
+          }),
+        })
+        console.log('Email de notificação enviado')
+      } catch (emailError) {
+        console.error('Erro ao enviar email de notificação:', emailError)
+        // Não bloqueia o fluxo se der erro no email
+      }
+
       // Mostrar o relatório no próprio chat (já inclui o contacto da Clínica Kids & Family)
       setTimeout(() => {
         addMessage({
@@ -378,7 +399,7 @@ export function AIChat() {
       setTimeout(() => {
         addMessage({
           sender: 'ai',
-          text: 'O relatório detalhado será enviado para o seu WhatsApp em breve. Caso tenha alguma dúvida, não hesite em entrar em contacto!',
+          text: 'O relatório detalhado será enviado para o seu WhatsApp em breve. Caso tenha alguma dúvida, não hesite em entrar em contacto através do telefone/WhatsApp +351 916 209 737!',
         })
         setIsLoading(false)
       }, 3000)
