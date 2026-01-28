@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teste Facebook Pixel - Respira Oral</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+    h1 {
+      color: #1a73e8;
+      margin-top: 0;
+    }
+    .status {
+      padding: 15px;
+      border-radius: 4px;
+      margin: 10px 0;
+      font-weight: 500;
+    }
+    .status.success {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+    .status.error {
+      background: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+    .status.info {
+      background: #d1ecf1;
+      color: #0c5460;
+      border: 1px solid #bee5eb;
+    }
+    button {
+      background: #1a73e8;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      margin: 5px;
+    }
+    button:hover {
+      background: #1557b0;
+    }
+    pre {
+      background: #f4f4f4;
+      padding: 15px;
+      border-radius: 4px;
+      overflow-x: auto;
+      font-size: 12px;
+    }
+    .log-entry {
+      padding: 8px;
+      margin: 4px 0;
+      border-left: 3px solid #1a73e8;
+      background: #f8f9fa;
+      font-family: monospace;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>🔍 Diagnóstico Facebook Pixel</h1>
+    <p>Esta página testa se o Facebook Pixel está carregando corretamente no seu site.</p>
+
+    <div id="status"></div>
+
+    <div style="margin: 20px 0;">
+      <button onclick="testPixel()">🧪 Testar Pixel</button>
+      <button onclick="testEvent()">📊 Enviar Evento de Teste</button>
+      <button onclick="clearLogs()">🗑️ Limpar Logs</button>
+    </div>
+
+    <div id="logs"></div>
+  </div>
+
+  <div class="card">
+    <h2>📋 Informações do Sistema</h2>
+    <pre id="system-info"></pre>
+  </div>
+
+  <div class="card">
+    <h2>🍪 Cookies</h2>
+    <pre id="cookies"></pre>
+  </div>
+
+  <!-- Facebook Pixel Code -->
+  <script>
+    // Configuração
+    const PIXEL_ID = '1783122225709154'
+    const logs = []
+
+    function addLog(message, type = 'info') {
+      const timestamp = new Date().toLocaleTimeString('pt-BR')
+      logs.push({ timestamp, message, type })
+      updateLogs()
+    }
+
+    function updateLogs() {
+      const logsDiv = document.getElementById('logs')
+      if (logs.length === 0) {
+        logsDiv.innerHTML = '<p style="color: #666;">Nenhum log ainda. Clique em "Testar Pixel" para começar.</p>'
+        return
+      }
+
+      logsDiv.innerHTML = '<h3>📝 Logs:</h3>' + logs.map(log =>
+        `<div class="log-entry" style="border-left-color: ${
+          log.type === 'success' ? '#28a745' :
+          log.type === 'error' ? '#dc3545' : '#1a73e8'
+        }">
+          <strong>[${log.timestamp}]</strong> ${log.message}
+        </div>`
+      ).join('')
+    }
+
+    function clearLogs() {
+      logs.length = 0
+      updateLogs()
+    }
+
+    function updateStatus(message, type) {
+      const statusDiv = document.getElementById('status')
+      statusDiv.innerHTML = `<div class="status ${type}">${message}</div>`
+    }
+
+    function showSystemInfo() {
+      const info = {
+        'User Agent': navigator.userAgent,
+        'Cookies Enabled': navigator.cookieEnabled,
+        'URL': window.location.href,
+        'Referrer': document.referrer || '(nenhum)',
+        'Screen': `${screen.width}x${screen.height}`,
+        'Language': navigator.language,
+        'Pixel ID': PIXEL_ID
+      }
+
+      document.getElementById('system-info').textContent =
+        Object.entries(info).map(([k, v]) => `${k}: ${v}`).join('\n')
+    }
+
+    function showCookies() {
+      const cookies = document.cookie.split(';').map(c => c.trim())
+      const fbCookies = cookies.filter(c => c.startsWith('_fb'))
+
+      document.getElementById('cookies').textContent =
+        fbCookies.length > 0
+          ? fbCookies.join('\n')
+          : 'Nenhum cookie do Facebook encontrado (_fbp ou _fbc)'
+    }
+
+    function testPixel() {
+      addLog('🔄 Iniciando teste do Facebook Pixel...', 'info')
+
+      // Verifica se o pixel está carregado
+      if (typeof window.fbq === 'undefined') {
+        addLog('❌ Função fbq não encontrada. O pixel não foi carregado!', 'error')
+        updateStatus('❌ Pixel NÃO carregado - verifique se o script está sendo injetado', 'error')
+
+        // Tenta carregar manualmente
+        addLog('🔄 Tentando carregar o pixel manualmente...', 'info')
+        loadPixelManually()
+      } else {
+        addLog('✅ Função fbq encontrada!', 'success')
+
+        // Verifica se foi inicializado
+        if (window.fbq.loaded) {
+          addLog('✅ Pixel está carregado e pronto', 'success')
+          updateStatus('✅ Pixel carregado com sucesso!', 'success')
+        } else {
+          addLog('⚠️ Pixel encontrado mas não está inicializado', 'info')
+          updateStatus('⚠️ Pixel encontrado mas não inicializado', 'info')
+        }
+
+        // Mostra informações
+        addLog(`ℹ️ Pixel ID: ${PIXEL_ID}`, 'info')
+        addLog(`ℹ️ Version: ${window.fbq.version || 'desconhecida'}`, 'info')
+      }
+
+      showCookies()
+    }
+
+    function loadPixelManually() {
+      !function(f,b,e,v,n,t,s) {
+        if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)
+      }(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+
+      fbq('init', PIXEL_ID);
+      fbq('track', 'PageView');
+
+      addLog('✅ Pixel carregado manualmente', 'success')
+      addLog('✅ Evento PageView enviado', 'success')
+      updateStatus('✅ Pixel carregado manualmente e funcionando!', 'success')
+
+      setTimeout(() => {
+        showCookies()
+      }, 1000)
+    }
+
+    function testEvent() {
+      if (typeof window.fbq === 'undefined') {
+        addLog('❌ Não é possível enviar evento: Pixel não carregado', 'error')
+        alert('Pixel não está carregado. Clique em "Testar Pixel" primeiro.')
+        return
+      }
+
+      const eventData = {
+        content_name: 'Teste de Pixel',
+        content_category: 'test',
+        value: 0.00,
+        currency: 'EUR'
+      }
+
+      addLog('📤 Enviando evento de teste...', 'info')
+      addLog(`📦 Dados: ${JSON.stringify(eventData)}`, 'info')
+
+      try {
+        window.fbq('track', 'ViewContent', eventData)
+        addLog('✅ Evento "ViewContent" enviado com sucesso!', 'success')
+        updateStatus('✅ Evento de teste enviado! Verifique no Facebook Events Manager.', 'success')
+      } catch (error) {
+        addLog(`❌ Erro ao enviar evento: ${error.message}`, 'error')
+        updateStatus('❌ Erro ao enviar evento', 'error')
+      }
+
+      setTimeout(() => {
+        showCookies()
+      }, 1000)
+    }
+
+    // Intercepta console.log para capturar logs do pixel
+    const originalLog = console.log
+    console.log = function(...args) {
+      const message = args.join(' ')
+      if (message.includes('[FB Pixel]') || message.includes('fbq')) {
+        addLog(message, 'info')
+      }
+      originalLog.apply(console, args)
+    }
+
+    // Inicialização
+    window.addEventListener('load', () => {
+      addLog('✅ Página carregada', 'success')
+      showSystemInfo()
+      showCookies()
+
+      // Auto-testa após 1 segundo
+      setTimeout(() => {
+        testPixel()
+      }, 1000)
+    })
+
+    // Carrega o pixel automaticamente
+    loadPixelManually()
+  </script>
+
+  <!-- Conversions API Test -->
+  <div class="card">
+    <h2>🔄 Teste Conversions API</h2>
+    <button onclick="testConversionsAPI()">Testar Conversions API</button>
+    <div id="conversions-result"></div>
+  </div>
+
+  <script>
+    async function testConversionsAPI() {
+      const resultDiv = document.getElementById('conversions-result')
+      resultDiv.innerHTML = '<p style="color: #666;">Enviando...</p>'
+
+      try {
+        const response = await fetch('/api/conversions-api', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            eventName: 'ViewContent',
+            eventId: `test-${Date.now()}`,
+            eventData: {
+              content_name: 'Teste Conversions API',
+              test: true
+            },
+            url: window.location.href,
+            referrer: document.referrer
+          })
+        })
+
+        if (response.ok) {
+          const data = await response.json()
+          resultDiv.innerHTML = `<div class="status success">✅ Conversions API funcionando!<pre>${JSON.stringify(data, null, 2)}</pre></div>`
+          addLog('✅ Conversions API testada com sucesso', 'success')
+        } else {
+          const error = await response.text()
+          resultDiv.innerHTML = `<div class="status error">❌ Erro: ${response.status}<pre>${error}</pre></div>`
+          addLog(`❌ Erro na Conversions API: ${response.status}`, 'error')
+        }
+      } catch (error) {
+        resultDiv.innerHTML = `<div class="status error">❌ Erro: ${error.message}</div>`
+        addLog(`❌ Erro ao testar Conversions API: ${error.message}`, 'error')
+      }
+    }
+  </script>
+
+  <noscript>
+    <img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=1783122225709154&ev=PageView&noscript=1"/>
+  </noscript>
+</body>
+</html>
