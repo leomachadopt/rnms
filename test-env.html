@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Test Env Variables</title>
+</head>
+<body>
+  <h1>Teste de Variáveis de Ambiente</h1>
+  <div id="output"></div>
+
+  <script type="module">
+    const output = document.getElementById('output')
+
+    // Tentar acessar as variáveis
+    const pixelId = import.meta.env.VITE_FACEBOOK_PIXEL_ID
+    const allEnv = import.meta.env
+
+    output.innerHTML = `
+      <h2>VITE_FACEBOOK_PIXEL_ID:</h2>
+      <pre>${pixelId || 'NÃO ENCONTRADO'}</pre>
+
+      <h2>Todas as variáveis VITE_:</h2>
+      <pre>${JSON.stringify(allEnv, null, 2)}</pre>
+    `
+  </script>
+</body>
+</html>

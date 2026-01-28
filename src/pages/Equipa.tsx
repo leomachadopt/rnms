@@ -32,7 +32,7 @@ const Equipa = () => {
     {
       icon: Users,
       title: 'A criança como sistema',
-      description: 'Não tratamos apenas "dentes". Avaliamos sono, respiração, postura, hábitos, oclusão, desenvolvimento e comportamento como um todo integrado.',
+      description: 'Não tratamos apenas "dentes". Avaliamos sono, respiração, postura, hábitos, oclusão, crescimento e comportamento como um todo integrado.',
       highlight: 'Visão 360°'
     },
     {
@@ -157,7 +157,7 @@ const Equipa = () => {
             <span className="text-primary font-semibold">O nosso diferencial</span>
           </div>
           <h2 className="text-3xl lg:text-5xl font-bold mb-4">
-            O que fazemos (de verdade)<br />que outros não fazem
+            O que vemos (de verdade)<br />que outros não vêem
           </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
             Depois de atender milhares de crianças, desenvolvemos uma leitura clínica que vai além do óbvio
