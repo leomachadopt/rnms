@@ -244,7 +244,13 @@ export default async function handler(
       let noteText = ''
 
       if (evaluationData.report) {
-        noteText += `📄 RELATÓRIO DETALHADO\n\n${evaluationData.report}\n\n`
+        // Converter markdown para texto simples para melhor compatibilidade
+        const reportText = evaluationData.report
+          .replace(/#{1,6}\s/g, '') // Remove markdown headers
+          .replace(/\*\*(.*?)\*\*/g, '$1') // Remove bold
+          .replace(/\*(.*?)\*/g, '$1') // Remove italic
+
+        noteText += `📄 RELATÓRIO DETALHADO\n\n${reportText}\n\n`
       }
 
       if (evaluationData.utmSource) {
@@ -257,6 +263,9 @@ export default async function handler(
       }
 
       if (noteText) {
+        console.log('Tamanho da nota:', noteText.length, 'caracteres')
+        console.log('Preview da nota:', noteText.substring(0, 200) + '...')
+
         const noteResponse = await fetch(`https://${config.domain}/api/v4/leads/${leadId}/notes`, {
           method: 'POST',
           headers: {
@@ -274,7 +283,11 @@ export default async function handler(
         })
 
         if (noteResponse.ok) {
-          console.log('Nota adicionada ao lead')
+          const noteResult = await noteResponse.json()
+          console.log('Nota adicionada ao lead:', noteResult._embedded.notes[0].id)
+        } else {
+          const noteError = await noteResponse.json()
+          console.error('Erro ao adicionar nota:', JSON.stringify(noteError, null, 2))
         }
       }
     }
