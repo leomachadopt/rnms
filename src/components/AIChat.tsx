@@ -432,6 +432,30 @@ export function AIChat() {
       sessionStorage.setItem('aiReport', report)
       sessionStorage.setItem('evaluationData', JSON.stringify(finalData))
 
+      // Enviar para Kommo CRM
+      try {
+        const utmParams = getUTMParams()
+        await fetch(`${API_URL}/send-to-kommo`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            ...finalData,
+            report: report,
+            utmSource: utmParams.utm_source,
+            utmMedium: utmParams.utm_medium,
+            utmCampaign: utmParams.utm_campaign,
+            utmContent: utmParams.utm_content,
+            utmTerm: utmParams.utm_term,
+          }),
+        })
+        console.log('Lead enviado para Kommo')
+      } catch (kommoError) {
+        console.error('Erro ao enviar para Kommo:', kommoError)
+        // Não bloqueia o fluxo se der erro no Kommo
+      }
+
       // Enviar email de notificação
       try {
         await fetch(`${API_URL}/send-evaluation-email`, {
@@ -441,6 +465,7 @@ export function AIChat() {
           },
           body: JSON.stringify({
             name: finalData.name,
+            parentName: finalData.parentName,
             phone: finalData.phone,
             age: finalData.age,
             report: report,

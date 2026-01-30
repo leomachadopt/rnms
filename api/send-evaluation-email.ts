@@ -5,6 +5,7 @@ import { eq } from 'drizzle-orm'
 
 interface EmailData {
   name: string
+  parentName?: string
   phone: string
   age: string
   report: string
@@ -141,7 +142,8 @@ export default async function handler(
     <div class="content">
       <div class="info-box">
         <h3>📋 Dados do Responsável</h3>
-        <p><strong>Nome:</strong> ${emailData.name}</p>
+        ${emailData.parentName ? `<p><strong>Nome do Responsável:</strong> ${emailData.parentName}</p>` : ''}
+        <p><strong>Nome da Criança:</strong> ${emailData.name}</p>
         <p><strong>WhatsApp:</strong> ${emailData.phone}</p>
         <p><strong>Idade da Criança:</strong> ${emailData.age}</p>
         ${emailData.evaluationId ? `<p><strong>ID da Avaliação:</strong> #${emailData.evaluationId}</p>` : ''}
@@ -176,7 +178,7 @@ export default async function handler(
     const emailPayload = {
       from: 'Respira Oral <onboarding@resend.dev>', // Usar domínio verificado em produção
       to: emailList,
-      subject: `🔔 Nova Avaliação - ${emailData.name}`,
+      subject: `🔔 Nova Avaliação - ${emailData.parentName || emailData.name}`,
       html: emailHtml,
     }
 
