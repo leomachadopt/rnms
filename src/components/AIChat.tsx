@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Send, Bot, Loader2 } from 'lucide-react'
+import { Send, Bot, Loader2, MessageCircle } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { ScrollArea } from '@/components/ui/scroll-area'
@@ -466,6 +466,7 @@ export function AIChat() {
         addMessage({
           sender: 'ai',
           text: 'O relatório detalhado será enviado para o seu WhatsApp em breve. Caso tenha alguma dúvida, não hesite em entrar em contacto através do telefone/WhatsApp +351 916 209 737!',
+          type: 'final',
         })
         setIsLoading(false)
       }, 3000)
@@ -606,9 +607,30 @@ export function AIChat() {
                       </ReactMarkdown>
                     </div>
                   ) : (
-                    <p className="text-sm md:text-base leading-relaxed">
-                      {msg.text}
-                    </p>
+                    <div>
+                      <p className="text-sm md:text-base leading-relaxed">
+                        {msg.text}
+                      </p>
+                      {/* Botão WhatsApp para mensagem final */}
+                      {msg.type === 'final' && (
+                        <div className="mt-4">
+                          <a
+                            href="https://wa.me/351916209737?text=Gostava%20de%20receber%20o%20meu%20relat%C3%B3rio."
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-block"
+                          >
+                            <Button
+                              size="lg"
+                              className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold shadow-lg flex items-center justify-center gap-2"
+                            >
+                              <MessageCircle className="w-5 h-5" />
+                              Fale Connosco pelo WhatsApp
+                            </Button>
+                          </a>
+                        </div>
+                      )}
+                    </div>
                   )}
                 </div>
               </div>
