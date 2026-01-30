@@ -86,7 +86,45 @@ export default async function handler(
       status_id: config.status_id
     })
 
-    // Preparar dados do lead
+    // PASSO 1: Criar ou buscar contato primeiro
+    console.log('Criando contato...')
+    const contactData = [
+      {
+        name: evaluationData.parentName || evaluationData.name,
+        custom_fields_values: [
+          {
+            field_code: 'PHONE',
+            values: [
+              {
+                value: evaluationData.phone,
+                enum_code: 'WORK'
+              }
+            ]
+          }
+        ]
+      }
+    ]
+
+    const contactResponse = await fetch(`https://${config.domain}/api/v4/contacts`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${config.token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(contactData)
+    })
+
+    if (!contactResponse.ok) {
+      const contactError = await contactResponse.json()
+      console.error('Erro ao criar contato:', JSON.stringify(contactError, null, 2))
+      throw new Error(`Erro ao criar contato: ${JSON.stringify(contactError)}`)
+    }
+
+    const contactResult = await contactResponse.json()
+    const contactId = contactResult._embedded.contacts[0].id
+    console.log('Contato criado com ID:', contactId)
+
+    // PASSO 2: Preparar dados do lead
     const leadData: any = {
       name: evaluationData.name, // Nome da criança
       pipeline_id: config.pipeline_id,
@@ -100,18 +138,7 @@ export default async function handler(
         ],
         contacts: [
           {
-            first_name: evaluationData.parentName || evaluationData.name,
-            custom_fields_values: [
-              {
-                field_id: 265611, // ID do campo "Telefone" (campo padrão do Kommo)
-                values: [
-                  {
-                    value: evaluationData.phone,
-                    enum_code: 'MOB'
-                  }
-                ]
-              }
-            ]
+            id: contactId
           }
         ]
       },
