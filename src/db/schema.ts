@@ -42,6 +42,7 @@ export const blogPosts = pgTable('blog_posts', {
 export const evaluations = pgTable('evaluations', {
   id: serial('id').primaryKey(),
   name: varchar('name', { length: 255 }).notNull(),
+  parentName: varchar('parent_name', { length: 255 }),
   email: varchar('email', { length: 255 }).notNull(),
   phone: varchar('phone', { length: 20 }).notNull(),
   age: varchar('age', { length: 50 }),

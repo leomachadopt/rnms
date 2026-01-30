@@ -44,6 +44,48 @@ export function AIChat() {
     ])
   }, [])
 
+  // Função para validar número de telefone português
+  const validatePhoneNumber = (phone: string): boolean => {
+    // Remove espaços, hífens e parênteses
+    const cleanPhone = phone.replace(/[\s\-()]/g, '')
+
+    // Aceita formatos:
+    // 9XXXXXXXX (9 dígitos começando com 9)
+    // +3519XXXXXXXX
+    // 003519XXXXXXXX
+    // 3519XXXXXXXX
+    const phoneRegex = /^(?:\+351|00351|351)?9\d{8}$/
+
+    return phoneRegex.test(cleanPhone)
+  }
+
+  // Função para normalizar número de telefone
+  const normalizePhoneNumber = (phone: string): string => {
+    const cleanPhone = phone.replace(/[\s\-()]/g, '')
+
+    // Se já tem +351, retorna
+    if (cleanPhone.startsWith('+351')) {
+      return cleanPhone
+    }
+
+    // Se tem 00351, substitui por +351
+    if (cleanPhone.startsWith('00351')) {
+      return cleanPhone.replace('00351', '+351')
+    }
+
+    // Se tem 351, adiciona +
+    if (cleanPhone.startsWith('351')) {
+      return '+' + cleanPhone
+    }
+
+    // Se tem apenas 9 dígitos, adiciona +351
+    if (cleanPhone.length === 9) {
+      return '+351' + cleanPhone
+    }
+
+    return cleanPhone
+  }
+
   const nextStep = useCallback(() => {
     const currentStep = step + 1
     setStep(currentStep)
@@ -66,12 +108,19 @@ export function AIChat() {
       case 3:
         addMessage({
           sender: 'ai',
-          text: 'Perfeito! Agora vamos falar sobre o seu filho(a). Qual a idade dele(a)?',
+          text: 'E qual é o seu nome? (para que possamos personalizar a comunicação)',
+          type: 'text',
+        })
+        break
+      case 4:
+        addMessage({
+          sender: 'ai',
+          text: `Perfeito${userData.parentName ? ', ' + userData.parentName : ''}! Agora vamos falar sobre ${userData.name ? 'o(a) ' + userData.name : 'o seu filho(a)'}. Qual a idade dele(a)?`,
           type: 'options',
           options: ['0-2 anos', '3-5 anos', '6-10 anos', '11-14 anos', 'Mais de 14 anos'],
         })
         break
-      case 4:
+      case 5:
         addMessage({
           sender: 'ai',
           text: 'Quais sinais ou comportamentos relacionados à respiração do seu filho(a) tem observado? (Pode selecionar vários)',
@@ -89,7 +138,7 @@ export function AIChat() {
         })
         setSelectedOptions([])
         break
-      case 5:
+      case 6:
         addMessage({
           sender: 'ai',
           text: 'O seu filho(a) tem dentes tortos, espaçados ou alguma mordida que não encaixa bem?',
@@ -104,7 +153,7 @@ export function AIChat() {
           ],
         })
         break
-      case 6:
+      case 7:
         addMessage({
           sender: 'ai',
           text: 'O seu filho(a) ainda usa chucha, chucha no dedo ou tem algum hábito oral?',
@@ -118,7 +167,7 @@ export function AIChat() {
           ],
         })
         break
-      case 7:
+      case 8:
         addMessage({
           sender: 'ai',
           text: 'Já reparou na postura do seu filho(a)? Por exemplo, ele(a) costuma ter a cabeça inclinada para trás ou os ombros curvados?',
@@ -126,7 +175,7 @@ export function AIChat() {
           options: ['Sim, frequentemente', 'Às vezes', 'Não notei', 'Não sei dizer'],
         })
         break
-      case 8:
+      case 9:
         addMessage({
           sender: 'ai',
           text: 'O seu filho(a) tem dificuldade em pronunciar certos sons ou fala com a língua entre os dentes?',
@@ -140,7 +189,7 @@ export function AIChat() {
           ],
         })
         break
-      case 9:
+      case 10:
         addMessage({
           sender: 'ai',
           text: 'Como descreveria a qualidade do sono do seu filho(a)?',
@@ -154,7 +203,7 @@ export function AIChat() {
           ],
         })
         break
-      case 10:
+      case 11:
         addMessage({
           sender: 'ai',
           text: 'O seu filho(a) já fez algum tratamento ortodôntico ou de ortopedia funcional anteriormente?',
@@ -168,7 +217,7 @@ export function AIChat() {
           ],
         })
         break
-      case 11:
+      case 12:
         // Vai direto para análise, sem perguntar região
         addMessage({
           sender: 'ai',
@@ -238,19 +287,36 @@ export function AIChat() {
           nextStep()
           break
         case 2: // Phone/WhatsApp
-          const updatedWithPhone = { ...userData, phone: input }
+          // Validação do número de telefone
+          if (!validatePhoneNumber(input)) {
+            addMessage({
+              sender: 'ai',
+              text: 'Desculpe, o número que digitou não parece ser um número de telefone português válido. Por favor, digite um número de WhatsApp no formato correto (ex: 916209737, +351 916 209 737 ou 00351 916 209 737).',
+            })
+            setIsLoading(false)
+            return
+          }
+
+          const normalizedPhone = normalizePhoneNumber(input)
+          const updatedWithPhone = { ...userData, phone: normalizedPhone }
           setUserData(updatedWithPhone)
           // Salva no banco após ter nome e whatsapp
           await saveEvaluation(updatedWithPhone)
           nextStep()
           break
-        case 3: // Age
+        case 3: // Parent Name
+          const updatedWithParentName = { ...userData, parentName: input }
+          setUserData(updatedWithParentName)
+          await saveEvaluation(updatedWithParentName)
+          nextStep()
+          break
+        case 4: // Age
           const updatedWithAge = { ...userData, age: input }
           setUserData(updatedWithAge)
           await saveEvaluation(updatedWithAge)
           nextStep()
           break
-        case 4: // Breathing Signs (multi-select)
+        case 5: // Breathing Signs (multi-select)
           if (selectedOptions.length === 0) {
             toast.error('Por favor, selecione pelo menos uma opção')
             setIsLoading(false)
@@ -265,7 +331,7 @@ export function AIChat() {
           setSelectedOptions([])
           nextStep()
           break
-        case 5: // Dental Issues
+        case 6: // Dental Issues
           const updatedWithDental = {
             ...userData,
             dentalIssues: [input],
@@ -274,7 +340,7 @@ export function AIChat() {
           await saveEvaluation(updatedWithDental)
           nextStep()
           break
-        case 6: // Oral Habits
+        case 7: // Oral Habits
           const updatedWithHabits = {
             ...userData,
             oralHabits: [input],
@@ -283,32 +349,32 @@ export function AIChat() {
           await saveEvaluation(updatedWithHabits)
           nextStep()
           break
-        case 7: // Posture
+        case 8: // Posture
           const updatedWithPosture = { ...userData, posture: input }
           setUserData(updatedWithPosture)
           await saveEvaluation(updatedWithPosture)
           nextStep()
           break
-        case 8: // Speech Issues
+        case 9: // Speech Issues
           const updatedWithSpeech = { ...userData, speechIssues: input }
           setUserData(updatedWithSpeech)
           await saveEvaluation(updatedWithSpeech)
           nextStep()
           break
-        case 9: // Sleep Quality
+        case 10: // Sleep Quality
           const updatedWithSleep = { ...userData, sleepQuality: input }
           setUserData(updatedWithSleep)
           await saveEvaluation(updatedWithSleep)
           nextStep()
           break
-        case 10: // Previous Treatment
+        case 11: // Previous Treatment
           const updatedWithTreatment = { ...userData, previousTreatment: input }
           setUserData(updatedWithTreatment)
           await saveEvaluation(updatedWithTreatment)
           nextStep()
           break
-        case 11: // Análise final - não processa input, apenas aguarda o processEvaluation automático
-          // O processEvaluation é chamado automaticamente no nextStep do case 11
+        case 12: // Análise final - não processa input, apenas aguarda o processEvaluation automático
+          // O processEvaluation é chamado automaticamente no nextStep do case 12
           break
         default:
           break

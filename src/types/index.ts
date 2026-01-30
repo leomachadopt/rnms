@@ -52,6 +52,7 @@ export interface EvaluationData {
 
   // Dados de contato
   name?: string
+  parentName?: string
   email?: string
   phone?: string
 }
