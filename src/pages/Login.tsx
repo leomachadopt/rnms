@@ -48,16 +48,12 @@ export default function Login() {
     setIsLoading(true)
 
     try {
-      const success = await login(data.email, data.password)
-
-      if (success) {
-        toast.success('Login realizado com sucesso!')
-        navigate('/admin')
-      } else {
-        toast.error('Email ou senha incorretos')
-      }
-    } catch (error) {
-      toast.error('Erro ao fazer login. Tente novamente.')
+      await login(data.email, data.password)
+      toast.success('Login realizado com sucesso!')
+      navigate('/admin')
+    } catch (error: any) {
+      console.error('Erro no login:', error)
+      toast.error(error?.message || 'Email ou senha incorretos')
     } finally {
       setIsLoading(false)
     }
