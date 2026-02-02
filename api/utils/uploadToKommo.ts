@@ -171,10 +171,12 @@ export async function attachFileToLead(
   const attachUrl = `https://${accountDomain}/api/v4/leads/${leadId}/files`
   console.log('Attach URL:', attachUrl)
 
-  // O body precisa ser um array de UUIDs
-  const requestBody = {
-    file_uuid: [fileUuid]
-  }
+  // O body precisa ser um array de objetos com file_uuid
+  const requestBody = [
+    {
+      file_uuid: fileUuid
+    }
+  ]
 
   console.log('Request body:', JSON.stringify(requestBody, null, 2))
 
