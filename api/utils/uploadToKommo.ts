@@ -124,9 +124,20 @@ export async function uploadPDFToKommo(
     throw new Error(`Erro ao fazer upload do arquivo: ${JSON.stringify(error)}`)
   }
 
-  const uploadResult: UploadCompleteResponse = await uploadResponse.json()
+  const uploadResultText = await uploadResponse.text()
+  console.log('Upload response completo:', uploadResultText.substring(0, 500))
+
+  let uploadResult: UploadCompleteResponse
+  try {
+    uploadResult = JSON.parse(uploadResultText)
+  } catch (error) {
+    console.error('Erro ao fazer parse do upload result')
+    throw new Error('Upload response não é JSON válido')
+  }
+
   console.log('Upload concluído!')
-  console.log('File UUID:', uploadResult.file_uuid)
+  console.log('Upload result completo:', JSON.stringify(uploadResult, null, 2))
+  console.log('File UUID extraído:', uploadResult.file_uuid)
 
   return uploadResult.file_uuid
 }
@@ -145,12 +156,20 @@ export async function attachFileToLead(
   accountDomain: string = 'clinicadentariavitoria.kommo.com'
 ): Promise<void> {
   console.log('=== ANEXANDO ARQUIVO AO LEAD ===')
-  console.log('File UUID:', fileUuid)
+  console.log('File UUID recebido:', fileUuid)
+  console.log('Type do UUID:', typeof fileUuid)
   console.log('Lead ID:', leadId)
 
   // Endpoint correto: /api/v4/leads/{id}/files (não é no drive domain)
   const attachUrl = `https://${accountDomain}/api/v4/leads/${leadId}/files`
   console.log('Attach URL:', attachUrl)
+
+  // Testar diferentes formatos de body
+  const requestBody = {
+    file_uuid: fileUuid
+  }
+
+  console.log('Request body:', JSON.stringify(requestBody, null, 2))
 
   const attachResponse = await fetch(attachUrl, {
     method: 'PUT',
@@ -158,11 +177,7 @@ export async function attachFileToLead(
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify([
-      {
-        file_uuid: fileUuid,
-      }
-    ]),
+    body: JSON.stringify(requestBody),
   })
 
   if (!attachResponse.ok) {
