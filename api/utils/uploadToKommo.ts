@@ -12,28 +12,61 @@ interface UploadCompleteResponse {
 }
 
 /**
+ * Obtém o domínio do drive do Kommo
+ */
+async function getDriveDomain(token: string, accountDomain: string): Promise<string> {
+  console.log('Buscando drive domain...')
+
+  const accountResponse = await fetch(`https://${accountDomain}/api/v4/account?with=drive_url`, {
+    headers: {
+      'Authorization': `Bearer ${token}`,
+    },
+  })
+
+  if (!accountResponse.ok) {
+    throw new Error(`Erro ao buscar informações da conta: ${accountResponse.status}`)
+  }
+
+  const accountData = await accountResponse.json()
+  const driveUrl = accountData.drive_url || accountData._embedded?.drive_url
+
+  if (!driveUrl) {
+    console.log('Account data:', JSON.stringify(accountData, null, 2))
+    throw new Error('Drive URL não encontrada na resposta da API')
+  }
+
+  // Extrair domínio da URL (ex: https://drive-c.kommo.com/v1.0/files -> drive-c.kommo.com)
+  const driveDomain = new URL(driveUrl).hostname
+  console.log('Drive domain encontrado:', driveDomain)
+
+  return driveDomain
+}
+
+/**
  * Faz upload de um arquivo PDF para o Kommo CRM
  * @param pdfBuffer - Buffer do PDF
  * @param fileName - Nome do arquivo
  * @param token - Token de acesso do Kommo
+ * @param accountDomain - Domínio da conta (ex: clinicadentariavitoria.kommo.com)
  * @returns UUID do arquivo no Kommo
  */
 export async function uploadPDFToKommo(
   pdfBuffer: Buffer,
   fileName: string,
-  token: string
+  token: string,
+  accountDomain: string = 'clinicadentariavitoria.kommo.com'
 ): Promise<string> {
-  const DRIVE_DOMAIN = 'clinicadentariavitoria.kommo.com'
-
   console.log('=== UPLOAD PDF PARA KOMMO ===')
   console.log('Tamanho do arquivo:', pdfBuffer.length, 'bytes')
   console.log('Nome do arquivo:', fileName)
   console.log('Token (primeiros 20 chars):', token.substring(0, 20) + '...')
-  console.log('Drive Domain:', DRIVE_DOMAIN)
-  console.log('URL completa:', `https://${DRIVE_DOMAIN}/v1.0/sessions`)
+
+  // PASSO 0: Obter drive domain
+  const DRIVE_DOMAIN = await getDriveDomain(token, accountDomain)
 
   // PASSO 1: Criar sessão de upload
   console.log('Passo 1: Criando sessão de upload...')
+  console.log('URL completa:', `https://${DRIVE_DOMAIN}/v1.0/sessions`)
 
   const sessionResponse = await fetch(`https://${DRIVE_DOMAIN}/v1.0/sessions`, {
     method: 'POST',
@@ -103,17 +136,20 @@ export async function uploadPDFToKommo(
  * @param fileUuid - UUID do arquivo no Kommo
  * @param leadId - ID do lead
  * @param token - Token de acesso do Kommo
+ * @param accountDomain - Domínio da conta
  */
 export async function attachFileToLead(
   fileUuid: string,
   leadId: number,
-  token: string
+  token: string,
+  accountDomain: string = 'clinicadentariavitoria.kommo.com'
 ): Promise<void> {
-  const DRIVE_DOMAIN = 'clinicadentariavitoria.kommo.com'
-
   console.log('=== ANEXANDO ARQUIVO AO LEAD ===')
   console.log('File UUID:', fileUuid)
   console.log('Lead ID:', leadId)
+
+  // Obter drive domain
+  const DRIVE_DOMAIN = await getDriveDomain(token, accountDomain)
 
   const attachResponse = await fetch(`https://${DRIVE_DOMAIN}/v1.0/files/attached-to-entity`, {
     method: 'PUT',

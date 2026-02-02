@@ -258,10 +258,10 @@ export default async function handler(
 
         // Fazer upload do PDF para o Kommo
         const fileName = `relatorio-${evaluationData.name.replace(/\s+/g, '-')}-${Date.now()}.pdf`
-        const fileUuid = await uploadPDFToKommo(pdfBuffer, fileName, config.token)
+        const fileUuid = await uploadPDFToKommo(pdfBuffer, fileName, config.token, config.domain)
 
         // Anexar PDF ao lead
-        await attachFileToLead(fileUuid, leadId, config.token)
+        await attachFileToLead(fileUuid, leadId, config.token, config.domain)
 
         console.log('PDF anexado ao lead com sucesso!')
       } catch (pdfError: any) {
