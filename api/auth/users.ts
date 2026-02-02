@@ -7,6 +7,13 @@ import jwt from 'jsonwebtoken'
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-this'
 
+// Configuração para parsear o body como JSON
+export const config = {
+  api: {
+    bodyParser: true,
+  },
+}
+
 // Middleware para verificar autenticação e permissões
 function verifyToken(req: VercelRequest): { id: number; email: string; name: string; role: string } | null {
   const authHeader = req.headers.authorization
