@@ -91,6 +91,19 @@ export const settings = pgTable('settings', {
   updatedAt: timestamp('updated_at').defaultNow().notNull(),
 })
 
+// Tabela de Usuários do Sistema
+export const users = pgTable('users', {
+  id: serial('id').primaryKey(),
+  email: varchar('email', { length: 255 }).notNull().unique(),
+  password: varchar('password', { length: 255 }).notNull(), // Hash bcrypt
+  name: varchar('name', { length: 255 }).notNull(),
+  role: varchar('role', { length: 50 }).notNull().default('editor'), // 'super_admin' | 'editor'
+  active: integer('active').default(1).notNull(), // 1 = ativo, 0 = inativo
+  lastLogin: timestamp('last_login'),
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+  updatedAt: timestamp('updated_at').defaultNow().notNull(),
+})
+
 // Tabela de Eventos de Tracking
 export const trackingEvents = pgTable('tracking_events', {
   id: serial('id').primaryKey(),
@@ -126,5 +139,7 @@ export type Testimonial = typeof testimonials.$inferSelect
 export type NewTestimonial = typeof testimonials.$inferInsert
 export type Setting = typeof settings.$inferSelect
 export type NewSetting = typeof settings.$inferInsert
+export type User = typeof users.$inferSelect
+export type NewUser = typeof users.$inferInsert
 export type TrackingEvent = typeof trackingEvents.$inferSelect
 export type NewTrackingEvent = typeof trackingEvents.$inferInsert

@@ -1,80 +1,96 @@
 import React, { createContext, useContext, useState, useEffect } from 'react'
 
+interface User {
+  id: number
+  email: string
+  name: string
+  role: 'super_admin' | 'editor'
+}
+
 interface AuthContextType {
+  user: User | null
+  token: string | null
   isAuthenticated: boolean
-  login: (email: string, password: string) => Promise<boolean>
+  isSuperAdmin: boolean
+  login: (email: string, password: string) => Promise<void>
   logout: () => void
   isLoading: boolean
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
-// Credenciais hardcoded (em produção, isso deveria vir de um backend)
-const ADMIN_EMAIL = 'leomachadopt@gmail.com'
-const ADMIN_PASSWORD = 'Admin123!'
-
-const AUTH_STORAGE_KEY = 'respira_oral_auth'
+const AUTH_TOKEN_KEY = 'respira_oral_token'
+const AUTH_USER_KEY = 'respira_oral_user'
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [user, setUser] = useState<User | null>(null)
+  const [token, setToken] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(true)
 
-  // Verificar se há sessão salva ao carregar
+  // Carregar token e usuário do localStorage ao iniciar
   useEffect(() => {
-    const checkAuth = () => {
-      try {
-        const stored = localStorage.getItem(AUTH_STORAGE_KEY)
-        if (stored) {
-          const { authenticated, expiry } = JSON.parse(stored)
+    const savedToken = localStorage.getItem(AUTH_TOKEN_KEY)
+    const savedUser = localStorage.getItem(AUTH_USER_KEY)
 
-          // Verificar se a sessão ainda é válida (24 horas)
-          if (authenticated && expiry > Date.now()) {
-            setIsAuthenticated(true)
-          } else {
-            // Sessão expirada, limpar
-            localStorage.removeItem(AUTH_STORAGE_KEY)
-          }
-        }
+    if (savedToken && savedUser) {
+      try {
+        setToken(savedToken)
+        setUser(JSON.parse(savedUser))
       } catch (error) {
-        console.error('Erro ao verificar autenticação:', error)
-        localStorage.removeItem(AUTH_STORAGE_KEY)
-      } finally {
-        setIsLoading(false)
+        console.error('Erro ao carregar sessão:', error)
+        localStorage.removeItem(AUTH_TOKEN_KEY)
+        localStorage.removeItem(AUTH_USER_KEY)
       }
     }
 
-    checkAuth()
+    setIsLoading(false)
   }, [])
 
-  const login = async (email: string, password: string): Promise<boolean> => {
-    // Simular delay de rede
-    await new Promise((resolve) => setTimeout(resolve, 500))
+  const login = async (email: string, password: string): Promise<void> => {
+    const API_URL = import.meta.env.VITE_API_URL || '/api'
+    const response = await fetch(`${API_URL}/auth/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ email, password })
+    })
 
-    if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
-      setIsAuthenticated(true)
-
-      // Salvar sessão no localStorage (válida por 24 horas)
-      const expiry = Date.now() + 24 * 60 * 60 * 1000 // 24 horas
-      localStorage.setItem(
-        AUTH_STORAGE_KEY,
-        JSON.stringify({ authenticated: true, expiry })
-      )
-
-      return true
+    if (!response.ok) {
+      const error = await response.json()
+      throw new Error(error.error || 'Erro ao fazer login')
     }
 
-    return false
+    const data = await response.json()
+
+    setToken(data.token)
+    setUser(data.user)
+
+    localStorage.setItem(AUTH_TOKEN_KEY, data.token)
+    localStorage.setItem(AUTH_USER_KEY, JSON.stringify(data.user))
   }
 
   const logout = () => {
-    setIsAuthenticated(false)
-    localStorage.removeItem(AUTH_STORAGE_KEY)
+    setToken(null)
+    setUser(null)
+    localStorage.removeItem(AUTH_TOKEN_KEY)
+    localStorage.removeItem(AUTH_USER_KEY)
   }
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, logout, isLoading }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        token,
+        isAuthenticated: !!user,
+        isSuperAdmin: user?.role === 'super_admin',
+        login,
+        logout,
+        isLoading
+      }}
+    >
       {children}
     </AuthContext.Provider>
   )
