@@ -24,13 +24,19 @@ export default async function handler(
   }
 
   try {
+    console.log('=== LOGIN ATTEMPT ===')
     const { email, password } = req.body
+    console.log('Email recebido:', email)
 
     if (!email || !password) {
+      console.log('Email ou password não fornecidos')
       return res.status(400).json({ error: 'Email e password são obrigatórios' })
     }
 
+    console.log('Conectando ao banco de dados...')
     const database = db()
+
+    console.log('Buscando usuário:', email.toLowerCase())
     const [user] = await database
       .select()
       .from(users)
@@ -38,18 +44,27 @@ export default async function handler(
       .limit(1)
 
     if (!user) {
+      console.log('Usuário não encontrado')
       return res.status(401).json({ error: 'Credenciais inválidas' })
     }
 
+    console.log('Usuário encontrado:', user.email, 'Role:', user.role, 'Active:', user.active)
+
     if (user.active === 0) {
+      console.log('Usuário desativado')
       return res.status(401).json({ error: 'Usuário desativado' })
     }
 
+    console.log('Verificando senha...')
     const isValidPassword = await bcrypt.compare(password, user.password)
+    console.log('Senha válida:', isValidPassword)
 
     if (!isValidPassword) {
+      console.log('Senha inválida')
       return res.status(401).json({ error: 'Credenciais inválidas' })
     }
+
+    console.log('Login bem-sucedido!')
 
     // Atualizar last login
     await database
