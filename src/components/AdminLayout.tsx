@@ -9,6 +9,7 @@ import {
   Settings,
   ClipboardList,
   BarChart3,
+  Shield,
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
@@ -19,7 +20,7 @@ import { toast } from 'sonner'
 export default function AdminLayout() {
   const location = useLocation()
   const navigate = useNavigate()
-  const { logout } = useAuth()
+  const { logout, isSuperAdmin } = useAuth()
 
   const handleLogout = () => {
     logout()
@@ -35,6 +36,7 @@ export default function AdminLayout() {
     { name: 'Blog Posts', path: '/admin/blog', icon: FileText },
     { name: 'Configurações IA', path: '/admin/settings', icon: Settings },
     { name: 'Tracking', path: '/admin/tracking', icon: BarChart3 },
+    ...(isSuperAdmin ? [{ name: 'Usuários', path: '/admin/users', icon: Shield }] : []),
   ]
 
   const SidebarContent = () => (

@@ -19,6 +19,7 @@ import ResultadoAvaliacao from './pages/ResultadoAvaliacao'
 import Agendamento from './pages/Agendamento'
 import Login from './pages/Login'
 import NotFound from './pages/NotFound'
+import Users from './pages/Users'
 
 // Admin Pages
 import Dashboard from './pages/admin/Dashboard'
@@ -138,6 +139,10 @@ const router = createBrowserRouter([
       {
         path: 'tracking',
         element: <TrackingSettings />,
+      },
+      {
+        path: 'users',
+        element: <Users />,
       },
     ],
   },
