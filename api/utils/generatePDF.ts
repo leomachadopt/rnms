@@ -1,6 +1,3 @@
-import PDFDocument from 'pdfkit'
-import { Readable } from 'stream'
-
 interface PDFData {
   childName: string
   parentName?: string
@@ -11,8 +8,11 @@ interface PDFData {
 }
 
 export async function generateReportPDF(data: PDFData): Promise<Buffer> {
-  return new Promise((resolve, reject) => {
+  return new Promise(async (resolve, reject) => {
     try {
+      // Dynamic import para compatibilidade com Vercel
+      const PDFDocument = (await import('pdfkit')).default
+
       const doc = new PDFDocument({
         size: 'A4',
         margins: {
