@@ -2,6 +2,8 @@ import type { VercelRequest, VercelResponse } from '@vercel/node'
 import { db } from './db/client.js'
 import { settings } from './db/schema.js'
 import { eq } from 'drizzle-orm'
+import { generateReportPDF } from './utils/generatePDF.js'
+import { uploadPDFToKommo, attachFileToLead } from './utils/uploadToKommo.js'
 
 interface EvaluationData {
   name: string // Nome da criança
@@ -238,6 +240,36 @@ export default async function handler(
     console.log('Lead criado com sucesso:', result._embedded.leads[0].id)
 
     const leadId = result._embedded.leads[0].id
+
+    // PASSO 3: Gerar e fazer upload do PDF do relatório
+    if (evaluationData.report) {
+      try {
+        console.log('Gerando PDF do relatório...')
+        const pdfBuffer = await generateReportPDF({
+          childName: evaluationData.name,
+          parentName: evaluationData.parentName,
+          age: evaluationData.age,
+          phone: evaluationData.phone,
+          report: evaluationData.report,
+          date: new Date(),
+        })
+
+        console.log('PDF gerado com sucesso! Tamanho:', pdfBuffer.length, 'bytes')
+
+        // Fazer upload do PDF para o Kommo
+        const fileName = `relatorio-${evaluationData.name.replace(/\s+/g, '-')}-${Date.now()}.pdf`
+        const fileUuid = await uploadPDFToKommo(pdfBuffer, fileName, config.token)
+
+        // Anexar PDF ao lead
+        await attachFileToLead(fileUuid, leadId, config.token)
+
+        console.log('PDF anexado ao lead com sucesso!')
+      } catch (pdfError: any) {
+        console.error('Erro ao processar PDF:', pdfError)
+        // Não falhar a requisição inteira se o PDF falhar
+        // O lead já foi criado, então continuamos
+      }
+    }
 
     // Adicionar nota com relatório e dados UTM
     if (evaluationData.report || evaluationData.utmSource) {
