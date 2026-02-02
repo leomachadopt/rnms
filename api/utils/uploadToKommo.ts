@@ -6,9 +6,15 @@ interface UploadSessionResponse {
 }
 
 interface UploadCompleteResponse {
-  file_uuid: string
-  file_name: string
-  file_size: number
+  uuid: string
+  version_uuid: string
+  name: string
+  size: number
+  id: number
+  metadata: {
+    extension: string
+    mime_type: string
+  }
 }
 
 /**
@@ -137,9 +143,10 @@ export async function uploadPDFToKommo(
 
   console.log('Upload concluído!')
   console.log('Upload result completo:', JSON.stringify(uploadResult, null, 2))
-  console.log('File UUID extraído:', uploadResult.file_uuid)
+  console.log('File UUID extraído:', uploadResult.uuid)
+  console.log('File ID:', uploadResult.id)
 
-  return uploadResult.file_uuid
+  return uploadResult.uuid
 }
 
 /**
