@@ -148,20 +148,21 @@ export async function attachFileToLead(
   console.log('File UUID:', fileUuid)
   console.log('Lead ID:', leadId)
 
-  // Obter drive domain
-  const DRIVE_DOMAIN = await getDriveDomain(token, accountDomain)
+  // Endpoint correto: /api/v4/leads/{id}/files (não é no drive domain)
+  const attachUrl = `https://${accountDomain}/api/v4/leads/${leadId}/files`
+  console.log('Attach URL:', attachUrl)
 
-  const attachResponse = await fetch(`https://${DRIVE_DOMAIN}/v1.0/files/attached-to-entity`, {
+  const attachResponse = await fetch(attachUrl, {
     method: 'PUT',
     headers: {
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({
-      file_uuid: fileUuid,
-      entity_type: 'lead',
-      entity_id: leadId,
-    }),
+    body: JSON.stringify([
+      {
+        file_uuid: fileUuid,
+      }
+    ]),
   })
 
   if (!attachResponse.ok) {
