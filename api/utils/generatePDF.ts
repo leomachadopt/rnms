@@ -286,10 +286,8 @@ Com base nos sinais identificados neste relatório, recomendamos o agendamento d
         .fontSize(11)
         .font('Helvetica-Bold')
         .fillColor('#2563eb')
-        .text('👉 Agende a consulta de avaliação e obtenha uma visão completa, integrada e', {
-          continued: true,
-        })
-        .text(' fundamentada sobre a respiração, o crescimento e o funcionamento do seu filho.', {
+        .text('>> Agende a consulta de avaliação e obtenha uma visão completa, integrada e fundamentada sobre a respiração, o crescimento e o funcionamento do seu filho.', {
+          align: 'justify',
           continued: false,
         })
 

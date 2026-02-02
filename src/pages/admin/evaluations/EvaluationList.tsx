@@ -169,6 +169,119 @@ export default function EvaluationList() {
       }
     })
 
+    // Adicionar texto complementar padrão
+    yPosition += 15
+
+    // Linha separadora
+    if (yPosition + 10 > pageHeight - margin) {
+      doc.addPage()
+      yPosition = margin
+    }
+    doc.setDrawColor(200, 200, 200)
+    doc.line(margin, yPosition, pageWidth - margin, yPosition)
+    yPosition += 10
+
+    // Título da seção complementar
+    doc.setTextColor(37, 99, 235)
+    doc.setFontSize(16)
+    doc.setFont('helvetica', 'bold')
+    const titleLines = doc.splitTextToSize('Avaliação pelo Método Respira e Cresce 360º', maxWidth)
+    titleLines.forEach((line: string) => {
+      if (yPosition + 10 > pageHeight - margin) {
+        doc.addPage()
+        yPosition = margin
+      }
+      doc.text(line, pageWidth / 2, yPosition, { align: 'center' })
+      yPosition += 7
+    })
+
+    doc.setFontSize(12)
+    doc.setFont('helvetica', 'bold')
+    const subtitleLines = doc.splitTextToSize('O que é e como funciona na prática', maxWidth)
+    subtitleLines.forEach((line: string) => {
+      if (yPosition + 10 > pageHeight - margin) {
+        doc.addPage()
+        yPosition = margin
+      }
+      doc.text(line, pageWidth / 2, yPosition, { align: 'center' })
+      yPosition += 6
+    })
+
+    yPosition += 5
+    doc.setTextColor(0, 0, 0)
+
+    // Conteúdo padrão
+    const standardContent = `Os sinais identificados neste relatório indicam a necessidade de uma avaliação mais aprofundada, com o objetivo de compreender a causa real das alterações observadas e não apenas os seus efeitos. É neste contexto que se enquadra a consulta de avaliação pelo Método Respira e Cresce 360º.
+
+Esta consulta não é uma avaliação convencional nem uma observação rápida. Trata-se de um processo estruturado e integrado, desenhado especificamente para analisar de forma completa como a criança respira, cresce e funciona no seu dia a dia.
+
+O que acontece na consulta de avaliação
+
+A avaliação pelo Método Respira e Cresce 360º é composta por diferentes etapas, que permitem cruzar informação clínica, funcional e postural:
+
+1. Avaliação do crescimento e das funções orais
+Nesta fase são analisados:
+• A forma como a criança respira (nariz e boca)
+• O crescimento do rosto e das arcadas dentárias
+• A posição do palato (céu da boca)
+• A mastigação, deglutição e fala
+
+Esta análise permite perceber de que forma a função está a influenciar o crescimento.
+
+2. Avaliação postural e do equilíbrio corporal
+A respiração oral raramente afeta apenas a boca. Por isso, é avaliado:
+• O alinhamento global do corpo
+• A posição da cabeça e do pescoço
+• Tensões musculares e compensações posturais
+
+Esta etapa ajuda a identificar adaptações do corpo associadas ao padrão respiratório.
+
+3. Exames complementares e registo objetivo
+Sempre que indicado, são realizados exames como:
+• Avaliação do sono
+• Registos fotográficos da postura e da face
+• Análise funcional da mastigação
+• Exames de imagem
+
+Estes dados permitem confirmar clinicamente o que foi observado e dar mais precisão ao diagnóstico.
+
+Qual é o objetivo desta avaliação
+
+No final da consulta, os responsáveis recebem:
+• Uma explicação clara do que está a acontecer
+• A identificação do que é causa e do que é consequência
+• Uma proposta de plano adequado ao crescimento da criança
+
+O objetivo não é iniciar um tratamento automaticamente, mas sim definir com rigor se existe necessidade de intervenção, qual o tipo de abordagem mais indicada e qual o melhor momento para agir, aproveitando o crescimento de forma inteligente.
+
+Próximo passo
+
+Com base nos sinais identificados neste relatório, recomendamos o agendamento da consulta de avaliação pelo Método Respira e Cresce 360º. Esta avaliação permitirá esclarecer dúvidas, confirmar os achados clínicos e definir, de forma personalizada, o melhor caminho para apoiar o desenvolvimento saudável da criança.
+
+>> Agende a consulta de avaliação e obtenha uma visão completa, integrada e fundamentada sobre a respiração, o crescimento e o funcionamento do seu filho.`
+
+    const standardParagraphs = standardContent.split('\n').filter(p => p.trim())
+
+    standardParagraphs.forEach((para: string) => {
+      const cleanPara = para.trim()
+
+      if (cleanPara.match(/^(O que acontece|Qual é o objetivo|Próximo passo)$/)) {
+        // Títulos principais
+        addText(cleanPara, 12, true, true)
+      } else if (cleanPara.match(/^\d+\./)) {
+        // Títulos numerados
+        addText(cleanPara, 11, true, true)
+      } else if (cleanPara.startsWith('>>')) {
+        // CTA final
+        doc.setTextColor(37, 99, 235)
+        addText(cleanPara.replace('>>', '').trim(), 11, true, false)
+        doc.setTextColor(0, 0, 0)
+      } else if (cleanPara) {
+        // Texto normal
+        addText(cleanPara, 10, false, false)
+      }
+    })
+
     // Rodapé
     const totalPages = doc.getNumberOfPages()
     for (let i = 1; i <= totalPages; i++) {
