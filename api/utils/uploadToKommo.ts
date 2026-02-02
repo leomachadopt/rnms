@@ -28,6 +28,9 @@ export async function uploadPDFToKommo(
   console.log('=== UPLOAD PDF PARA KOMMO ===')
   console.log('Tamanho do arquivo:', pdfBuffer.length, 'bytes')
   console.log('Nome do arquivo:', fileName)
+  console.log('Token (primeiros 20 chars):', token.substring(0, 20) + '...')
+  console.log('Drive Domain:', DRIVE_DOMAIN)
+  console.log('URL completa:', `https://${DRIVE_DOMAIN}/v1.0/sessions`)
 
   // PASSO 1: Criar sessão de upload
   console.log('Passo 1: Criando sessão de upload...')
@@ -47,12 +50,24 @@ export async function uploadPDFToKommo(
   })
 
   if (!sessionResponse.ok) {
-    const error = await sessionResponse.json()
-    console.error('Erro ao criar sessão:', JSON.stringify(error, null, 2))
-    throw new Error(`Erro ao criar sessão de upload: ${JSON.stringify(error)}`)
+    const responseText = await sessionResponse.text()
+    console.error('Erro ao criar sessão - Status:', sessionResponse.status)
+    console.error('Response Headers:', JSON.stringify(Object.fromEntries(sessionResponse.headers.entries()), null, 2))
+    console.error('Response Body:', responseText.substring(0, 500))
+    throw new Error(`Erro ao criar sessão de upload (${sessionResponse.status}): ${responseText.substring(0, 200)}`)
   }
 
-  const sessionData: UploadSessionResponse = await sessionResponse.json()
+  const responseText = await sessionResponse.text()
+  console.log('Session Response:', responseText.substring(0, 500))
+
+  let sessionData: UploadSessionResponse
+  try {
+    sessionData = JSON.parse(responseText)
+  } catch (parseError) {
+    console.error('Erro ao fazer parse do JSON:', parseError)
+    console.error('Response completo:', responseText)
+    throw new Error('Resposta da API não é JSON válido')
+  }
   console.log('Sessão criada:', sessionData.session_id)
   console.log('Upload URL:', sessionData.upload_url)
   console.log('Max part size:', sessionData.max_part_size)
