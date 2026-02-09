@@ -39,10 +39,17 @@ export function ImageUploader({
     setIsUploading(true)
 
     try {
+      const token = import.meta.env.VITE_BLOB_READ_WRITE_TOKEN
+      console.log('Token disponível:', !!token)
+
+      if (!token) {
+        throw new Error('Token do Vercel Blob não configurado')
+      }
+
       // Upload para Vercel Blob
       const blob = await put(`blog/${Date.now()}-${file.name}`, file, {
         access: 'public',
-        token: import.meta.env.VITE_BLOB_READ_WRITE_TOKEN,
+        token: token,
       })
 
       setPreview(blob.url)
