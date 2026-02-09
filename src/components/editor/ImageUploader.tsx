@@ -42,6 +42,7 @@ export function ImageUploader({
       // Upload para Vercel Blob
       const blob = await put(`blog/${Date.now()}-${file.name}`, file, {
         access: 'public',
+        token: import.meta.env.VITE_BLOB_READ_WRITE_TOKEN,
       })
 
       setPreview(blob.url)
