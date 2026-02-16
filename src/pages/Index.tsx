@@ -20,7 +20,7 @@ const Index = () => {
     : testimonials.slice(0, 3)
 
   return (
-    <div className="flex flex-col gap-16 pb-16">
+    <div className="flex flex-col gap-12 pb-16">
       {/* Hero Section */}
       <section className="relative gradient-luxury pt-20 pb-16 lg:pt-28 lg:pb-24 overflow-hidden min-h-[calc(100vh-80px)] flex items-center">
         {/* Premium Gradient Overlays */}
@@ -28,7 +28,7 @@ const Index = () => {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(17,25,40,0.4),transparent_60%)]"></div>
         <div className="absolute inset-0" style={{backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'0.03\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")'}}></div>
 
-        <div className="container mx-auto px-4 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center relative z-10">
+        <div className="container mx-auto px-4 grid lg:grid-cols-2 gap-8 lg:gap-12 items-center relative z-10">
           <div 
             ref={heroRef.elementRef}
             className={`space-y-6 lg:space-y-8 transition-all duration-1000 ${
@@ -92,7 +92,7 @@ const Index = () => {
       <section className="section-premium container-premium">
         <div
           ref={whatIsRef.elementRef}
-          className={`glass-premium rounded-[2rem] p-10 lg:p-16 shadow-premium border-gradient grid md:grid-cols-2 gap-16 items-center transition-all duration-1000 ${
+          className={`glass-premium rounded-[2rem] p-10 lg:p-16 shadow-premium border-gradient grid md:grid-cols-2 gap-12 items-center transition-all duration-1000 ${
             whatIsRef.isVisible
               ? 'opacity-100'
               : 'opacity-0'
