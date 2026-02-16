@@ -39,7 +39,7 @@ export function Header() {
         'fixed top-0 left-0 right-0 z-50 transition-all duration-500',
         isScrolled
           ? 'glass-premium shadow-premium border-b border-secondary/20 py-3'
-          : 'bg-primary/5 backdrop-blur-sm py-5',
+          : 'bg-white/90 backdrop-blur-md shadow-sm py-5',
       )}
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
@@ -64,8 +64,8 @@ export function Header() {
               className={cn(
                 'text-sm font-semibold transition-all duration-300 hover:text-secondary hover:scale-105 relative group',
                 location.pathname === link.path
-                  ? 'text-secondary drop-shadow-lg'
-                  : isScrolled ? 'text-foreground' : 'text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]',
+                  ? 'text-secondary'
+                  : 'text-foreground',
               )}
               style={{ animationDelay: `${idx * 50}ms` }}
             >
@@ -95,10 +95,7 @@ export function Header() {
               <Button
                 variant="ghost"
                 size="icon"
-                className={cn(
-                  isScrolled ? 'text-foreground' : 'text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]',
-                  'hover:bg-secondary/10'
-                )}
+                className="text-foreground hover:bg-secondary/10"
               >
                 <Menu className="w-6 h-6" />
                 <span className="sr-only">Menu</span>
