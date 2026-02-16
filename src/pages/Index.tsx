@@ -22,10 +22,11 @@ const Index = () => {
   return (
     <div className="flex flex-col gap-16 pb-16">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 pt-20 pb-16 lg:pt-28 lg:pb-24 overflow-hidden min-h-[calc(100vh-80px)] flex items-center">
-        {/* Gradient Overlays */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(59,130,246,0.3),transparent_50%)]"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(147,51,234,0.3),transparent_50%)]"></div>
+      <section className="relative gradient-luxury pt-20 pb-16 lg:pt-28 lg:pb-24 overflow-hidden min-h-[calc(100vh-80px)] flex items-center">
+        {/* Premium Gradient Overlays */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(250,204,21,0.15),transparent_50%)]"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(17,25,40,0.4),transparent_60%)]"></div>
+        <div className="absolute inset-0" style={{backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'0.03\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")'}}></div>
 
         <div className="container mx-auto px-4 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center relative z-10">
           <div 
@@ -36,52 +37,48 @@ const Index = () => {
                 : 'opacity-0 translate-y-10'
             }`}
           >
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-[1.1] text-white">
-              Compreenda a <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent animate-gradient-x bg-[length:200%_auto]">Respiração Oral</span>{' '}
-              do Seu Filho
+            <div className="inline-block mb-6 badge-premium animate-fade-in">
+              Método Premium
+            </div>
+            <h1 className="heading-premium text-4xl sm:text-5xl lg:text-6xl xl:text-7xl leading-[1.1] text-white mb-6">
+              A má oclusão só pode ser compreendida <span className="text-gradient-gold">dentro do sistema</span>
             </h1>
-            <p className="text-lg sm:text-xl text-slate-300 max-w-xl leading-relaxed animate-fade-in-up animate-stagger-1">
-              A respiração pela boca pode afetar o sono, a fala e até o
-              aprendizado. Identifique os sinais cedo e garanta um futuro
-              saudável.
+            <p className="text-lg sm:text-xl text-white/90 max-w-xl leading-relaxed animate-fade-in-up animate-stagger-1 font-light">
+              Método RNS — Reequilíbrio Neuro-Oclusal Sistémico.
+              Reorganize o raciocínio clínico e conduza tratamentos com maior coerência, previsibilidade e valor.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 sm:gap-5 pt-4 animate-fade-in-up animate-stagger-2">
               <Button
                 asChild
                 size="lg"
-                className="rounded-full text-base sm:text-lg px-8 sm:px-10 py-6 sm:py-7 bg-gradient-to-r from-blue-500 to-purple-600 hover:shadow-2xl hover:shadow-purple-500/50 transition-all duration-300 hover:scale-105 hover-lift"
+                className="btn-gold text-base sm:text-lg hover-glow-gold"
               >
-                <a
-                  href="https://wa.link/uyxjm5"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center"
-                >
-                  Agendar Checkup 360°
+                <Link to="/formacao" className="flex items-center">
+                  Formação Método RNS
                   <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </a>
+                </Link>
               </Button>
               <Button
                 asChild
                 variant="outline"
                 size="lg"
-                className="rounded-full text-base sm:text-lg px-8 sm:px-10 py-6 sm:py-7 border-2 border-white/30 text-white hover:bg-white/10 backdrop-blur-sm transition-all duration-300 hover-scale"
+                className="glass-premium rounded-xl text-base sm:text-lg px-8 sm:px-10 py-6 sm:py-7 border-2 border-white/30 text-primary hover:bg-white hover:scale-105 transition-all duration-300 font-semibold"
               >
-                <Link to="/avaliacao">Fale com a Dra. Ro</Link>
+                <Link to="/avaliacao">Diagnóstico IA Gratuito</Link>
               </Button>
             </div>
           </div>
-          <div 
+          <div
             className={`relative hidden lg:block transition-all duration-1000 ${
-              heroRef.isVisible 
-                ? 'animate-fade-in-right opacity-100' 
+              heroRef.isVisible
+                ? 'animate-fade-in-right opacity-100'
                 : 'opacity-0 translate-x-10'
             }`}
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/30 to-purple-500/30 rounded-[3rem] blur-3xl transform translate-x-10 translate-y-10 animate-pulse-slow"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-secondary/20 to-primary/30 rounded-[3rem] blur-3xl transform translate-x-10 translate-y-10 animate-pulse-slow"></div>
             <img
-              src="https://img.usecurling.com/p/600/600?q=happy%20child%20smiling&dpr=2"
-              alt="Criança feliz e saudável"
+              src="https://img.usecurling.com/p/600/600?q=professional%20dentist%20orthodontist%20clinic%20modern&dpr=2"
+              alt="Profissional de ortodontia - Método RNS"
               className="relative rounded-[3rem] shadow-2xl w-full object-cover aspect-square transform hover:scale-105 transition-transform duration-700 border-4 border-white/20 hover-glow"
             />
           </div>
@@ -91,28 +88,28 @@ const Index = () => {
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent"></div>
       </section>
 
-      {/* O que é Respiração Oral */}
-      <section className="container mx-auto px-4">
-        <div 
+      {/* O que é Método RNS */}
+      <section className="section-premium container-premium">
+        <div
           ref={whatIsRef.elementRef}
-          className={`bg-gradient-to-br from-white to-blue-50/30 rounded-[2.5rem] p-10 lg:p-16 shadow-xl border border-blue-100 grid md:grid-cols-2 gap-16 items-center backdrop-blur-sm transition-all duration-1000 ${
-            whatIsRef.isVisible 
-              ? 'opacity-100' 
+          className={`glass-premium rounded-[2rem] p-10 lg:p-16 shadow-premium border-gradient grid md:grid-cols-2 gap-16 items-center transition-all duration-1000 ${
+            whatIsRef.isVisible
+              ? 'opacity-100'
               : 'opacity-0'
           }`}
         >
-          <div 
+          <div
             className={`order-2 md:order-1 transition-all duration-1000 ${
-              whatIsRef.isVisible 
-                ? 'animate-scale-in opacity-100' 
+              whatIsRef.isVisible
+                ? 'animate-scale-in opacity-100'
                 : 'opacity-0 scale-95'
             }`}
           >
             <div className="relative hover-scale">
-              <div className="absolute -inset-4 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-[2rem] blur-2xl animate-pulse-slow"></div>
+              <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-[2rem] blur-2xl animate-pulse-slow"></div>
               <img
-                src="https://img.usecurling.com/p/500/400?q=child%20sleeping&dpr=2"
-                alt="Criança dormindo"
+                src="https://img.usecurling.com/p/500/400?q=dental%20xray%20skull%20occlusion%20anatomy&dpr=2"
+                alt="Análise sistémica da oclusão - Método RNS"
                 className="relative rounded-[2rem] shadow-2xl w-full object-cover border-4 border-white hover-lift"
               />
             </div>
@@ -124,34 +121,36 @@ const Index = () => {
                 : 'opacity-0 -translate-x-10'
             }`}
           >
-            <h2 className="text-4xl lg:text-5xl font-bold text-foreground leading-tight">
-              O que é a Respiração Oral?
+            <div className="inline-block mb-4 subheading-premium text-primary">
+              O Método
+            </div>
+            <h2 className="heading-premium text-4xl lg:text-5xl text-foreground leading-tight mb-6">
+              O que é o Método RNS?
             </h2>
-            <p className="text-muted-foreground text-lg leading-relaxed">
-              A respiração oral ocorre quando a criança respira
-              predominantemente pela boca, em vez do nariz. Embora pareça
-              inofensivo, pode ser um sinal de obstrução nasal, alergias ou
-              hábitos que precisam de atenção.
+            <p className="text-premium text-lg leading-relaxed mb-6">
+              O Método RNS não é uma técnica ortodôntica. É um modelo estruturado de raciocínio clínico
+              que integra sistema nervoso, oclusão, postura, função lingual e adaptação funcional do
+              organismo na compreensão e condução dos tratamentos.
             </p>
             <ul className="space-y-4">
               {[
-                'Comum em crianças em fase de crescimento',
-                'Pode alterar o desenvolvimento da face',
-                'Afeta a qualidade do sono e descanso',
+                'Reorganiza a compreensão da má oclusão como fenómeno sistémico',
+                'Aumenta previsibilidade e coerência terapêutica',
+                'Diferenciação profissional baseada em critério',
               ].map((text, idx) => (
-                <li 
+                <li
                   key={idx}
                   className={`flex items-center gap-4 text-foreground text-lg transition-all duration-700 ${
-                    whatIsRef.isVisible 
-                      ? 'animate-fade-in-up opacity-100' 
+                    whatIsRef.isVisible
+                      ? 'animate-fade-in-up opacity-100'
                       : 'opacity-0 translate-y-5'
                   }`}
                   style={{ transitionDelay: `${(idx + 1) * 150}ms` }}
                 >
-                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center hover-scale animate-bounce-slow">
-                    <CheckCircle className="w-5 h-5 text-white" />
+                  <div className="flex-shrink-0 w-10 h-10 rounded-full gradient-navy-gold flex items-center justify-center shadow-gold">
+                    <CheckCircle className="w-6 h-6 text-white" />
                   </div>
-                  <span>{text}</span>
+                  <span className="font-medium">{text}</span>
                 </li>
               ))}
             </ul>
@@ -160,8 +159,8 @@ const Index = () => {
               variant="link"
               className="text-primary p-0 h-auto font-semibold text-lg hover:gap-3 transition-all group"
             >
-              <Link to="/problema" className="flex items-center gap-2">
-                Saiba mais sobre o problema{' '}
+              <Link to="/sobre" className="flex items-center gap-2">
+                Saiba mais sobre o Método{' '}
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
             </Button>
@@ -169,66 +168,69 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Consequências */}
-      <section className="relative bg-gradient-to-br from-slate-50 via-blue-50/20 to-slate-50 py-24 overflow-hidden">
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLW9wYWNpdHk9IjAuMDMiIHN0cm9rZS13aWR0aD0iMSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmlkKSIvPjwvc3ZnPg==')] opacity-40"></div>
+      {/* Diferenciais do Método RNS */}
+      <section className="section-premium relative gradient-subtle overflow-hidden">
+        <div className="absolute inset-0 pattern-dots opacity-30"></div>
 
-        <div 
+        <div
           ref={impactsRef.elementRef}
-          className="container mx-auto px-4 relative z-10"
+          className="container-premium relative z-10"
         >
-          <div 
+          <div
             className={`text-center max-w-3xl mx-auto mb-20 transition-all duration-1000 ${
-              impactsRef.isVisible 
-                ? 'animate-fade-in-up opacity-100' 
+              impactsRef.isVisible
+                ? 'animate-fade-in-up opacity-100'
                 : 'opacity-0 translate-y-10'
             }`}
           >
-            <h2 className="text-4xl lg:text-5xl font-bold mb-6 bg-gradient-to-r from-slate-900 to-blue-900 bg-clip-text text-transparent">
-              Impactos no Desenvolvimento
+            <div className="inline-block mb-4 subheading-premium text-primary">
+              Diferenciais
+            </div>
+            <h2 className="heading-premium text-4xl lg:text-5xl mb-6">
+              Diferenciais do Método RNS
             </h2>
-            <p className="text-muted-foreground text-xl leading-relaxed">
-              A respiração oral não tratada pode ter consequências que vão além
-              da saúde física, afetando o dia a dia da criança.
+            <p className="text-premium text-xl leading-relaxed">
+              Um modelo de raciocínio clínico que reorganiza a forma de pensar
+              antes de reorganizar a forma de tratar.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-8 lg:gap-10">
             {[
               {
-                title: 'Sono e Cansaço',
-                desc: 'Sono agitado, ronco e cansaço diurno, afetando a energia para brincar.',
-                icon: '💤',
+                title: 'Coerência Terapêutica',
+                desc: 'Decisões clínicas baseadas em critérios sistémicos claros, não em protocolos rígidos.',
+                icon: '🎯',
               },
               {
-                title: 'Fala e Linguagem',
-                desc: 'Alterações na dicção e dificuldade em pronunciar certos sons.',
-                icon: '🗣️',
+                title: 'Previsibilidade Clínica',
+                desc: 'Redução de instabilidade e recidivas através da compreensão das variáveis sistémicas.',
+                icon: '📊',
               },
               {
-                title: 'Aprendizagem',
-                desc: 'Dificuldade de concentração na escola devido à má qualidade do sono.',
-                icon: '📚',
+                title: 'Valorização Profissional',
+                desc: 'Diferenciação baseada em raciocínio clínico profundo, não apenas em técnica.',
+                icon: '⭐',
               },
             ].map((item, idx) => (
               <Card
                 key={idx}
-                className={`border-none shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 bg-white/80 backdrop-blur-sm group hover-lift ${
-                  impactsRef.isVisible 
-                    ? 'animate-scale-in opacity-100' 
+                className={`card-premium group hover-lift ${
+                  impactsRef.isVisible
+                    ? 'animate-scale-in opacity-100'
                     : 'opacity-0 scale-95'
                 }`}
-                style={{ 
+                style={{
                   animationDelay: `${idx * 150}ms`,
                   transitionDelay: `${idx * 150}ms`
                 }}
               >
                 <CardContent className="p-10 text-center space-y-5">
                   <div className="text-6xl mb-6 transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 animate-float">{item.icon}</div>
-                  <h3 className="text-2xl font-bold text-foreground">
+                  <h3 className="text-2xl font-bold text-foreground mb-4">
                     {item.title}
                   </h3>
-                  <p className="text-muted-foreground text-lg leading-relaxed">{item.desc}</p>
+                  <p className="text-premium text-lg leading-relaxed">{item.desc}</p>
                 </CardContent>
               </Card>
             ))}
@@ -237,49 +239,54 @@ const Index = () => {
       </section>
 
       {/* Testimonials */}
-      <section 
+      <section
         ref={testimonialsRef.elementRef}
-        className="container mx-auto px-4 py-8"
+        className="section-premium container-premium"
       >
-        <h2 
-          className={`text-4xl lg:text-5xl font-bold text-center mb-16 transition-all duration-1000 ${
-            testimonialsRef.isVisible 
-              ? 'animate-fade-in-up opacity-100' 
+        <div
+          className={`text-center max-w-3xl mx-auto mb-16 transition-all duration-1000 ${
+            testimonialsRef.isVisible
+              ? 'animate-fade-in-up opacity-100'
               : 'opacity-0 translate-y-10'
           }`}
         >
-          O que dizem os pais
-        </h2>
+          <div className="inline-block mb-4 subheading-premium text-primary">
+            Depoimentos
+          </div>
+          <h2 className="heading-premium text-4xl lg:text-5xl mb-6">
+            O que dizem os profissionais
+          </h2>
+        </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {displayTestimonials.map((t, i) => (
             <Card
               key={t.id}
-              className={`bg-gradient-to-br from-white to-blue-50/30 border border-blue-100 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 hover-lift ${
-                testimonialsRef.isVisible 
-                  ? 'animate-scale-in opacity-100' 
+              className={`card-premium hover-lift ${
+                testimonialsRef.isVisible
+                  ? 'animate-scale-in opacity-100'
                   : 'opacity-0 scale-95'
               }`}
-              style={{ 
+              style={{
                 animationDelay: `${i * 150}ms`,
                 transitionDelay: `${i * 150}ms`
               }}
             >
               <CardContent className="p-8 space-y-5">
-                <div className="flex gap-1 text-yellow-400">
+                <div className="flex gap-1 mb-4">
                   {Array.from({ length: t.rating }).map((_, s) => (
-                    <Star key={s} className="w-5 h-5 fill-current" />
+                    <Star key={s} className="w-5 h-5 fill-secondary text-secondary" />
                   ))}
                 </div>
-                <p className="text-foreground italic text-lg leading-relaxed">"{t.text}"</p>
-                <div className="flex items-center gap-4 pt-3 border-t border-border/50">
-                  <Avatar className="w-12 h-12 border-2 border-primary/20">
+                <p className="text-foreground italic text-lg leading-relaxed font-light">"{t.text}"</p>
+                <div className="flex items-center gap-4 pt-4 border-t border-gradient-subtle">
+                  <Avatar className="w-14 h-14 border-2 border-secondary/30 shadow-gold">
                     <AvatarImage
                       src={t.customAvatar || `https://img.usecurling.com/ppl/thumbnail?gender=${t.avatarGender}&seed=${t.avatarSeed}`}
                     />
-                    <AvatarFallback className="bg-gradient-to-br from-primary to-secondary text-white">{t.name[0]}</AvatarFallback>
+                    <AvatarFallback className="gradient-navy-gold text-white font-semibold">{t.name[0]}</AvatarFallback>
                   </Avatar>
                   <div>
-                    <p className="font-semibold text-base">{t.name}</p>
+                    <p className="font-semibold text-base text-foreground">{t.name}</p>
                     <p className="text-sm text-muted-foreground">{t.role}</p>
                   </div>
                 </div>
@@ -289,45 +296,45 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Warning Signs CTA */}
-      <section className="container mx-auto px-4">
-        <div 
+      {/* Final CTA */}
+      <section className="container-premium">
+        <div
           ref={ctaRef.elementRef}
-          className={`bg-gradient-to-br from-blue-600 via-blue-700 to-purple-700 rounded-[3rem] p-12 lg:p-20 text-center text-white space-y-10 relative overflow-hidden shadow-2xl transition-all duration-1000 ${
-            ctaRef.isVisible 
-              ? 'opacity-100' 
+          className={`gradient-navy-gold rounded-[3rem] p-12 lg:p-20 text-center text-white space-y-10 relative overflow-hidden shadow-premium hover-glow-gold transition-all duration-1000 ${
+            ctaRef.isVisible
+              ? 'opacity-100'
               : 'opacity-0'
           }`}
         >
-          <div 
+          <div
             className={`relative z-10 max-w-3xl mx-auto transition-all duration-1000 ${
-              ctaRef.isVisible 
-                ? 'animate-bounce-in opacity-100' 
+              ctaRef.isVisible
+                ? 'animate-bounce-in opacity-100'
                 : 'opacity-0 scale-90'
             }`}
           >
-            <div className="w-20 h-20 mx-auto mb-8 bg-yellow-400/20 rounded-full flex items-center justify-center backdrop-blur-sm border-2 border-yellow-300/50">
-              <AlertTriangle className="w-12 h-12 text-yellow-300" />
+            <div className="w-24 h-24 mx-auto mb-8 bg-white/10 rounded-full flex items-center justify-center backdrop-blur-sm border-2 border-white/30 shadow-gold">
+              <AlertTriangle className="w-14 h-14 text-white" />
             </div>
-            <h2 className="text-4xl lg:text-6xl font-bold mb-6 leading-tight text-white">
-              Quando procurar ajuda?
+            <h2 className="heading-premium text-4xl lg:text-6xl mb-6 leading-tight text-white">
+              Pronto para reorganizar o raciocínio clínico?
             </h2>
-            <p className="text-xl text-white/95 mb-10 leading-relaxed max-w-2xl mx-auto">
-              Se o seu filho dorme de boca aberta, ronca ou parece sempre
-              cansado, não espere. A intervenção precoce faz toda a diferença.
+            <p className="text-xl text-white/95 mb-10 leading-relaxed max-w-2xl mx-auto font-light">
+              A má oclusão não pode ser compreendida fora do sistema.
+              Integre oclusão, sistema nervoso e organização funcional do corpo.
             </p>
             <Button
               asChild
               size="lg"
-              className="rounded-full bg-white text-blue-700 font-bold text-lg px-12 py-7 hover:bg-blue-50 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 hover-lift animate-glow"
+              className="rounded-full bg-white text-primary font-bold text-lg px-12 py-7 hover:bg-white/90 shadow-premium hover:shadow-2xl transition-all duration-300 hover:scale-105 hover-lift"
             >
-              <Link to="/avaliacao">Falar com um especialista agora</Link>
+              <Link to="/formacao">Conheça a Formação RNS</Link>
             </Button>
           </div>
           {/* Decorative circles */}
-          <div className="absolute top-0 left-0 w-80 h-80 bg-gradient-to-br from-white/10 to-transparent rounded-full -translate-x-1/2 -translate-y-1/2 blur-2xl"></div>
-          <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-tl from-purple-500/20 to-transparent rounded-full translate-x-1/3 translate-y-1/3 blur-3xl"></div>
-          <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-blue-400/10 rounded-full -translate-x-1/2 -translate-y-1/2 blur-2xl"></div>
+          <div className="absolute top-0 left-0 w-80 h-80 bg-gradient-radial from-white/10 to-transparent rounded-full -translate-x-1/2 -translate-y-1/2 blur-3xl"></div>
+          <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-radial from-secondary/20 to-transparent rounded-full translate-x-1/3 translate-y-1/3 blur-3xl"></div>
+          <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-white/5 rounded-full -translate-x-1/2 -translate-y-1/2 blur-2xl"></div>
         </div>
       </section>
     </div>

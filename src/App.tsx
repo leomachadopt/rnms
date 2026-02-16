@@ -10,7 +10,9 @@ import { CookieConsent } from '@/components/CookieConsent'
 import Layout from './components/Layout'
 import AdminLayout from './components/AdminLayout'
 import Index from './pages/Index'
-import Equipa from './pages/Equipa'
+import Sobre from './pages/Sobre'
+import LeonardoMachado from './pages/LeonardoMachado'
+import Formacao from './pages/Formacao'
 import Problema from './pages/Problema'
 import Blog from './pages/Blog'
 import BlogPost from './pages/BlogPost'
@@ -43,8 +45,16 @@ const router = createBrowserRouter([
         element: <Index />,
       },
       {
-        path: '/metodo',
-        element: <Equipa />,
+        path: '/sobre',
+        element: <Sobre />,
+      },
+      {
+        path: '/leonardo',
+        element: <LeonardoMachado />,
+      },
+      {
+        path: '/formacao',
+        element: <Formacao />,
       },
       {
         path: '/problema',

@@ -26,8 +26,10 @@ export function Header() {
 
   const navLinks = [
     { name: 'Home', path: '/' },
-    { name: 'Método', path: '/metodo' },
-    { name: 'Problema', path: '/problema' },
+    { name: 'Método RNS', path: '/sobre' },
+    { name: 'Leonardo Machado', path: '/leonardo' },
+    { name: 'Formação', path: '/formacao' },
+    { name: 'Diagnóstico IA', path: '/avaliacao' },
     { name: 'Blog', path: '/blog' },
   ]
 
@@ -36,8 +38,8 @@ export function Header() {
       className={cn(
         'fixed top-0 left-0 right-0 z-50 transition-all duration-500',
         isScrolled
-          ? 'bg-white/80 backdrop-blur-xl shadow-lg border-b border-border/50 py-3'
-          : 'bg-transparent py-5',
+          ? 'glass-premium shadow-premium border-b border-secondary/20 py-3'
+          : 'bg-primary/5 backdrop-blur-sm py-5',
       )}
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
@@ -45,11 +47,11 @@ export function Header() {
         <Link to="/" className="flex items-center gap-3 group">
           <img
             src="/logo_ro.png"
-            alt="Respiração Oral"
-            className="w-12 h-12 object-contain transition-all duration-300 group-hover:scale-110 group-hover:rotate-3"
+            alt="Método RNS"
+            className="w-12 h-12 object-contain transition-all duration-300 group-hover:scale-110 group-hover:rotate-3 drop-shadow-lg"
           />
-          <span className="font-bold text-2xl bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent hidden sm:block transition-all duration-300 group-hover:scale-105">
-            Respiração Oral
+          <span className="heading-premium text-2xl text-gradient-gold hidden sm:block transition-all duration-300 group-hover:scale-105 drop-shadow-lg">
+            Método RNS
           </span>
         </Link>
 
@@ -60,15 +62,15 @@ export function Header() {
               key={link.path}
               to={link.path}
               className={cn(
-                'text-sm font-medium transition-all duration-300 hover:text-primary hover:scale-105 relative group',
+                'text-sm font-semibold transition-all duration-300 hover:text-secondary hover:scale-105 relative group',
                 location.pathname === link.path
-                  ? 'text-primary font-semibold'
-                  : 'text-foreground/80',
+                  ? 'text-secondary drop-shadow-lg'
+                  : isScrolled ? 'text-foreground' : 'text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]',
               )}
               style={{ animationDelay: `${idx * 50}ms` }}
             >
               {link.name}
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-secondary shadow-gold transition-all duration-300 group-hover:w-full"></span>
             </Link>
           ))}
         </nav>
@@ -77,11 +79,11 @@ export function Header() {
         <div className="hidden lg:block">
           <Button
             asChild
-            className="rounded-full bg-gradient-to-r from-primary to-secondary hover:shadow-lg transition-all duration-300 hover:scale-105 shadow-md hover-lift animate-pulse-slow"
+            className="btn-gold hover-glow-gold px-6"
           >
             <Link to="/avaliacao" className="group">
               <MessageCircle className="w-4 h-4 mr-2 group-hover:rotate-12 transition-transform duration-300" />
-              Fale com a Dra. Ro
+              Diagnóstico IA
             </Link>
           </Button>
         </div>
@@ -90,16 +92,23 @@ export function Header() {
         <div className="lg:hidden">
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="text-foreground">
+              <Button
+                variant="ghost"
+                size="icon"
+                className={cn(
+                  isScrolled ? 'text-foreground' : 'text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]',
+                  'hover:bg-secondary/10'
+                )}
+              >
                 <Menu className="w-6 h-6" />
                 <span className="sr-only">Menu</span>
               </Button>
             </SheetTrigger>
             <SheetContent
               side="right"
-              className="w-[80vw] sm:w-[350px] flex flex-col"
+              className="w-[80vw] sm:w-[350px] flex flex-col glass-premium border-l border-secondary/20"
             >
-              <SheetTitle className="text-left text-lg font-bold text-primary">
+              <SheetTitle className="text-left text-lg heading-premium text-primary">
                 Menu
               </SheetTitle>
               <SheetDescription className="sr-only">
@@ -112,10 +121,10 @@ export function Header() {
                     to={link.path}
                     onClick={() => setIsOpen(false)}
                     className={cn(
-                      'text-lg font-medium transition-all duration-300 hover:text-primary hover:translate-x-2 hover:scale-105',
+                      'text-lg font-semibold transition-all duration-300 hover:text-secondary hover:translate-x-2 hover:scale-105',
                       location.pathname === link.path
-                        ? 'text-primary font-semibold'
-                        : 'text-foreground/80',
+                        ? 'text-secondary'
+                        : 'text-foreground',
                     )}
                     style={{ animationDelay: `${idx * 100}ms` }}
                   >
@@ -124,11 +133,11 @@ export function Header() {
                 ))}
                 <Button
                   asChild
-                  className="mt-4 w-full rounded-full bg-primary hover:bg-primary/90"
+                  className="mt-4 w-full btn-gold hover-glow-gold"
                 >
                   <Link to="/avaliacao" onClick={() => setIsOpen(false)}>
                     <MessageCircle className="w-4 h-4 mr-2" />
-                    Fale com a Dra. Ro
+                    Diagnóstico IA
                   </Link>
                 </Button>
               </nav>

@@ -59,8 +59,8 @@ const Problema = () => {
               seco, o que pode levar a diversas complicações.
             </p>
             <img
-              src="https://img.usecurling.com/p/800/400?q=anatomy%20illustration%20child&dpr=2"
-              alt="Ilustração anatômica"
+              src="https://img.usecurling.com/p/800/400?q=dental%20anatomy%20jaw%20occlusion%20medical&dpr=2"
+              alt="Anatomia da oclusão e sistema estomatognático"
               className="rounded-xl shadow-md my-6 w-full object-cover hover-scale hover-lift transition-all duration-300"
             />
           </div>
