@@ -69,16 +69,16 @@ const Formacao = () => {
     },
     {
       icon: Lightbulb,
-      title: 'Mentoria Clínica e Posicionamento',
-      subtitle: 'Programa Premium',
-      description: 'Programa destinado a profissionais que desejam aprofundar raciocínio clínico, estruturar diferenciação profissional e posicionar-se como referência clínica.',
+      title: 'Mentoria Clínica, Comercial & Marketing',
+      subtitle: 'Programa Premium · Acompanhamento Contínuo',
+      description: 'Programa de acompanhamento contínuo para profissionais que querem ser referência clínica e construir um negócio sólido. Integra raciocínio clínico avançado, estratégia comercial e posicionamento de marketing.',
       features: [
         'Aprofundamento de raciocínio clínico',
-        'Estruturação de diferenciação profissional',
-        'Comunicação de valor terapêutico',
-        'Posicionamento como referência',
-        'Estratégia de valorização',
-        'Acompanhamento contínuo'
+        'Estratégia comercial e precificação premium',
+        'Marketing clínico e autoridade digital',
+        'Comunicação e conversão de casos',
+        'Posicionamento como referência de mercado',
+        'Acompanhamento contínuo personalizado'
       ],
       highlight: 'Premium',
       color: 'from-purple-500 to-purple-600'
