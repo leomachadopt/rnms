@@ -53,18 +53,18 @@ const Formacao = () => {
     },
     {
       icon: Users,
-      title: 'Consultoria Clínica Estratégica',
-      subtitle: 'Atuação Selectiva',
-      description: 'Atuação junto a clínicas e profissionais para análise de casos complexos, estruturação de planos terapêuticos e integração sistémica no tratamento.',
+      title: 'Day Clinic — Consultoria In Loco',
+      subtitle: 'Presença Clínica Directa',
+      description: 'Consultoria presencial na sua clínica. Um dia de imersão clínica com avaliação, tratamento e acompanhamento directo de casos reais ao lado do profissional — aprendizagem prática em contexto real.',
       features: [
-        'Análise de casos complexos',
-        'Estruturação de planos terapêuticos',
-        'Integração sistémica',
-        'Aumento de previsibilidade clínica',
-        'Valorização do plano de tratamento',
-        'Acompanhamento personalizado'
+        'Presença física na sua clínica',
+        'Avaliação sistémica de casos reais',
+        'Condução e orientação de tratamentos',
+        'Raciocínio clínico aplicado ao vivo',
+        'Feedback imediato caso a caso',
+        'Acompanhamento pós Day Clinic'
       ],
-      highlight: 'Selectivo',
+      highlight: 'In Loco',
       color: 'from-green-500 to-green-600'
     },
     {
