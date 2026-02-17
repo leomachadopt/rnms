@@ -5,11 +5,11 @@ const Avaliacao = () => {
     <div className="min-h-[calc(100vh-80px)] bg-slate-50 flex flex-col items-center justify-center p-4 lg:p-8">
       <div className="text-center mb-8 max-w-2xl animate-fade-in">
         <h1 className="text-3xl lg:text-4xl font-bold mb-4 text-foreground">
-          Diagnóstico de Necessidades Clínicas
+          Diagnóstico Gratuito — Método RNS
         </h1>
         <p className="text-muted-foreground text-lg">
-          Converse com nosso assistente inteligente para identificar suas principais
-          dificuldades clínicas e descobrir qual solução do Método RNS é mais adequada para você.
+          Responda a algumas perguntas sobre os seus desafios reais e descubra qual serviço
+          do Método RNS é o mais adequado para o seu momento profissional.
         </p>
       </div>
 
@@ -18,8 +18,8 @@ const Avaliacao = () => {
       </div>
 
       <p className="mt-8 text-xs text-muted-foreground text-center max-w-md">
-        Nota: Esta ferramenta ajuda a identificar o serviço mais adequado às suas necessidades.
-        Formação Certificada • Consultoria Clínica • Mentoria Profissional
+        Diagnóstico confidencial · Sem compromisso · Recomendação personalizada ao seu perfil<br />
+        <span className="font-medium">Formação Certificada · Day Clinic In Loco · Mentoria Premium · In Company</span>
       </p>
     </div>
   )
