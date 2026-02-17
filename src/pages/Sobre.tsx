@@ -109,7 +109,7 @@ const Sobre = () => {
       {/* Hero Section */}
       <section className="gradient-luxury text-white py-20 lg:py-28 relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(250,204,21,0.15),transparent_50%)]"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(17,25,40,0.4),transparent_60%)]"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(0,0,0,0.5),transparent_60%)]"></div>
         <div className="absolute inset-0 pattern-dots opacity-20"></div>
 
         <div

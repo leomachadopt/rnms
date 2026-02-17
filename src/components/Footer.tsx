@@ -19,7 +19,7 @@ export function Footer() {
           <div className="space-y-4 animate-fade-in-up">
             <div className="flex items-center gap-2 group">
               <img
-                src="/logo_ro.png"
+                src="/logo_RNS_NOVA.png"
                 alt="Método RNS"
                 className="w-10 h-10 object-contain drop-shadow-lg"
               />

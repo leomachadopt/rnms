@@ -39,14 +39,14 @@ export function Header() {
         'fixed top-0 left-0 right-0 z-50 transition-all duration-500',
         isScrolled
           ? 'glass-premium shadow-premium border-b border-secondary/20 py-3'
-          : 'bg-white/90 backdrop-blur-md shadow-sm py-5',
+          : 'bg-white/95 backdrop-blur-md border-b border-secondary/10 py-5',
       )}
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-3 group">
           <img
-            src="/logo_ro.png"
+            src="/logo_RNS_NOVA.png"
             alt="Método RNS"
             className="w-12 h-12 object-contain transition-all duration-300 group-hover:scale-110 group-hover:rotate-3 drop-shadow-lg"
           />

@@ -144,7 +144,7 @@ const Formacao = () => {
       {/* Hero Section */}
       <section className="relative gradient-luxury pt-20 pb-16 lg:pt-28 lg:pb-24 overflow-hidden min-h-[calc(100vh-80px)] flex items-center">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(250,204,21,0.15),transparent_50%)]"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(17,25,40,0.4),transparent_60%)]"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(0,0,0,0.5),transparent_60%)]"></div>
         <div className="absolute inset-0 pattern-dots opacity-20"></div>
 
         <div className="container mx-auto px-4 relative z-10">

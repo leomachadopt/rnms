@@ -84,7 +84,7 @@ const LeonardoMachado = () => {
       {/* Hero Section */}
       <section className="gradient-luxury text-white py-20 lg:py-28 relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(250,204,21,0.15),transparent_50%)]"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(17,25,40,0.4),transparent_60%)]"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(0,0,0,0.5),transparent_60%)]"></div>
         <div className="absolute inset-0 pattern-dots opacity-20"></div>
 
         <div
@@ -103,7 +103,7 @@ const LeonardoMachado = () => {
           </h1>
           <p className="text-xl lg:text-2xl mb-10 text-white/90 leading-relaxed max-w-3xl mx-auto font-light">
             Referência clínica e intelectual no estudo e aplicação do Reequilíbrio Neuro-Oclusal Sistémico.<br />
-            <strong className="font-semibold text-gradient-gold">A má oclusão só pode ser compreendida dentro do sistema.</strong>
+            <strong className="font-semibold text-gradient-gold">A má oclusão só pode ser compreendida dentro de um sistema.</strong>
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Button
