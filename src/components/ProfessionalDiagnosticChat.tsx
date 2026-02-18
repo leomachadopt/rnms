@@ -116,18 +116,18 @@ export function ProfessionalDiagnosticChat() {
 
   return (
     <div className="flex flex-col h-[680px] w-full max-w-2xl mx-auto bg-white rounded-2xl shadow-premium border border-border overflow-hidden">
-      {/* Header */}
-      <div className="gradient-navy-gold p-4 text-white flex items-center gap-3">
-        <div className="w-10 h-10 bg-white/15 rounded-full flex items-center justify-center flex-shrink-0">
-          <Bot className="w-5 h-5" />
+      {/* Header — fundo preto com detalhe dourado */}
+      <div className="bg-[hsl(0,0%,8%)] p-4 text-white flex items-center gap-3 border-b-2 border-secondary/60">
+        <div className="w-10 h-10 bg-secondary/20 border border-secondary/40 rounded-full flex items-center justify-center flex-shrink-0">
+          <Bot className="w-5 h-5 text-secondary" />
         </div>
         <div>
-          <h3 className="font-bold text-base">Assistente Método RNS</h3>
-          <p className="text-xs opacity-80">Diagnóstico · Identificação da Solução Ideal</p>
+          <h3 className="font-bold text-base text-white">Assistente Método RNS</h3>
+          <p className="text-xs text-white/60">Diagnóstico · Identificação da Solução Ideal</p>
         </div>
         <div className="ml-auto flex items-center gap-1.5">
           <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-          <span className="text-xs opacity-80">Online</span>
+          <span className="text-xs text-white/60">Online</span>
         </div>
       </div>
 
@@ -143,8 +143,8 @@ export function ProfessionalDiagnosticChat() {
               )}
             >
               {msg.role === 'assistant' && (
-                <div className="w-7 h-7 rounded-full gradient-navy-gold flex items-center justify-center flex-shrink-0 mr-2 mt-1 shadow-gold">
-                  <Bot className="w-3.5 h-3.5 text-white" />
+                <div className="w-7 h-7 rounded-full bg-[hsl(0,0%,8%)] border border-secondary/40 flex items-center justify-center flex-shrink-0 mr-2 mt-1">
+                  <Bot className="w-3.5 h-3.5 text-secondary" />
                 </div>
               )}
               <div
@@ -203,8 +203,8 @@ export function ProfessionalDiagnosticChat() {
           {/* Loading indicator */}
           {isLoading && (
             <div className="flex justify-start">
-              <div className="w-7 h-7 rounded-full gradient-navy-gold flex items-center justify-center flex-shrink-0 mr-2 mt-1 shadow-gold">
-                <Bot className="w-3.5 h-3.5 text-white" />
+              <div className="w-7 h-7 rounded-full bg-[hsl(0,0%,8%)] border border-secondary/40 flex items-center justify-center flex-shrink-0 mr-2 mt-1">
+                <Bot className="w-3.5 h-3.5 text-secondary" />
               </div>
               <div className="bg-muted p-3 rounded-2xl rounded-tl-none border border-border/40 flex items-center gap-1">
                 <span

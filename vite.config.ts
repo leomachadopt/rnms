@@ -12,6 +12,15 @@ export default defineConfig(({ mode }) => ({
       // Evita que o Vite sirva arquivos da pasta api (são serverless functions)
       deny: ['**/api/**'],
     },
+    proxy: {
+      // Encaminha chamadas /api/* para o servidor Vercel local (vercel dev)
+      // Em produção as Vercel Functions são servidas automaticamente
+      '/api': {
+        target: 'http://localhost:3000',
+        changeOrigin: true,
+        secure: false,
+      },
+    },
   },
   experimental: {
     enableNativePlugin: true
