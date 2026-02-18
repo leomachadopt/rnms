@@ -182,7 +182,7 @@ export function ProfessionalDiagnosticChat() {
                 className={cn(
                   'max-w-[80%] p-3.5 rounded-2xl animate-fade-in text-sm leading-relaxed',
                   msg.role === 'user'
-                    ? 'bg-[hsl(0,0%,15%)] text-white rounded-tr-none'
+                    ? 'bg-[hsl(0,0%,15%)] text-white rounded-tr-none [&_*]:text-white [&_strong]:text-white'
                     : 'bg-muted text-foreground rounded-tl-none border border-border/40',
                 )}
               >
