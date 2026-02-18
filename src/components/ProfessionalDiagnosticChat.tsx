@@ -11,14 +11,29 @@ import ReactMarkdown from 'react-markdown'
 type ChatMessage = {
   id: string
   role: 'user' | 'assistant'
-  content: string
+  content: string       // texto visível (sem o bloco OPTIONS)
+  rawContent: string    // conteúdo completo da API
+  options?: string[]    // opções extraídas do bloco OPTIONS
+}
+
+// Extrai opções do formato: OPTIONS: ["a", "b", "c"]
+function parseOptions(raw: string): { text: string; options: string[] } {
+  const match = raw.match(/OPTIONS:\s*(\[[\s\S]*?\])\s*$/m)
+  if (!match) return { text: raw.trim(), options: [] }
+  try {
+    const options: string[] = JSON.parse(match[1])
+    const text = raw.slice(0, match.index).trim()
+    return { text, options }
+  } catch {
+    return { text: raw.trim(), options: [] }
+  }
 }
 
 const INITIAL_MESSAGE = `Olá! Sou o assistente de diagnóstico do **Método RNS**.
 
-Vou fazer-lhe algumas perguntas para compreender os seus desafios reais e recomendar o serviço mais adequado ao seu momento — **Formação Certificada**, **Day Clinic In Loco**, **Mentoria Clínica & Comercial** ou **Programa In Company**.
+Vou fazer-lhe algumas perguntas rápidas para perceber o seu momento actual e recomendar o serviço ideal — **Formação Certificada**, **Day Clinic In Loco**, **Mentoria Clínica & Comercial** ou **Programa In Company**.
 
-Para começar: qual é o seu nome e como posso ajudar a sua clínica hoje?`
+Para começar: qual é o seu nome?`
 
 export function ProfessionalDiagnosticChat() {
   const [messages, setMessages] = useState<ChatMessage[]>([
@@ -26,10 +41,14 @@ export function ProfessionalDiagnosticChat() {
       id: 'init',
       role: 'assistant',
       content: INITIAL_MESSAGE,
+      rawContent: INITIAL_MESSAGE,
+      options: [],
     },
   ])
   const [inputValue, setInputValue] = useState('')
   const [isLoading, setIsLoading] = useState(false)
+  // Controla se as opções da última mensagem ainda estão activas
+  const [optionsUsed, setOptionsUsed] = useState(false)
   const scrollRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -53,23 +72,24 @@ export function ProfessionalDiagnosticChat() {
   const sendMessage = useCallback(async (userText: string) => {
     if (!userText.trim() || isLoading) return
 
+    setOptionsUsed(true)
+
     const userMsg: ChatMessage = {
       id: Date.now().toString(),
       role: 'user',
       content: userText.trim(),
+      rawContent: userText.trim(),
     }
 
     setMessages((prev) => [...prev, userMsg])
     setInputValue('')
     setIsLoading(true)
 
-    // Preparar histórico para a API (excluindo a mensagem inicial local)
+    // Prepara histórico para API — usa rawContent para preservar OPTIONS no contexto
     const history = [...messages, userMsg]
       .filter((m) => m.id !== 'init')
-      .map((m) => ({ role: m.role, content: m.content }))
+      .map((m) => ({ role: m.role, content: m.rawContent }))
 
-    // Se o histórico não tiver nenhuma mensagem do assistente ainda,
-    // incluir a mensagem inicial como contexto
     const apiMessages =
       history.filter((m) => m.role === 'assistant').length === 0
         ? [{ role: 'assistant' as const, content: INITIAL_MESSAGE }, ...history]
@@ -88,24 +108,26 @@ export function ProfessionalDiagnosticChat() {
       }
 
       const data = await response.json()
+      const { text, options } = parseOptions(data.reply)
+
       const assistantMsg: ChatMessage = {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
-        content: data.reply,
+        content: text,
+        rawContent: data.reply,
+        options,
       }
       setMessages((prev) => [...prev, assistantMsg])
+      setOptionsUsed(false)
     } catch (error: any) {
       toast.error(error.message || 'Erro ao contactar o assistente. Tente novamente.')
-      // Remover a mensagem do utilizador em caso de erro de rede grave
     } finally {
       setIsLoading(false)
       setTimeout(() => inputRef.current?.focus(), 100)
     }
   }, [messages, isLoading])
 
-  const handleSend = () => {
-    sendMessage(inputValue)
-  }
+  const handleSend = () => sendMessage(inputValue)
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {
@@ -114,10 +136,19 @@ export function ProfessionalDiagnosticChat() {
     }
   }
 
+  // Última mensagem do assistente (para mostrar opções)
+  const lastAssistantMsg = [...messages].reverse().find((m) => m.role === 'assistant')
+  const activeOptions =
+    !optionsUsed && !isLoading && lastAssistantMsg?.options?.length
+      ? lastAssistantMsg.options
+      : []
+
   return (
-    <div className="flex flex-col h-[680px] w-full max-w-2xl mx-auto bg-white rounded-2xl shadow-premium border border-border overflow-hidden">
-      {/* Header — fundo preto com detalhe dourado */}
-      <div className="bg-[hsl(0,0%,8%)] p-4 text-white flex items-center gap-3 border-b-2 border-secondary/60">
+    <div className="flex flex-col w-full max-w-2xl mx-auto bg-white rounded-2xl shadow-premium border border-border overflow-hidden"
+         style={{ minHeight: '520px', maxHeight: '680px', height: 'clamp(520px, 70vh, 680px)' }}>
+
+      {/* Header */}
+      <div className="bg-[hsl(0,0%,8%)] p-4 text-white flex items-center gap-3 border-b-2 border-secondary/60 flex-shrink-0">
         <div className="w-10 h-10 bg-secondary/20 border border-secondary/40 rounded-full flex items-center justify-center flex-shrink-0">
           <Bot className="w-5 h-5 text-secondary" />
         </div>
@@ -151,7 +182,7 @@ export function ProfessionalDiagnosticChat() {
                 className={cn(
                   'max-w-[80%] p-3.5 rounded-2xl animate-fade-in text-sm leading-relaxed',
                   msg.role === 'user'
-                    ? 'gradient-navy-gold text-white rounded-tr-none'
+                    ? 'bg-[hsl(0,0%,15%)] text-white rounded-tr-none'
                     : 'bg-muted text-foreground rounded-tl-none border border-border/40',
                 )}
               >
@@ -207,33 +238,39 @@ export function ProfessionalDiagnosticChat() {
                 <Bot className="w-3.5 h-3.5 text-secondary" />
               </div>
               <div className="bg-muted p-3 rounded-2xl rounded-tl-none border border-border/40 flex items-center gap-1">
-                <span
-                  className="w-2 h-2 bg-foreground/40 rounded-full animate-bounce"
-                  style={{ animationDelay: '0ms' }}
-                />
-                <span
-                  className="w-2 h-2 bg-foreground/40 rounded-full animate-bounce"
-                  style={{ animationDelay: '150ms' }}
-                />
-                <span
-                  className="w-2 h-2 bg-foreground/40 rounded-full animate-bounce"
-                  style={{ animationDelay: '300ms' }}
-                />
+                <span className="w-2 h-2 bg-foreground/40 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+                <span className="w-2 h-2 bg-foreground/40 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+                <span className="w-2 h-2 bg-foreground/40 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
               </div>
+            </div>
+          )}
+
+          {/* Quick-reply options */}
+          {activeOptions.length > 0 && (
+            <div className="flex flex-wrap gap-2 pl-9 pb-1">
+              {activeOptions.map((opt) => (
+                <button
+                  key={opt}
+                  onClick={() => sendMessage(opt)}
+                  className="text-sm px-3.5 py-2 rounded-xl border-2 border-secondary/60 bg-white text-foreground font-medium hover:bg-secondary hover:text-[hsl(0,0%,8%)] hover:border-secondary transition-all duration-150 cursor-pointer"
+                >
+                  {opt}
+                </button>
+              ))}
             </div>
           )}
         </div>
       </ScrollArea>
 
       {/* Input */}
-      <div className="p-4 bg-muted/30 border-t border-border">
+      <div className="p-4 bg-muted/30 border-t border-border flex-shrink-0">
         <div className="flex gap-2">
           <Input
             ref={inputRef}
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Escreva a sua mensagem..."
+            placeholder={activeOptions.length > 0 ? 'Ou escreva a sua resposta...' : 'Escreva a sua mensagem...'}
             className="flex-1 bg-white text-sm"
             disabled={isLoading}
             maxLength={600}
@@ -242,7 +279,7 @@ export function ProfessionalDiagnosticChat() {
             onClick={handleSend}
             disabled={isLoading || !inputValue.trim()}
             size="icon"
-            className="gradient-navy-gold hover:opacity-90 border-0 flex-shrink-0"
+            className="bg-[hsl(0,0%,8%)] hover:bg-[hsl(0,0%,20%)] border border-secondary/40 text-secondary flex-shrink-0"
           >
             {isLoading ? (
               <Loader2 className="w-4 h-4 animate-spin" />
