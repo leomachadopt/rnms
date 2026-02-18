@@ -145,7 +145,7 @@ export function ProfessionalDiagnosticChat() {
 
   return (
     <div className="flex flex-col w-full max-w-2xl mx-auto bg-white rounded-2xl shadow-premium border border-border overflow-hidden"
-         style={{ minHeight: '520px', maxHeight: '680px', height: 'clamp(520px, 70vh, 680px)' }}>
+         style={{ minHeight: '560px', maxHeight: '780px', height: 'clamp(560px, 75vh, 780px)' }}>
 
       {/* Header */}
       <div className="bg-[hsl(0,0%,8%)] p-4 text-white flex items-center gap-3 border-b-2 border-secondary/60 flex-shrink-0">
