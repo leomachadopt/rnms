@@ -29,9 +29,9 @@ function parseOptions(raw: string): { text: string; options: string[] } {
   }
 }
 
-const INITIAL_MESSAGE = `Olá! Sou o assistente de diagnóstico do **Método RNS**.
+const INITIAL_MESSAGE = `Olá! Sou o consultor de diagnóstico do **Método RNS**.
 
-Vou fazer-lhe algumas perguntas rápidas para perceber o seu momento actual e recomendar o serviço ideal — **Formação Certificada**, **Day Clinic In Loco**, **Mentoria Clínica & Comercial** ou **Programa In Company**.
+Em poucos minutos vou perceber exactamente onde está o maior bloqueio na sua clínica e recomendar a solução ideal — com clareza e sem rodeios.
 
 Para começar: qual é o seu nome?`
 
