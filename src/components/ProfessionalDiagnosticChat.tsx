@@ -2,7 +2,7 @@ import { useState, useRef, useEffect, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import { Send, Bot, Loader2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/textarea'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { cn } from '@/lib/utils'
 import { toast } from 'sonner'
@@ -50,7 +50,7 @@ export function ProfessionalDiagnosticChat() {
   // Controla se as opções da última mensagem ainda estão activas
   const [optionsUsed, setOptionsUsed] = useState(false)
   const scrollRef = useRef<HTMLDivElement>(null)
-  const inputRef = useRef<HTMLInputElement>(null)
+  const inputRef = useRef<HTMLTextAreaElement>(null)
 
   // Auto-scroll to bottom
   useEffect(() => {
@@ -129,7 +129,7 @@ export function ProfessionalDiagnosticChat() {
 
   const handleSend = () => sendMessage(inputValue)
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault()
       handleSend()
@@ -264,16 +264,17 @@ export function ProfessionalDiagnosticChat() {
 
       {/* Input */}
       <div className="p-4 bg-muted/30 border-t border-border flex-shrink-0">
-        <div className="flex gap-2">
-          <Input
+        <div className="flex gap-2 items-end">
+          <Textarea
             ref={inputRef}
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder={activeOptions.length > 0 ? 'Ou escreva a sua resposta...' : 'Escreva a sua mensagem...'}
-            className="flex-1 bg-white text-sm"
+            placeholder={activeOptions.length > 0 ? 'Ou escreva a sua resposta... (Shift+Enter para nova linha)' : 'Escreva a sua mensagem... (Shift+Enter para nova linha)'}
+            className="flex-1 bg-white text-sm min-h-[44px] max-h-[120px] resize-none"
             disabled={isLoading}
             maxLength={600}
+            rows={1}
           />
           <Button
             onClick={handleSend}
