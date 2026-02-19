@@ -14,16 +14,13 @@ type ChatMessage = {
   content: string
 }
 
-const INITIAL_MESSAGE = `Bem-vindo ao Consultor Técnico Estratégico do **Método RNS**.
+const INITIAL_MESSAGE = `Olá! Sou um consultor clínico com experiência em compreender os desafios reais da prática contemporânea em saúde.
 
-Sou um consultor especializado que está aqui para o ajudar a compreender como o Método RNS pode transformar a sua prática clínica.
+Estou aqui para ter uma conversa honesta sobre o que realmente está a acontecer na sua prática — os casos que funcionam, os que não funcionam, e porquê.
 
-Não se trata de aprender mais uma técnica.
-Trata-se de reorganizar a forma como pensa, lê o paciente e toma decisões clínicas.
+Não é uma conversa comercial. É uma conversa clínica.
 
-**Uma nova lente clínica para uma nova geração de decisões.**
-
-Para começar: qual é o seu nome e qual é a sua área de actuação?`
+**Para começar: qual é o seu nome e em que área actua?**`
 
 export function StrategicAgentChat() {
   const [messages, setMessages] = useState<ChatMessage[]>([
