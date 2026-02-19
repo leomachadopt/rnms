@@ -128,8 +128,7 @@ const Sobre = () => {
             <span className="text-gradient-gold">Sistémico</span>
           </h1>
           <p className="text-xl lg:text-2xl mb-8 text-white/90 leading-relaxed font-light">
-            Um modelo de raciocínio clínico que integra sistema nervoso, oclusão e organização<br />
-            funcional do corpo na compreensão e tratamento da má oclusão.
+            Um modelo de raciocínio clínico que integra sistema nervoso, oclusão e organização funcional do corpo na compreensão e tratamento da má oclusão.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Button
@@ -272,7 +271,7 @@ const Sobre = () => {
                   </div>
                   <Icon className="w-9 h-9 text-primary mb-4" />
                   <h3 className="text-xl font-bold mb-3 text-foreground">{phase.title}</h3>
-                  <p className="text-premium text-sm leading-relaxed">
+                  <p className="text-premium text-base leading-relaxed">
                     {phase.description}
                   </p>
                 </CardContent>

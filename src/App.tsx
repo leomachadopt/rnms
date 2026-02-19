@@ -17,6 +17,7 @@ import Problema from './pages/Problema'
 import Blog from './pages/Blog'
 import BlogPost from './pages/BlogPost'
 import Avaliacao from './pages/Avaliacao'
+import Agente from './pages/Agente'
 import ResultadoAvaliacao from './pages/ResultadoAvaliacao'
 import Agendamento from './pages/Agendamento'
 import Login from './pages/Login'
@@ -71,6 +72,10 @@ const router = createBrowserRouter([
       {
         path: '/avaliacao',
         element: <Avaliacao />,
+      },
+      {
+        path: '/agente',
+        element: <Agente />,
       },
       {
         path: '/resultado-avaliacao',

@@ -32,3 +32,5 @@ screenshot.png
 .env.local
 .env.*.local
 !.env.example
+.vercel
+.env*.local
