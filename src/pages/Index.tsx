@@ -258,7 +258,7 @@ const Index = () => {
             Depoimentos
           </div>
           <h2 className="heading-premium text-4xl lg:text-5xl mb-6">
-            O que dizem os profissionais
+            O que dizem sobre o Método RNS
           </h2>
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
