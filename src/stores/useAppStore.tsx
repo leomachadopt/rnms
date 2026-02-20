@@ -85,8 +85,10 @@ const STATIC_BLOG_POSTS: BlogPost[] = [
 // ---------------------------------------------------------------------------
 
 interface AppContextType {
+  specialists: any[] // TODO: Add proper type
   blogPosts: BlogPost[]
   testimonials: Testimonial[]
+  evaluations: any[] // TODO: Add proper type
   isLoading: boolean
 }
 
@@ -100,8 +102,10 @@ export const AppStoreProvider = ({
   return (
     <AppContext.Provider
       value={{
+        specialists: [], // Empty for now
         blogPosts: STATIC_BLOG_POSTS,
         testimonials: STATIC_TESTIMONIALS,
+        evaluations: [], // Empty for now
         isLoading: false,
       }}
     >
