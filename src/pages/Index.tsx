@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { ArrowRight, CheckCircle, AlertTriangle, Star } from 'lucide-react'
+import { ArrowRight, AlertTriangle, Star } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
@@ -38,14 +38,13 @@ const Index = () => {
             }`}
           >
             <div className="inline-block mb-6 badge-premium animate-fade-in">
-              Método Premium
+              Método RNS
             </div>
             <h1 className="heading-premium text-4xl sm:text-5xl lg:text-6xl xl:text-7xl leading-[1.1] text-white mb-6">
-              A má oclusão só pode ser compreendida <span className="text-gradient-gold">dentro de um sistema</span>
+              Reorganize a sua forma de pensar <span className="text-gradient-gold">antes de reorganizar a sua forma de tratar</span>
             </h1>
             <p className="text-lg sm:text-xl text-white/90 max-w-xl leading-relaxed animate-fade-in-up animate-stagger-1 font-light">
-              Método RNS — Reequilíbrio Neuro-Oclusal Sistémico.
-              Reorganize o raciocínio clínico e conduza tratamentos com maior coerência, previsibilidade e valor.
+              O Método RNS é um modelo clínico-econômico baseado na oclusão que transforma diagnóstico fragmentado em estrutura integrada — gerando crescimento consistente e previsibilidade financeira.
             </p>
             <div className={`flex flex-col sm:flex-row gap-4 sm:gap-5 pt-4 transition-all duration-1000 ${
               heroRef.isVisible 
@@ -66,7 +65,7 @@ const Index = () => {
                 asChild
                 variant="outline"
                 size="lg"
-                className="glass-premium rounded-xl text-base sm:text-lg px-8 sm:px-10 py-6 sm:py-7 border-2 border-white/30 text-white hover:bg-white hover:text-primary hover:scale-105 transition-all duration-300 font-semibold relative z-20"
+                className="rounded-xl text-base sm:text-lg px-8 sm:px-10 py-6 sm:py-7 border-2 border-white bg-white/95 text-foreground hover:bg-white hover:border-secondary hover:scale-105 transition-all duration-300 font-semibold relative z-20 shadow-lg"
               >
                 <Link to="/avaliacao">Diagnóstico IA Gratuito</Link>
               </Button>
@@ -132,16 +131,14 @@ const Index = () => {
               O que é o Método RNS?
             </h2>
             <p className="text-premium text-lg leading-relaxed mb-6">
-              O Método RNS não é uma técnica ortodôntica. É um modelo estruturado de raciocínio clínico
-              que integra sistema nervoso, oclusão, postura, função lingual e adaptação funcional do
-              organismo na compreensão e condução dos tratamentos.
+              O Método RNS é uma arquitetura clínica baseada na oclusão que reorganiza a forma como o diagnóstico é construído e como o plano é estruturado.
             </p>
             <ul className="space-y-4">
               {[
-                'Reorganiza a compreensão da má oclusão como fenómeno sistémico',
-                'Aumenta previsibilidade e coerência terapêutica',
-                'Diferenciação profissional baseada em critério',
-              ].map((text, idx) => (
+                { emoji: '🔎', title: 'Ver', desc: 'Leitura sistêmica que integra oclusão, postura e função numa única arquitetura diagnóstica.' },
+                { emoji: '🧩', title: 'Estruturar', desc: 'Transformação de procedimentos isolados em planos integrados de alto valor clínico.' },
+                { emoji: '📈', title: 'Consolidar', desc: 'Decisões clínicas que geram crescimento consistente e previsibilidade econômica.' },
+              ].map((item, idx) => (
                 <li
                   key={idx}
                   className={`flex items-center gap-4 text-foreground text-lg transition-all duration-700 ${
@@ -151,10 +148,10 @@ const Index = () => {
                   }`}
                   style={{ transitionDelay: `${(idx + 1) * 150}ms` }}
                 >
-                  <div className="flex-shrink-0 w-10 h-10 rounded-full gradient-navy-gold flex items-center justify-center shadow-gold">
-                    <CheckCircle className="w-6 h-6 text-white" />
+                  <div className="flex-shrink-0 w-10 h-10 rounded-full gradient-navy-gold flex items-center justify-center shadow-gold text-2xl">
+                    {item.emoji}
                   </div>
-                  <span className="font-medium">{text}</span>
+                  <span className="font-medium"><strong>{item.title}</strong> — {item.desc}</span>
                 </li>
               ))}
             </ul>
@@ -188,33 +185,32 @@ const Index = () => {
             }`}
           >
             <div className="inline-block mb-4 subheading-premium text-primary">
-              Diferenciais
+              Como funciona
             </div>
             <h2 className="heading-premium text-4xl lg:text-5xl mb-6">
-              Diferenciais do Método RNS
+              Os 3 pilares do Método RNS
             </h2>
             <p className="text-premium text-xl leading-relaxed">
-              Um modelo de raciocínio clínico que reorganiza a forma de pensar
-              antes de reorganizar a forma de tratar.
+              O RNS desenvolve uma sequência lógica de raciocínio clínico que transforma leitura em estrutura e estrutura em decisão consistente.
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 lg:gap-10">
             {[
               {
-                title: 'Coerência Terapêutica',
-                desc: 'Decisões clínicas baseadas em critérios sistémicos claros, não em protocolos rígidos.',
+                title: 'Leitura Sistêmica',
+                desc: 'Aprenda a ver oclusão, postura e função como um sistema integrado — não como áreas separadas. Reconheça padrões que a maioria dos clínicos não vê.',
+                icon: '👁️',
+              },
+              {
+                title: 'Antecipação Clínica',
+                desc: 'Desenvolva a capacidade de prever desdobramentos biomecânicos antes de intervir — reduza riscos, recidivas e instabilidade nos seus casos.',
+                icon: '⚡',
+              },
+              {
+                title: 'Decisão com Critério',
+                desc: 'Transforme a sua leitura e antecipação em decisões clínicas mais seguras, coerentes e valorizadas pelos seus pacientes.',
                 icon: '🎯',
-              },
-              {
-                title: 'Previsibilidade Clínica',
-                desc: 'Redução de instabilidade e recidivas através da compreensão das variáveis sistémicas.',
-                icon: '📊',
-              },
-              {
-                title: 'Valorização Profissional',
-                desc: 'Diferenciação baseada em raciocínio clínico profundo, não apenas em técnica.',
-                icon: '⭐',
               },
             ].map((item, idx) => (
               <Card
@@ -324,8 +320,7 @@ const Index = () => {
               Pronto para reorganizar o raciocínio clínico?
             </h2>
             <p className="text-xl text-white/95 mb-10 leading-relaxed max-w-2xl mx-auto font-light">
-              A má oclusão não pode ser compreendida fora do sistema.
-              Integre oclusão, sistema nervoso e organização funcional do corpo.
+              Aprenda a integrar oclusão, sistema nervoso e função numa leitura sistêmica — e conduza tratamentos com maior previsibilidade e valorização profissional.
             </p>
             <Button
               asChild

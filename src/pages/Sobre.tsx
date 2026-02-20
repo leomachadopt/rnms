@@ -6,13 +6,15 @@ import {
   Moon,
   Wind,
   Target,
-  CheckCircle2,
   TrendingUp,
   Users,
   HeartHandshake,
   Sparkles,
   Shield,
-  Zap
+  Zap,
+  Layers,
+  ScanEye,
+  Puzzle
 } from 'lucide-react'
 import { useScrollAnimation } from '@/hooks/use-scroll-animation'
 
@@ -25,62 +27,62 @@ const Sobre = () => {
   const differentials = [
     {
       icon: Brain,
-      title: 'Integração Sistémica',
-      description: 'Sistema nervoso, oclusão, postura, respiração e função lingual integrados num único modelo de compreensão clínica.',
-      highlight: 'Visão Sistémica'
+      title: 'Integração Sistêmica',
+      description: 'Sistema nervoso, oclusão, postura, respiração e função lingual integrados num único modelo de compreensão clínica — não como áreas separadas.',
+      highlight: 'Visão Completa'
     },
     {
       icon: Users,
       title: 'Raciocínio, não Protocolo',
-      description: 'Desenvolve capacidade de decisão terapêutica baseada em critérios claros, não em protocolos rígidos ou técnicas isoladas.',
+      description: 'Desenvolve capacidade de decisão terapêutica baseada em critérios claros e sistêmicos — não em protocolos rígidos ou técnicas isoladas.',
       highlight: 'Autonomia Clínica'
     },
     {
       icon: HeartHandshake,
-      title: 'Previsibilidade e Coerência',
-      description: 'Reduz instabilidade e recidivas através da compreensão das variáveis sistémicas que influenciam a má oclusão.',
-      highlight: 'Resultados Sustentáveis'
+      title: 'Previsibilidade Sustentada',
+      description: 'Reduz instabilidade e recidivas através da compreensão das variáveis sistêmicas que realmente influenciam a má oclusão e a sua estabilidade.',
+      highlight: 'Resultados Reais'
     },
   ]
 
   const methodology = [
     {
       step: '1',
-      title: 'Leitura Sistémica',
-      description: 'Reconhecimento de interferências sistémicas e correlação entre sinais clínicos frequentemente negligenciados.',
+      title: 'Leitura Sistêmica',
+      description: 'Reconhecimento de interferências sistêmicas e correlação entre sinais clínicos que habitualmente são negligenciados ou vistos de forma isolada.',
       icon: Target,
       color: 'from-blue-500 to-blue-600'
     },
     {
       step: '2',
       title: 'Integração de Variáveis',
-      description: 'Sistema neuromuscular, postura, função lingual, respiração, visão, sono e crescimento integrados.',
+      description: 'Sistema neuromuscular, postura, função lingual, respiração, visão, sono e crescimento integrados numa só análise clínica.',
       icon: Shield,
       color: 'from-green-500 to-green-600'
     },
     {
       step: '3',
       title: 'Priorização Terapêutica',
-      description: 'Critérios claros para priorizar intervenções e conduzir tratamentos com maior coerência.',
+      description: 'Critérios claros para priorizar intervenções e conduzir tratamentos com maior coerência e segurança clínica.',
       icon: TrendingUp,
       color: 'from-purple-500 to-purple-600'
     },
     {
       step: '4',
       title: 'Previsibilidade Sustentada',
-      description: 'Redução de instabilidade e recidivas através da compreensão das bases adaptativas da má oclusão.',
+      description: 'Redução de instabilidade e recidivas através da compreensão das bases adaptativas e sistêmicas da má oclusão.',
       icon: Sparkles,
       color: 'from-orange-500 to-orange-600'
     },
   ]
 
   const truths = [
-    'A oclusão é expressão de um sistema adaptativo complexo',
-    'Sistema neuromuscular influencia diretamente a organização oclusal',
-    'Postura, respiração e função lingual são inseparáveis da má oclusão',
-    'Leitura isolada da oclusão conduz a decisões clínicas incoerentes',
-    'Instabilidade e recidivas resultam da fragmentação do diagnóstico',
-    'Técnica sem raciocínio sistémico limita previsibilidade'
+    { icon: Layers, text: 'A oclusão é manifestação de um sistema adaptativo complexo' },
+    { icon: Brain, text: 'O sistema neuromuscular organiza e influencia a estabilidade oclusal' },
+    { icon: Wind, text: 'Postura, respiração e função lingual são inseparáveis da organização oclusal' },
+    { icon: ScanEye, text: 'Leitura isolada da oclusão conduz a decisões clínicas incompletas' },
+    { icon: Puzzle, text: 'Instabilidade e recidivas resultam da fragmentação diagnóstica' },
+    { icon: TrendingUp, text: 'Raciocínio sistêmico aumenta previsibilidade e reduz instabilidade clínica' }
   ]
 
   const pillars = [
@@ -121,14 +123,14 @@ const Sobre = () => {
           }`}
         >
           <div className="inline-block mb-6 badge-premium">
-            Método RNS
+            Sobre o Método
           </div>
           <h1 className="heading-premium text-4xl lg:text-6xl mb-6 leading-tight text-white">
             Reequilíbrio Neuro-Oclusal<br />
-            <span className="text-gradient-gold">Sistémico</span>
+            <span className="text-gradient-gold">Sistêmico</span>
           </h1>
           <p className="text-xl lg:text-2xl mb-8 text-white/90 leading-relaxed font-light">
-            Um modelo de raciocínio clínico que integra sistema nervoso, oclusão e organização funcional do corpo na compreensão e tratamento da má oclusão.
+            Um modelo clínico-econômico que reorganiza a prática clínica a partir da oclusão — transformando fragmentação em critério, coerência e previsibilidade.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Button
@@ -153,14 +155,13 @@ const Sobre = () => {
           }`}
         >
           <div className="inline-block mb-4 subheading-premium text-primary">
-            Fundamento do Método
+            O Problema
           </div>
           <h2 className="heading-premium text-3xl lg:text-5xl mb-6">
-            A lacuna que o Método RNS<br />veio preencher
+            Por que tantas clínicas continuam presas à instabilidade?
           </h2>
           <p className="text-premium text-lg max-w-3xl mx-auto">
-            Muitos profissionais dominam técnicas sofisticadas, mas continuam a enfrentar instabilidade,
-            recidivas e dificuldade de leitura sistémica dos casos
+            Porque foram treinados para executar procedimentos, não para estruturar decisões — e quando o diagnóstico é fragmentado, o plano também é; quando o plano é fragmentado, o resultado depende do acaso. Recidivas não são apenas falhas técnicas, mas sintomas de uma estrutura clínica incompleta.
           </p>
         </div>
 
@@ -211,23 +212,26 @@ const Sobre = () => {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {truths.map((truth, index) => (
-              <Card
-                key={index}
-                className="glass-premium border-l-4 border-l-secondary hover:shadow-premium transition-all duration-300 hover-lift"
-              >
-                <CardContent className="p-6">
-                  <div className="flex items-start gap-4">
-                    <div className="flex-shrink-0 w-8 h-8 rounded-full gradient-navy-gold flex items-center justify-center mt-1 shadow-gold">
-                      <CheckCircle2 className="w-5 h-5 text-white" />
+            {truths.map((truth, index) => {
+              const Icon = truth.icon
+              return (
+                <Card
+                  key={index}
+                  className="glass-premium border-l-4 border-l-secondary hover:shadow-premium transition-all duration-300 hover-lift"
+                >
+                  <CardContent className="p-6">
+                    <div className="flex items-start gap-4">
+                      <div className="flex-shrink-0 w-10 h-10 rounded-full gradient-navy-gold flex items-center justify-center mt-1 shadow-gold">
+                        <Icon className="w-5 h-5 text-white" />
+                      </div>
+                      <p className="font-medium text-foreground leading-relaxed">
+                        {truth.text}
+                      </p>
                     </div>
-                    <p className="font-medium text-foreground leading-relaxed">
-                      {truth}
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+                  </CardContent>
+                </Card>
+              )
+            })}
           </div>
         </div>
       </section>
@@ -291,14 +295,13 @@ const Sobre = () => {
         >
           <div className="text-center mb-16 max-w-3xl mx-auto">
             <div className="inline-block mb-4 subheading-premium text-primary">
-              Nossa promessa
+              Nossa Promessa
             </div>
             <h2 className="heading-premium text-3xl lg:text-5xl mb-6">
               <span className="text-gradient-gold">Reorganizar a compreensão da má oclusão</span>
             </h2>
             <p className="text-premium text-xl leading-relaxed">
-              O Método RNS oferece aos profissionais um modelo estruturado de raciocínio clínico
-              que integra múltiplas variáveis na condução de tratamentos mais coerentes e previsíveis.
+              O Método RNS oferece aos profissionais um modelo estruturado de raciocínio clínico que integra múltiplas variáveis sistêmicas na condução de tratamentos mais coerentes, previsíveis e valorizados.
             </p>
           </div>
 

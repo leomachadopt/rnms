@@ -27,11 +27,10 @@ const Problema = () => {
           }`}
         >
           <h1 className="text-4xl lg:text-5xl font-bold mb-6 text-foreground">
-            Respiração Oral em Crianças: Compreenda, Identifique e Aja
+            Por que tantas clínicas continuam presas à instabilidade?
           </h1>
           <p className="text-xl text-muted-foreground">
-            Um guia completo para pais sobre as causas, sintomas e consequências
-            de respirar pela boca na infância.
+            Porque a maioria dos profissionais foi treinada para ver a oclusão de forma isolada — e isso limita a previsibilidade e a estabilidade dos resultados.
           </p>
         </div>
       </section>
@@ -49,14 +48,13 @@ const Problema = () => {
           {/* What is it */}
           <div className="prose prose-lg max-w-none">
             <h2 className="text-3xl font-bold text-primary mb-4">
-              O que é a Respiração Oral?
+              O problema não é falta de técnica
             </h2>
-            <p>
-              A respiração oral é uma condição onde a criança substitui o padrão
-              correto de respiração nasal pela respiração através da boca. O
-              nariz tem funções vitais: filtrar, aquecer e umidificar o ar.
-              Quando o ar entra pela boca, ele chega aos pulmões "sujo", frio e
-              seco, o que pode levar a diversas complicações.
+            <p className="leading-relaxed">
+              O problema é a fragmentação. A maioria dos profissionais foi treinada para ver a oclusão de forma isolada — sem integrar sistema nervoso, postura, respiração e função lingual. O resultado? Intervenções corretivas sem previsibilidade, instabilidade nos tratamentos e recidivas frequentes.
+            </p>
+            <p className="leading-relaxed mt-4">
+              <strong>Muitos clínicos dominam técnicas sofisticadas</strong>, mas continuam a enfrentar os mesmos desafios: dificuldade de leitura sistêmica dos casos, falta de critérios claros para decisões terapêuticas e resultados que não se sustentam no tempo.
             </p>
             <img
               src="https://img.usecurling.com/p/800/400?q=dental%20anatomy%20jaw%20occlusion%20medical&dpr=2"
@@ -68,18 +66,18 @@ const Problema = () => {
           {/* Symptoms */}
           <div>
             <h2 className="text-3xl font-bold text-primary mb-6">
-              Sintomas e Sinais de Alerta
+              O que o Método RNS propõe
             </h2>
             <div className="grid sm:grid-cols-2 gap-4">
               {[
-                'Dorme com a boca aberta',
-                'Ronca ou tem sono agitado',
-                'Baba no travesseiro',
-                'Lábios secos e rachados',
-                'Olheiras profundas',
-                'Postura curvada',
-                'Dificuldade de concentração',
-                'Come de boca aberta ou rápido demais',
+                'Ver a oclusão como expressão de um sistema adaptativo',
+                'Integrar sistema nervoso, postura e função numa só análise',
+                'Antecipar desdobramentos antes de intervir',
+                'Tomar decisões clínicas com critérios sistêmicos claros',
+                'Reduzir recidivas pela compreensão das causas sistêmicas',
+                'Aumentar previsibilidade e coerência terapêutica',
+                'Diferenciar-se por raciocínio, não apenas por técnica',
+                'Construir planos de tratamento mais valorizados',
               ].map((s, i) => (
                 <div
                   key={i}
@@ -103,37 +101,31 @@ const Problema = () => {
           {/* Impacts */}
           <div>
             <h2 className="text-3xl font-bold text-primary mb-6">
-              Impactos no Desenvolvimento
+              Como funciona o Método RNS
             </h2>
             <Accordion type="single" collapsible className="w-full">
               <AccordionItem value="item-1">
                 <AccordionTrigger className="text-lg font-semibold">
-                  Sono e Descanso
+                  Leitura Sistêmica
                 </AccordionTrigger>
                 <AccordionContent className="text-base text-muted-foreground">
-                  A respiração oral fragmenta o sono, impedindo que a criança
-                  atinja os estágios profundos de descanso. Isso resulta em
-                  irritabilidade, sonolência diurna e até hiperatividade.
+                  Aprenda a ver oclusão, postura, sistema nervoso e função como um sistema integrado — reconhecendo padrões e interferências que habitualmente são negligenciados.
                 </AccordionContent>
               </AccordionItem>
               <AccordionItem value="item-2">
                 <AccordionTrigger className="text-lg font-semibold">
-                  Fala e Linguagem
+                  Antecipação Clínica
                 </AccordionTrigger>
                 <AccordionContent className="text-base text-muted-foreground">
-                  A flacidez dos músculos da face e a posição incorreta da
-                  língua podem causar alterações na fala, como o ceceio (falar
-                  com a língua entre os dentes) e dificuldade em pronunciar
-                  certos fonemas.
+                  Desenvolva a capacidade de prever desdobramentos biomecânicos antes de intervir — reduzindo riscos, instabilidade e recidivas nos seus casos.
                 </AccordionContent>
               </AccordionItem>
               <AccordionItem value="item-3">
                 <AccordionTrigger className="text-lg font-semibold">
-                  Dentes e Face
+                  Decisão com Critério
                 </AccordionTrigger>
                 <AccordionContent className="text-base text-muted-foreground">
-                  Pode levar ao estreitamento do maxilar, mordida cruzada,
-                  dentes tortos e um perfil facial alongado e "triste".
+                  Transforme a sua leitura e antecipação em decisões clínicas mais seguras, coerentes e valorizadas — baseadas em critérios sistêmicos claros, não em protocolos rígidos.
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
@@ -152,16 +144,15 @@ const Problema = () => {
           <Card className="sticky top-24 border-primary/20 shadow-lg bg-blue-50/50 hover-lift">
             <CardHeader>
               <CardTitle className="text-primary">
-                Identificou algum sinal?
+                Reconhece esses desafios na sua clínica?
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <p className="text-sm text-muted-foreground">
-                Não deixe a dúvida persistir. A Dra. Ro pode ajudar numa triagem
-                inicial rápida e gratuita.
+                O Método RNS oferece uma arquitetura decisória estruturada para reorganizar a prática clínica e consolidar crescimento sustentável.
               </p>
               <Button asChild className="w-full rounded-full">
-                <Link to="/avaliacao">Fale com a Dra. Ro agora</Link>
+                <Link to="/formacao">Conheça a Formação RNS</Link>
               </Button>
             </CardContent>
           </Card>

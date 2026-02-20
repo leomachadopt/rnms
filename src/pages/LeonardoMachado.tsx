@@ -288,7 +288,7 @@ const LeonardoMachado = () => {
             Portfólio de Serviços
           </div>
           <h2 className="heading-premium text-3xl lg:text-5xl mb-6">
-            Produtos e Serviços
+            Ecossistema RNS
           </h2>
           <p className="text-premium text-lg max-w-3xl mx-auto">
             Posicionamento premium e selectivo. Profundidade clínica, autoridade conceptual
