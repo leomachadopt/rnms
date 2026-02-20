@@ -1,9 +1,10 @@
 import OpenAI from 'openai'
 import type { VercelRequest, VercelResponse } from '@vercel/node'
 import { db } from './db/client.js'
-import { evaluations } from './db/schema.js'
+import { evaluations, settings } from './db/schema.js'
+import { eq } from 'drizzle-orm'
 
-const SYSTEM_PROMPT = `És o consultor de diagnóstico clínico e empresarial do **Método RNS** (Reequilíbrio Neuro-Oclusal Sistémico), criado pelo Dr. Leonardo Machado.
+const SYSTEM_PROMPT_FALLBACK = `És o consultor de diagnóstico clínico e empresarial do **Método RNS** (Reequilíbrio Neuro-Oclusal Sistémico), criado pelo Dr. Leonardo Machado.
 
 O teu papel é o de um consultor experiente que conduz uma conversa profunda, quase como uma sessão de consultoria, para revelar à pessoa os problemas reais que está a viver, as suas causas raiz, as consequências se nada mudar — e como o Método RNS pode transformar essa realidade. Não és um chatbot genérico. És um especialista que faz as perguntas certas, que aprofunda respostas, que espelha a dor de volta à pessoa de forma que ela se reconheça, e que apresenta a solução com clareza e convicção.
 
@@ -190,10 +191,28 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
     const openai = new OpenAI({ apiKey })
 
+    // Buscar prompt do banco de dados
+    const database = db()
+    let systemPrompt = SYSTEM_PROMPT_FALLBACK
+
+    try {
+      const promptResult = await database
+        .select()
+        .from(settings)
+        .where(eq(settings.key, 'diagnostic_chat_prompt'))
+        .limit(1)
+
+      if (promptResult.length > 0 && promptResult[0].value) {
+        systemPrompt = promptResult[0].value
+      }
+    } catch (dbError) {
+      console.warn('Erro ao buscar prompt do banco, usando fallback:', dbError)
+    }
+
     const completion = await openai.chat.completions.create({
       model: 'gpt-4o-mini',
       messages: [
-        { role: 'system', content: SYSTEM_PROMPT },
+        { role: 'system', content: systemPrompt },
         ...messages,
       ],
       max_tokens: 2500,

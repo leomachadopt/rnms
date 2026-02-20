@@ -1,90 +1,14 @@
 import { useState, useEffect } from 'react'
-import { Save, Loader2, Sparkles } from 'lucide-react'
+import { Save, Loader2, Sparkles, MessageSquare, BrainCircuit } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Textarea } from '@/components/ui/textarea'
 import { toast } from 'sonner'
 import { getSetting, saveSetting } from '@/services/settings'
 
-const DEFAULT_PROMPT = `Você é a Dra. Ro, uma assistente especializada em avaliação de respiração oral e ortopedia funcional dos maxilares em crianças.
-
-**DADOS DA CRIANÇA:**
-- Nome: {name}
-- Idade: {age}
-- Região: {region}
-
-**RESPOSTAS DA AVALIAÇÃO:**
-- Sinais de respiração: {breathingSigns}
-- Problemas dentários/mordida: {dentalIssues}
-- Hábitos orais: {oralHabits}
-- Postura: {posture}
-- Dificuldades de fala: {speechIssues}
-- Qualidade do sono: {sleepQuality}
-- Tratamento anterior: {previousTreatment}
-
-**INSTRUÇÕES CRÍTICAS - LEIA COM ATENÇÃO:**
-
-Você DEVE escrever um relatório EXTENSO, NARRATIVO e FLUIDO, com MÍNIMO de 800-1000 palavras.
-
-**FORMATO PROIBIDO (NÃO FAÇA ISTO):**
-
-❌ ERRADO - NÃO faça assim:
-"Resumo dos Sinais Identificados
-Foram identificados os seguintes sinais:
-• Olheiras profundas: Indicam possíveis distúrbios
-• Baba na almofada: Sugere dificuldade
-• Boca aberta: Um sinal claro"
-
-❌ ERRADO - NÃO use subtítulos como:
-"Resumo dos Sinais Identificados"
-"Implicações Clínicas"
-"Recomendações"
-"Conclusão"
-
-❌ ERRADO - NÃO enumere sinais com marcadores (•, -, números)
-
-**FORMATO CORRETO (FAÇA ASSIM):**
-
-✅ CORRETO - Escreva assim:
-
-"**RELATÓRIO DE AVALIAÇÃO - [NOME EM MAIÚSCULAS]**
-
-Criança com [idade] anos, residente na região [região] de Portugal.
-
-Após a análise cuidadosa das respostas fornecidas na avaliação, observa-se em [nome] um conjunto de sinais que, quando analisados de forma integrada, revelam um padrão característico de respiração oral. A presença de olheiras profundas, combinada com a qualidade de sono muito comprometida, sugere que a criança atravessa noites agitadas e fragmentadas, acordando várias vezes durante o período de descanso. Esta fragmentação do sono está frequentemente associada a dificuldades respiratórias durante a noite, que se manifestam através do ronco e da necessidade de respirar pela boca. Quando uma criança não consegue respirar adequadamente pelo nariz, seja por obstruções nasais, hipertrofia das adenóides ou outras causas, o organismo encontra uma via alternativa através da boca, o que leva à manutenção constante desta aberta durante o dia e especialmente durante o sono.
-
-A observação de baba na almofada é um indicador adicional desta respiração oral noturna. Quando a boca permanece aberta durante o sono, a saliva acumula-se e escorre, manifestando-se através deste sinal que, embora possa parecer isolado, está intimamente conectado com todo o padrão respiratório da criança. Paralelamente, os lábios ressecados são outra consequência direta da exposição constante ao ar, já que a respiração oral impede que os lábios permaneçam húmidos e protegidos, levando ao ressecamento da mucosa labial.
-
-No entanto, as implicações da respiração oral estendem-se muito além do ato de respirar em si. O desenvolvimento dentário e facial de [nome] também demonstra sinais desta alteração no padrão respiratório. A presença de dentes tortos indica que pode estar a ocorrer um desequilíbrio no desenvolvimento da arcada dentária, frequentemente influenciado pela posição incorreta da língua que acompanha a respiração oral. Quando a criança respira pela boca, a língua tende a posicionar-se de forma mais baixa e anterior na cavidade oral, em vez de repousar suavemente contra o palato. Esta alteração postural da língua tem consequências diretas no crescimento e desenvolvimento dos ossos maxilares e na posição dos dentes, podendo levar a desalinhamentos e necessidade futura de ajuste e equilíbrio oclusal.
-
-A fala com a língua entre os dentes, observada em [nome], é outro reflexo desta cascata de alterações. A postura inadequada da língua não afeta apenas o desenvolvimento dentário, mas também a articulação das palavras e a clareza da fala. Este padrão de fala pode perpetuar o ciclo de problemas, já que reforça a posição incorreta da língua e dificulta ainda mais a transição para uma respiração nasal adequada.
-
-Os riscos de não intervir precocemente neste quadro são significativos e merecem atenção cuidadosa. A respiração oral prolongada pode levar a alterações no crescimento facial, com desenvolvimento de uma face mais alongada e estreita, palato mais profundo e ogival, e retração do terço médio da face. Além disso, a qualidade de vida da criança é afetada no presente: o sono fragmentado compromete o descanso, o que pode influenciar o rendimento escolar, a concentração, o humor e até o crescimento, já que é durante o sono profundo que são libertadas hormonas essenciais para o desenvolvimento infantil. A presença de hábitos orais como o uso da chucha pode agravar ainda mais este quadro, perpetuando padrões de sucção inadequados e reforçando a postura oral incorreta.
-
-É fundamental compreender que todos estes sinais não são problemas isolados, mas sim manifestações interligadas de um padrão que tende a agravar-se com o tempo se não for devidamente abordado. A intervenção precoce é crucial porque permite aproveitar o potencial de crescimento e desenvolvimento da criança, orientando este crescimento de forma mais harmoniosa e equilibrada. O estabelecimento de uma respiração nasal adequada, o reequilíbrio da postura da língua e o ajuste oclusal quando necessário podem prevenir complicações futuras mais complexas e favorecer um desenvolvimento saudável das estruturas orofaciais.
-
-A Clínica Kids & Family, localizada na região de Oliveira de Azeméis, dispõe de uma equipa multidisciplinar altamente qualificada em respiração oral e ortopedia funcional dos maxilares, com experiência no diagnóstico e tratamento especializado deste tipo de situação. A avaliação presencial permitirá compreender de forma mais aprofundada as causas subjacentes destes sinais, identificar eventuais obstruções nasais ou hipertrofia de adenóides e amígdalas, avaliar a necessidade de acompanhamento com otorrinolaringologista, e propor um plano de intervenção personalizado que pode incluir terapia miofuncional orofacial, exercícios respiratórios, e quando apropriado, orientações para promover o equilíbrio e harmonia no desenvolvimento das estruturas orais e faciais.
-
-A intervenção precoce oferece os melhores resultados, e o facto de [nome] ainda estar em fase de crescimento é uma vantagem significativa, pois permite orientar este desenvolvimento de forma mais favorável. Encorajamos vivamente que seja agendada uma consulta de avaliação na Clínica Kids & Family, para que possam ser realizados exames clínicos adequados e estabelecido um plano de acompanhamento que atenda às necessidades específicas de [nome]. Este é um passo importante para promover não apenas a saúde oral e respiratória, mas também a qualidade de vida, o bem-estar e o desenvolvimento harmonioso da criança. Entre em contacto connosco através do telefone/WhatsApp +351 916 209 737."
-
-**REGRAS ABSOLUTAS:**
-1. NUNCA use marcadores (•, -, *) ou numerações antes de listar sintomas
-2. NUNCA crie seções separadas com subtítulos
-3. SEMPRE escreva em parágrafos longos e conectados
-4. Mínimo de 8-10 parágrafos extensos
-5. Cada parágrafo deve ter no mínimo 4-6 linhas
-6. Use conectivos: "paralelamente", "além disso", "no entanto", "desta forma", "por sua vez"
-7. Integre TODOS os sinais no texto de forma narrativa
-8. Português de Portugal obrigatório
-9. Mencione "ajuste e equilíbrio oclusal" de forma sutil (nunca "ortodontia" ou "aparelho")
-10. Total do relatório: 800-1000 palavras mínimo`
-
 export default function Settings() {
-  const [prompt, setPrompt] = useState(DEFAULT_PROMPT)
-  const [openaiKey, setOpenaiKey] = useState('')
-  const [isKeyConfigured, setIsKeyConfigured] = useState(false)
-  const [resendKey, setResendKey] = useState('')
-  const [isResendConfigured, setIsResendConfigured] = useState(false)
-  const [notificationEmail, setNotificationEmail] = useState('')
+  const [diagnosticPrompt, setDiagnosticPrompt] = useState('')
+  const [strategicPrompt, setStrategicPrompt] = useState('')
+  const [activeTab, setActiveTab] = useState<'diagnostic' | 'strategic'>('diagnostic')
   const [isLoading, setIsLoading] = useState(true)
   const [isSaving, setIsSaving] = useState(false)
 
@@ -95,27 +19,16 @@ export default function Settings() {
   const loadSettings = async () => {
     try {
       setIsLoading(true)
-      const [promptSetting, keySetting, resendSetting, emailSetting] = await Promise.all([
-        getSetting('ai_report_prompt'),
-        getSetting('openai_api_key'),
-        getSetting('resend_api_key'),
-        getSetting('notification_email'),
+      const [diagnosticSetting, strategicSetting] = await Promise.all([
+        getSetting('diagnostic_chat_prompt'),
+        getSetting('strategic_agent_prompt'),
       ])
 
-      if (promptSetting) {
-        setPrompt(promptSetting.value)
+      if (diagnosticSetting) {
+        setDiagnosticPrompt(diagnosticSetting.value)
       }
-      if (keySetting) {
-        // A chave vem mascarada do backend por segurança
-        setIsKeyConfigured(keySetting.value === '***configurada***')
-        setOpenaiKey('') // Nunca mostrar a chave real
-      }
-      if (resendSetting) {
-        setIsResendConfigured(resendSetting.value === '***configurada***')
-        setResendKey('')
-      }
-      if (emailSetting) {
-        setNotificationEmail(emailSetting.value)
+      if (strategicSetting) {
+        setStrategicPrompt(strategicSetting.value)
       }
     } catch (error) {
       console.error('Erro ao carregar configurações:', error)
@@ -129,76 +42,25 @@ export default function Settings() {
     try {
       setIsSaving(true)
 
-      const promises = [
+      await Promise.all([
         saveSetting(
-          'ai_report_prompt',
-          prompt,
-          'Prompt usado pela IA para gerar relatórios de avaliação'
+          'diagnostic_chat_prompt',
+          diagnosticPrompt,
+          'System prompt para o chat de diagnóstico clínico/empresarial (página /avaliacao)'
         ),
-      ]
+        saveSetting(
+          'strategic_agent_prompt',
+          strategicPrompt,
+          'System prompt para o agente estratégico (página /agente)'
+        ),
+      ])
 
-      // Só salvar a chave OpenAI se o usuário digitou uma nova
-      if (openaiKey.trim().length > 0) {
-        promises.push(
-          saveSetting(
-            'openai_api_key',
-            openaiKey,
-            'Chave da API OpenAI para gerar relatórios'
-          )
-        )
-      }
-
-      // Só salvar a chave Resend se o usuário digitou uma nova
-      if (resendKey.trim().length > 0) {
-        promises.push(
-          saveSetting(
-            'resend_api_key',
-            resendKey,
-            'Chave da API Resend para enviar emails'
-          )
-        )
-      }
-
-      // Salvar email de notificação se preenchido
-      if (notificationEmail.trim().length > 0) {
-        promises.push(
-          saveSetting(
-            'notification_email',
-            notificationEmail,
-            'Email para receber notificações de novas avaliações'
-          )
-        )
-      }
-
-      await Promise.all(promises)
-
-      if (openaiKey.trim().length > 0) {
-        setIsKeyConfigured(true)
-        setOpenaiKey('') // Limpar o campo após salvar
-      }
-
-      if (resendKey.trim().length > 0) {
-        setIsResendConfigured(true)
-        setResendKey('') // Limpar o campo após salvar
-      }
-
-      toast.success('Configurações salvas com sucesso!')
+      toast.success('Prompts de IA atualizados com sucesso!')
     } catch (error) {
       console.error('Erro ao salvar configurações:', error)
       toast.error('Erro ao salvar configurações')
     } finally {
       setIsSaving(false)
-    }
-  }
-
-  const handleReset = () => {
-    if (
-      confirm(
-        'Tem certeza que deseja restaurar o prompt padrão? Isso irá sobrescrever as suas alterações.'
-      )
-    ) {
-      setPrompt(DEFAULT_PROMPT)
-      toast.success('Prompt restaurado para o padrão')
     }
   }
 
@@ -211,222 +73,211 @@ export default function Settings() {
   }
 
   return (
-    <div className="max-w-5xl mx-auto space-y-6 animate-fade-in">
+    <div className="max-w-6xl mx-auto space-y-6 animate-fade-in">
       <div>
         <h1 className="text-2xl font-bold text-foreground flex items-center gap-2">
           <Sparkles className="w-6 h-6 text-primary" />
           Configurações da IA
         </h1>
         <p className="text-muted-foreground mt-1">
-          Configure o prompt usado pela IA para gerar relatórios de avaliação
+          Configure os prompts utilizados pelos assistentes de IA do Método RNS
         </p>
       </div>
 
-      <div className="bg-white p-6 rounded-xl border shadow-sm space-y-6">
-        <div className="space-y-2">
-          <label className="text-sm font-medium text-foreground">
-            Chave da API OpenAI
-          </label>
-          {isKeyConfigured && (
-            <div className="bg-green-50 border border-green-200 rounded-lg p-3 mb-2">
-              <p className="text-sm text-green-800">
-                ✓ Chave OpenAI já configurada e armazenada de forma segura no servidor
-              </p>
-            </div>
-          )}
-          <input
-            type="password"
-            value={openaiKey}
-            onChange={(e) => setOpenaiKey(e.target.value)}
-            placeholder={isKeyConfigured ? "Digite para atualizar a chave..." : "sk-..."}
-            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-          />
-          <p className="text-xs text-muted-foreground">
-            {isKeyConfigured
-              ? 'A chave atual está armazenada de forma segura. Digite uma nova chave apenas se desejar atualizá-la.'
-              : 'Obtenha sua chave em'}{' '}
-            <a
-              href="https://platform.openai.com/api-keys"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-primary hover:underline"
-            >
-              platform.openai.com/api-keys
-            </a>
-          </p>
-        </div>
+      {/* Tabs */}
+      <div className="flex gap-2 border-b">
+        <button
+          onClick={() => setActiveTab('diagnostic')}
+          className={`flex items-center gap-2 px-4 py-2 font-medium transition-colors border-b-2 ${
+            activeTab === 'diagnostic'
+              ? 'border-primary text-primary'
+              : 'border-transparent text-muted-foreground hover:text-foreground'
+          }`}
+        >
+          <MessageSquare className="w-4 h-4" />
+          Diagnóstico Clínico (Avaliação)
+        </button>
+        <button
+          onClick={() => setActiveTab('strategic')}
+          className={`flex items-center gap-2 px-4 py-2 font-medium transition-colors border-b-2 ${
+            activeTab === 'strategic'
+              ? 'border-primary text-primary'
+              : 'border-transparent text-muted-foreground hover:text-foreground'
+          }`}
+        >
+          <BrainCircuit className="w-4 h-4" />
+          Agente Estratégico (Consultoria)
+        </button>
+      </div>
 
-        <hr className="my-6" />
+      {/* Diagnostic Chat Tab */}
+      {activeTab === 'diagnostic' && (
+        <div className="bg-white p-6 rounded-xl border shadow-sm space-y-4">
+          <div>
+            <h2 className="text-lg font-semibold text-foreground flex items-center gap-2">
+              <MessageSquare className="w-5 h-5 text-primary" />
+              Chat de Diagnóstico Clínico/Empresarial
+            </h2>
+            <p className="text-sm text-muted-foreground mt-1">
+              Este prompt é utilizado na página <strong>/avaliacao</strong> para conduzir
+              um diagnóstico estruturado em 6-8 trocas, culminando num relatório completo
+              com recomendação de serviço RNS.
+            </p>
+          </div>
 
-        <div className="space-y-2">
-          <label className="text-sm font-medium text-foreground">
-            Email(s) para Notificações
-          </label>
-          <input
-            type="text"
-            value={notificationEmail}
-            onChange={(e) => setNotificationEmail(e.target.value)}
-            placeholder="email1@exemplo.com, email2@exemplo.com"
-            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-          />
-          <p className="text-xs text-muted-foreground">
-            Email(s) que receberão notificações quando uma nova avaliação for concluída. Para múltiplos emails, separe com vírgula (,) ou ponto-e-vírgula (;)
-          </p>
-        </div>
-
-        <div className="space-y-2">
-          <label className="text-sm font-medium text-foreground">
-            Chave da API Resend
-          </label>
-          {isResendConfigured && (
-            <div className="bg-green-50 border border-green-200 rounded-lg p-3 mb-2">
-              <p className="text-sm text-green-800">
-                ✓ Chave Resend já configurada e armazenada de forma segura no servidor
-              </p>
-            </div>
-          )}
-          <input
-            type="password"
-            value={resendKey}
-            onChange={(e) => setResendKey(e.target.value)}
-            placeholder={isResendConfigured ? "Digite para atualizar a chave..." : "re_..."}
-            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-          />
-          <p className="text-xs text-muted-foreground">
-            {isResendConfigured
-              ? 'A chave atual está armazenada de forma segura. Digite uma nova chave apenas se desejar atualizá-la.'
-              : 'Obtenha sua chave em'}{' '}
-            <a
-              href="https://resend.com/api-keys"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-primary hover:underline"
-            >
-              resend.com/api-keys
-            </a>
-          </p>
-        </div>
-
-        <hr className="my-6" />
-
-        <div className="space-y-2">
-          <div className="flex items-center justify-between">
+          <div className="space-y-2">
             <label className="text-sm font-medium text-foreground">
-              Prompt de Análise
+              System Prompt (GPT-4o-mini)
             </label>
-            <Button
-              type="button"
-              variant="outline"
-              size="sm"
-              onClick={handleReset}
-            >
-              Restaurar Padrão
-            </Button>
+            <Textarea
+              value={diagnosticPrompt}
+              onChange={(e) => setDiagnosticPrompt(e.target.value)}
+              rows={24}
+              className="font-mono text-xs leading-relaxed"
+              placeholder="Insira o system prompt para o chat de diagnóstico..."
+            />
+            <p className="text-xs text-muted-foreground">
+              <strong>Caracteres:</strong> {diagnosticPrompt.length} |{' '}
+              <strong>Linhas:</strong> {diagnosticPrompt.split('\n').length}
+            </p>
           </div>
-          <Textarea
-            value={prompt}
-            onChange={(e) => setPrompt(e.target.value)}
-            rows={20}
-            className="font-mono text-sm"
-            placeholder="Insira o prompt para a IA..."
-          />
-          <div className="text-xs text-muted-foreground space-y-1">
-            <p className="font-semibold">Variáveis disponíveis:</p>
-            <div className="grid grid-cols-2 gap-x-4 gap-y-1">
-              <code className="bg-muted px-1 rounded">{'{name}'}</code>
-              <span>Nome do responsável</span>
-              <code className="bg-muted px-1 rounded">{'{whatsapp}'}</code>
-              <span>WhatsApp</span>
-              <code className="bg-muted px-1 rounded">{'{age}'}</code>
-              <span>Idade da criança</span>
-              <code className="bg-muted px-1 rounded">{'{breathingSigns}'}</code>
-              <span>Sinais de respiração</span>
-              <code className="bg-muted px-1 rounded">{'{dentalIssues}'}</code>
-              <span>Problemas dentários</span>
-              <code className="bg-muted px-1 rounded">{'{oralHabits}'}</code>
-              <span>Hábitos orais</span>
-              <code className="bg-muted px-1 rounded">{'{posture}'}</code>
-              <span>Postura</span>
-              <code className="bg-muted px-1 rounded">{'{speechIssues}'}</code>
-              <span>Problemas de fala</span>
-              <code className="bg-muted px-1 rounded">{'{sleepQuality}'}</code>
-              <span>Qualidade do sono</span>
-              <code className="bg-muted px-1 rounded">{'{previousTreatment}'}</code>
-              <span>Tratamento anterior</span>
-              <code className="bg-muted px-1 rounded">{'{region}'}</code>
-              <span>Região de Portugal</span>
-            </div>
+
+          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+            <h3 className="font-semibold text-blue-900 text-sm mb-2">ℹ️ Sobre este prompt</h3>
+            <ul className="text-xs text-blue-800 space-y-1 list-disc list-inside">
+              <li>Conduz conversa em <strong>6-8 fases estruturadas</strong> (nome, especialidade, perfil, dor, impacto, objectivo, urgência)</li>
+              <li>Usa <strong>OPTIONS clicáveis</strong> para facilitar UX do utilizador</li>
+              <li>Termina com <strong>relatório final de 600+ palavras</strong> em 6 blocos obrigatórios</li>
+              <li>Inclui <strong>"Uma Ideia Que Podes Aplicar Hoje"</strong> (primeira vitória imediata)</li>
+              <li>Recomenda 1 dos 4 serviços RNS com base no perfil diagnosticado</li>
+            </ul>
           </div>
         </div>
+      )}
 
-        <div className="flex gap-3">
-          <Button onClick={handleSave} disabled={isSaving} className="flex-1">
-            {isSaving ? (
-              <>
-                <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                A guardar...
-              </>
-            ) : (
-              <>
-                <Save className="w-4 h-4 mr-2" />
-                Guardar Configurações
-              </>
-            )}
-          </Button>
+      {/* Strategic Agent Tab */}
+      {activeTab === 'strategic' && (
+        <div className="bg-white p-6 rounded-xl border shadow-sm space-y-4">
+          <div>
+            <h2 className="text-lg font-semibold text-foreground flex items-center gap-2">
+              <BrainCircuit className="w-5 h-5 text-primary" />
+              Agente Estratégico — Consultor Clínico Investigativo
+            </h2>
+            <p className="text-sm text-muted-foreground mt-1">
+              Este prompt é utilizado na página <strong>/agente</strong> para conduzir uma
+              investigação socrática profunda antes de revelar gradualmente o Método RNS
+              como solução natural aos problemas verbalizados.
+            </p>
+          </div>
+
+          <div className="space-y-2">
+            <label className="text-sm font-medium text-foreground">
+              System Prompt (GPT-4o-mini)
+            </label>
+            <Textarea
+              value={strategicPrompt}
+              onChange={(e) => setStrategicPrompt(e.target.value)}
+              rows={24}
+              className="font-mono text-xs leading-relaxed"
+              placeholder="Insira o system prompt para o agente estratégico..."
+            />
+            <p className="text-xs text-muted-foreground">
+              <strong>Caracteres:</strong> {strategicPrompt.length} |{' '}
+              <strong>Linhas:</strong> {strategicPrompt.split('\n').length}
+            </p>
+          </div>
+
+          <div className="bg-purple-50 border border-purple-200 rounded-lg p-4">
+            <h3 className="font-semibold text-purple-900 text-sm mb-2">ℹ️ Sobre este prompt</h3>
+            <ul className="text-xs text-purple-800 space-y-1 list-disc list-inside">
+              <li><strong>Fase 1 (3-5 trocas):</strong> Investigação pura SEM mencionar RNS — foco em verbalizar dores e frustrações</li>
+              <li><strong>Transição:</strong> Espelha o padrão de volta ao profissional para validação ("é exactamente isto")</li>
+              <li><strong>Fase 2 (2-4 trocas):</strong> Revelação gradual e orgânica do RNS como resposta natural</li>
+              <li><strong>Fase 3:</strong> Diferenciais concretos (previsibilidade clínica, arquitectura cognitiva, casos práticos)</li>
+              <li><strong>Fase 4:</strong> Qualificação honesta e CTA sem pressão (formacao@metodorns.pt)</li>
+              <li><strong>Tom:</strong> Investigador clínico experiente — <strong>NUNCA vende, SEMPRE revela</strong></li>
+            </ul>
+          </div>
+        </div>
+      )}
+
+      {/* Save Button */}
+      <div className="flex gap-3">
+        <Button onClick={handleSave} disabled={isSaving} size="lg" className="flex-1">
+          {isSaving ? (
+            <>
+              <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+              A guardar alterações...
+            </>
+          ) : (
+            <>
+              <Save className="w-4 h-4 mr-2" />
+              Guardar Prompts de IA
+            </>
+          )}
+        </Button>
+      </div>
+
+      {/* Info Cards */}
+      <div className="grid gap-4 md:grid-cols-2">
+        <div className="bg-green-50 border border-green-200 rounded-xl p-4">
+          <h3 className="font-semibold text-green-900 mb-2 flex items-center gap-2">
+            🔒 Segurança e Integração
+          </h3>
+          <ul className="text-sm text-green-800 space-y-1 list-disc list-inside">
+            <li>
+              Prompts armazenados de forma <strong>segura no banco de dados</strong> (Neon PostgreSQL)
+            </li>
+            <li>
+              <strong>Integração dinâmica:</strong> os endpoints{' '}
+              <code className="bg-green-100 px-1 rounded">/api/diagnostic-chat</code> e{' '}
+              <code className="bg-green-100 px-1 rounded">/api/strategic-agent</code>{' '}
+              buscam os prompts do banco antes de cada chamada à OpenAI
+            </li>
+            <li>
+              Fallback automático: se o banco falhar, usa prompts hardcoded como backup
+            </li>
+          </ul>
+        </div>
+
+        <div className="bg-amber-50 border border-amber-200 rounded-xl p-4">
+          <h3 className="font-semibold text-amber-900 mb-2 flex items-center gap-2">
+            ⚙️ Configuração da OpenAI API
+          </h3>
+          <ul className="text-sm text-amber-800 space-y-1 list-disc list-inside">
+            <li>
+              Modelo utilizado: <strong>GPT-4o-mini</strong> (rápido, económico, eficaz)
+            </li>
+            <li>
+              Chave API armazenada em <code className="bg-amber-100 px-1 rounded">.env.local</code> no servidor (variável <code className="bg-amber-100 px-1 rounded">OPENAI_API_KEY</code>)
+            </li>
+            <li>
+              <strong>IMPORTANTE:</strong> A chave NUNCA é exposta ao frontend — todas as chamadas são server-side
+            </li>
+            <li>
+              Tokens máximos: 2500 (diagnóstico) | 2000 (agente) | Temperatura: 0.7 / 0.8
+            </li>
+          </ul>
         </div>
       </div>
 
       <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
         <h3 className="font-semibold text-blue-900 mb-2 flex items-center gap-2">
-          📧 Notificações por Email
+          💡 Boas Práticas ao Editar Prompts
         </h3>
         <ul className="text-sm text-blue-800 space-y-1 list-disc list-inside">
           <li>
-            Configure o email para receber notificações automáticas quando uma avaliação for concluída
+            <strong>Teste sempre após alterar:</strong> abra as páginas /avaliacao e /agente para verificar comportamento real
           </li>
           <li>
-            O email incluirá os dados do responsável e o relatório completo gerado pela IA
+            <strong>Preserve a estrutura:</strong> os prompts atuais foram calibrados para gerar alta conversão — alterações devem ser incrementais
           </li>
           <li>
-            É necessário configurar uma conta no <a href="https://resend.com" target="_blank" rel="noopener noreferrer" className="underline font-semibold">Resend</a> (serviço gratuito até 3.000 emails/mês)
+            <strong>Monitorize o comprimento:</strong> prompts muito longos aumentam custo e latência; muito curtos perdem contexto
           </li>
           <li>
-            Se não configurar, a aplicação funcionará normalmente sem enviar emails
+            <strong>Tom e voz:</strong> mantenha o registo de consultor experiente (não vendedor), empático mas directo, português europeu
           </li>
-        </ul>
-      </div>
-
-      <div className="bg-green-50 border border-green-200 rounded-xl p-4">
-        <h3 className="font-semibold text-green-900 mb-2 flex items-center gap-2">
-          🔒 Segurança
-        </h3>
-        <ul className="text-sm text-green-800 space-y-1 list-disc list-inside">
-          <li>
-            As chaves OpenAI e Resend são armazenadas de forma <strong>criptografada</strong> no servidor
-          </li>
-          <li>
-            As chaves <strong>NUNCA</strong> são enviadas ao navegador ou expostas no frontend
-          </li>
-          <li>
-            Todas as chamadas às APIs são feitas exclusivamente pelo backend
-          </li>
-        </ul>
-      </div>
-
-      <div className="bg-amber-50 border border-amber-200 rounded-xl p-4">
-        <h3 className="font-semibold text-amber-900 mb-2">
-          ℹ️ Informações
-        </h3>
-        <ul className="text-sm text-amber-800 space-y-1 list-disc list-inside">
-          <li>
-            O prompt será usado para gerar relatórios personalizados para cada
-            avaliação
-          </li>
-          <li>
-            As variáveis entre chaves (ex: {'{name}'}) serão substituídas pelos dados
-            reais da avaliação
-          </li>
-          <li>Teste o prompt após fazer alterações para garantir bons resultados</li>
         </ul>
       </div>
     </div>

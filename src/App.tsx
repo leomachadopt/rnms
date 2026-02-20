@@ -26,14 +26,12 @@ import Users from './pages/Users'
 
 // Admin Pages
 import Dashboard from './pages/admin/Dashboard'
-import Analytics from './pages/admin/Analytics'
 import PostList from './pages/admin/blog/PostList'
 import PostForm from './pages/admin/blog/PostForm'
 import TestimonialList from './pages/admin/testimonials/TestimonialList'
 import TestimonialForm from './pages/admin/testimonials/TestimonialForm'
 import EvaluationList from './pages/admin/evaluations/EvaluationList'
 import Settings from './pages/admin/Settings'
-import TrackingSettings from './pages/admin/TrackingSettings'
 
 const router = createBrowserRouter([
   {
@@ -132,10 +130,6 @@ const router = createBrowserRouter([
       {
         path: 'settings',
         element: <Settings />,
-      },
-      {
-        path: 'tracking',
-        element: <TrackingSettings />,
       },
       {
         path: 'users',
