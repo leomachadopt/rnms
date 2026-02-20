@@ -419,6 +419,15 @@ Com base nos sinais identificados neste relatório, recomendamos o agendamento d
                               Iniciada
                             </span>
                           )}
+                          {evaluation.analysisResult?.source === 'strategic_agent' ? (
+                            <span className="px-2 py-1 bg-purple-100 text-purple-700 text-xs rounded-full font-medium">
+                              Agente Estratégico
+                            </span>
+                          ) : (
+                            <span className="px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded-full font-medium">
+                              Diagnóstico Clínico
+                            </span>
+                          )}
                         </div>
 
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm text-muted-foreground">
@@ -530,21 +539,70 @@ Com base nos sinais identificados neste relatório, recomendamos o agendamento d
               </div>
             </div>
             <div className="p-6 overflow-y-auto flex-1">
-              <div className="prose max-w-none">
-                {selectedEvaluation.analysisResult?.report?.split('\n').map((paragraph: string, idx: number) => {
-                  if (paragraph.trim().startsWith('**') && paragraph.trim().endsWith('**')) {
-                    return (
-                      <h2 key={idx} className="text-xl font-bold text-primary mt-4 mb-2">
-                        {paragraph.replace(/\*\*/g, '')}
-                      </h2>
-                    )
-                  }
-                  if (paragraph.trim()) {
-                    return <p key={idx} className="mb-4">{paragraph}</p>
-                  }
-                  return null
-                })}
-              </div>
+              {selectedEvaluation.analysisResult?.messages ? (
+                // Mostrar conversa (Diagnóstico IA ou Agente Estratégico)
+                <div className="space-y-4">
+                  {selectedEvaluation.analysisResult.messages.map((msg: any, idx: number) => (
+                    <div
+                      key={idx}
+                      className={`p-4 rounded-lg ${
+                        msg.role === 'user'
+                          ? 'bg-blue-50 border border-blue-200'
+                          : 'bg-gray-50 border border-gray-200'
+                      }`}
+                    >
+                      <div className="flex items-center gap-2 mb-2">
+                        <span
+                          className={`text-xs font-semibold uppercase ${
+                            msg.role === 'user' ? 'text-blue-700' : 'text-gray-700'
+                          }`}
+                        >
+                          {msg.role === 'user' ? 'Utilizador' : 'Assistente RNS'}
+                        </span>
+                      </div>
+                      <div className="prose max-w-none text-sm">
+                        {msg.content.split('\n').map((line: string, lineIdx: number) => {
+                          if (line.trim().startsWith('**') && line.trim().endsWith('**')) {
+                            return (
+                              <h3 key={lineIdx} className="font-bold text-base mt-3 mb-1">
+                                {line.replace(/\*\*/g, '')}
+                              </h3>
+                            )
+                          }
+                          if (line.trim().startsWith('OPTIONS:')) {
+                            return (
+                              <div key={lineIdx} className="mt-2 p-2 bg-white rounded border text-xs text-gray-600">
+                                <code>{line}</code>
+                              </div>
+                            )
+                          }
+                          if (line.trim()) {
+                            return <p key={lineIdx} className="mb-2">{line}</p>
+                          }
+                          return <br key={lineIdx} />
+                        })}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                // Mostrar relatório antigo (caso exista)
+                <div className="prose max-w-none">
+                  {selectedEvaluation.analysisResult?.report?.split('\n').map((paragraph: string, idx: number) => {
+                    if (paragraph.trim().startsWith('**') && paragraph.trim().endsWith('**')) {
+                      return (
+                        <h2 key={idx} className="text-xl font-bold text-primary mt-4 mb-2">
+                          {paragraph.replace(/\*\*/g, '')}
+                        </h2>
+                      )
+                    }
+                    if (paragraph.trim()) {
+                      return <p key={idx} className="mb-4">{paragraph}</p>
+                    }
+                    return null
+                  })}
+                </div>
+              )}
             </div>
           </div>
         </div>
