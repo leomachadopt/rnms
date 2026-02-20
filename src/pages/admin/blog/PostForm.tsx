@@ -64,9 +64,10 @@ type FormValues = z.infer<typeof formSchema>
 export default function PostForm() {
   const { id } = useParams()
   const navigate = useNavigate()
-  const { blogPosts, addBlogPost, updateBlogPost } = useAppStore()
+  const { blogPosts } = useAppStore()
   const isEditing = !!id
   const [showPreview, setShowPreview] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -115,21 +116,41 @@ export default function PostForm() {
     }
   }
 
-  const onSubmit = (data: FormValues) => {
-    const postData: Omit<BlogPost, 'id'> = {
-      ...data,
-      date: isEditing
-        ? blogPosts.find((p) => p.id === Number(id))?.date ||
-          format(new Date(), 'dd MMM yyyy')
-        : format(new Date(), 'dd MMM yyyy'),
-    }
+  const onSubmit = async (data: FormValues) => {
+    setIsSubmitting(true)
+    try {
+      const postData = {
+        ...data,
+        date: isEditing
+          ? blogPosts.find((p) => p.id === Number(id))?.date ||
+            format(new Date(), 'yyyy-MM-dd')
+          : format(new Date(), 'yyyy-MM-dd'),
+      }
 
-    if (isEditing) {
-      updateBlogPost(Number(id), postData)
-    } else {
-      addBlogPost(postData)
+      const endpoint = isEditing
+        ? `/api/blog-posts?id=${id}`
+        : '/api/blog-posts'
+      const method = isEditing ? 'PUT' : 'POST'
+
+      const response = await fetch(endpoint, {
+        method,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(postData),
+      })
+
+      if (!response.ok) throw new Error('Falha ao salvar post')
+
+      toast.success(
+        isEditing
+          ? 'Post atualizado com sucesso!'
+          : 'Post criado com sucesso!',
+      )
+      navigate('/admin/blog')
+    } catch (error) {
+      toast.error('Erro ao salvar post')
+    } finally {
+      setIsSubmitting(false)
     }
-    navigate('/admin/blog')
   }
 
   const previewData = form.watch()
@@ -426,9 +447,18 @@ export default function PostForm() {
                   </CardContent>
                 </Card>
 
-                <Button type="submit" size="lg" className="w-full sticky top-24">
+                <Button
+                  type="submit"
+                  size="lg"
+                  className="w-full sticky top-24"
+                  disabled={isSubmitting}
+                >
                   <Save className="w-4 h-4 mr-2" />
-                  {isEditing ? 'Salvar Alterações' : 'Publicar Artigo'}
+                  {isSubmitting
+                    ? 'Salvando...'
+                    : isEditing
+                      ? 'Salvar Alterações'
+                      : 'Publicar Artigo'}
                 </Button>
               </div>
             </div>

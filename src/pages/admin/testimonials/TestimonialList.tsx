@@ -23,11 +23,29 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog'
 import { Badge } from '@/components/ui/badge'
+import { toast } from 'sonner'
 import useAppStore from '@/stores/useAppStore'
 
 export default function TestimonialList() {
-  const { testimonials, deleteTestimonial } = useAppStore()
+  const { testimonials, refreshTestimonials } = useAppStore()
   const [searchTerm, setSearchTerm] = useState('')
+  const [deletingId, setDeletingId] = useState<number | null>(null)
+
+  const handleDelete = async (id: number) => {
+    setDeletingId(id)
+    try {
+      const response = await fetch(`/api/testimonials?id=${id}`, {
+        method: 'DELETE',
+      })
+      if (!response.ok) throw new Error('Falha ao deletar depoimento')
+      toast.success('Depoimento removido com sucesso!')
+      await refreshTestimonials()
+    } catch (error) {
+      toast.error('Erro ao remover depoimento')
+    } finally {
+      setDeletingId(null)
+    }
+  }
 
   const filteredTestimonials = testimonials.filter(
     (t) =>
@@ -147,10 +165,13 @@ export default function TestimonialList() {
                           <AlertDialogFooter>
                             <AlertDialogCancel>Cancelar</AlertDialogCancel>
                             <AlertDialogAction
-                              onClick={() => deleteTestimonial(testimonial.id)}
+                              onClick={() => handleDelete(testimonial.id)}
                               className="bg-destructive hover:bg-destructive/90"
+                              disabled={deletingId === testimonial.id}
                             >
-                              Excluir
+                              {deletingId === testimonial.id
+                                ? 'Excluindo...'
+                                : 'Excluir'}
                             </AlertDialogAction>
                           </AlertDialogFooter>
                         </AlertDialogContent>

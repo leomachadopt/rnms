@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -8,8 +8,8 @@ import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
-import { Checkbox } from '@/components/ui/checkbox'
-import { ImageUpload } from '@/components/ImageUpload'
+import { Switch } from '@/components/ui/switch'
+import { ImageUploader } from '@/components/editor/ImageUploader'
 import {
   Form,
   FormControl,
@@ -26,17 +26,17 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import useAppStore from '@/stores/useAppStore'
-import { Testimonial } from '@/types'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
 const formSchema = z.object({
-  name: z.string().min(2, 'Nome deve ter pelo menos 2 caracteres'),
-  role: z.string().min(2, 'Papel/relação é obrigatório'),
-  text: z.string().min(10, 'O depoimento deve ter pelo menos 10 caracteres'),
-  rating: z.number().min(1).max(5),
-  avatarGender: z.enum(['male', 'female']),
-  customAvatar: z.string().url('URL inválida').optional().or(z.literal('')),
-  featured: z.boolean(),
+  name: z.string().min(3, 'Nome deve ter pelo menos 3 caracteres'),
+  text: z.string().min(20, 'Depoimento deve ter pelo menos 20 caracteres'),
+  role: z.string().min(3, 'Cargo/função é obrigatório'),
+  rating: z.number().min(1).max(5).default(5),
+  avatarGender: z.enum(['male', 'female']).default('female'),
+  avatarSeed: z.number().min(0).max(100).default(42),
+  customAvatar: z.string().optional(),
+  featured: z.boolean().default(false),
 })
 
 type FormValues = z.infer<typeof formSchema>
@@ -44,67 +44,90 @@ type FormValues = z.infer<typeof formSchema>
 export default function TestimonialForm() {
   const { id } = useParams()
   const navigate = useNavigate()
-  const { testimonials, addTestimonial, updateTestimonial } = useAppStore()
   const isEditing = !!id
+  const [isLoading, setIsLoading] = useState(false)
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: '',
-      role: '',
       text: '',
+      role: '',
       rating: 5,
       avatarGender: 'female',
+      avatarSeed: 42,
       customAvatar: '',
       featured: false,
     },
   })
 
+  // Load existing testimonial data if editing
   useEffect(() => {
     if (isEditing) {
-      const testimonial = testimonials.find((t) => t.id === Number(id))
-      if (testimonial) {
-        form.reset({
-          name: testimonial.name,
-          role: testimonial.role,
-          text: testimonial.text,
-          rating: testimonial.rating,
-          avatarGender: testimonial.avatarGender,
-          customAvatar: testimonial.customAvatar || '',
-          featured: testimonial.featured,
-        })
-      } else {
-        navigate('/admin/testimonials')
+      const loadTestimonial = async () => {
+        setIsLoading(true)
+        try {
+          const response = await fetch(`/api/testimonials/${id}`)
+          if (!response.ok) throw new Error('Falha ao carregar depoimento')
+          const data = await response.json()
+
+          form.reset({
+            name: data.name,
+            text: data.text,
+            role: data.role,
+            rating: data.rating || 5,
+            avatarGender: data.avatarGender || 'female',
+            avatarSeed: data.avatarSeed || 42,
+            customAvatar: data.customAvatar || '',
+            featured: !!data.featured,
+          })
+        } catch (error) {
+          toast.error('Erro ao carregar depoimento')
+          navigate('/admin/testimonials')
+        } finally {
+          setIsLoading(false)
+        }
       }
+      loadTestimonial()
     }
-  }, [id, isEditing, testimonials, navigate, form])
+  }, [id, isEditing, navigate, form])
 
-  const onSubmit = (data: FormValues) => {
-    const testimonialData: Omit<Testimonial, 'id'> = {
-      name: data.name,
-      role: data.role,
-      text: data.text,
-      rating: data.rating,
-      avatarGender: data.avatarGender,
-      avatarSeed: isEditing
-        ? testimonials.find((t) => t.id === Number(id))?.avatarSeed || 1
-        : Math.floor(Math.random() * 100),
-      ...(data.customAvatar && { customAvatar: data.customAvatar }),
-      featured: data.featured,
-    }
+  const onSubmit = async (data: FormValues) => {
+    setIsLoading(true)
+    try {
+      const endpoint = isEditing
+        ? `/api/testimonials/${id}`
+        : '/api/testimonials'
+      const method = isEditing ? 'PUT' : 'POST'
 
-    if (isEditing) {
-      updateTestimonial(Number(id), testimonialData)
-    } else {
-      addTestimonial(testimonialData)
+      const response = await fetch(endpoint, {
+        method,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...data,
+          featured: data.featured ? 1 : 0,
+        }),
+      })
+
+      if (!response.ok) throw new Error('Falha ao salvar depoimento')
+
+      toast.success(
+        isEditing
+          ? 'Depoimento atualizado com sucesso!'
+          : 'Depoimento criado com sucesso!',
+      )
+      navigate('/admin/testimonials')
+    } catch (error) {
+      toast.error('Erro ao salvar depoimento')
+    } finally {
+      setIsLoading(false)
     }
-    navigate('/admin/testimonials')
   }
 
-  const rating = form.watch('rating')
+  const watchedRating = form.watch('rating')
 
   return (
-    <div className="max-w-2xl mx-auto space-y-6 animate-fade-in">
+    <div className="max-w-4xl mx-auto space-y-6 animate-fade-in pb-12">
       <div className="flex items-center gap-4">
         <Button asChild variant="ghost" size="icon">
           <Link to="/admin/testimonials">
@@ -116,172 +139,250 @@ export default function TestimonialForm() {
             {isEditing ? 'Editar Depoimento' : 'Novo Depoimento'}
           </h1>
           <p className="text-muted-foreground">
-            Preencha os dados do depoimento abaixo.
+            Adicione ou edite depoimentos de profissionais.
           </p>
         </div>
       </div>
 
-      <div className="bg-white p-6 rounded-xl border shadow-sm">
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            <div className="grid sm:grid-cols-2 gap-4">
-              <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Nome</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Maria Silva" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="role"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Papel/Relação</FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="Ex: Mãe do Pedro, 5 anos"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+          <div className="grid lg:grid-cols-3 gap-6">
+            {/* Main Content Column */}
+            <div className="lg:col-span-2 space-y-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Informações do Depoimento</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                  <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Nome do Profissional</FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="Ex: Dra. Ana Ferreira"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
 
-            <FormField
-              control={form.control}
-              name="text"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Depoimento</FormLabel>
-                  <FormControl>
-                    <Textarea
-                      placeholder="Escreva o depoimento aqui..."
-                      className="min-h-[120px]"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                  <FormField
+                    control={form.control}
+                    name="role"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Cargo/Especialidade · Cidade</FormLabel>
+                        <FormControl>
+                          <Input placeholder="Ex: Dentista · Porto" {...field} />
+                        </FormControl>
+                        <FormDescription>
+                          Formato: Profissão · Localização
+                        </FormDescription>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
 
-            <div className="grid sm:grid-cols-2 gap-4">
-              <FormField
-                control={form.control}
-                name="rating"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Avaliação</FormLabel>
-                    <Select
-                      onValueChange={(value) => field.onChange(Number(value))}
-                      value={String(field.value)}
-                    >
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Selecione" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        {[5, 4, 3, 2, 1].map((stars) => (
-                          <SelectItem key={stars} value={String(stars)}>
+                  <FormField
+                    control={form.control}
+                    name="text"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Depoimento</FormLabel>
+                        <FormControl>
+                          <Textarea
+                            placeholder="Escreva o depoimento completo..."
+                            className="min-h-[120px]"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormDescription>
+                          O texto do depoimento que aparecerá no site
+                        </FormDescription>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="rating"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Avaliação</FormLabel>
+                        <FormControl>
+                          <div className="space-y-2">
                             <div className="flex items-center gap-2">
-                              {Array.from({ length: stars }).map((_, i) => (
-                                <Star
-                                  key={i}
-                                  className="w-4 h-4 fill-yellow-400 text-yellow-400"
-                                />
+                              {[1, 2, 3, 4, 5].map((star) => (
+                                <button
+                                  key={star}
+                                  type="button"
+                                  onClick={() => field.onChange(star)}
+                                  className="focus:outline-none transition-transform hover:scale-110"
+                                >
+                                  <Star
+                                    className={`w-8 h-8 ${
+                                      star <= watchedRating
+                                        ? 'fill-yellow-400 text-yellow-400'
+                                        : 'text-gray-300'
+                                    }`}
+                                  />
+                                </button>
                               ))}
                             </div>
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="avatarGender"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Gênero (para avatar)</FormLabel>
-                    <Select
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                    >
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Selecione" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        <SelectItem value="male">Masculino</SelectItem>
-                        <SelectItem value="female">Feminino</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+                            <p className="text-sm text-muted-foreground">
+                              {watchedRating}{' '}
+                              {watchedRating === 1 ? 'estrela' : 'estrelas'}
+                            </p>
+                          </div>
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </CardContent>
+              </Card>
             </div>
 
-            <FormField
-              control={form.control}
-              name="customAvatar"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Foto (opcional)</FormLabel>
-                  <FormControl>
-                    <ImageUpload value={field.value} onChange={field.onChange} />
-                  </FormControl>
-                  <FormDescription>
-                    Faça upload da foto da pessoa. Se não fornecida, será usado
-                    um avatar genérico.
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            {/* Sidebar Column */}
+            <div className="space-y-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-base">Avatar</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <FormField
+                    control={form.control}
+                    name="customAvatar"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Foto Personalizada (Opcional)</FormLabel>
+                        <FormControl>
+                          <ImageUploader
+                            onImageSelect={field.onChange}
+                            currentImage={field.value || ''}
+                            label="Upload de Foto"
+                            aspectRatio="aspect-square"
+                          />
+                        </FormControl>
+                        <FormDescription className="text-xs">
+                          Se não enviar foto, será usado avatar gerado
+                        </FormDescription>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
 
-            <FormField
-              control={form.control}
-              name="featured"
-              render={({ field }) => (
-                <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
-                  <FormControl>
-                    <Checkbox
-                      checked={field.value}
-                      onCheckedChange={field.onChange}
+                  <div className="border-t pt-4 space-y-4">
+                    <p className="text-sm font-medium text-muted-foreground">
+                      Configurações do Avatar Gerado
+                    </p>
+
+                    <FormField
+                      control={form.control}
+                      name="avatarGender"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Género</FormLabel>
+                          <Select
+                            onValueChange={field.onChange}
+                            defaultValue={field.value}
+                          >
+                            <FormControl>
+                              <SelectTrigger>
+                                <SelectValue />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              <SelectItem value="female">Feminino</SelectItem>
+                              <SelectItem value="male">Masculino</SelectItem>
+                            </SelectContent>
+                          </Select>
+                          <FormMessage />
+                        </FormItem>
+                      )}
                     />
-                  </FormControl>
-                  <div className="space-y-1 leading-none">
-                    <FormLabel>Destacar na página inicial</FormLabel>
-                    <FormDescription>
-                      Este depoimento aparecerá em destaque na home do site.
-                    </FormDescription>
-                  </div>
-                </FormItem>
-              )}
-            />
 
-            <Button type="submit" className="w-full">
-              <Save className="w-4 h-4 mr-2" />
-              {isEditing ? 'Salvar Alterações' : 'Adicionar Depoimento'}
-            </Button>
-          </form>
-        </Form>
-      </div>
+                    <FormField
+                      control={form.control}
+                      name="avatarSeed"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Variação do Avatar (0-100)</FormLabel>
+                          <FormControl>
+                            <Input
+                              type="number"
+                              min="0"
+                              max="100"
+                              {...field}
+                              onChange={(e) =>
+                                field.onChange(parseInt(e.target.value) || 0)
+                              }
+                            />
+                          </FormControl>
+                          <FormDescription className="text-xs">
+                            Altere para gerar diferentes avatares
+                          </FormDescription>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-base">Destaque</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <FormField
+                    control={form.control}
+                    name="featured"
+                    render={({ field }) => (
+                      <FormItem className="flex items-center justify-between rounded-lg border p-4">
+                        <div className="space-y-0.5">
+                          <FormLabel className="text-base">
+                            Depoimento em Destaque
+                          </FormLabel>
+                          <FormDescription>
+                            Aparece na página inicial
+                          </FormDescription>
+                        </div>
+                        <FormControl>
+                          <Switch
+                            checked={field.value}
+                            onCheckedChange={field.onChange}
+                          />
+                        </FormControl>
+                      </FormItem>
+                    )}
+                  />
+                </CardContent>
+              </Card>
+
+              <Button
+                type="submit"
+                size="lg"
+                className="w-full"
+                disabled={isLoading}
+              >
+                <Save className="w-4 h-4 mr-2" />
+                {isLoading
+                  ? 'Salvando...'
+                  : isEditing
+                    ? 'Salvar Alterações'
+                    : 'Criar Depoimento'}
+              </Button>
+            </div>
+          </div>
+        </form>
+      </Form>
     </div>
   )
 }

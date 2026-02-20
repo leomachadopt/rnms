@@ -23,11 +23,29 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog'
+import { toast } from 'sonner'
 import useAppStore from '@/stores/useAppStore'
 
 export default function PostList() {
-  const { blogPosts, deleteBlogPost } = useAppStore()
+  const { blogPosts, refreshBlogPosts } = useAppStore()
   const [searchTerm, setSearchTerm] = useState('')
+  const [deletingId, setDeletingId] = useState<number | null>(null)
+
+  const handleDelete = async (id: number) => {
+    setDeletingId(id)
+    try {
+      const response = await fetch(`/api/blog-posts?id=${id}`, {
+        method: 'DELETE',
+      })
+      if (!response.ok) throw new Error('Falha ao deletar post')
+      toast.success('Post removido com sucesso!')
+      await refreshBlogPosts()
+    } catch (error) {
+      toast.error('Erro ao remover post')
+    } finally {
+      setDeletingId(null)
+    }
+  }
 
   const filteredPosts = blogPosts.filter(
     (p) =>
@@ -134,10 +152,11 @@ export default function PostList() {
                           <AlertDialogFooter>
                             <AlertDialogCancel>Cancelar</AlertDialogCancel>
                             <AlertDialogAction
-                              onClick={() => deleteBlogPost(post.id)}
+                              onClick={() => handleDelete(post.id)}
                               className="bg-destructive hover:bg-destructive/90"
+                              disabled={deletingId === post.id}
                             >
-                              Excluir
+                              {deletingId === post.id ? 'Excluindo...' : 'Excluir'}
                             </AlertDialogAction>
                           </AlertDialogFooter>
                         </AlertDialogContent>

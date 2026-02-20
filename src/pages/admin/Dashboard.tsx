@@ -1,40 +1,34 @@
 import { Link } from 'react-router-dom'
-import { Users, FileText, MessageSquare, ClipboardCheck, ArrowRight } from 'lucide-react'
+import { FileText, MessageSquare, ClipboardCheck, ArrowRight } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import useAppStore from '@/stores/useAppStore'
+import { useEffect, useState } from 'react'
 
 export default function Dashboard() {
-  const { specialists, blogPosts, testimonials, evaluations } = useAppStore()
+  const { blogPosts, testimonials } = useAppStore()
+  const [evaluationsCount, setEvaluationsCount] = useState(0)
+
+  useEffect(() => {
+    // Carregar contagem de evaluations da API
+    fetch('/api/evaluations')
+      .then((res) => res.json())
+      .then((data) => {
+        if (Array.isArray(data)) {
+          setEvaluationsCount(data.length)
+        }
+      })
+      .catch((err) => console.error('Erro ao carregar evaluations:', err))
+  }, [])
 
   return (
     <div className="space-y-8 animate-fade-in">
       <div>
         <h1 className="text-3xl font-bold text-foreground">Dashboard</h1>
-        <p className="text-muted-foreground">Visão geral do sistema</p>
+        <p className="text-muted-foreground">Visão geral do sistema RNS</p>
       </div>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {/* Professionals Stats */}
-        <Card className="hover:shadow-md transition-shadow">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">
-              Total de Profissionais
-            </CardTitle>
-            <Users className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{specialists.length}</div>
-            <p className="text-xs text-muted-foreground mb-4">
-              Especialistas registados
-            </p>
-            <Button asChild variant="outline" size="sm" className="w-full">
-              <Link to="/admin/specialists">
-                Gerir Profissionais <ArrowRight className="ml-2 w-4 h-4" />
-              </Link>
-            </Button>
-          </CardContent>
-        </Card>
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
 
         {/* Blog Stats */}
         <Card className="hover:shadow-md transition-shadow">
@@ -82,18 +76,18 @@ export default function Dashboard() {
         <Card className="hover:shadow-md transition-shadow">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">
-              Total de Avaliações
+              Diagnósticos IA
             </CardTitle>
             <ClipboardCheck className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{evaluations.length}</div>
+            <div className="text-2xl font-bold">{evaluationsCount}</div>
             <p className="text-xs text-muted-foreground mb-4">
-              Avaliações da Dra. Ro
+              Conversas de diagnóstico guardadas
             </p>
             <Button asChild variant="outline" size="sm" className="w-full">
               <Link to="/admin/evaluations">
-                Ver Avaliações <ArrowRight className="ml-2 w-4 h-4" />
+                Ver Diagnósticos <ArrowRight className="ml-2 w-4 h-4" />
               </Link>
             </Button>
           </CardContent>

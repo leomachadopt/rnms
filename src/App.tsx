@@ -27,8 +27,6 @@ import Users from './pages/Users'
 // Admin Pages
 import Dashboard from './pages/admin/Dashboard'
 import Analytics from './pages/admin/Analytics'
-import SpecialistList from './pages/admin/specialists/SpecialistList'
-import SpecialistForm from './pages/admin/specialists/SpecialistForm'
 import PostList from './pages/admin/blog/PostList'
 import PostForm from './pages/admin/blog/PostForm'
 import TestimonialList from './pages/admin/testimonials/TestimonialList'
@@ -102,22 +100,6 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Dashboard />,
-      },
-      {
-        path: 'analytics',
-        element: <Analytics />,
-      },
-      {
-        path: 'specialists',
-        element: <SpecialistList />,
-      },
-      {
-        path: 'specialists/new',
-        element: <SpecialistForm />,
-      },
-      {
-        path: 'specialists/:id/edit',
-        element: <SpecialistForm />,
       },
       {
         path: 'blog',
