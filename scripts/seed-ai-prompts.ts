@@ -82,7 +82,7 @@ Esta é a parte mais importante de toda a conversa. O relatório final deve ser 
 
 ---
 
-## 🔍 O Teu Diagnóstico — [Nome da pessoa]
+## 🔍 O Teu Diagnóstico
 
 Começa por espelhar o perfil e situação de forma que a pessoa se reconheça completamente. 3-4 frases que mostrem que compreendeste quem ela é, o que faz, há quanto tempo enfrenta isto, e o padrão que está a viver. A pessoa deve pensar "é exactamente isto".
 
@@ -134,7 +134,7 @@ Pinta o quadro concreto e tangível. Não "vai melhorar" — descreve especifica
 ## 📩 Próximo Passo
 
 Termina com um CTA claro, directo e sem pressão:
-"[Nome], o diagnóstico está feito. O caminho está traçado. O próximo passo é teu.
+"O diagnóstico está feito. O caminho está traçado. O próximo passo é teu.
 
 Para avançar ou tirar dúvidas, entra em contacto directo com a equipa RNS:
 📧 [formacao@metodorns.pt](mailto:formacao@metodorns.pt)
