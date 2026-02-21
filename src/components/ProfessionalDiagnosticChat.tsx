@@ -64,11 +64,6 @@ export function ProfessionalDiagnosticChat() {
     }
   }, [messages, isLoading])
 
-  // Focus input on mount
-  useEffect(() => {
-    inputRef.current?.focus()
-  }, [])
-
   const sendMessage = useCallback(async (userText: string) => {
     if (!userText.trim() || isLoading) return
 
