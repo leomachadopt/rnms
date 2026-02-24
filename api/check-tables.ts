@@ -31,32 +31,16 @@ export default async function handler(
     // Verificar se as tabelas existem
     // Usar template literal para queries (nova API do Neon serverless)
     const tablesResult = await sql`
-      SELECT table_name 
-      FROM information_schema.tables 
-      WHERE table_schema = 'public' 
+      SELECT table_name
+      FROM information_schema.tables
+      WHERE table_schema = 'public'
       AND table_type = 'BASE TABLE'
       ORDER BY table_name;
     `
-    
-    // Verificar se a tabela specialists existe e tem dados
-    let specialistsCount = 0
-    let specialistsError = null
-    
-    try {
-      const countResult = await sql`SELECT COUNT(*) as count FROM specialists`
-      specialistsCount = Number(countResult[0]?.count || 0)
-    } catch (err: any) {
-      specialistsError = err?.message || 'Erro desconhecido'
-    }
-    
+
     return res.status(200).json({
       success: true,
       tables: tablesResult.map((t: any) => t.table_name) || [],
-      specialists: {
-        exists: !specialistsError,
-        count: specialistsCount,
-        error: specialistsError,
-      },
       timestamp: new Date().toISOString(),
     })
   } catch (error: any) {

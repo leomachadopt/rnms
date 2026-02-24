@@ -1,24 +1,4 @@
-import { pgTable, serial, text, varchar, timestamp, integer, jsonb, decimal } from 'drizzle-orm/pg-core'
-
-// Tabela de Especialistas
-export const specialists = pgTable('specialists', {
-  id: serial('id').primaryKey(),
-  name: varchar('name', { length: 255 }).notNull(),
-  role: varchar('role', { length: 255 }).notNull(),
-  region: varchar('region', { length: 50 }), // Norte, Centro, Lisboa e Vale do Tejo, Alentejo, Algarve, Açores, Madeira
-  city: varchar('city', { length: 100 }).notNull(),
-  address: text('address').notNull(),
-  phone: varchar('phone', { length: 20 }).notNull(),
-  whatsapp: varchar('whatsapp', { length: 20 }),
-  email: varchar('email', { length: 255 }).notNull(),
-  lat: decimal('lat', { precision: 10, scale: 7 }).notNull(),
-  lng: decimal('lng', { precision: 10, scale: 7 }).notNull(),
-  image: varchar('image', { length: 20 }), // 'male' | 'female'
-  seed: integer('seed'),
-  customImage: text('custom_image'),
-  createdAt: timestamp('created_at').defaultNow().notNull(),
-  updatedAt: timestamp('updated_at').defaultNow().notNull(),
-})
+import { pgTable, serial, text, varchar, timestamp, integer, jsonb } from 'drizzle-orm/pg-core'
 
 // Tabela de Posts do Blog
 export const blogPosts = pgTable('blog_posts', {
@@ -38,34 +18,6 @@ export const blogPosts = pgTable('blog_posts', {
   updatedAt: timestamp('updated_at').defaultNow().notNull(),
 })
 
-// Tabela de Avaliações (dados das consultas com a Dra. Ro)
-export const evaluations = pgTable('evaluations', {
-  id: serial('id').primaryKey(),
-  name: varchar('name', { length: 255 }).notNull(),
-  parentName: varchar('parent_name', { length: 255 }),
-  email: varchar('email', { length: 255 }).notNull(),
-  phone: varchar('phone', { length: 20 }).notNull(),
-  age: varchar('age', { length: 50 }),
-  location: jsonb('location'), // { city: string, coords?: { lat, lng } }
-  breathingSigns: jsonb('breathing_signs'), // Array de strings
-  dentalIssues: jsonb('dental_issues'), // Array de strings
-  oralHabits: jsonb('oral_habits'), // Array de strings
-  posture: varchar('posture', { length: 100 }),
-  speechIssues: varchar('speech_issues', { length: 100 }),
-  sleepQuality: varchar('sleep_quality', { length: 100 }),
-  previousTreatment: varchar('previous_treatment', { length: 100 }),
-  riskLevel: varchar('risk_level', { length: 20 }), // baixo, moderado, alto
-  analysisResult: jsonb('analysis_result'), // Resultado completo da análise IA
-  recommendedSpecialistId: integer('recommended_specialist_id').references(() => specialists.id, { onDelete: 'set null' }),
-  // Campos de tracking
-  utmSource: varchar('utm_source', { length: 100 }),
-  utmMedium: varchar('utm_medium', { length: 100 }),
-  utmCampaign: varchar('utm_campaign', { length: 100 }),
-  utmContent: varchar('utm_content', { length: 100 }),
-  utmTerm: varchar('utm_term', { length: 100 }),
-  trackingEventId: integer('tracking_event_id'),
-  createdAt: timestamp('created_at').defaultNow().notNull(),
-})
 
 // Tabela de Depoimentos
 export const testimonials = pgTable('testimonials', {
@@ -124,8 +76,6 @@ export const trackingEvents = pgTable('tracking_events', {
   referrer: text('referrer'),
   // Dados customizados do evento
   eventData: jsonb('event_data'), // Dados específicos do evento
-  // Relação com avaliação (se aplicável)
-  evaluationId: integer('evaluation_id').references(() => evaluations.id, { onDelete: 'set null' }),
   createdAt: timestamp('created_at').defaultNow().notNull(),
 })
 

@@ -19,7 +19,7 @@ export function Footer() {
           <div className="space-y-4 animate-fade-in-up">
             <div className="flex items-center gap-2 group">
               <img
-                src="/logo_RNS_NOVA.png"
+                src="/logo_RNSNOVA.png"
                 alt="Método RNS"
                 className="w-10 h-10 object-contain drop-shadow-lg"
               />
@@ -71,7 +71,7 @@ export function Footer() {
                 { path: '/sobre', label: 'Método RNS' },
                 { path: '/leonardo', label: 'Leonardo Machado' },
                 { path: '/formacao', label: 'Formação' },
-                { path: '/avaliacao', label: 'Diagnóstico IA' },
+                { path: '/agenterns', label: 'Fale Connosco' },
                 { path: '/blog', label: 'Blog' },
               ].map((link, idx) => (
                 <li
@@ -157,10 +157,9 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-white/10 mt-12 pt-8 text-center text-sm text-white/60">
+        <div className="border-t border-white/10 mt-12 pt-8 text-center text-sm text-white">
           <p className="font-light">
-            &copy; {new Date().getFullYear()} Método RNS — Leonardo Machado. Todos os
-            direitos reservados.
+            © 2026 Método RNS — Leonardo Machado. Todos os direitos reservados.
           </p>
         </div>
       </div>

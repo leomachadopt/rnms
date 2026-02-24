@@ -1,21 +1,3 @@
-export type PortugalRegion = 'Norte' | 'Centro' | 'Lisboa e Vale do Tejo' | 'Alentejo' | 'Algarve' | 'Açores' | 'Madeira'
-
-export interface Specialist {
-  id: number
-  name: string
-  role: string
-  region?: PortugalRegion
-  city: string
-  address: string
-  phone: string
-  whatsapp: string
-  email: string
-  coords: { lat: number; lng: number }
-  image: 'male' | 'female'
-  seed: number
-  customImage?: string // URL da foto personalizada
-}
-
 export interface BlogPost {
   id: number
   title: string
@@ -31,39 +13,6 @@ export interface BlogPost {
   seoKeywords?: string
 }
 
-export interface EvaluationData {
-  // Dados demográficos
-  age?: string
-  region?: PortugalRegion
-  location?: {
-    city?: string
-    region?: PortugalRegion
-    coords?: { lat: number; lng: number }
-  }
-
-  // Indicadores clínicos
-  breathingSigns?: string[]
-  dentalIssues?: string[]
-  oralHabits?: string[]
-  posture?: string
-  speechIssues?: string
-  sleepQuality?: string
-  previousTreatment?: string
-
-  // Dados de contato
-  name?: string
-  parentName?: string
-  email?: string
-  phone?: string
-}
-
-export interface EvaluationResult {
-  score: number // 0-100
-  treatmentRecommendation: string
-  recommendedSpecialist: Specialist | null
-  confidence: 'alta' | 'média' | 'baixa'
-  reasoning: string
-}
 
 export interface Testimonial {
   id: number

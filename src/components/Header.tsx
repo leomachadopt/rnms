@@ -25,12 +25,11 @@ export function Header() {
   }, [])
 
   const navLinks = [
-    { name: 'Home', path: '/' },
     { name: 'Método RNS', path: '/sobre' },
-    { name: 'Leonardo Machado', path: '/leonardo' },
-    { name: 'Formação', path: '/formacao' },
-    { name: 'Diagnóstico IA', path: '/avaliacao' },
-    { name: 'Blog', path: '/blog' },
+    { name: 'Imersão RNS', path: '/formacao' },
+    { name: 'Programa RNS', path: '/programa-rns' },
+    { name: 'O Fundador', path: '/leonardo' },
+    { name: 'Publicações', path: '/blog' },
   ]
 
   return (
@@ -46,7 +45,7 @@ export function Header() {
         {/* Logo */}
         <Link to="/" className="flex items-center gap-3 group">
           <img
-            src="/logo_RNS_NOVA.png"
+            src="/logo_RNSNOVA.png"
             alt="Método RNS"
             className="w-12 h-12 object-contain transition-all duration-300 group-hover:scale-110 group-hover:rotate-3 drop-shadow-lg"
           />
@@ -81,9 +80,9 @@ export function Header() {
             asChild
             className="btn-gold hover-glow-gold px-6"
           >
-            <Link to="/avaliacao" className="group">
+            <Link to="/agenterns" className="group">
               <MessageCircle className="w-4 h-4 mr-2 group-hover:rotate-12 transition-transform duration-300" />
-              Diagnóstico IA
+              Fale Connosco
             </Link>
           </Button>
         </div>
@@ -132,9 +131,9 @@ export function Header() {
                   asChild
                   className="mt-4 w-full btn-gold hover-glow-gold"
                 >
-                  <Link to="/avaliacao" onClick={() => setIsOpen(false)}>
+                  <Link to="/agenterns" onClick={() => setIsOpen(false)}>
                     <MessageCircle className="w-4 h-4 mr-2" />
-                    Diagnóstico IA
+                    Fale Connosco
                   </Link>
                 </Button>
               </nav>

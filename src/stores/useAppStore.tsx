@@ -6,10 +6,8 @@ import { BlogPost, Testimonial } from '@/types'
 // ---------------------------------------------------------------------------
 
 interface AppContextType {
-  specialists: any[]
   blogPosts: BlogPost[]
   testimonials: Testimonial[]
-  evaluations: any[]
   isLoading: boolean
   refreshBlogPosts: () => Promise<void>
   refreshTestimonials: () => Promise<void>
@@ -62,10 +60,8 @@ export const AppStoreProvider = ({
   return (
     <AppContext.Provider
       value={{
-        specialists: [],
         blogPosts,
         testimonials,
-        evaluations: [],
         isLoading,
         refreshBlogPosts,
         refreshTestimonials,

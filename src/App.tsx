@@ -18,7 +18,6 @@ import Blog from './pages/Blog'
 import BlogPost from './pages/BlogPost'
 import Avaliacao from './pages/Avaliacao'
 import Agente from './pages/Agente'
-import ResultadoAvaliacao from './pages/ResultadoAvaliacao'
 import Agendamento from './pages/Agendamento'
 import Login from './pages/Login'
 import NotFound from './pages/NotFound'
@@ -30,7 +29,6 @@ import PostList from './pages/admin/blog/PostList'
 import PostForm from './pages/admin/blog/PostForm'
 import TestimonialList from './pages/admin/testimonials/TestimonialList'
 import TestimonialForm from './pages/admin/testimonials/TestimonialForm'
-import EvaluationList from './pages/admin/evaluations/EvaluationList'
 import Settings from './pages/admin/Settings'
 
 const router = createBrowserRouter([
@@ -72,10 +70,6 @@ const router = createBrowserRouter([
       {
         path: '/agente',
         element: <Agente />,
-      },
-      {
-        path: '/resultado-avaliacao',
-        element: <ResultadoAvaliacao />,
       },
       {
         path: '/agendamento',
@@ -122,10 +116,6 @@ const router = createBrowserRouter([
       {
         path: 'testimonials/:id/edit',
         element: <TestimonialForm />,
-      },
-      {
-        path: 'evaluations',
-        element: <EvaluationList />,
       },
       {
         path: 'settings',

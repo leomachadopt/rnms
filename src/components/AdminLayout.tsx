@@ -32,7 +32,6 @@ export default function AdminLayout() {
     { name: 'Dashboard', path: '/admin', icon: LayoutDashboard },
     { name: 'Blog Posts', path: '/admin/blog', icon: FileText },
     { name: 'Depoimentos', path: '/admin/testimonials', icon: MessageSquare },
-    { name: 'Diagnósticos IA', path: '/admin/evaluations', icon: ClipboardList },
     { name: 'Configurações IA', path: '/admin/settings', icon: Settings },
     ...(isSuperAdmin ? [{ name: 'Usuários', path: '/admin/users', icon: Shield }] : []),
   ]

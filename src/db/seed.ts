@@ -1,90 +1,6 @@
 import 'dotenv/config'
 import { db } from './client'
-import { specialists, blogPosts, testimonials } from './schema'
-
-// Dados iniciais dos especialistas
-const INITIAL_SPECIALISTS = [
-  {
-    name: 'Dr. Carlos Ferreira',
-    role: 'Ortodontista Pediátrico',
-    city: 'Lisboa',
-    address: 'Av. da Liberdade, 100, Lisboa',
-    phone: '+351 210 000 001',
-    whatsapp: '351910000001',
-    email: 'carlos.ferreira@respiracaooral.pt',
-    lat: '38.7223',
-    lng: '-9.1393',
-    image: 'male',
-    seed: 12,
-  },
-  {
-    name: 'Dra. Sofia Costa',
-    role: 'Odontopediatra',
-    city: 'Porto',
-    address: 'Rua de Santa Catarina, 200, Porto',
-    phone: '+351 220 000 002',
-    whatsapp: '351920000002',
-    email: 'sofia.costa@respiracaooral.pt',
-    lat: '41.1579',
-    lng: '-8.6291',
-    image: 'female',
-    seed: 15,
-  },
-  {
-    name: 'Dr. Miguel Santos',
-    role: 'Ortodontista',
-    city: 'Coimbra',
-    address: 'Praça da República, 50, Coimbra',
-    phone: '+351 239 000 003',
-    whatsapp: '351930000003',
-    email: 'miguel.santos@respiracaooral.pt',
-    lat: '40.2033',
-    lng: '-8.4103',
-    image: 'male',
-    seed: 20,
-  },
-  {
-    name: 'Dra. Inês Silva',
-    role: 'Dentista do Sono',
-    city: 'Faro',
-    address: 'Rua de Santo António, 30, Faro',
-    phone: '+351 289 000 004',
-    whatsapp: '351960000004',
-    email: 'ines.silva@respiracaooral.pt',
-    lat: '37.0194',
-    lng: '-7.9304',
-    image: 'female',
-    seed: 25,
-  },
-  {
-    name: 'Dr. Ricardo Oliveira',
-    role: 'Ortodontista',
-    city: 'Braga',
-    address: 'Av. Central, 10, Braga',
-    phone: '+351 253 000 005',
-    whatsapp: '351910000005',
-    email: 'ricardo.oliveira@respiracaooral.pt',
-    lat: '41.5454',
-    lng: '-8.4265',
-    image: 'male',
-    seed: 30,
-  },
-  {
-    name: 'Dra. Cristiane Martins',
-    role: 'Ortodontista | Invisalign Provider',
-    city: 'Oliveira de Azeméis',
-    address: 'Rua Artur Correia Barbosa, 111, Oliveira de Azeméis',
-    phone: '+351 918 233 310',
-    whatsapp: '351918233310',
-    email: 'clinicadentariavitoria@hotmail.com',
-    lat: '40.8396',
-    lng: '-8.4733',
-    image: 'female',
-    seed: 35,
-    customImage:
-      'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&h=400&fit=crop&crop=faces',
-  },
-]
+import { blogPosts, testimonials } from './schema'
 
 // Dados iniciais dos posts do blog
 const INITIAL_POSTS = [
@@ -198,11 +114,6 @@ async function seed() {
   console.log('🌱 Iniciando seed do banco de dados...')
 
   try {
-    // Inserir especialistas
-    console.log('📍 Inserindo especialistas...')
-    await db.insert(specialists).values(INITIAL_SPECIALISTS)
-    console.log(`✅ ${INITIAL_SPECIALISTS.length} especialistas inseridos`)
-
     // Inserir posts do blog
     console.log('📝 Inserindo posts do blog...')
     await db.insert(blogPosts).values(INITIAL_POSTS)
