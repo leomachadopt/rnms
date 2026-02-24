@@ -13,10 +13,11 @@ import Index from './pages/Index'
 import Sobre from './pages/Sobre'
 import LeonardoMachado from './pages/LeonardoMachado'
 import Formacao from './pages/Formacao'
+import ProgramaRNS from './pages/ProgramaRNS'
 import Problema from './pages/Problema'
 import Blog from './pages/Blog'
 import BlogPost from './pages/BlogPost'
-import Avaliacao from './pages/Avaliacao'
+import AgentRNS from './pages/AgentRNS'
 import Agente from './pages/Agente'
 import Agendamento from './pages/Agendamento'
 import Login from './pages/Login'
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
         element: <Formacao />,
       },
       {
+        path: '/programa-rns',
+        element: <ProgramaRNS />,
+      },
+      {
         path: '/problema',
         element: <Problema />,
       },
@@ -64,8 +69,8 @@ const router = createBrowserRouter([
         element: <BlogPost />,
       },
       {
-        path: '/avaliacao',
-        element: <Avaliacao />,
+        path: '/agenterns',
+        element: <AgentRNS />,
       },
       {
         path: '/agente',
