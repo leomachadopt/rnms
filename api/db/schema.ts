@@ -79,5 +79,16 @@ export const trackingEvents = pgTable('tracking_events', {
   createdAt: timestamp('created_at').defaultNow().notNull(),
 })
 
+// Tabela de Avaliações/Diagnósticos (conversas do chat diagnóstico)
+export const evaluations = pgTable('evaluations', {
+  id: serial('id').primaryKey(),
+  name: varchar('name', { length: 255 }).notNull(),
+  email: varchar('email', { length: 255 }).notNull(),
+  phone: varchar('phone', { length: 50 }),
+  analysisResult: jsonb('analysis_result'), // Conversa completa e dados extraídos
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+  updatedAt: timestamp('updated_at').defaultNow().notNull(),
+})
+
 
 

@@ -107,9 +107,9 @@ const Sobre = () => {
   ]
 
   return (
-    <div className="flex flex-col gap-12 pb-16">
+    <div className="flex flex-col gap-6 pb-12">
       {/* Hero Section */}
-      <section className="gradient-luxury text-white py-20 lg:py-28 relative overflow-hidden">
+      <section className="gradient-luxury text-white py-12 lg:py-16 relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(250,204,21,0.15),transparent_50%)]"></div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(0,0,0,0.5),transparent_60%)]"></div>
         <div className="absolute inset-0 pattern-dots opacity-20"></div>
@@ -147,10 +147,10 @@ const Sobre = () => {
       </section>
 
       {/* O que fazemos de diferente */}
-      <section className="section-premium container-premium">
+      <section className="section-premium container-premium py-8 lg:py-12">
         <div
           ref={differentialRef.elementRef}
-          className={`text-center mb-16 transition-all duration-1000 ${
+          className={`text-center mb-10 transition-all duration-1000 ${
             differentialRef.isVisible ? 'opacity-100' : 'opacity-0'
           }`}
         >
@@ -199,9 +199,9 @@ const Sobre = () => {
       </section>
 
       {/* Premissas do Método */}
-      <section className="section-premium gradient-subtle">
+      <section className="section-premium gradient-subtle py-8 lg:py-12">
         <div className="container-premium">
-          <div className="text-center mb-16 max-w-3xl mx-auto">
+          <div className="text-center mb-10 max-w-3xl mx-auto">
             <div className="inline-block mb-4 subheading-premium text-primary">
               Fundamentos
             </div>
@@ -237,10 +237,10 @@ const Sobre = () => {
       </section>
 
       {/* Os 4 Pilares do Método RNS */}
-      <section className="section-premium container-premium">
+      <section className="section-premium container-premium py-8 lg:py-12">
         <div
           ref={methodRef.elementRef}
-          className={`text-center mb-16 transition-all duration-1000 ${
+          className={`text-center mb-10 transition-all duration-1000 ${
             methodRef.isVisible ? 'opacity-100' : 'opacity-0'
           }`}
         >
@@ -286,14 +286,14 @@ const Sobre = () => {
       </section>
 
       {/* Nossa Promessa + 3 Pilares */}
-      <section className="section-premium container-premium">
+      <section className="section-premium container-premium py-8 lg:py-12">
         <div
           ref={promiseRef.elementRef}
-          className={`glass-premium border-gradient rounded-[3rem] p-10 lg:p-16 shadow-premium transition-all duration-1000 ${
+          className={`glass-premium border-gradient rounded-[3rem] p-8 lg:p-12 shadow-premium transition-all duration-1000 ${
             promiseRef.isVisible ? 'opacity-100' : 'opacity-0'
           }`}
         >
-          <div className="text-center mb-16 max-w-3xl mx-auto">
+          <div className="text-center mb-10 max-w-3xl mx-auto">
             <div className="inline-block mb-4 subheading-premium text-primary">
               Nossa Promessa
             </div>
@@ -306,7 +306,7 @@ const Sobre = () => {
           </div>
 
           {/* 3 Pilares de Conteúdo */}
-          <div className="grid md:grid-cols-3 gap-8 lg:gap-10 max-w-5xl mx-auto mb-12">
+          <div className="grid md:grid-cols-3 gap-8 lg:gap-10 max-w-5xl mx-auto mb-8">
             {pillars.map((pillar, index) => {
               const Icon = pillar.icon
               return (
@@ -329,11 +329,11 @@ const Sobre = () => {
           </div>
 
           {/* CTAs */}
-          <div className="flex flex-wrap gap-4 justify-center mt-12">
+          <div className="flex flex-wrap gap-4 justify-center mt-8">
             <Button asChild size="lg" className="btn-gold text-lg px-10 py-7 hover-glow-gold">
-              <Link to="/avaliacao">
+              <Link to="/agenterns">
                 <Zap className="w-5 h-5 mr-2" />
-                Diagnóstico IA Gratuito
+                Fale Connosco
               </Link>
             </Button>
             <Button asChild size="lg" variant="outline" className="glass-premium border-2 border-primary/30 hover:bg-white hover:scale-105 transition-all text-lg px-10 py-7 font-semibold">
@@ -347,8 +347,8 @@ const Sobre = () => {
       </section>
 
       {/* CTA Final */}
-      <section className="container-premium">
-        <div className="gradient-navy-gold rounded-[3rem] p-12 lg:p-20 text-center text-white space-y-10 relative overflow-hidden shadow-premium hover-glow-gold">
+      <section className="container-premium py-6">
+        <div className="gradient-navy-gold rounded-[3rem] p-10 lg:p-14 text-center text-white space-y-8 relative overflow-hidden shadow-premium hover-glow-gold">
           <div className="absolute inset-0 pattern-dots opacity-20"></div>
 
           <div className="relative z-10">

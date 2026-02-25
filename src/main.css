@@ -393,7 +393,7 @@
 
   /* Section Premium Spacing */
   .section-premium {
-    @apply py-16 lg:py-20;
+    @apply py-12 lg:py-16;
   }
 
   .container-premium {

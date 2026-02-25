@@ -14,7 +14,7 @@ const ProgramaRNS = () => {
   const ctaRef = useScrollAnimation({ threshold: 0.2, triggerOnce: true })
 
   return (
-    <div className="flex flex-col gap-8 pb-16">
+    <div className="flex flex-col gap-4 pb-12">
       {/* Hero Section */}
       <section className="relative gradient-luxury pt-20 pb-16 lg:pt-28 lg:pb-24 overflow-hidden min-h-[calc(100vh-80px)] flex items-center z-10">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(250,204,21,0.15),transparent_50%)] z-0"></div>
@@ -327,8 +327,8 @@ const ProgramaRNS = () => {
                 size="lg"
                 className="rounded-full bg-white text-primary font-bold text-lg px-12 py-7 hover:bg-white/90 shadow-premium hover:shadow-2xl transition-all duration-300 hover:scale-105 hover-lift"
               >
-                <Link to="/agendamento" className="flex items-center">
-                  Solicitar Avaliação Estratégica da Clínica
+                <Link to="/programa-rns/qualificacao" className="flex items-center">
+                  Iniciar Conversa de Qualificação
                   <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </Button>

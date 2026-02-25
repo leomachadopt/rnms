@@ -41,10 +41,10 @@ const Index = () => {
               Método RNS
             </div>
             <h1 className="heading-premium text-4xl sm:text-5xl lg:text-6xl xl:text-7xl leading-[1.1] text-white mb-6">
-              Reorganize a sua forma de pensar <span className="text-gradient-gold">antes de reorganizar a sua forma de tratar</span>
+              Complexidade não exige mais técnica. <span className="text-gradient-gold">Exige raciocínio clínico integrado.</span>
             </h1>
             <p className="text-lg sm:text-xl text-white/90 max-w-xl leading-relaxed animate-fade-in-up animate-stagger-1 font-light">
-              O Método RNS é um modelo clínico-econômico baseado na oclusão que transforma diagnóstico fragmentado em estrutura integrada — gerando crescimento consistente e previsibilidade financeira.
+              O Método RNS organiza a interpretação sistêmica do corpo a partir da dinâmica adaptativa entre oclusão e função, promovendo segurança decisória fundamentada e maior previsibilidade clínica.
             </p>
             <div className={`flex flex-col sm:flex-row gap-4 sm:gap-5 pt-4 transition-all duration-1000 ${
               heroRef.isVisible 
@@ -67,7 +67,7 @@ const Index = () => {
                 size="lg"
                 className="rounded-xl text-base sm:text-lg px-8 sm:px-10 py-6 sm:py-7 border-2 border-white bg-white/95 text-foreground hover:bg-white hover:border-secondary hover:scale-105 transition-all duration-300 font-semibold relative z-20 shadow-lg"
               >
-                <Link to="/avaliacao">Diagnóstico IA Gratuito</Link>
+                <Link to="/agenterns">Fale Connosco</Link>
               </Button>
             </div>
           </div>

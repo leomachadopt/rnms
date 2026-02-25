@@ -80,9 +80,9 @@ const LeonardoMachado = () => {
   ]
 
   return (
-    <div className="flex flex-col gap-12 pb-16">
+    <div className="flex flex-col gap-6 pb-12">
       {/* Hero Section */}
-      <section className="gradient-luxury text-white py-20 lg:py-28 relative overflow-hidden">
+      <section className="gradient-luxury text-white py-12 lg:py-16 relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(250,204,21,0.15),transparent_50%)]"></div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(0,0,0,0.5),transparent_60%)]"></div>
         <div className="absolute inset-0 pattern-dots opacity-20"></div>
@@ -121,8 +121,8 @@ const LeonardoMachado = () => {
               variant="outline"
               className="glass-premium border-2 border-white/30 text-white hover:bg-white hover:text-primary hover:scale-105 transition-all text-lg px-10 py-7 font-semibold"
             >
-              <Link to="/avaliacao">
-                Diagnóstico IA Gratuito
+              <Link to="/agenterns">
+                Fale Connosco
               </Link>
             </Button>
           </div>
@@ -130,10 +130,10 @@ const LeonardoMachado = () => {
       </section>
 
       {/* Identidade Profissional */}
-      <section className="section-premium container-premium">
+      <section className="section-premium container-premium py-8 lg:py-12">
         <div
           ref={identityRef.elementRef}
-          className={`text-center mb-16 transition-all duration-1000 ${
+          className={`text-center mb-10 transition-all duration-1000 ${
             identityRef.isVisible ? 'opacity-100' : 'opacity-0'
           }`}
         >
@@ -180,10 +180,10 @@ const LeonardoMachado = () => {
       </section>
 
       {/* A Lacuna que Ocupa */}
-      <section className="section-premium gradient-subtle">
+      <section className="section-premium gradient-subtle py-8 lg:py-12">
         <div className="container-premium">
           <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-12">
+            <div className="text-center mb-10">
               <div className="inline-block mb-4 subheading-premium text-primary">
                 Contexto
               </div>
@@ -192,7 +192,7 @@ const LeonardoMachado = () => {
               </h2>
             </div>
 
-            <div className="glass-premium border-gradient rounded-[2rem] p-10 lg:p-12 shadow-premium">
+            <div className="glass-premium border-gradient rounded-[2rem] p-8 lg:p-10 shadow-premium">
               <p className="text-premium text-lg leading-relaxed mb-6">
                 No panorama atual da ortodontia e da oclusão, existe uma abundância de técnicas,
                 cursos e abordagens fragmentadas. No entanto, permanece uma <strong className="text-primary">lacuna significativa
@@ -232,10 +232,10 @@ const LeonardoMachado = () => {
       </section>
 
       {/* Diferenciais Estratégicos */}
-      <section className="section-premium container-premium">
+      <section className="section-premium container-premium py-8 lg:py-12">
         <div
           ref={differentialsRef.elementRef}
-          className={`text-center mb-16 transition-all duration-1000 ${
+          className={`text-center mb-10 transition-all duration-1000 ${
             differentialsRef.isVisible ? 'opacity-100' : 'opacity-0'
           }`}
         >
@@ -277,10 +277,10 @@ const LeonardoMachado = () => {
       </section>
 
       {/* Portfólio */}
-      <section className="section-premium container-premium gradient-subtle">
+      <section className="section-premium container-premium gradient-subtle py-8 lg:py-12">
         <div
           ref={portfolioRef.elementRef}
-          className={`text-center mb-16 transition-all duration-1000 ${
+          className={`text-center mb-10 transition-all duration-1000 ${
             portfolioRef.isVisible ? 'opacity-100' : 'opacity-0'
           }`}
         >
@@ -330,8 +330,8 @@ const LeonardoMachado = () => {
       </section>
 
       {/* CTA Final */}
-      <section className="container-premium">
-        <div className="gradient-navy-gold rounded-[3rem] p-12 lg:p-20 text-center text-white space-y-10 relative overflow-hidden shadow-premium hover-glow-gold">
+      <section className="container-premium py-6">
+        <div className="gradient-navy-gold rounded-[3rem] p-10 lg:p-14 text-center text-white space-y-8 relative overflow-hidden shadow-premium hover-glow-gold">
           <div className="absolute inset-0 pattern-dots opacity-20"></div>
 
           <div className="relative z-10">

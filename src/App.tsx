@@ -14,6 +14,7 @@ import Sobre from './pages/Sobre'
 import LeonardoMachado from './pages/LeonardoMachado'
 import Formacao from './pages/Formacao'
 import ProgramaRNS from './pages/ProgramaRNS'
+import ProgramaRNSQualificacao from './pages/ProgramaRNSQualificacao'
 import Problema from './pages/Problema'
 import Blog from './pages/Blog'
 import BlogPost from './pages/BlogPost'
@@ -55,6 +56,10 @@ const router = createBrowserRouter([
       {
         path: '/programa-rns',
         element: <ProgramaRNS />,
+      },
+      {
+        path: '/programa-rns/qualificacao',
+        element: <ProgramaRNSQualificacao />,
       },
       {
         path: '/problema',

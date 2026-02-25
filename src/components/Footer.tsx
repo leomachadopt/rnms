@@ -157,8 +157,8 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-white/10 mt-12 pt-8 text-center text-sm text-white">
-          <p className="font-light">
+        <div className="border-t border-white/10 mt-12 pt-8 text-center text-sm" style={{ color: '#ffffff' }}>
+          <p className="font-light" style={{ color: '#ffffff' }}>
             © 2026 Método RNS — Leonardo Machado. Todos os direitos reservados.
           </p>
         </div>

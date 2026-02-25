@@ -5,20 +5,20 @@ import { cn } from '@/lib/utils'
 export function FloatingCTA() {
   const location = useLocation()
 
-  // Don't show on the evaluation page itself
-  if (location.pathname === '/avaliacao') return null
+  // Don't show on the agent page itself
+  if (location.pathname === '/agenterns') return null
 
   return (
     <Link
-      to="/avaliacao"
+      to="/agenterns"
       className={cn(
         'fixed bottom-4 right-4 z-50 flex items-center gap-2 bg-primary text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 animate-bounce-slow hover-lift group',
         'py-3 px-6 min-w-[60px] h-[60px] md:h-auto animate-glow',
       )}
-      aria-label="Diagnóstico IA"
+      aria-label="Fale Connosco"
     >
       <MessageCircle className="w-6 h-6 group-hover:rotate-12 transition-transform duration-300" />
-      <span className="font-semibold hidden md:inline">Diagnóstico IA</span>
+      <span className="font-semibold hidden md:inline">Fale Connosco</span>
     </Link>
   )
 }

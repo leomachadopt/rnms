@@ -1,7 +1,7 @@
 import OpenAI from 'openai'
 import type { VercelRequest, VercelResponse } from '@vercel/node'
 import { db } from './db/client.js'
-import { evaluations, settings } from './db/schema.js'
+import { settings } from './db/schema.js'
 import { eq } from 'drizzle-orm'
 
 const SYSTEM_PROMPT_FALLBACK = `És o consultor de diagnóstico clínico e empresarial do **Método RNS (Reequilíbrio Neuro-Oclusal Sistémico)**, criado pelo Dr. Leonardo Machado.
@@ -313,35 +313,28 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     const reply = completion.choices[0]?.message?.content ?? ''
 
-    // Salvar conversa completa no banco de dados
-    try {
-      const database = db()
-      const fullConversation = [
-        ...messages,
-        { role: 'assistant', content: reply },
-      ]
-
-      // Extrair informações da conversa para campos estruturados
-      const userName =
-        messages.find((m) => m.role === 'user')?.content || 'Anónimo'
-      const conversationText = fullConversation
-        .map((m) => `${m.role}: ${m.content}`)
-        .join('\n\n')
-
-      await database.insert(evaluations).values({
-        name: userName.substring(0, 255),
-        email: 'diagnostico@rnos.pt',
-        phone: 'N/A',
-        analysisResult: {
-          messages: fullConversation,
-          timestamp: new Date().toISOString(),
-          conversationLength: fullConversation.length,
-        },
-      })
-    } catch (dbError) {
-      console.error('Erro ao salvar conversa no banco:', dbError)
-      // Não falha a resposta por erro no banco
-    }
+    // TODO: Salvar conversa completa no banco de dados
+    // Por enquanto desabilitado até ajustar schema da tabela evaluations
+    // try {
+    //   const database = db()
+    //   const fullConversation = [
+    //     ...messages,
+    //     { role: 'assistant', content: reply },
+    //   ]
+    //
+    //   await database.insert(evaluations).values({
+    //     name: messages.find((m) => m.role === 'user')?.content?.substring(0, 255) || 'Anónimo',
+    //     email: 'diagnostico@rnos.pt',
+    //     phone: 'N/A',
+    //     analysisResult: {
+    //       messages: fullConversation,
+    //       timestamp: new Date().toISOString(),
+    //       conversationLength: fullConversation.length,
+    //     },
+    //   })
+    // } catch (dbError) {
+    //   console.error('Erro ao salvar conversa no banco:', dbError)
+    // }
 
     return res.status(200).json({ reply })
   } catch (error: any) {

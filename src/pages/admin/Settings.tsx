@@ -46,7 +46,7 @@ export default function Settings() {
         saveSetting(
           'diagnostic_chat_prompt',
           diagnosticPrompt,
-          'System prompt para o chat de diagnóstico clínico/empresarial (página /avaliacao)'
+          'System prompt para o agente de qualificação RNS (página /agenterns)'
         ),
         saveSetting(
           'strategic_agent_prompt',
@@ -116,12 +116,12 @@ export default function Settings() {
           <div>
             <h2 className="text-lg font-semibold text-foreground flex items-center gap-2">
               <MessageSquare className="w-5 h-5 text-primary" />
-              Chat de Diagnóstico Clínico/Empresarial
+              Agente de Qualificação RNS
             </h2>
             <p className="text-sm text-muted-foreground mt-1">
-              Este prompt é utilizado na página <strong>/avaliacao</strong> para conduzir
-              um diagnóstico estruturado em 6-8 trocas, culminando num relatório completo
-              com recomendação de serviço RNS.
+              Este prompt é utilizado na página <strong>/agenterns</strong> para qualificar
+              o interesse do prospect (Formação ou Programa RNS) e conduzir uma entrevista
+              de aplicação estruturada.
             </p>
           </div>
 
@@ -267,7 +267,7 @@ export default function Settings() {
         </h3>
         <ul className="text-sm text-blue-800 space-y-1 list-disc list-inside">
           <li>
-            <strong>Teste sempre após alterar:</strong> abra as páginas /avaliacao e /agente para verificar comportamento real
+            <strong>Teste sempre após alterar:</strong> abra as páginas /agenterns e /agente para verificar comportamento real
           </li>
           <li>
             <strong>Preserve a estrutura:</strong> os prompts atuais foram calibrados para gerar alta conversão — alterações devem ser incrementais
