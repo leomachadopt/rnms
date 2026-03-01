@@ -118,16 +118,11 @@ const LeonardoMachado = () => {
               {/* Coluna de Texto */}
               <div className="space-y-8 text-lg lg:text-xl leading-relaxed text-foreground/90 lg:order-2 order-1">
                 <p>
-                  Desde 2003 trabalho em contexto clínico colaborativo com médicos dentistas.
+                  Desde 2003 trabalho em contexto clínico colaborativo com médicos dentistas, acompanhando de perto a realidade prática da integração terapêutica. Ao longo desse percurso tornou-se evidente a necessidade de estruturar aquilo que, em muitas clínicas, permanecia apenas intuitivo. Em 2011 comecei a sistematizar o eixo central do meu trabalho: <strong>tornar mensurável e operacional a integração entre oclusão e sistema corporal.</strong>
                 </p>
 
                 <p>
-                  Em 2011 comecei a sistematizar aquilo que se tornaria o eixo do meu trabalho: <strong>tornar mensurável e operacional a integração entre oclusão e sistema corporal.</strong>
-                </p>
-
-                <p>
-                  Entre 2016 e 2021 formei profissionais numa metodologia integrativa própria.<br />
-                  A partir de 2021, o foco evoluiu para <strong className="text-primary">implementação estrutural em clínica</strong>.
+                  Entre 2016 e 2021 esse pensamento foi consolidado através da formação de profissionais numa metodologia integrativa própria. A partir de 2021, o foco evoluiu para <strong className="text-primary">implementação estrutural em clínica</strong>, organizando decisão, equipa e coerência institucional.
                 </p>
 
                 <div className="glass-premium border-l-4 border-l-secondary p-8 lg:p-10 rounded-xl shadow-premium mt-10">
