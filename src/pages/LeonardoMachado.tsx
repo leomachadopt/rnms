@@ -244,16 +244,6 @@ const LeonardoMachado = () => {
           <div className="absolute inset-0 pattern-dots opacity-20"></div>
 
           <div className="relative z-10 max-w-3xl mx-auto">
-            <p className="text-2xl lg:text-3xl mb-8 text-white/90 leading-relaxed font-light">
-              O Programa RNS é aplicado de forma <strong className="text-white">criteriosamente selectiva</strong>.
-            </p>
-
-            <div className="bg-white/10 backdrop-blur-sm border border-white/30 rounded-2xl p-8 mb-10">
-              <p className="text-xl lg:text-2xl font-semibold mb-4">
-                Neste momento é possível integrar apenas <span className="text-gradient-gold">2 clínicas adicionais</span>.
-              </p>
-            </div>
-
             <Button
               asChild
               size="lg"
