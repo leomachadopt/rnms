@@ -121,8 +121,8 @@ const LeonardoMachado = () => {
               variant="outline"
               className="glass-premium border-2 border-white/30 text-white hover:bg-white hover:text-primary hover:scale-105 transition-all text-lg px-10 py-7 font-semibold"
             >
-              <Link to="/agenterns">
-                Fale Connosco
+              <Link to="/elegibilidade">
+                Avaliar Elegibilidade
               </Link>
             </Button>
           </div>

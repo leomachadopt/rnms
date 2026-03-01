@@ -331,9 +331,9 @@ const Sobre = () => {
           {/* CTAs */}
           <div className="flex flex-wrap gap-4 justify-center mt-8">
             <Button asChild size="lg" className="btn-gold text-lg px-10 py-7 hover-glow-gold">
-              <Link to="/agenterns">
+              <Link to="/elegibilidade">
                 <Zap className="w-5 h-5 mr-2" />
-                Fale Connosco
+                Avaliar Elegibilidade
               </Link>
             </Button>
             <Button asChild size="lg" variant="outline" className="glass-premium border-2 border-primary/30 hover:bg-white hover:scale-105 transition-all text-lg px-10 py-7 font-semibold">
