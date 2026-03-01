@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom'
 import { Toaster } from '@/components/ui/toaster'
 import { Toaster as Sonner } from '@/components/ui/sonner'
 import { TooltipProvider } from '@/components/ui/tooltip'
@@ -10,11 +10,11 @@ import { CookieConsent } from '@/components/CookieConsent'
 import Layout from './components/Layout'
 import AdminLayout from './components/AdminLayout'
 import Index from './pages/Index'
-import Sobre from './pages/Sobre'
 import LeonardoMachado from './pages/LeonardoMachado'
 import Formacao from './pages/Formacao'
 import ProgramaRNS from './pages/ProgramaRNS'
 import ProgramaRNSQualificacao from './pages/ProgramaRNSQualificacao'
+import Elegibilidade from './pages/Elegibilidade'
 import Problema from './pages/Problema'
 import Blog from './pages/Blog'
 import BlogPost from './pages/BlogPost'
@@ -32,6 +32,7 @@ import PostForm from './pages/admin/blog/PostForm'
 import TestimonialList from './pages/admin/testimonials/TestimonialList'
 import TestimonialForm from './pages/admin/testimonials/TestimonialForm'
 import Settings from './pages/admin/Settings'
+import Conversations from './pages/admin/Conversations'
 
 const router = createBrowserRouter([
   {
@@ -43,7 +44,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/sobre',
-        element: <Sobre />,
+        element: <Navigate to="/" replace />,
       },
       {
         path: '/leonardo',
@@ -60,6 +61,10 @@ const router = createBrowserRouter([
       {
         path: '/programa-rns/qualificacao',
         element: <ProgramaRNSQualificacao />,
+      },
+      {
+        path: '/elegibilidade',
+        element: <Elegibilidade />,
       },
       {
         path: '/problema',
@@ -126,6 +131,10 @@ const router = createBrowserRouter([
       {
         path: 'testimonials/:id/edit',
         element: <TestimonialForm />,
+      },
+      {
+        path: 'conversations',
+        element: <Conversations />,
       },
       {
         path: 'settings',
