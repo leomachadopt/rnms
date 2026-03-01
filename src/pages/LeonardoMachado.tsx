@@ -181,26 +181,6 @@ const LeonardoMachado = () => {
             </div>
           </div>
 
-          {/* Enquadramento */}
-          <div className="max-w-4xl mx-auto mt-16 pt-12 border-t-2 border-border">
-            <div className="glass-premium rounded-2xl p-10 lg:p-12 shadow-premium">
-              <h3 className="text-2xl lg:text-3xl font-semibold text-primary mb-8 text-center">
-                Enquadramento
-              </h3>
-              <div className="space-y-6 text-lg lg:text-xl leading-relaxed text-foreground/90">
-                <p>
-                  A minha formação de base é em Fisioterapia.
-                </p>
-                <p>
-                  A integração com Medicina Dentária não nasceu de tendência ou discurso teórico, mas de <strong>prática clínica colaborativa contínua</strong> ao longo do meu percurso profissional.
-                </p>
-                <p className="text-center text-xl font-light italic text-foreground/80 mt-8 pt-8 border-t border-border">
-                  O Programa RNS não é um produto académico.<br />
-                  <strong className="text-gradient-gold text-2xl not-italic">É uma arquitetura construída a partir de prática real.</strong>
-                </p>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 
