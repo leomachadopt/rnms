@@ -97,7 +97,7 @@ const LeonardoMachado = () => {
             }`}
           >
             <h2 className="heading-premium text-4xl lg:text-5xl mb-16 text-center">
-              A Integração
+              A Trajetória
             </h2>
 
             <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center max-w-6xl mx-auto">
@@ -118,11 +118,15 @@ const LeonardoMachado = () => {
               {/* Coluna de Texto */}
               <div className="space-y-8 text-lg lg:text-xl leading-relaxed text-foreground/90 lg:order-2 order-1">
                 <p>
-                  Desde 2003 trabalho em contexto clínico colaborativo com médicos dentistas, acompanhando de perto a realidade prática da integração terapêutica. Ao longo desse percurso tornou-se evidente a necessidade de estruturar aquilo que, em muitas clínicas, permanecia apenas intuitivo. Em 2011 comecei a sistematizar o eixo central do meu trabalho: <strong>tornar mensurável e operacional a integração entre oclusão e sistema corporal.</strong>
+                  Desde 2003 desenvolvo a minha atividade em contexto clínico colaborativo com médicos dentistas, acompanhando de perto a realidade prática da integração terapêutica. Ao longo desse percurso tornou-se evidente a necessidade de estruturar aquilo que, em muitas clínicas, permanecia apenas intuitivo. Em 2011 comecei a sistematizar o eixo central do meu trabalho: <strong>tornar mensurável e operacional a integração entre oclusão e sistema corporal.</strong>
                 </p>
 
                 <p>
-                  Entre 2016 e 2021 esse pensamento foi consolidado através da formação de profissionais numa metodologia integrativa própria. A partir de 2021, o foco evoluiu para <strong className="text-primary">implementação estrutural em clínicas</strong>, organizando decisão, equipa e coerência clínica-comercial.
+                  A minha formação de base é em Fisioterapia, com especialização como Esperto em Posturologia pela Accademia di Posturologia ed Ortopedia Funzionale (Itália). Esta base técnica, aliada à prática interdisciplinar contínua, sustentou o desenvolvimento de uma metodologia integrativa própria, consolidada entre 2016 e 2021 através da formação de profissionais em Portugal, Espanha, França e Brasil.
+                </p>
+
+                <p>
+                  A partir de 2021, o foco evoluiu para <strong className="text-primary">implementação estrutural em clínicas</strong>, organizando decisão, equipa e coerência clínica-comercial. O Programa RNS não é um produto académico: <strong>é uma arquitetura construída a partir de prática real</strong>, aplicada em contexto clínico e institucional.
                 </p>
 
                 <div className="glass-premium border-l-4 border-l-secondary p-8 lg:p-10 rounded-xl shadow-premium mt-10">
