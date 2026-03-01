@@ -25,8 +25,7 @@ export function Header() {
   }, [])
 
   const navLinks = [
-    { name: 'Método RNS', path: '/sobre' },
-    { name: 'Imersão RNS', path: '/formacao' },
+    { name: 'Formação RNS', path: '/formacao' },
     { name: 'Programa RNS', path: '/programa-rns' },
     { name: 'O Fundador', path: '/leonardo' },
     { name: 'Publicações', path: '/blog' },

@@ -90,5 +90,68 @@ export const evaluations = pgTable('evaluations', {
   updatedAt: timestamp('updated_at').defaultNow().notNull(),
 })
 
+// Tabela de Conversas com o Agente
+export const agentConversations = pgTable('agent_conversations', {
+  id: serial('id').primaryKey(),
+  sessionId: varchar('session_id', { length: 255 }).notNull().unique(), // UUID da sessão
+  chatType: varchar('chat_type', { length: 50 }).notNull(), // 'diagnostic' | 'programa_rns'
+  userEmail: varchar('user_email', { length: 255 }), // Email fornecido pelo utilizador (se disponível)
+  userName: varchar('user_name', { length: 255 }), // Nome fornecido pelo utilizador (se disponível)
+  // Informações do utilizador
+  userFingerprint: varchar('user_fingerprint', { length: 255 }), // Hash único do visitante
+  ipAddress: varchar('ip_address', { length: 45 }),
+  userAgent: text('user_agent'),
+  // Dados da conversa
+  messages: jsonb('messages').notNull(), // Array de mensagens [{role, content, timestamp}]
+  metadata: jsonb('metadata'), // Informações extraídas da conversa (perfil, dores, etc)
+  status: varchar('status', { length: 50 }).default('active'), // 'active' | 'completed' | 'abandoned'
+  // Timestamps
+  startedAt: timestamp('started_at').defaultNow().notNull(),
+  lastMessageAt: timestamp('last_message_at').defaultNow().notNull(),
+  completedAt: timestamp('completed_at'),
+})
+
+export type BlogPost = typeof blogPosts.$inferSelect
+export type NewBlogPost = typeof blogPosts.$inferInsert
+export type Testimonial = typeof testimonials.$inferSelect
+export type NewTestimonial = typeof testimonials.$inferInsert
+export type Setting = typeof settings.$inferSelect
+export type NewSetting = typeof settings.$inferInsert
+export type User = typeof users.$inferSelect
+export type NewUser = typeof users.$inferInsert
+export type TrackingEvent = typeof trackingEvents.$inferSelect
+export type NewTrackingEvent = typeof trackingEvents.$inferInsert
+export type Evaluation = typeof evaluations.$inferSelect
+export type NewEvaluation = typeof evaluations.$inferInsert
+export type AgentConversation = typeof agentConversations.$inferSelect
+export type NewAgentConversation = typeof agentConversations.$inferInsert
+
+// Tabela de Aplicações (Formulário Pré-Call)
+export const applications = pgTable('applications', {
+  id: serial('id').primaryKey(),
+  // Dados do utilizador
+  name: varchar('name', { length: 255 }).notNull(),
+  email: varchar('email', { length: 255 }).notNull(),
+  whatsapp: varchar('whatsapp', { length: 50 }).notNull(),
+  // Respostas do formulário
+  monthlyRevenue: varchar('monthly_revenue', { length: 100 }).notNull(), // Faturamento mensal ortodôntico
+  readyToInvest: varchar('ready_to_invest', { length: 10 }).notNull(), // 'Sim' | 'Não'
+  mainGoal: text('main_goal'), // Objectivo principal (texto livre)
+  biggestChallenge: text('biggest_challenge'), // Maior desafio (texto livre)
+  whyNow: text('why_now'), // Por que agora? (texto livre)
+  // Metadata
+  metadata: jsonb('metadata'), // Informações adicionais (source, utm, etc)
+  ipAddress: varchar('ip_address', { length: 45 }),
+  userAgent: text('user_agent'),
+  // Status do processo
+  status: varchar('status', { length: 50 }).default('submitted'), // 'submitted' | 'interview_scheduled' | 'approved' | 'rejected'
+  // Timestamps
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+  updatedAt: timestamp('updated_at').defaultNow().notNull(),
+})
+
+export type Application = typeof applications.$inferSelect
+export type NewApplication = typeof applications.$inferInsert
+
 
 

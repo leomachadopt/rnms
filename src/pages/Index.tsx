@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
-import { ArrowRight, AlertTriangle, Star } from 'lucide-react'
+import { ArrowRight, AlertTriangle, Star, Brain, Wind, Users, Target, Shield, TrendingUp, Sparkles, Layers, ScanEye, Puzzle, CheckCircle2, GraduationCap, Lightbulb, MessageCircle } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent } from '@/components/ui/card'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
 import useAppStore from '@/stores/useAppStore'
 import { useScrollAnimation } from '@/hooks/use-scroll-animation'
@@ -9,8 +9,12 @@ import { useScrollAnimation } from '@/hooks/use-scroll-animation'
 const Index = () => {
   const { testimonials } = useAppStore()
   const heroRef = useScrollAnimation({ threshold: 0.2, triggerOnce: true })
+  const problemRef = useScrollAnimation({ threshold: 0.2, triggerOnce: true })
   const whatIsRef = useScrollAnimation({ threshold: 0.2, triggerOnce: true })
-  const impactsRef = useScrollAnimation({ threshold: 0.1, triggerOnce: true })
+  const premisesRef = useScrollAnimation({ threshold: 0.2, triggerOnce: true })
+  const methodRef = useScrollAnimation({ threshold: 0.1, triggerOnce: true })
+  const pillarsRef = useScrollAnimation({ threshold: 0.1, triggerOnce: true })
+  const ecosystemRef = useScrollAnimation({ threshold: 0.1, triggerOnce: true })
   const testimonialsRef = useScrollAnimation({ threshold: 0.1, triggerOnce: true })
   const ctaRef = useScrollAnimation({ threshold: 0.2, triggerOnce: true })
 
@@ -19,8 +23,107 @@ const Index = () => {
     ? testimonials.filter(t => t.featured).slice(0, 3)
     : testimonials.slice(0, 3)
 
+  const truths = [
+    { icon: Layers, text: 'A oclusão é manifestação de um sistema adaptativo complexo' },
+    { icon: Brain, text: 'O sistema neuromuscular organiza e influencia a estabilidade oclusal' },
+    { icon: Wind, text: 'Postura, respiração e função lingual são inseparáveis da organização oclusal' },
+    { icon: ScanEye, text: 'Leitura isolada da oclusão conduz a decisões clínicas incompletas' },
+    { icon: Puzzle, text: 'Instabilidade e recidivas resultam da fragmentação diagnóstica' },
+    { icon: TrendingUp, text: 'Raciocínio sistêmico aumenta previsibilidade e reduz instabilidade clínica' }
+  ]
+
+  const methodology = [
+    {
+      step: '1',
+      title: 'Leitura Sistêmica',
+      description: 'Reconhecimento de interferências sistêmicas e correlação entre sinais clínicos que habitualmente são negligenciados ou vistos de forma isolada.',
+      icon: Target,
+    },
+    {
+      step: '2',
+      title: 'Integração de Variáveis',
+      description: 'Sistema neuromuscular, postura, função lingual, respiração, visão, sono e crescimento integrados numa só análise clínica.',
+      icon: Shield,
+    },
+    {
+      step: '3',
+      title: 'Priorização Terapêutica',
+      description: 'Critérios claros para priorizar intervenções e conduzir tratamentos com maior coerência e segurança clínica.',
+      icon: TrendingUp,
+    },
+    {
+      step: '4',
+      title: 'Previsibilidade Sustentada',
+      description: 'Redução de instabilidade e recidivas através da compreensão das bases adaptativas e sistêmicas da má oclusão.',
+      icon: Sparkles,
+    },
+  ]
+
+  const pillars = [
+    {
+      icon: Brain,
+      title: 'Sistema Nervoso',
+      description: 'Organização neuromuscular e adaptação funcional como base da compreensão oclusal.',
+    },
+    {
+      icon: Wind,
+      title: 'Função & Postura',
+      description: 'Respiração, função lingual e organização postural integradas à leitura da má oclusão.',
+    },
+    {
+      icon: Users,
+      title: 'Oclusão Sistémica',
+      description: 'Má oclusão como expressão de um sistema adaptativo, não como problema isolado.',
+    },
+  ]
+
+  const services = [
+    {
+      icon: GraduationCap,
+      title: 'Formação Presencial Certificada',
+      highlight: 'Produto Estruturante',
+      description: 'Formação intensiva de 4 dias para profissionais que desejam reorganizar o raciocínio clínico a partir da oclusão como eixo sistêmico e estrutural.',
+      features: [
+        'Modelo clínico-econômico estruturado',
+        'Leitura sistêmica aplicada',
+        'Arquitetura terapêutica integrada',
+        'Certificação oficial RNS',
+        'Acesso à Comunidade RNS',
+        'Base para crescimento previsível'
+      ]
+    },
+    {
+      icon: Users,
+      title: 'Comunidade RNS',
+      highlight: 'Programa de Continuidade',
+      description: 'Ambiente anual de aprofundamento clínico e consolidação estratégica para profissionais que desejam manter evolução, troca qualificada e atualização contínua.',
+      features: [
+        'Encontros periódicos exclusivos',
+        'Discussão estruturada de casos',
+        'Atualizações clínicas estratégicas',
+        'Networking qualificado',
+        'Direcionamento contínuo',
+        'Evolução com consistência'
+      ]
+    },
+    {
+      icon: Lightbulb,
+      title: 'Programa RNS — Implementação Clínica',
+      highlight: 'Programa Premium',
+      description: 'Transformação completa da arquitetura clínica e comercial da sua clínica ortodôntica através do Método RNS — para clínicas que procuram crescimento por diferenciação.',
+      features: [
+        'Estruturação clínica avançada',
+        'Estratégia comercial e precificação',
+        'Posicionamento e autoridade',
+        'Conversão de planos integrados',
+        'Crescimento sustentável',
+        'Acompanhamento individual'
+      ]
+    }
+  ]
+
   return (
-    <div className="flex flex-col gap-12 pb-16">
+    <div className="flex flex-col gap-6 pb-16">
       {/* Hero Section */}
       <section className="relative gradient-luxury pt-20 pb-16 lg:pt-28 lg:pb-24 overflow-hidden min-h-[calc(100vh-80px)] flex items-center z-10">
         {/* Premium Gradient Overlays */}
@@ -91,6 +194,26 @@ const Index = () => {
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent z-0"></div>
       </section>
 
+      {/* O Problema */}
+      <section className="section-premium container-premium">
+        <div
+          ref={problemRef.elementRef}
+          className={`text-center mb-10 transition-all duration-1000 ${
+            problemRef.isVisible ? 'opacity-100' : 'opacity-0'
+          }`}
+        >
+          <div className="inline-block mb-4 subheading-premium text-primary">
+            O Problema
+          </div>
+          <h2 className="heading-premium text-3xl lg:text-5xl mb-6">
+            Por que tantas clínicas continuam presas à instabilidade?
+          </h2>
+          <p className="text-premium text-lg max-w-3xl mx-auto">
+            Porque foram treinados para executar procedimentos, não para estruturar decisões — e quando o diagnóstico é fragmentado, o plano também é; quando o plano é fragmentado, o resultado depende do acaso. Recidivas não são apenas falhas técnicas, mas sintomas de uma estrutura clínica incompleta.
+          </p>
+        </div>
+      </section>
+
       {/* O que é Método RNS */}
       <section className="section-premium container-premium">
         <div
@@ -117,10 +240,10 @@ const Index = () => {
               />
             </div>
           </div>
-          <div 
+          <div
             className={`space-y-7 order-1 md:order-2 transition-all duration-1000 ${
-              whatIsRef.isVisible 
-                ? 'animate-fade-in-left opacity-100' 
+              whatIsRef.isVisible
+                ? 'animate-fade-in-left opacity-100'
                 : 'opacity-0 -translate-x-10'
             }`}
           >
@@ -155,86 +278,227 @@ const Index = () => {
                 </li>
               ))}
             </ul>
-            <Button
-              asChild
-              variant="link"
-              className="text-primary p-0 h-auto font-semibold text-lg hover:gap-3 transition-all group"
-            >
-              <Link to="/sobre" className="flex items-center gap-2">
-                Saiba mais sobre o Método{' '}
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </Button>
           </div>
         </div>
       </section>
 
-      {/* Diferenciais do Método RNS */}
-      <section className="section-premium relative gradient-subtle overflow-hidden">
-        <div className="absolute inset-0 pattern-dots opacity-30"></div>
-
-        <div
-          ref={impactsRef.elementRef}
-          className="container-premium relative z-10"
-        >
+      {/* Premissas do Método */}
+      <section className="section-premium gradient-subtle">
+        <div className="container-premium">
           <div
-            className={`text-center max-w-3xl mx-auto mb-20 transition-all duration-1000 ${
-              impactsRef.isVisible
-                ? 'animate-fade-in-up opacity-100'
-                : 'opacity-0 translate-y-10'
+            ref={premisesRef.elementRef}
+            className={`text-center mb-10 max-w-3xl mx-auto transition-all duration-1000 ${
+              premisesRef.isVisible ? 'opacity-100' : 'opacity-0'
             }`}
           >
             <div className="inline-block mb-4 subheading-premium text-primary">
-              Como funciona
+              Fundamentos
             </div>
-            <h2 className="heading-premium text-4xl lg:text-5xl mb-6">
-              Os 3 pilares do Método RNS
+            <h2 className="heading-premium text-3xl lg:text-4xl mb-4">
+              Premissas do Método RNS<br />
+              <span className="text-gradient-gold">(que reorganizam a compreensão clínica)</span>
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {truths.map((truth, index) => {
+              const Icon = truth.icon
+              return (
+                <Card
+                  key={index}
+                  className={`glass-premium border-l-4 border-l-secondary hover:shadow-premium transition-all duration-1000 hover-lift ${
+                    premisesRef.isVisible
+                      ? 'opacity-100 translate-y-0'
+                      : 'opacity-0 translate-y-10'
+                  }`}
+                  style={{ transitionDelay: `${index * 100}ms` }}
+                >
+                  <CardContent className="p-6">
+                    <div className="flex items-start gap-4">
+                      <div className="flex-shrink-0 w-10 h-10 rounded-full gradient-navy-gold flex items-center justify-center mt-1 shadow-gold">
+                        <Icon className="w-5 h-5 text-white" />
+                      </div>
+                      <p className="font-medium text-foreground leading-relaxed">
+                        {truth.text}
+                      </p>
+                    </div>
+                  </CardContent>
+                </Card>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Os 4 Pilares do Método RNS */}
+      <section className="section-premium container-premium">
+        <div
+          ref={methodRef.elementRef}
+          className={`text-center mb-10 transition-all duration-1000 ${
+            methodRef.isVisible ? 'opacity-100' : 'opacity-0'
+          }`}
+        >
+          <div className="inline-block mb-4 subheading-premium text-primary">
+            Estrutura do Método
+          </div>
+          <h2 className="heading-premium text-3xl lg:text-5xl mb-6">
+            Os 4 Pilares do Método RNS
+          </h2>
+          <p className="text-premium text-lg max-w-3xl mx-auto">
+            Da leitura sistémica à previsibilidade clínica sustentada.
+          </p>
+        </div>
+
+        <div className="grid lg:grid-cols-4 gap-6 lg:gap-8 max-w-6xl mx-auto">
+          {methodology.map((phase, index) => {
+            const Icon = phase.icon
+            return (
+              <Card
+                key={index}
+                className={`card-premium relative overflow-hidden hover-lift transition-all duration-1000 ${
+                  methodRef.isVisible
+                    ? 'opacity-100 translate-y-0'
+                    : 'opacity-0 translate-y-10'
+                }`}
+                style={{ transitionDelay: `${index * 100}ms` }}
+              >
+                <CardContent className="p-8 relative">
+                  <div className="w-16 h-16 gradient-navy-gold rounded-2xl flex items-center justify-center mb-6 shadow-gold">
+                    <span className="text-3xl font-bold text-white">{phase.step}</span>
+                  </div>
+                  <Icon className="w-9 h-9 text-primary mb-4" />
+                  <h3 className="text-xl font-bold mb-3 text-foreground">{phase.title}</h3>
+                  <p className="text-premium text-base leading-relaxed">
+                    {phase.description}
+                  </p>
+                </CardContent>
+              </Card>
+            )
+          })}
+        </div>
+      </section>
+
+      {/* 3 Pilares de Conteúdo */}
+      <section className="section-premium gradient-subtle">
+        <div className="container-premium">
+          <div
+            ref={pillarsRef.elementRef}
+            className={`text-center mb-10 max-w-3xl mx-auto transition-all duration-1000 ${
+              pillarsRef.isVisible ? 'opacity-100' : 'opacity-0'
+            }`}
+          >
+            <div className="inline-block mb-4 subheading-premium text-primary">
+              Nossa Promessa
+            </div>
+            <h2 className="heading-premium text-3xl lg:text-5xl mb-6">
+              <span className="text-gradient-gold">Reorganizar a compreensão da má oclusão</span>
             </h2>
             <p className="text-premium text-xl leading-relaxed">
-              O RNS desenvolve uma sequência lógica de raciocínio clínico que transforma leitura em estrutura e estrutura em decisão consistente.
+              O Método RNS oferece aos profissionais um modelo estruturado de raciocínio clínico que integra múltiplas variáveis sistêmicas na condução de tratamentos mais coerentes, previsíveis e valorizados.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8 lg:gap-10">
-            {[
-              {
-                title: 'Leitura Sistêmica',
-                desc: 'Aprenda a ver oclusão, postura e função como um sistema integrado — não como áreas separadas. Reconheça padrões que a maioria dos clínicos não vê.',
-                icon: '👁️',
-              },
-              {
-                title: 'Antecipação Clínica',
-                desc: 'Desenvolva a capacidade de prever desdobramentos biomecânicos antes de intervir — reduza riscos, recidivas e instabilidade nos seus casos.',
-                icon: '⚡',
-              },
-              {
-                title: 'Decisão com Critério',
-                desc: 'Transforme a sua leitura e antecipação em decisões clínicas mais seguras, coerentes e valorizadas pelos seus pacientes.',
-                icon: '🎯',
-              },
-            ].map((item, idx) => (
-              <Card
-                key={idx}
-                className={`card-premium group hover-lift ${
-                  impactsRef.isVisible
-                    ? 'animate-scale-in opacity-100'
-                    : 'opacity-0 scale-95'
-                }`}
-                style={{
-                  animationDelay: `${idx * 150}ms`,
-                  transitionDelay: `${idx * 150}ms`
-                }}
-              >
-                <CardContent className="p-10 text-center space-y-5">
-                  <div className="text-6xl mb-6 transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 animate-float">{item.icon}</div>
-                  <h3 className="text-2xl font-bold text-foreground mb-4">
-                    {item.title}
-                  </h3>
-                  <p className="text-premium text-lg leading-relaxed">{item.desc}</p>
-                </CardContent>
-              </Card>
-            ))}
+          <div className="grid md:grid-cols-3 gap-8 lg:gap-10 max-w-5xl mx-auto">
+            {pillars.map((pillar, index) => {
+              const Icon = pillar.icon
+              return (
+                <Card
+                  key={index}
+                  className={`card-premium hover-lift transition-all duration-1000 ${
+                    pillarsRef.isVisible
+                      ? 'opacity-100 translate-y-0'
+                      : 'opacity-0 translate-y-10'
+                  }`}
+                  style={{ transitionDelay: `${index * 150}ms` }}
+                >
+                  <CardContent className="p-8 lg:p-10 text-center">
+                    <div className="w-16 h-16 gradient-navy-gold rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-gold">
+                      <Icon className="w-8 h-8 text-white" />
+                    </div>
+                    <h4 className="font-bold text-xl mb-4 text-foreground">{pillar.title}</h4>
+                    <p className="text-premium leading-relaxed">
+                      {pillar.description}
+                    </p>
+                  </CardContent>
+                </Card>
+              )
+            })}
           </div>
+        </div>
+      </section>
+
+      {/* Ecossistema RNS */}
+      <section className="section-premium container-premium">
+        <div
+          ref={ecosystemRef.elementRef}
+          className={`text-center mb-16 transition-all duration-1000 ${
+            ecosystemRef.isVisible ? 'opacity-100' : 'opacity-0'
+          }`}
+        >
+          <div className="inline-block mb-4 subheading-premium text-primary">
+            Portfólio Completo
+          </div>
+          <h2 className="heading-premium text-3xl lg:text-5xl mb-6">
+            Ecossistema RNS
+          </h2>
+          <p className="text-premium text-lg max-w-3xl mx-auto">
+            Do raciocínio clínico à diferenciação profissional. Soluções estruturadas
+            para cada fase do desenvolvimento clínico.
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10 max-w-6xl mx-auto">
+          {services.map((service, index) => {
+            const Icon = service.icon
+            return (
+            <Card
+              key={index}
+              className={`card-premium hover-lift group transition-all duration-1000 ${
+                ecosystemRef.isVisible
+                  ? 'opacity-100 translate-y-0'
+                  : 'opacity-0 translate-y-10'
+              }`}
+              style={{ transitionDelay: `${index * 150}ms` }}
+            >
+              <CardHeader>
+                <div className="flex items-start justify-between mb-4">
+                  <div className="w-16 h-16 gradient-navy-gold rounded-2xl flex items-center justify-center shadow-gold group-hover:scale-110 transition-transform duration-300">
+                    <Icon className="w-8 h-8 text-white" />
+                  </div>
+                  <div className="px-3 py-1 bg-secondary/10 text-secondary rounded-full text-xs font-semibold shadow-sm">
+                    {service.highlight}
+                  </div>
+                </div>
+                <CardTitle className="text-2xl font-bold text-foreground">{service.title}</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <p className="text-premium leading-relaxed">
+                  {service.description}
+                </p>
+                <div className="space-y-3 pt-4 border-t border-gradient-subtle">
+                  {service.features.map((feature, idx) => (
+                    <div key={idx} className="flex items-start gap-3">
+                      <div className="flex-shrink-0 w-5 h-5 rounded-full gradient-navy-gold flex items-center justify-center mt-0.5">
+                        <CheckCircle2 className="w-3 h-3 text-white" />
+                      </div>
+                      <span className="text-sm text-foreground font-medium">{feature}</span>
+                    </div>
+                  ))}
+                </div>
+                <div className="pt-4">
+                  <Button
+                    asChild
+                    className="btn-gold w-full hover-glow-gold"
+                  >
+                    <Link to={index === 2 ? "/programa-rns" : "/formacao"}>
+                      Saiba Mais
+                    </Link>
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          )
+          })}
         </div>
       </section>
 

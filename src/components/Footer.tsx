@@ -68,7 +68,6 @@ export function Footer() {
             <ul className="space-y-3">
               {[
                 { path: '/', label: 'Home' },
-                { path: '/sobre', label: 'Método RNS' },
                 { path: '/leonardo', label: 'Leonardo Machado' },
                 { path: '/formacao', label: 'Formação' },
                 { path: '/agenterns', label: 'Fale Connosco' },

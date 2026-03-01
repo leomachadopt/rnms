@@ -15,6 +15,7 @@ import Formacao from './pages/Formacao'
 import ProgramaRNS from './pages/ProgramaRNS'
 import ProgramaRNSQualificacao from './pages/ProgramaRNSQualificacao'
 import Elegibilidade from './pages/Elegibilidade'
+import Aplicacao from './pages/Aplicacao'
 import Problema from './pages/Problema'
 import Blog from './pages/Blog'
 import BlogPost from './pages/BlogPost'
@@ -65,6 +66,10 @@ const router = createBrowserRouter([
       {
         path: '/elegibilidade',
         element: <Elegibilidade />,
+      },
+      {
+        path: '/aplicacao',
+        element: <Aplicacao />,
       },
       {
         path: '/problema',

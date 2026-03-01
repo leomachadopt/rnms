@@ -1,23 +1,19 @@
 import { Link } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent } from '@/components/ui/card'
 import {
   CheckCircle2,
   Target,
   TrendingUp,
   Award,
   BookOpen,
-  MessageCircle,
-  GraduationCap,
-  Users,
-  Lightbulb
+  MessageCircle
 } from 'lucide-react'
 import { useScrollAnimation } from '@/hooks/use-scroll-animation'
 
 const Formacao = () => {
   const heroRef = useScrollAnimation({ threshold: 0.2, triggerOnce: true })
   const formationRef = useScrollAnimation({ threshold: 0.2, triggerOnce: true })
-  const servicesRef = useScrollAnimation({ threshold: 0.2, triggerOnce: true })
   const benefitsRef = useScrollAnimation({ threshold: 0.2, triggerOnce: true })
 
   const formationBenefits = [
@@ -27,51 +23,6 @@ const Formacao = () => {
     'Estruturar decisões clínicas com critérios claros',
     'Diferenciar prática profissional baseada em raciocínio',
     'Construir planos de tratamento mais coerentes e valorizados'
-  ]
-
-  const services = [
-    {
-      icon: GraduationCap,
-      title: 'Formação Presencial Certificada',
-      highlight: 'Produto Estruturante',
-      description: 'Formação intensiva de 4 dias para profissionais que desejam reorganizar o raciocínio clínico a partir da oclusão como eixo sistêmico e estrutural.',
-      features: [
-        'Modelo clínico-econômico estruturado',
-        'Leitura sistêmica aplicada',
-        'Arquitetura terapêutica integrada',
-        'Certificação oficial RNS',
-        'Acesso à Comunidade RNS',
-        'Base para crescimento previsível'
-      ]
-    },
-    {
-      icon: Users,
-      title: 'Comunidade RNS',
-      highlight: 'Programa de Continuidade',
-      description: 'Ambiente anual de aprofundamento clínico e consolidação estratégica para profissionais que desejam manter evolução, troca qualificada e atualização contínua.',
-      features: [
-        'Encontros periódicos exclusivos',
-        'Discussão estruturada de casos',
-        'Atualizações clínicas estratégicas',
-        'Networking qualificado',
-        'Direcionamento contínuo',
-        'Evolução com consistência'
-      ]
-    },
-    {
-      icon: Lightbulb,
-      title: 'Mentoria Clínica & Estratégica',
-      highlight: 'Programa Premium',
-      description: 'Acompanhamento personalizado para profissionais que desejam estruturar clínica, posicionamento e previsibilidade financeira em alto nível.',
-      features: [
-        'Estruturação clínica avançada',
-        'Estratégia comercial e precificação',
-        'Posicionamento e autoridade',
-        'Conversão de planos integrados',
-        'Crescimento sustentável',
-        'Acompanhamento individual'
-      ]
-    }
   ]
 
   const targetAudience = [
@@ -117,7 +68,7 @@ const Formacao = () => {
   ]
 
   return (
-    <div className="flex flex-col gap-12 pb-16">
+    <div className="flex flex-col gap-6 pb-16">
       {/* Hero Section */}
       <section className="relative gradient-luxury pt-20 pb-16 lg:pt-28 lg:pb-24 overflow-hidden min-h-[calc(100vh-80px)] flex items-center">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(250,204,21,0.15),transparent_50%)]"></div>
@@ -237,72 +188,6 @@ const Formacao = () => {
         </div>
       </section>
 
-      {/* Portfólio de Serviços */}
-      <section className="section-premium gradient-subtle">
-        <div className="container-premium">
-          <div
-            ref={servicesRef.elementRef}
-            className={`text-center mb-16 transition-all duration-1000 ${
-              servicesRef.isVisible ? 'opacity-100' : 'opacity-0'
-            }`}
-          >
-            <div className="inline-block mb-4 subheading-premium text-primary">
-              Portfólio Completo
-            </div>
-            <h2 className="heading-premium text-3xl lg:text-5xl mb-6">
-              Ecossistema RNS
-            </h2>
-            <p className="text-premium text-lg max-w-3xl mx-auto">
-              Do raciocínio clínico à diferenciação profissional. Soluções estruturadas
-              para cada fase do desenvolvimento clínico.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10 max-w-6xl mx-auto">
-            {services.map((service, index) => {
-              const Icon = service.icon
-              return (
-              <Card
-                key={index}
-                className={`card-premium hover-lift group transition-all duration-1000 ${
-                  servicesRef.isVisible
-                    ? 'opacity-100 translate-y-0'
-                    : 'opacity-0 translate-y-10'
-                }`}
-                style={{ transitionDelay: `${index * 150}ms` }}
-              >
-                <CardHeader>
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="w-16 h-16 gradient-navy-gold rounded-2xl flex items-center justify-center shadow-gold group-hover:scale-110 transition-transform duration-300">
-                      <Icon className="w-8 h-8 text-white" />
-                    </div>
-                    <div className="px-3 py-1 bg-secondary/10 text-secondary rounded-full text-xs font-semibold shadow-sm">
-                      {service.highlight}
-                    </div>
-                  </div>
-                  <CardTitle className="text-2xl font-bold text-foreground">{service.title}</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <p className="text-premium leading-relaxed">
-                    {service.description}
-                  </p>
-                  <div className="space-y-3 pt-4 border-t border-gradient-subtle">
-                    {service.features.map((feature, idx) => (
-                      <div key={idx} className="flex items-start gap-3">
-                        <div className="flex-shrink-0 w-5 h-5 rounded-full gradient-navy-gold flex items-center justify-center mt-0.5">
-                          <CheckCircle2 className="w-3 h-3 text-white" />
-                        </div>
-                        <span className="text-sm text-foreground font-medium">{feature}</span>
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            )
-            })}
-          </div>
-        </div>
-      </section>
 
       {/* Diferenciais */}
       <section className="section-premium container-premium">

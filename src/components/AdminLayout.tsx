@@ -10,6 +10,7 @@ import {
   ClipboardList,
   MessageSquare,
   Shield,
+  MessagesSquare,
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
@@ -32,6 +33,7 @@ export default function AdminLayout() {
     { name: 'Dashboard', path: '/admin', icon: LayoutDashboard },
     { name: 'Blog Posts', path: '/admin/blog', icon: FileText },
     { name: 'Depoimentos', path: '/admin/testimonials', icon: MessageSquare },
+    { name: 'Conversas Agente', path: '/admin/conversations', icon: MessagesSquare },
     { name: 'Configurações IA', path: '/admin/settings', icon: Settings },
     ...(isSuperAdmin ? [{ name: 'Usuários', path: '/admin/users', icon: Shield }] : []),
   ]

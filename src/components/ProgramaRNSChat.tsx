@@ -35,6 +35,9 @@ export function ProgramaRNSChat() {
   const scrollRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLTextAreaElement>(null)
 
+  // Session ID único para esta conversa
+  const [sessionId] = useState(() => `programa-rns-${Date.now()}-${Math.random().toString(36).substring(7)}`)
+
   // Auto-scroll to bottom
   useEffect(() => {
     if (scrollRef.current) {
@@ -90,21 +93,46 @@ export function ProgramaRNSChat() {
 
       const data = await response.json()
 
+      const assistantMsg: ChatMessage = {
+        id: Date.now().toString(),
+        role: 'assistant',
+        content: data.reply,
+      }
+
+      const updatedMessages = [...messages, userMsg, assistantMsg]
+
       setMessages((prev) => [
         ...prev,
-        {
-          id: Date.now().toString(),
-          role: 'assistant',
-          content: data.reply,
-        },
+        assistantMsg,
       ])
+
+      // Salvar conversa na base de dados
+      try {
+        await fetch('/api/save-conversation', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            sessionId,
+            chatType: 'programa_rns',
+            messages: updatedMessages.map((m) => ({
+              role: m.role,
+              content: m.content,
+              timestamp: m.id,
+            })),
+            status: 'active',
+          }),
+        })
+      } catch (saveError) {
+        console.error('Erro ao salvar conversa:', saveError)
+        // Não mostrar erro ao utilizador, apenas registrar no console
+      }
     } catch (error) {
       console.error('Erro ao enviar mensagem:', error)
       toast.error('Erro ao enviar mensagem. Tente novamente.')
     } finally {
       setIsLoading(false)
     }
-  }, [messages, isLoading])
+  }, [messages, isLoading, sessionId])
 
   const handleSend = () => {
     sendMessage(inputValue)

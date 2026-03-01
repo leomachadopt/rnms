@@ -52,6 +52,9 @@ export function ProfessionalDiagnosticChat() {
   const scrollRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLTextAreaElement>(null)
 
+  // Session ID único para esta conversa
+  const [sessionId] = useState(() => `diagnostic-${Date.now()}-${Math.random().toString(36).substring(7)}`)
+
   // Auto-scroll to bottom
   useEffect(() => {
     if (scrollRef.current) {
@@ -112,15 +115,37 @@ export function ProfessionalDiagnosticChat() {
         rawContent: data.reply,
         options,
       }
+      const updatedMessages = [...messages, userMsg, assistantMsg]
       setMessages((prev) => [...prev, assistantMsg])
       setOptionsUsed(false)
+
+      // Salvar conversa na base de dados
+      try {
+        await fetch('/api/save-conversation', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            sessionId,
+            chatType: 'diagnostic',
+            messages: updatedMessages.map((m) => ({
+              role: m.role,
+              content: m.content,
+              timestamp: m.id,
+            })),
+            status: 'active',
+          }),
+        })
+      } catch (saveError) {
+        console.error('Erro ao salvar conversa:', saveError)
+        // Não mostrar erro ao utilizador, apenas registrar no console
+      }
     } catch (error: any) {
       toast.error(error.message || 'Erro ao contactar o assistente. Tente novamente.')
     } finally {
       setIsLoading(false)
       setTimeout(() => inputRef.current?.focus(), 100)
     }
-  }, [messages, isLoading])
+  }, [messages, isLoading, sessionId])
 
   const handleSend = () => sendMessage(inputValue)
 

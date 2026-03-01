@@ -15,7 +15,7 @@ const Problema = () => {
   const sidebarRef = useScrollAnimation({ threshold: 0.2, triggerOnce: true })
 
   return (
-    <div className="flex flex-col gap-12 pb-16">
+    <div className="flex flex-col gap-6 pb-16">
       {/* Hero */}
       <section className="bg-blue-50 py-20">
         <div 
