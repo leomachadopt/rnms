@@ -70,7 +70,7 @@ export function Footer() {
                 { path: '/', label: 'Home' },
                 { path: '/leonardo', label: 'Leonardo Machado' },
                 { path: '/formacao', label: 'Formação' },
-                { path: '/agenterns', label: 'Fale Connosco' },
+                { path: '/programa-rns', label: 'Programa RNS' },
                 { path: '/blog', label: 'Blog' },
               ].map((link, idx) => (
                 <li
@@ -89,32 +89,32 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Services */}
+          {/* Soluções */}
           <div>
-            <h3 className="font-semibold text-white mb-4 text-base">Serviços</h3>
+            <h3 className="font-semibold text-white mb-4 text-base">Soluções</h3>
             <ul className="space-y-3">
               <li>
                 <Link
                   to="/formacao"
                   className="text-sm text-white/70 hover:text-secondary transition-all duration-300 hover:translate-x-1 inline-block font-medium"
                 >
-                  Formação Certificada
+                  Formação Presencial RNS
                 </Link>
               </li>
               <li>
                 <Link
-                  to="/consultoria"
+                  to="/programa-rns"
                   className="text-sm text-white/70 hover:text-secondary transition-all duration-300 hover:translate-x-1 inline-block font-medium"
                 >
-                  Consultoria Clínica
+                  Programa de Integração Clínica
                 </Link>
               </li>
               <li>
                 <Link
-                  to="/mentoria"
+                  to="/elegibilidade"
                   className="text-sm text-white/70 hover:text-secondary transition-all duration-300 hover:translate-x-1 inline-block font-medium"
                 >
-                  Mentoria Profissional
+                  Avaliar Elegibilidade
                 </Link>
               </li>
             </ul>
