@@ -34,6 +34,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const openai = new OpenAI({ apiKey })
 
     // Buscar prompt do banco de dados (opcional override)
+    // Precedência: DB (settings.eligibility_chat_prompt) > Arquivo (/prompts/eligibility-chat.md)
+    // Se DB estiver vazio ou indisponível, usa SYSTEM_PROMPT_FALLBACK do arquivo
     const database = db()
     let systemPrompt = SYSTEM_PROMPT_FALLBACK
 
