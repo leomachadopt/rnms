@@ -5,11 +5,7 @@ import { PRIMARY_CTA_ROUTE } from '@/config/routes'
 import {
   Brain,
   BookOpen,
-  Users,
-  Globe,
-  Award,
   Target,
-  Lightbulb,
   TrendingUp,
   CheckCircle2
 } from 'lucide-react'
@@ -19,7 +15,6 @@ const LeonardoMachado = () => {
   const heroRef = useScrollAnimation({ threshold: 0.2, triggerOnce: true })
   const identityRef = useScrollAnimation({ threshold: 0.2, triggerOnce: true })
   const differentialsRef = useScrollAnimation({ threshold: 0.2, triggerOnce: true })
-  const portfolioRef = useScrollAnimation({ threshold: 0.2, triggerOnce: true })
 
   const identityPillars = [
     {
@@ -51,33 +46,6 @@ const LeonardoMachado = () => {
     'Experiência clínica real e comprovada',
     'Visão e presença internacional',
     'Posicionamento intelectual consistente'
-  ]
-
-  const portfolio = [
-    {
-      icon: Award,
-      title: 'Formação Presencial Certificada',
-      description: 'Formação estruturada destinada a profissionais que trabalham com oclusão e desejam ampliar leitura clínica, integrar variáveis sistémicas e aumentar previsibilidade.',
-      highlight: 'Produto Central'
-    },
-    {
-      icon: Users,
-      title: 'Consultoria Clínica Estratégica',
-      description: 'Análise de casos complexos, estruturação de planos terapêuticos, integração sistémica no tratamento e aumento de previsibilidade clínica.',
-      highlight: 'Selectivo'
-    },
-    {
-      icon: Lightbulb,
-      title: 'Mentoria Clínica e Posicionamento',
-      description: 'Programa para profissionais que desejam aprofundar raciocínio clínico, estruturar diferenciação profissional e posicionar-se como referência clínica.',
-      highlight: 'Premium'
-    },
-    {
-      icon: Globe,
-      title: 'Formação Internacional',
-      description: 'Participação em eventos científicos e clínicos internacionais para consolidar presença e criar rede de profissionais alinhados.',
-      highlight: 'Expansão'
-    }
   ]
 
   return (
@@ -274,59 +242,6 @@ const LeonardoMachado = () => {
               </CardContent>
             </Card>
           ))}
-        </div>
-      </section>
-
-      {/* Portfólio */}
-      <section className="section-premium container-premium gradient-subtle py-8 lg:py-12">
-        <div
-          ref={portfolioRef.elementRef}
-          className={`text-center mb-10 transition-all duration-1000 ${
-            portfolioRef.isVisible ? 'opacity-100' : 'opacity-0'
-          }`}
-        >
-          <div className="inline-block mb-4 subheading-premium text-primary">
-            Portfólio de Serviços
-          </div>
-          <h2 className="heading-premium text-3xl lg:text-5xl mb-6">
-            Ecossistema RNS
-          </h2>
-          <p className="text-premium text-lg max-w-3xl mx-auto">
-            Posicionamento premium e selectivo. Profundidade clínica, autoridade conceptual
-            e impacto real na prática profissional.
-          </p>
-        </div>
-
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-10 max-w-6xl mx-auto">
-          {portfolio.map((item, index) => {
-            const Icon = item.icon
-            return (
-              <Card
-                key={index}
-                className={`card-premium hover-lift relative overflow-hidden group transition-all duration-1000 ${
-                  portfolioRef.isVisible
-                    ? 'opacity-100 translate-y-0'
-                    : 'opacity-0 translate-y-10'
-                }`}
-                style={{ transitionDelay: `${index * 150}ms` }}
-              >
-                <CardContent className="p-8 lg:p-10">
-                  <div className="flex items-start justify-between mb-6">
-                    <div className="w-14 h-14 rounded-full gradient-navy-gold flex items-center justify-center shadow-gold group-hover:scale-110 transition-transform duration-300">
-                      <Icon className="w-7 h-7 text-white" />
-                    </div>
-                    <div className="px-3 py-1 bg-secondary/10 text-secondary rounded-full text-xs font-semibold shadow-sm">
-                      {item.highlight}
-                    </div>
-                  </div>
-                  <h3 className="text-2xl font-bold mb-4 text-foreground">{item.title}</h3>
-                  <p className="text-premium leading-relaxed">
-                    {item.description}
-                  </p>
-                </CardContent>
-              </Card>
-            )
-          })}
         </div>
       </section>
 
