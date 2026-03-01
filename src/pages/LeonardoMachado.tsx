@@ -38,32 +38,51 @@ const LeonardoMachado = () => {
       <section className="section-premium container-premium">
         <div
           ref={funcaoRef.elementRef}
-          className={`max-w-4xl mx-auto transition-all duration-1000 ${
+          className={`transition-all duration-1000 ${
             funcaoRef.isVisible ? 'opacity-100' : 'opacity-0'
           }`}
         >
-          <h2 className="heading-premium text-4xl lg:text-5xl mb-12 text-center">
+          <h2 className="heading-premium text-4xl lg:text-5xl mb-16 text-center">
             A Função
           </h2>
 
-          <div className="space-y-8 text-lg lg:text-xl leading-relaxed text-foreground/90">
-            <p className="text-2xl lg:text-3xl font-light text-center mb-12">
-              Eu não criei um curso.<br />
-              <strong className="text-gradient-gold font-semibold">Criei uma estrutura de decisão.</strong>
-            </p>
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center max-w-6xl mx-auto">
+            {/* Coluna de Texto */}
+            <div className="space-y-8 text-lg lg:text-xl leading-relaxed text-foreground/90">
+              <p className="text-2xl lg:text-3xl font-light">
+                Eu não criei um curso.<br />
+                <strong className="text-gradient-gold font-semibold">Criei uma estrutura de decisão.</strong>
+              </p>
 
-            <p>
-              Ao longo de mais de duas décadas de prática integrada com Medicina Dentária, tornou-se evidente um padrão: clínicas tecnicamente competentes operam com critérios de decisão frágeis.
-            </p>
+              <p>
+                Ao longo de mais de duas décadas de prática integrada com Medicina Dentária, tornou-se evidente um padrão: clínicas tecnicamente competentes operam com critérios de decisão frágeis.
+              </p>
 
-            <p className="text-center italic text-primary font-semibold text-xl lg:text-2xl">
-              O problema raramente está na técnica.<br />
-              Está na arquitetura que organiza essa técnica.
-            </p>
+              <div className="glass-premium border-l-4 border-l-secondary p-6 lg:p-8 rounded-xl">
+                <p className="text-center italic text-primary font-semibold text-xl lg:text-2xl">
+                  O problema raramente está na técnica.<br />
+                  Está na arquitetura que organiza essa técnica.
+                </p>
+              </div>
 
-            <p>
-              Foi dessa constatação que nasceu o trabalho que hoje sustenta o Programa RNS: <strong>estruturar a decisão clínica e institucional</strong> para que a previsibilidade deixe de ser circunstancial e passe a ser consequência.
-            </p>
+              <p>
+                Foi dessa constatação que nasceu o trabalho que hoje sustenta o Programa RNS: <strong>estruturar a decisão clínica e institucional</strong> para que a previsibilidade deixe de ser circunstancial e passe a ser consequência.
+              </p>
+            </div>
+
+            {/* Área de Imagem/Visual */}
+            <div className="relative">
+              <div className="aspect-[4/3] rounded-2xl gradient-navy-gold shadow-premium relative overflow-hidden">
+                <div className="absolute inset-0 pattern-dots opacity-20"></div>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  {/* Placeholder para imagem futura */}
+                  <div className="text-center text-white/30 p-8">
+                    <p className="text-sm font-light">[Espaço reservado para imagem]</p>
+                    <p className="text-xs mt-2">Sugestão: Leonardo em ambiente clínico ou diagrama de estrutura de decisão</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -73,50 +92,67 @@ const LeonardoMachado = () => {
         <div className="container-premium">
           <div
             ref={integracaoRef.elementRef}
-            className={`max-w-4xl mx-auto transition-all duration-1000 ${
+            className={`transition-all duration-1000 ${
               integracaoRef.isVisible ? 'opacity-100' : 'opacity-0'
             }`}
           >
-            <h2 className="heading-premium text-4xl lg:text-5xl mb-12 text-center">
+            <h2 className="heading-premium text-4xl lg:text-5xl mb-16 text-center">
               A Integração
             </h2>
 
-            <div className="space-y-8 text-lg lg:text-xl leading-relaxed text-foreground/90">
-              <p>
-                Desde 2003 trabalho em contexto clínico colaborativo com médicos dentistas.
-              </p>
+            <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center max-w-6xl mx-auto">
+              {/* Área de Imagem/Visual (ordem invertida no desktop) */}
+              <div className="relative lg:order-1 order-2">
+                <div className="aspect-[4/3] rounded-2xl bg-gradient-to-br from-slate-100 to-slate-200 shadow-premium relative overflow-hidden border border-border">
+                  <div className="absolute inset-0 pattern-dots opacity-10"></div>
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    {/* Placeholder para timeline visual ou foto */}
+                    <div className="text-center text-muted-foreground/30 p-8">
+                      <p className="text-sm font-light">[Espaço reservado para imagem]</p>
+                      <p className="text-xs mt-2">Sugestão: Timeline visual 2003-2024 ou foto de formação/prática colaborativa</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-              <p>
-                Em 2011 comecei a sistematizar aquilo que se tornaria o eixo do meu trabalho: <strong>tornar mensurável e operacional a integração entre oclusão e sistema corporal.</strong>
-              </p>
-
-              <p>
-                Entre 2016 e 2021 formei profissionais numa metodologia integrativa própria.<br />
-                A partir de 2021, o foco evoluiu para <strong className="text-primary">implementação estrutural em clínica</strong>.
-              </p>
-
-              <div className="glass-premium border-l-4 border-l-secondary p-8 lg:p-10 rounded-xl shadow-premium mt-10">
-                <p className="text-xl lg:text-2xl font-semibold text-primary mb-6">
-                  Hoje, o meu trabalho integra três dimensões que raramente coexistem na mesma pessoa:
+              {/* Coluna de Texto */}
+              <div className="space-y-8 text-lg lg:text-xl leading-relaxed text-foreground/90 lg:order-2 order-1">
+                <p>
+                  Desde 2003 trabalho em contexto clínico colaborativo com médicos dentistas.
                 </p>
-                <ul className="space-y-4 text-lg">
-                  <li className="flex items-start gap-3">
-                    <span className="text-secondary font-bold">→</span>
-                    <span><strong>decisão clínica,</strong></span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="text-secondary font-bold">→</span>
-                    <span><strong>estrutura de conversão,</strong></span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="text-secondary font-bold">→</span>
-                    <span><strong>organização institucional.</strong></span>
-                  </li>
-                </ul>
-                <p className="mt-8 text-center italic text-foreground/80">
-                  Não como teoria.<br />
-                  <strong className="text-gradient-gold text-xl">Como prática aplicada.</strong>
+
+                <p>
+                  Em 2011 comecei a sistematizar aquilo que se tornaria o eixo do meu trabalho: <strong>tornar mensurável e operacional a integração entre oclusão e sistema corporal.</strong>
                 </p>
+
+                <p>
+                  Entre 2016 e 2021 formei profissionais numa metodologia integrativa própria.<br />
+                  A partir de 2021, o foco evoluiu para <strong className="text-primary">implementação estrutural em clínica</strong>.
+                </p>
+
+                <div className="glass-premium border-l-4 border-l-secondary p-8 lg:p-10 rounded-xl shadow-premium mt-10">
+                  <p className="text-xl lg:text-2xl font-semibold text-primary mb-6">
+                    Hoje, o meu trabalho integra três dimensões que raramente coexistem na mesma pessoa:
+                  </p>
+                  <ul className="space-y-4 text-lg">
+                    <li className="flex items-start gap-3">
+                      <span className="text-secondary font-bold text-2xl">→</span>
+                      <span><strong>decisão clínica,</strong></span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-secondary font-bold text-2xl">→</span>
+                      <span><strong>estrutura de conversão,</strong></span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-secondary font-bold text-2xl">→</span>
+                      <span><strong>organização institucional.</strong></span>
+                    </li>
+                  </ul>
+                  <p className="mt-8 text-center italic text-foreground/80 text-base">
+                    Não como teoria.<br />
+                    <strong className="text-gradient-gold text-xl not-italic">Como prática aplicada.</strong>
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -127,54 +163,76 @@ const LeonardoMachado = () => {
       <section className="section-premium container-premium">
         <div
           ref={resultadoRef.elementRef}
-          className={`max-w-4xl mx-auto transition-all duration-1000 ${
+          className={`transition-all duration-1000 ${
             resultadoRef.isVisible ? 'opacity-100' : 'opacity-0'
           }`}
         >
-          <h2 className="heading-premium text-4xl lg:text-5xl mb-12 text-center">
+          <h2 className="heading-premium text-4xl lg:text-5xl mb-16 text-center">
             O Resultado Natural
           </h2>
 
-          <div className="space-y-8 text-lg lg:text-xl leading-relaxed text-foreground/90">
-            <div className="glass-premium border-gradient rounded-xl p-8 lg:p-10 shadow-premium text-center">
-              <p className="text-xl lg:text-2xl font-light mb-6">
-                Quando a decisão clínica se organiza, a comunicação torna-se clara.
-              </p>
-              <p className="text-xl lg:text-2xl font-light mb-6">
-                Quando a comunicação se torna clara, a conversão deixa de ser tensão.
-              </p>
-              <p className="text-xl lg:text-2xl font-light">
-                Quando a conversão estabiliza, a instituição cresce.
-              </p>
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start max-w-6xl mx-auto mb-16">
+            {/* Coluna de Texto */}
+            <div className="space-y-8">
+              <div className="glass-premium border-gradient rounded-xl p-8 lg:p-10 shadow-premium">
+                <p className="text-xl lg:text-2xl font-light mb-6 text-center">
+                  Quando a decisão clínica se organiza, a comunicação torna-se clara.
+                </p>
+                <p className="text-xl lg:text-2xl font-light mb-6 text-center">
+                  Quando a comunicação se torna clara, a conversão deixa de ser tensão.
+                </p>
+                <p className="text-xl lg:text-2xl font-light text-center">
+                  Quando a conversão estabiliza, a instituição cresce.
+                </p>
+              </div>
+
+              <div className="bg-secondary/10 border-2 border-secondary rounded-xl p-8 lg:p-10">
+                <p className="text-xl lg:text-2xl font-semibold text-primary mb-4 text-center">
+                  Clínicas que implementaram esta estrutura registaram crescimentos médios mensais entre <strong className="text-gradient-gold">20% e 30%</strong>.
+                </p>
+                <p className="text-lg text-foreground/80 italic mt-6 text-center">
+                  Mas o crescimento não é o objetivo.<br />
+                  <strong className="text-primary not-italic">É a consequência.</strong>
+                </p>
+                <p className="text-xl font-semibold mt-6 text-foreground text-center">
+                  O objetivo é maturidade decisória e estabilidade institucional.
+                </p>
+              </div>
             </div>
 
-            <div className="bg-secondary/10 border-2 border-secondary rounded-xl p-8 lg:p-10 text-center">
-              <p className="text-xl lg:text-2xl font-semibold text-primary mb-4">
-                Clínicas que implementaram esta estrutura registaram crescimentos médios mensais entre <strong className="text-gradient-gold">20% e 30%</strong>.
-              </p>
-              <p className="text-lg text-foreground/80 italic mt-6">
-                Mas o crescimento não é o objetivo.<br />
-                <strong className="text-primary not-italic">É a consequência.</strong>
-              </p>
-              <p className="text-xl font-semibold mt-6 text-foreground">
-                O objetivo é maturidade decisória e estabilidade institucional.
-              </p>
+            {/* Área de Imagem/Gráfico */}
+            <div className="relative">
+              <div className="aspect-[4/3] rounded-2xl gradient-navy-gold shadow-premium relative overflow-hidden">
+                <div className="absolute inset-0 pattern-dots opacity-20"></div>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  {/* Placeholder para gráfico de crescimento ou infográfico */}
+                  <div className="text-center text-white/30 p-8">
+                    <p className="text-sm font-light">[Espaço reservado para visual]</p>
+                    <p className="text-xs mt-2">Sugestão: Gráfico de crescimento, before/after de clínica, ou infográfico das 3 dimensões</p>
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
 
-            <div className="mt-12 pt-12 border-t border-border">
-              <h3 className="text-2xl lg:text-3xl font-semibold text-primary mb-6 text-center">
+          {/* Enquadramento */}
+          <div className="max-w-4xl mx-auto mt-16 pt-12 border-t-2 border-border">
+            <div className="glass-premium rounded-2xl p-10 lg:p-12 shadow-premium">
+              <h3 className="text-2xl lg:text-3xl font-semibold text-primary mb-8 text-center">
                 Enquadramento
               </h3>
-              <p className="mb-6">
-                A minha formação de base é em Fisioterapia.
-              </p>
-              <p className="mb-6">
-                A integração com Medicina Dentária não nasceu de tendência ou discurso teórico, mas de <strong>prática clínica colaborativa contínua</strong> ao longo do meu percurso profissional.
-              </p>
-              <p className="text-center text-xl font-light italic text-foreground/80">
-                O Programa RNS não é um produto académico.<br />
-                <strong className="text-gradient-gold text-2xl not-italic">É uma arquitetura construída a partir de prática real.</strong>
-              </p>
+              <div className="space-y-6 text-lg lg:text-xl leading-relaxed text-foreground/90">
+                <p>
+                  A minha formação de base é em Fisioterapia.
+                </p>
+                <p>
+                  A integração com Medicina Dentária não nasceu de tendência ou discurso teórico, mas de <strong>prática clínica colaborativa contínua</strong> ao longo do meu percurso profissional.
+                </p>
+                <p className="text-center text-xl font-light italic text-foreground/80 mt-8 pt-8 border-t border-border">
+                  O Programa RNS não é um produto académico.<br />
+                  <strong className="text-gradient-gold text-2xl not-italic">É uma arquitetura construída a partir de prática real.</strong>
+                </p>
+              </div>
             </div>
           </div>
         </div>
