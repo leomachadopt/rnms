@@ -166,47 +166,18 @@ const LeonardoMachado = () => {
             O Resultado Natural
           </h2>
 
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start max-w-6xl mx-auto mb-16">
-            {/* Coluna de Texto */}
-            <div className="space-y-8">
-              <div className="glass-premium border-gradient rounded-xl p-8 lg:p-10 shadow-premium">
-                <p className="text-xl lg:text-2xl font-light mb-6 text-center">
-                  Quando a decisão clínica se organiza, a comunicação torna-se clara.
-                </p>
-                <p className="text-xl lg:text-2xl font-light mb-6 text-center">
-                  Quando a comunicação se torna clara, a conversão deixa de ser tensão.
-                </p>
-                <p className="text-xl lg:text-2xl font-light text-center">
-                  Quando a conversão estabiliza, a instituição cresce.
-                </p>
-              </div>
-
-              <div className="bg-secondary/10 border-2 border-secondary rounded-xl p-8 lg:p-10">
-                <p className="text-xl lg:text-2xl font-semibold text-primary mb-4 text-center">
-                  Clínicas que implementaram esta estrutura registaram crescimentos médios mensais entre <strong className="text-gradient-gold">20% e 30%</strong>.
-                </p>
-                <p className="text-lg text-foreground/80 italic mt-6 text-center">
-                  Mas o crescimento não é o objetivo.<br />
-                  <strong className="text-primary not-italic">É a consequência.</strong>
-                </p>
-                <p className="text-xl font-semibold mt-6 text-foreground text-center">
-                  O objetivo é maturidade decisória e estabilidade institucional.
-                </p>
-              </div>
-            </div>
-
-            {/* Área de Imagem/Gráfico */}
-            <div className="relative">
-              <div className="aspect-[4/3] rounded-2xl gradient-navy-gold shadow-premium relative overflow-hidden">
-                <div className="absolute inset-0 pattern-dots opacity-20"></div>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  {/* Placeholder para gráfico de crescimento ou infográfico */}
-                  <div className="text-center text-white/30 p-8">
-                    <p className="text-sm font-light">[Espaço reservado para visual]</p>
-                    <p className="text-xs mt-2">Sugestão: Gráfico de crescimento, before/after de clínica, ou infográfico das 3 dimensões</p>
-                  </div>
-                </div>
-              </div>
+          <div className="max-w-4xl mx-auto mb-16">
+            <div className="bg-secondary/10 border-2 border-secondary rounded-xl p-8 lg:p-10">
+              <p className="text-xl lg:text-2xl font-semibold text-primary mb-4 text-center">
+                Clínicas que implementaram esta estrutura registaram crescimentos médios mensais entre <strong className="text-gradient-gold">20% e 30%</strong>.
+              </p>
+              <p className="text-lg text-foreground/80 italic mt-6 text-center">
+                Mas o crescimento não é o objetivo.<br />
+                <strong className="text-primary not-italic">É a consequência.</strong>
+              </p>
+              <p className="text-xl font-semibold mt-6 text-foreground text-center">
+                O objetivo é maturidade decisória e estabilidade institucional.
+              </p>
             </div>
           </div>
 
