@@ -120,9 +120,9 @@ export const applications = pgTable('applications', {
   name: varchar('name', { length: 255 }).notNull(),
   email: varchar('email', { length: 255 }),
   whatsapp: varchar('whatsapp', { length: 50 }),
-  // Respostas do formulário (5 perguntas)
-  orthoCount: varchar('ortho_count', { length: 50 }).notNull(), // "Apenas eu" | "1–2" | "3–5" | "5+"
-  activeCases: varchar('active_cases', { length: 50 }).notNull(), // "Até 80" | "80–200" | "200–400" | "400+"
+  // Respostas do formulário (3 perguntas obrigatórias + 2 do chat de elegibilidade)
+  orthoCount: varchar('ortho_count', { length: 50 }), // Agora coletado no chat de elegibilidade (nullable)
+  activeCases: varchar('active_cases', { length: 50 }), // Agora coletado no chat de elegibilidade (nullable)
   monthlyRevenue: varchar('monthly_revenue', { length: 100 }).notNull(), // "Até 50.000€" | "50.000–100.000€" | etc
   goal12m: varchar('goal_12m', { length: 255 }).notNull(), // Objetivo 12 meses
   readyToInvest: varchar('ready_to_invest', { length: 100 }).notNull(), // "Sim" | "Preciso avaliar internamente" | "Não neste momento"
