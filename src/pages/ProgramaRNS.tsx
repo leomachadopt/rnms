@@ -48,8 +48,8 @@ const ProgramaRNS = () => {
               size="lg"
               className="btn-gold text-lg px-10 py-7 hover-glow-gold"
             >
-              <Link to="/programa-rns/qualificacao">
-                Iniciar Conversa de Qualificação
+              <Link to="/elegibilidade">
+                Avaliar Elegibilidade da Minha Clínica
               </Link>
             </Button>
           </div>
@@ -627,8 +627,8 @@ const ProgramaRNS = () => {
                     size="lg"
                     className="btn-gold text-lg px-10 py-7 hover-glow-gold"
                   >
-                    <Link to="/programa-rns/qualificacao">
-                      Iniciar Conversa de Qualificação
+                    <Link to="/elegibilidade">
+                      Avaliar Elegibilidade da Minha Clínica
                     </Link>
                   </Button>
                 </div>
@@ -666,8 +666,8 @@ const ProgramaRNS = () => {
               size="lg"
               className="rounded-full bg-white text-primary hover:bg-white/90 shadow-premium hover:scale-105 transition-all text-lg px-12 py-7 font-bold hover-lift"
             >
-              <Link to="/programa-rns/qualificacao" className="flex items-center gap-2">
-                Iniciar Conversa de Qualificação
+              <Link to="/elegibilidade" className="flex items-center gap-2">
+                Avaliar Elegibilidade da Minha Clínica
                 <ArrowRight className="w-5 h-5" />
               </Link>
             </Button>

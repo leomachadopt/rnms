@@ -170,7 +170,7 @@ const Index = () => {
                 size="lg"
                 className="rounded-xl text-base sm:text-lg px-8 sm:px-10 py-6 sm:py-7 border-2 border-white bg-white/95 text-foreground hover:bg-white hover:border-secondary hover:scale-105 transition-all duration-300 font-semibold relative z-20 shadow-lg"
               >
-                <Link to="/agenterns">Fale Connosco</Link>
+                <Link to="/elegibilidade">Avaliar Elegibilidade da Minha Clínica</Link>
               </Button>
             </div>
           </div>

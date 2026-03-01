@@ -79,9 +79,9 @@ export function Header() {
             asChild
             className="btn-gold hover-glow-gold px-6"
           >
-            <Link to="/agenterns" className="group">
+            <Link to="/elegibilidade" className="group">
               <MessageCircle className="w-4 h-4 mr-2 group-hover:rotate-12 transition-transform duration-300" />
-              Fale Connosco
+              Avaliar Elegibilidade
             </Link>
           </Button>
         </div>
@@ -130,9 +130,9 @@ export function Header() {
                   asChild
                   className="mt-4 w-full btn-gold hover-glow-gold"
                 >
-                  <Link to="/agenterns" onClick={() => setIsOpen(false)}>
+                  <Link to="/elegibilidade" onClick={() => setIsOpen(false)}>
                     <MessageCircle className="w-4 h-4 mr-2" />
-                    Fale Connosco
+                    Avaliar Elegibilidade
                   </Link>
                 </Button>
               </nav>
