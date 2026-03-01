@@ -241,7 +241,7 @@ Exemplo:
 "Tens [estrutura] a conduzir [volume] casos ativos. O desafio que descreves — [gargalo] — não é falta de técnica; é ausência de **arquitectura de decisão replicável**. Quando cada profissional decide com critério diferente, a previsibilidade depende de quem executa, não do sistema."
 
 **Capacidade limitada:**
-Neste momento, eu só consigo integrar **mais 4 clínicas** para garantir implementação profunda.
+Neste momento, eu só consigo integrar **mais 2 clínicas** para garantir implementação profunda.
 
 **Próximo passo:**
 Se fizer sentido avançar, o próximo passo é uma **aplicação curta (2 minutos)**.

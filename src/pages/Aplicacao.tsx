@@ -15,8 +15,6 @@ export default function Aplicacao() {
     name: '',
     email: '',
     whatsapp: '',
-    orthoCount: '',
-    activeCases: '',
     monthlyRevenue: '',
     goal12m: '',
     readyToInvest: '',
@@ -26,7 +24,7 @@ export default function Aplicacao() {
     e.preventDefault()
 
     // Validação básica
-    if (!formData.name || !formData.orthoCount || !formData.activeCases || !formData.monthlyRevenue || !formData.goal12m || !formData.readyToInvest) {
+    if (!formData.name || !formData.monthlyRevenue || !formData.goal12m || !formData.readyToInvest) {
       toast.error('Por favor, preenche todos os campos obrigatórios.')
       return
     }
@@ -137,52 +135,14 @@ export default function Aplicacao() {
             </div>
           </div>
 
-          {/* 5 Perguntas Obrigatórias */}
+          {/* 3 Perguntas Obrigatórias */}
           <div className="space-y-6">
             <h3 className="font-bold text-lg text-foreground">Contexto da Clínica</h3>
 
-            {/* Q1: Quantos ortodontistas */}
+            {/* Q1: Faturação mensal */}
             <div className="space-y-3">
               <Label className="text-sm font-semibold text-foreground">
-                1. Quantos ortodontistas atuam atualmente? <span className="text-destructive">*</span>
-              </Label>
-              <RadioGroup
-                value={formData.orthoCount}
-                onValueChange={(value) => setFormData({ ...formData, orthoCount: value })}
-                className="space-y-2"
-              >
-                {["Apenas eu", "1–2", "3–5", "5+"].map((option) => (
-                  <div key={option} className="flex items-center space-x-2 p-3 border border-border rounded-lg hover:bg-muted/50 transition-colors cursor-pointer">
-                    <RadioGroupItem value={option} id={`ortho-${option}`} />
-                    <Label htmlFor={`ortho-${option}`} className="flex-1 cursor-pointer">{option}</Label>
-                  </div>
-                ))}
-              </RadioGroup>
-            </div>
-
-            {/* Q2: Casos ativos */}
-            <div className="space-y-3">
-              <Label className="text-sm font-semibold text-foreground">
-                2. Quantos casos ortodônticos ativos a clínica conduz atualmente? <span className="text-destructive">*</span>
-              </Label>
-              <RadioGroup
-                value={formData.activeCases}
-                onValueChange={(value) => setFormData({ ...formData, activeCases: value })}
-                className="space-y-2"
-              >
-                {["Até 80", "80–200", "200–400", "400+"].map((option) => (
-                  <div key={option} className="flex items-center space-x-2 p-3 border border-border rounded-lg hover:bg-muted/50 transition-colors cursor-pointer">
-                    <RadioGroupItem value={option} id={`cases-${option}`} />
-                    <Label htmlFor={`cases-${option}`} className="flex-1 cursor-pointer">{option}</Label>
-                  </div>
-                ))}
-              </RadioGroup>
-            </div>
-
-            {/* Q3: Faturação mensal */}
-            <div className="space-y-3">
-              <Label className="text-sm font-semibold text-foreground">
-                3. Faturação média mensal aproximada <span className="text-destructive">*</span>
+                1. Faturação média mensal aproximada <span className="text-destructive">*</span>
               </Label>
               <RadioGroup
                 value={formData.monthlyRevenue}
@@ -198,10 +158,10 @@ export default function Aplicacao() {
               </RadioGroup>
             </div>
 
-            {/* Q4: Objetivo 12 meses */}
+            {/* Q2: Objetivo 12 meses */}
             <div className="space-y-3">
               <Label className="text-sm font-semibold text-foreground">
-                4. Objetivo principal nos próximos 12 meses <span className="text-destructive">*</span>
+                2. Objetivo principal nos próximos 12 meses <span className="text-destructive">*</span>
               </Label>
               <RadioGroup
                 value={formData.goal12m}
@@ -220,10 +180,10 @@ export default function Aplicacao() {
               </RadioGroup>
             </div>
 
-            {/* Q5: Preparação para investir */}
+            {/* Q3: Preparação para investir */}
             <div className="space-y-3">
               <Label className="text-sm font-semibold text-foreground">
-                5. Preparação para investir num programa de implementação estrutural com acompanhamento direto (6 meses) <span className="text-destructive">*</span>
+                3. Preparação para investir num programa de implementação estrutural com acompanhamento direto (6 meses) <span className="text-destructive">*</span>
               </Label>
               <RadioGroup
                 value={formData.readyToInvest}

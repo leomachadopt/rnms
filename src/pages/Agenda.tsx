@@ -109,7 +109,7 @@ export default function Agenda() {
 
             <div className="bg-muted/50 border border-border rounded-xl p-6">
               <p className="text-xs text-muted-foreground mb-2">
-                ⚠️ <strong>Capacidade limitada:</strong> O Programa pode integrar apenas <strong>mais 4 clínicas</strong> neste momento para garantir qualidade de implementação.
+                ⚠️ <strong>Capacidade limitada:</strong> O Programa pode integrar apenas <strong>mais 2 clínicas</strong> neste momento para garantir qualidade de implementação.
               </p>
               <p className="text-xs text-muted-foreground">
                 <strong>Entrevista diagnóstica e seletiva.</strong> Não é uma sessão comercial — é uma avaliação mútua de alinhamento.

@@ -35,8 +35,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       name,
       email,
       whatsapp,
-      orthoCount,
-      activeCases,
       monthlyRevenue,
       goal12m,
       readyToInvest,
@@ -45,7 +43,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     } = req.body
 
     // Validação básica (apenas campos obrigatórios)
-    if (!name || !orthoCount || !activeCases || !monthlyRevenue || !goal12m || !readyToInvest) {
+    if (!name || !monthlyRevenue || !goal12m || !readyToInvest) {
       return res.status(400).json({ error: 'Campos obrigatórios em falta' })
     }
 
@@ -73,8 +71,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         name,
         email: email || null,
         whatsapp: whatsapp || null,
-        orthoCount,
-        activeCases,
+        orthoCount: null, // Removido do formulário (já perguntado no chat de elegibilidade)
+        activeCases: null, // Removido do formulário (já perguntado no chat de elegibilidade)
         monthlyRevenue,
         goal12m,
         readyToInvest,

@@ -35,7 +35,7 @@ export default function Elegibilidade() {
         <div className="mt-8 text-center">
           <p className="text-xs text-muted-foreground max-w-2xl mx-auto">
             Esta conversa é confidencial e não gera compromisso. O Programa RNS aceita
-            apenas <strong>4 clínicas adicionais</strong> neste momento para garantir
+            apenas <strong>2 clínicas adicionais</strong> neste momento para garantir
             qualidade de implementação.
           </p>
         </div>
