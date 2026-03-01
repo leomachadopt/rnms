@@ -118,16 +118,18 @@ export const applications = pgTable('applications', {
   id: serial('id').primaryKey(),
   // Dados do utilizador
   name: varchar('name', { length: 255 }).notNull(),
-  email: varchar('email', { length: 255 }).notNull(),
-  whatsapp: varchar('whatsapp', { length: 50 }).notNull(),
-  // Respostas do formulário
-  monthlyRevenue: varchar('monthly_revenue', { length: 100 }).notNull(), // Faturamento mensal ortodôntico
-  readyToInvest: varchar('ready_to_invest', { length: 10 }).notNull(), // 'Sim' | 'Não'
-  mainGoal: text('main_goal'), // Objectivo principal (texto livre)
-  biggestChallenge: text('biggest_challenge'), // Maior desafio (texto livre)
-  whyNow: text('why_now'), // Por que agora? (texto livre)
+  email: varchar('email', { length: 255 }),
+  whatsapp: varchar('whatsapp', { length: 50 }),
+  // Respostas do formulário (5 perguntas)
+  orthoCount: varchar('ortho_count', { length: 50 }).notNull(), // "Apenas eu" | "1–2" | "3–5" | "5+"
+  activeCases: varchar('active_cases', { length: 50 }).notNull(), // "Até 80" | "80–200" | "200–400" | "400+"
+  monthlyRevenue: varchar('monthly_revenue', { length: 100 }).notNull(), // "Até 50.000€" | "50.000–100.000€" | etc
+  goal12m: varchar('goal_12m', { length: 255 }).notNull(), // Objetivo 12 meses
+  readyToInvest: varchar('ready_to_invest', { length: 100 }).notNull(), // "Sim" | "Preciso avaliar internamente" | "Não neste momento"
   // Metadata
-  metadata: jsonb('metadata'), // Informações adicionais (source, utm, etc)
+  metadata: jsonb('metadata'), // sessionId, source, utm, etc
+  sessionId: varchar('session_id', { length: 255 }), // Link para agent_conversations
+  source: varchar('source', { length: 100 }), // 'eligibility_chat' | 'direct_url' | etc
   ipAddress: varchar('ip_address', { length: 45 }),
   userAgent: text('user_agent'),
   // Status do processo

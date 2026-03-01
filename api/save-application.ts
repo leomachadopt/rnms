@@ -35,15 +35,17 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       name,
       email,
       whatsapp,
+      orthoCount,
+      activeCases,
       monthlyRevenue,
+      goal12m,
       readyToInvest,
-      mainGoal,
-      biggestChallenge,
-      whyNow,
+      sessionId,
+      source,
     } = req.body
 
-    // Validação básica
-    if (!name || !email || !whatsapp || !monthlyRevenue || !readyToInvest) {
+    // Validação básica (apenas campos obrigatórios)
+    if (!name || !orthoCount || !activeCases || !monthlyRevenue || !goal12m || !readyToInvest) {
       return res.status(400).json({ error: 'Campos obrigatórios em falta' })
     }
 
@@ -56,26 +58,29 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     const userAgent = req.headers['user-agent'] || null
 
-    // Metadados adicionais
+    // Metadata adicional
     const metadata = {
-      source: 'elegibilidade_chat',
+      source: source || 'direct_url',
       timestamp: new Date().toISOString(),
       userAgent,
+      sessionId: sessionId || null,
     }
 
-    // Salva aplicação na base de dados
+    // Salvar aplicação na base de dados
     const [newApplication] = await db
       .insert(applications)
       .values({
         name,
-        email,
-        whatsapp,
+        email: email || null,
+        whatsapp: whatsapp || null,
+        orthoCount,
+        activeCases,
         monthlyRevenue,
+        goal12m,
         readyToInvest,
-        mainGoal: mainGoal || null,
-        biggestChallenge: biggestChallenge || null,
-        whyNow: whyNow || null,
         metadata,
+        sessionId: sessionId || null,
+        source: source || 'direct_url',
         ipAddress,
         userAgent,
         status: 'submitted',
@@ -87,6 +92,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(200).json({
       success: true,
       applicationId: newApplication.id,
+      readyToInvest: readyToInvest, // Para frontend redirecionar condicionalmente
     })
   } catch (error: any) {
     console.error('❌ Erro ao salvar aplicação:', error)

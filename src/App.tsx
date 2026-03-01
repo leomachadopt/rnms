@@ -16,6 +16,7 @@ import ProgramaRNS from './pages/ProgramaRNS'
 import ProgramaRNSQualificacao from './pages/ProgramaRNSQualificacao'
 import Elegibilidade from './pages/Elegibilidade'
 import Aplicacao from './pages/Aplicacao'
+import Agenda from './pages/Agenda'
 import Problema from './pages/Problema'
 import Blog from './pages/Blog'
 import BlogPost from './pages/BlogPost'
@@ -70,6 +71,10 @@ const router = createBrowserRouter([
       {
         path: '/aplicacao',
         element: <Aplicacao />,
+      },
+      {
+        path: '/agenda',
+        element: <Agenda />,
       },
       {
         path: '/problema',
