@@ -1,18 +1,42 @@
 import { useEffect, useState } from 'react'
-import { useSearchParams, Link } from 'react-router-dom'
+import { useSearchParams, Link, useLocation } from 'react-router-dom'
 import { Calendar, CheckCircle2, XCircle, ArrowLeft } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
 export default function Agenda() {
   const [searchParams] = useSearchParams()
+  const location = useLocation()
   const status = searchParams.get('status')
   const [calendlyUrl, setCalendlyUrl] = useState('')
 
   useEffect(() => {
-    // Obter URL do Calendly da variável de ambiente
-    const url = import.meta.env.VITE_CALENDLY_URL || 'https://calendly.com/leonardomachado-rns/entrevista-estrategica'
-    setCalendlyUrl(url)
-  }, [])
+    // Obter URL base do Calendly
+    const baseUrl = import.meta.env.VITE_CALENDLY_URL || 'https://calendly.com/leomachadopt/programa-rns'
+
+    // Receber dados do formulário (passados via navigate state)
+    const userData = location.state as { name?: string; email?: string; whatsapp?: string } | null
+
+    // Construir URL com parâmetros de pré-preenchimento
+    if (userData) {
+      const params = new URLSearchParams()
+
+      if (userData.name) {
+        params.append('name', userData.name)
+      }
+      if (userData.email) {
+        params.append('email', userData.email)
+      }
+      if (userData.whatsapp) {
+        // Calendly usa 'a1' para custom fields (telefone/WhatsApp)
+        params.append('a1', userData.whatsapp)
+      }
+
+      const urlWithParams = params.toString() ? `${baseUrl}?${params.toString()}` : baseUrl
+      setCalendlyUrl(urlWithParams)
+    } else {
+      setCalendlyUrl(baseUrl)
+    }
+  }, [location.state])
 
   // Estado: "not_ready" - Q5 = "Não neste momento"
   if (status === 'not_ready') {

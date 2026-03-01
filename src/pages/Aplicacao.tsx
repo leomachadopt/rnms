@@ -47,7 +47,14 @@ export default function Aplicacao() {
       if (formData.readyToInvest === 'Não neste momento') {
         navigate('/aplicacao?status=not_ready')
       } else {
-        navigate('/agenda?status=eligible')
+        // Passar dados do utilizador para página /agenda (pré-preencher Calendly)
+        navigate('/agenda?status=eligible', {
+          state: {
+            name: formData.name,
+            email: formData.email,
+            whatsapp: formData.whatsapp,
+          }
+        })
       }
     } catch (error: any) {
       toast.error(error.message || 'Erro ao enviar formulário. Tenta novamente.')
