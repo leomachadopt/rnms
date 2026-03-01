@@ -122,7 +122,7 @@ const LeonardoMachado = () => {
                 </p>
 
                 <p>
-                  Entre 2016 e 2021 esse pensamento foi consolidado através da formação de profissionais numa metodologia integrativa própria. A partir de 2021, o foco evoluiu para <strong className="text-primary">implementação estrutural em clínica</strong>, organizando decisão, equipa e coerência institucional.
+                  Entre 2016 e 2021 esse pensamento foi consolidado através da formação de profissionais numa metodologia integrativa própria. A partir de 2021, o foco evoluiu para <strong className="text-primary">implementação estrutural em clínicas</strong>, organizando decisão, equipa e coerência clínica-comercial.
                 </p>
 
                 <div className="glass-premium border-l-4 border-l-secondary p-8 lg:p-10 rounded-xl shadow-premium mt-10">
