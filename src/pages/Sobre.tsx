@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
+import { PRIMARY_CTA_ROUTE } from '@/config/routes'
 import { Card, CardContent } from '@/components/ui/card'
 import {
   Brain,
@@ -331,7 +332,7 @@ const Sobre = () => {
           {/* CTAs */}
           <div className="flex flex-wrap gap-4 justify-center mt-8">
             <Button asChild size="lg" className="btn-gold text-lg px-10 py-7 hover-glow-gold">
-              <Link to="/elegibilidade">
+              <Link to={PRIMARY_CTA_ROUTE}>
                 <Zap className="w-5 h-5 mr-2" />
                 Avaliar Elegibilidade
               </Link>

@@ -10,6 +10,7 @@ import {
   MessageCircle
 } from 'lucide-react'
 import { useScrollAnimation } from '@/hooks/use-scroll-animation'
+import { PRIMARY_CTA_ROUTE } from '@/config/routes'
 
 const Formacao = () => {
   const heroRef = useScrollAnimation({ threshold: 0.2, triggerOnce: true })
@@ -116,7 +117,7 @@ const Formacao = () => {
                 size="lg"
                 className="glass-premium text-base sm:text-lg px-10 py-7 border-2 border-white/30 text-white hover:bg-white hover:text-primary hover:scale-105 transition-all font-semibold"
               >
-                <Link to="/elegibilidade">Avaliar Elegibilidade</Link>
+                <Link to={PRIMARY_CTA_ROUTE}>Avaliar Elegibilidade</Link>
               </Button>
             </div>
           </div>

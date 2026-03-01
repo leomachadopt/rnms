@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import { ArrowLeft } from 'lucide-react'
 import useAppStore from '@/stores/useAppStore'
+import { PRIMARY_CTA_ROUTE } from '@/config/routes'
 
 const BlogPost = () => {
   const { slug } = useParams()
@@ -98,7 +99,7 @@ const BlogPost = () => {
             agora mesmo.
           </p>
           <Button asChild className="rounded-full">
-            <Link to="/elegibilidade">Avaliar Elegibilidade</Link>
+            <Link to={PRIMARY_CTA_ROUTE}>Avaliar Elegibilidade</Link>
           </Button>
         </div>
       </article>

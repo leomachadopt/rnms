@@ -10,6 +10,7 @@ import {
   SheetDescription,
 } from '@/components/ui/sheet'
 import { cn } from '@/lib/utils'
+import { PRIMARY_CTA_ROUTE } from '@/config/routes'
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -79,7 +80,7 @@ export function Header() {
             asChild
             className="btn-gold hover-glow-gold px-6"
           >
-            <Link to="/elegibilidade" className="group">
+            <Link to={PRIMARY_CTA_ROUTE} className="group">
               <MessageCircle className="w-4 h-4 mr-2 group-hover:rotate-12 transition-transform duration-300" />
               Avaliar Elegibilidade
             </Link>
@@ -130,7 +131,7 @@ export function Header() {
                   asChild
                   className="mt-4 w-full btn-gold hover-glow-gold"
                 >
-                  <Link to="/elegibilidade" onClick={() => setIsOpen(false)}>
+                  <Link to={PRIMARY_CTA_ROUTE} onClick={() => setIsOpen(false)}>
                     <MessageCircle className="w-4 h-4 mr-2" />
                     Avaliar Elegibilidade
                   </Link>

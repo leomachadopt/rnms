@@ -7,6 +7,7 @@ import {
   MapPin,
   Phone,
 } from 'lucide-react'
+import { PRIMARY_CTA_ROUTE } from '@/config/routes'
 
 export function Footer() {
   return (
@@ -111,7 +112,7 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  to="/elegibilidade"
+                  to={PRIMARY_CTA_ROUTE}
                   className="text-sm text-white/70 hover:text-secondary transition-all duration-300 hover:translate-x-1 inline-block font-medium"
                 >
                   Avaliar Elegibilidade

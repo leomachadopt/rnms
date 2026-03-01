@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
 import useAppStore from '@/stores/useAppStore'
 import { useScrollAnimation } from '@/hooks/use-scroll-animation'
+import { PRIMARY_CTA_ROUTE } from '@/config/routes'
 
 const Index = () => {
   const { testimonials } = useAppStore()
@@ -170,7 +171,7 @@ const Index = () => {
                 size="lg"
                 className="rounded-xl text-base sm:text-lg px-8 sm:px-10 py-6 sm:py-7 border-2 border-white bg-white/95 text-foreground hover:bg-white hover:border-secondary hover:scale-105 transition-all duration-300 font-semibold relative z-20 shadow-lg"
               >
-                <Link to="/elegibilidade">Avaliar Elegibilidade da Minha Clínica</Link>
+                <Link to={PRIMARY_CTA_ROUTE}>Avaliar Elegibilidade da Minha Clínica</Link>
               </Button>
             </div>
           </div>

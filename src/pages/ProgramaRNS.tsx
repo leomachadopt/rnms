@@ -3,6 +3,7 @@ import { ArrowRight, CheckCircle2, XCircle, TrendingUp, Users, Target, Shield, B
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { useScrollAnimation } from '@/hooks/use-scroll-animation'
+import { PRIMARY_CTA_ROUTE } from '@/config/routes'
 
 const ProgramaRNS = () => {
   const heroRef = useScrollAnimation({ threshold: 0.2, triggerOnce: true })
@@ -48,7 +49,7 @@ const ProgramaRNS = () => {
               size="lg"
               className="btn-gold text-lg px-10 py-7 hover-glow-gold"
             >
-              <Link to="/elegibilidade">
+              <Link to={PRIMARY_CTA_ROUTE}>
                 Avaliar Elegibilidade da Minha Clínica
               </Link>
             </Button>
@@ -666,7 +667,7 @@ const ProgramaRNS = () => {
               size="lg"
               className="rounded-full bg-white text-primary hover:bg-white/90 shadow-premium hover:scale-105 transition-all text-lg px-12 py-7 font-bold hover-lift"
             >
-              <Link to="/elegibilidade" className="flex items-center gap-2">
+              <Link to={PRIMARY_CTA_ROUTE} className="flex items-center gap-2">
                 Avaliar Elegibilidade da Minha Clínica
                 <ArrowRight className="w-5 h-5" />
               </Link>
