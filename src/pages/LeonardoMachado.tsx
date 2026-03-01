@@ -1,57 +1,18 @@
 import { Link } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent } from '@/components/ui/card'
 import { PRIMARY_CTA_ROUTE } from '@/config/routes'
-import {
-  Brain,
-  BookOpen,
-  Target,
-  TrendingUp,
-  CheckCircle2
-} from 'lucide-react'
 import { useScrollAnimation } from '@/hooks/use-scroll-animation'
 
 const LeonardoMachado = () => {
   const heroRef = useScrollAnimation({ threshold: 0.2, triggerOnce: true })
-  const identityRef = useScrollAnimation({ threshold: 0.2, triggerOnce: true })
-  const differentialsRef = useScrollAnimation({ threshold: 0.2, triggerOnce: true })
-
-  const identityPillars = [
-    {
-      icon: Brain,
-      title: 'Fundador do Método RNS',
-      description: 'Criador de um modelo estruturado de raciocínio clínico sistémico aplicado à má oclusão.'
-    },
-    {
-      icon: BookOpen,
-      title: 'Formador de Raciocínio Clínico',
-      description: 'Capacita profissionais a compreender a má oclusão dentro de um sistema adaptativo mais amplo.'
-    },
-    {
-      icon: Target,
-      title: 'Referência em Integração Sistémica',
-      description: 'Autoridade na integração entre oclusão, sistema nervoso e organização funcional do corpo.'
-    },
-    {
-      icon: TrendingUp,
-      title: 'Especialista em Previsibilidade Clínica',
-      description: 'Foco em coerência terapêutica, previsibilidade de resultados e valorização profissional sustentada.'
-    }
-  ]
-
-  const differentials = [
-    'Clareza conceptual e rigor intelectual',
-    'Capacidade pedagógica estruturada',
-    'Integração entre múltiplos sistemas',
-    'Experiência clínica real e comprovada',
-    'Visão e presença internacional',
-    'Posicionamento intelectual consistente'
-  ]
+  const funcaoRef = useScrollAnimation({ threshold: 0.2, triggerOnce: true })
+  const integracaoRef = useScrollAnimation({ threshold: 0.2, triggerOnce: true })
+  const resultadoRef = useScrollAnimation({ threshold: 0.2, triggerOnce: true })
 
   return (
-    <div className="flex flex-col gap-6 pb-12">
+    <div className="flex flex-col gap-12 pb-12">
       {/* Hero Section */}
-      <section className="gradient-luxury text-white py-12 lg:py-16 relative overflow-hidden">
+      <section className="gradient-luxury text-white py-16 lg:py-24 relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(250,204,21,0.15),transparent_50%)]"></div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(0,0,0,0.5),transparent_60%)]"></div>
         <div className="absolute inset-0 pattern-dots opacity-20"></div>
@@ -64,214 +25,189 @@ const LeonardoMachado = () => {
               : 'opacity-0 translate-y-10'
           }`}
         >
-          <div className="inline-block mb-6 badge-premium">
-            Fundador do Método RNS
-          </div>
-          <h1 className="heading-premium text-4xl lg:text-6xl mb-6 leading-tight text-white">
+          <h1 className="heading-premium text-5xl lg:text-7xl mb-8 leading-tight text-white">
             Leonardo Machado
           </h1>
-          <p className="text-xl lg:text-2xl mb-10 text-white/90 leading-relaxed max-w-3xl mx-auto font-light">
-            Referência clínica e intelectual no estudo e aplicação do Reequilíbrio Neuro-Oclusal Sistémico.<br />
-            <strong className="font-semibold text-gradient-gold">A má oclusão só pode ser compreendida dentro de um sistema.</strong>
+          <p className="text-2xl lg:text-3xl text-white/90 leading-relaxed max-w-3xl mx-auto font-light">
+            Fundador do Programa RNS de Integração Ortodôntica
           </p>
-          <div className="flex flex-wrap gap-4 justify-center">
+        </div>
+      </section>
+
+      {/* 1. A Função */}
+      <section className="section-premium container-premium">
+        <div
+          ref={funcaoRef.elementRef}
+          className={`max-w-4xl mx-auto transition-all duration-1000 ${
+            funcaoRef.isVisible ? 'opacity-100' : 'opacity-0'
+          }`}
+        >
+          <h2 className="heading-premium text-4xl lg:text-5xl mb-12 text-center">
+            A Função
+          </h2>
+
+          <div className="space-y-8 text-lg lg:text-xl leading-relaxed text-foreground/90">
+            <p className="text-2xl lg:text-3xl font-light text-center mb-12">
+              Eu não criei um curso.<br />
+              <strong className="text-gradient-gold font-semibold">Criei uma estrutura de decisão.</strong>
+            </p>
+
+            <p>
+              Ao longo de mais de duas décadas de prática integrada com Medicina Dentária, tornou-se evidente um padrão: clínicas tecnicamente competentes operam com critérios de decisão frágeis.
+            </p>
+
+            <p className="text-center italic text-primary font-semibold text-xl lg:text-2xl">
+              O problema raramente está na técnica.<br />
+              Está na arquitetura que organiza essa técnica.
+            </p>
+
+            <p>
+              Foi dessa constatação que nasceu o trabalho que hoje sustenta o Programa RNS: <strong>estruturar a decisão clínica e institucional</strong> para que a previsibilidade deixe de ser circunstancial e passe a ser consequência.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* 2. A Integração */}
+      <section className="section-premium gradient-subtle py-16 lg:py-20">
+        <div className="container-premium">
+          <div
+            ref={integracaoRef.elementRef}
+            className={`max-w-4xl mx-auto transition-all duration-1000 ${
+              integracaoRef.isVisible ? 'opacity-100' : 'opacity-0'
+            }`}
+          >
+            <h2 className="heading-premium text-4xl lg:text-5xl mb-12 text-center">
+              A Integração
+            </h2>
+
+            <div className="space-y-8 text-lg lg:text-xl leading-relaxed text-foreground/90">
+              <p>
+                Desde 2003 trabalho em contexto clínico colaborativo com médicos dentistas.
+              </p>
+
+              <p>
+                Em 2011 comecei a sistematizar aquilo que se tornaria o eixo do meu trabalho: <strong>tornar mensurável e operacional a integração entre oclusão e sistema corporal.</strong>
+              </p>
+
+              <p>
+                Entre 2016 e 2021 formei profissionais numa metodologia integrativa própria.<br />
+                A partir de 2021, o foco evoluiu para <strong className="text-primary">implementação estrutural em clínica</strong>.
+              </p>
+
+              <div className="glass-premium border-l-4 border-l-secondary p-8 lg:p-10 rounded-xl shadow-premium mt-10">
+                <p className="text-xl lg:text-2xl font-semibold text-primary mb-6">
+                  Hoje, o meu trabalho integra três dimensões que raramente coexistem na mesma pessoa:
+                </p>
+                <ul className="space-y-4 text-lg">
+                  <li className="flex items-start gap-3">
+                    <span className="text-secondary font-bold">→</span>
+                    <span><strong>decisão clínica,</strong></span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="text-secondary font-bold">→</span>
+                    <span><strong>estrutura de conversão,</strong></span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="text-secondary font-bold">→</span>
+                    <span><strong>organização institucional.</strong></span>
+                  </li>
+                </ul>
+                <p className="mt-8 text-center italic text-foreground/80">
+                  Não como teoria.<br />
+                  <strong className="text-gradient-gold text-xl">Como prática aplicada.</strong>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 3. O Resultado Natural */}
+      <section className="section-premium container-premium">
+        <div
+          ref={resultadoRef.elementRef}
+          className={`max-w-4xl mx-auto transition-all duration-1000 ${
+            resultadoRef.isVisible ? 'opacity-100' : 'opacity-0'
+          }`}
+        >
+          <h2 className="heading-premium text-4xl lg:text-5xl mb-12 text-center">
+            O Resultado Natural
+          </h2>
+
+          <div className="space-y-8 text-lg lg:text-xl leading-relaxed text-foreground/90">
+            <div className="glass-premium border-gradient rounded-xl p-8 lg:p-10 shadow-premium text-center">
+              <p className="text-xl lg:text-2xl font-light mb-6">
+                Quando a decisão clínica se organiza, a comunicação torna-se clara.
+              </p>
+              <p className="text-xl lg:text-2xl font-light mb-6">
+                Quando a comunicação se torna clara, a conversão deixa de ser tensão.
+              </p>
+              <p className="text-xl lg:text-2xl font-light">
+                Quando a conversão estabiliza, a instituição cresce.
+              </p>
+            </div>
+
+            <div className="bg-secondary/10 border-2 border-secondary rounded-xl p-8 lg:p-10 text-center">
+              <p className="text-xl lg:text-2xl font-semibold text-primary mb-4">
+                Clínicas que implementaram esta estrutura registaram crescimentos médios mensais entre <strong className="text-gradient-gold">20% e 30%</strong>.
+              </p>
+              <p className="text-lg text-foreground/80 italic mt-6">
+                Mas o crescimento não é o objetivo.<br />
+                <strong className="text-primary not-italic">É a consequência.</strong>
+              </p>
+              <p className="text-xl font-semibold mt-6 text-foreground">
+                O objetivo é maturidade decisória e estabilidade institucional.
+              </p>
+            </div>
+
+            <div className="mt-12 pt-12 border-t border-border">
+              <h3 className="text-2xl lg:text-3xl font-semibold text-primary mb-6 text-center">
+                Enquadramento
+              </h3>
+              <p className="mb-6">
+                A minha formação de base é em Fisioterapia.
+              </p>
+              <p className="mb-6">
+                A integração com Medicina Dentária não nasceu de tendência ou discurso teórico, mas de <strong>prática clínica colaborativa contínua</strong> ao longo do meu percurso profissional.
+              </p>
+              <p className="text-center text-xl font-light italic text-foreground/80">
+                O Programa RNS não é um produto académico.<br />
+                <strong className="text-gradient-gold text-2xl not-italic">É uma arquitetura construída a partir de prática real.</strong>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Final */}
+      <section className="container-premium py-12">
+        <div className="gradient-navy-gold rounded-[3rem] p-12 lg:p-16 text-center text-white space-y-8 relative overflow-hidden shadow-premium hover-glow-gold">
+          <div className="absolute inset-0 pattern-dots opacity-20"></div>
+
+          <div className="relative z-10 max-w-3xl mx-auto">
+            <p className="text-2xl lg:text-3xl mb-8 text-white/90 leading-relaxed font-light">
+              O Programa RNS é aplicado de forma <strong className="text-white">criteriosamente selectiva</strong>.
+            </p>
+
+            <div className="bg-white/10 backdrop-blur-sm border border-white/30 rounded-2xl p-8 mb-10">
+              <p className="text-xl lg:text-2xl font-semibold mb-4">
+                Neste momento é possível integrar apenas <span className="text-gradient-gold">2 clínicas adicionais</span>.
+              </p>
+            </div>
+
             <Button
               asChild
               size="lg"
-              className="btn-gold text-lg px-10 py-7 hover-glow-gold"
-            >
-              <Link to="/formacao">
-                Formação Método RNS
-              </Link>
-            </Button>
-            <Button
-              asChild
-              size="lg"
-              variant="outline"
-              className="glass-premium border-2 border-white/30 text-white hover:bg-white hover:text-primary hover:scale-105 transition-all text-lg px-10 py-7 font-semibold"
+              className="rounded-full bg-white text-primary hover:bg-white/90 shadow-premium hover:scale-105 transition-all text-xl px-14 py-8 font-bold hover-lift"
             >
               <Link to={PRIMARY_CTA_ROUTE}>
                 Avaliar Elegibilidade
               </Link>
             </Button>
-          </div>
-        </div>
-      </section>
 
-      {/* Identidade Profissional */}
-      <section className="section-premium container-premium py-8 lg:py-12">
-        <div
-          ref={identityRef.elementRef}
-          className={`text-center mb-10 transition-all duration-1000 ${
-            identityRef.isVisible ? 'opacity-100' : 'opacity-0'
-          }`}
-        >
-          <div className="inline-block mb-4 subheading-premium text-primary">
-            Identidade Profissional
-          </div>
-          <h2 className="heading-premium text-3xl lg:text-5xl mb-6">
-            Não é apenas um formador.<br />
-            <span className="text-gradient-gold">É o fundador de um método.</span>
-          </h2>
-          <p className="text-premium text-lg max-w-3xl mx-auto">
-            Leonardo Machado posiciona-se como organizador de pensamento clínico,
-            referência em integração sistémica e autoridade em previsibilidade clínica
-            aplicada ao tratamento da má oclusão.
-          </p>
-        </div>
-
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-10 max-w-5xl mx-auto">
-          {identityPillars.map((item, index) => {
-            const Icon = item.icon
-            return (
-              <Card
-                key={index}
-                className={`card-premium hover-lift group transition-all duration-1000 ${
-                  identityRef.isVisible
-                    ? 'opacity-100 translate-y-0'
-                    : 'opacity-0 translate-y-10'
-                }`}
-                style={{ transitionDelay: `${index * 150}ms` }}
-              >
-                <CardContent className="p-8 lg:p-10">
-                  <div className="w-14 h-14 rounded-full gradient-navy-gold flex items-center justify-center mb-6 shadow-gold group-hover:scale-110 transition-transform duration-300">
-                    <Icon className="w-7 h-7 text-white" />
-                  </div>
-                  <h3 className="text-xl font-bold mb-4 text-foreground">{item.title}</h3>
-                  <p className="text-premium leading-relaxed">
-                    {item.description}
-                  </p>
-                </CardContent>
-              </Card>
-            )
-          })}
-        </div>
-      </section>
-
-      {/* A Lacuna que Ocupa */}
-      <section className="section-premium gradient-subtle py-8 lg:py-12">
-        <div className="container-premium">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-10">
-              <div className="inline-block mb-4 subheading-premium text-primary">
-                Contexto
-              </div>
-              <h2 className="heading-premium text-3xl lg:text-4xl mb-4">
-                A lacuna que o posicionamento ocupa
-              </h2>
-            </div>
-
-            <div className="glass-premium border-gradient rounded-[2rem] p-8 lg:p-10 shadow-premium">
-              <p className="text-premium text-lg leading-relaxed mb-6">
-                No panorama atual da ortodontia e da oclusão, existe uma abundância de técnicas,
-                cursos e abordagens fragmentadas. No entanto, permanece uma <strong className="text-primary">lacuna significativa
-                na organização do raciocínio clínico</strong>.
-              </p>
-              <p className="text-premium text-lg leading-relaxed mb-6">
-                Muitos profissionais dominam técnicas sofisticadas, mas continuam a enfrentar:
-              </p>
-              <ul className="space-y-4 mb-8">
-                {[
-                  'Instabilidade de resultados',
-                  'Recidivas',
-                  'Dificuldade de leitura sistémica dos casos',
-                  'Decisões clínicas pouco coerentes entre si',
-                  'Dificuldade em comunicar valor clínico ao paciente'
-                ].map((item, idx) => (
-                  <li key={idx} className="flex items-start gap-4">
-                    <div className="flex-shrink-0 w-8 h-8 rounded-full gradient-navy-gold flex items-center justify-center mt-0.5 shadow-gold">
-                      <CheckCircle2 className="w-5 h-5 text-white" />
-                    </div>
-                    <span className="text-foreground font-medium text-lg">{item}</span>
-                  </li>
-                ))}
-              </ul>
-              <div className="glass-premium border-l-4 border-l-secondary p-6 lg:p-8 rounded-xl shadow-gold">
-                <p className="text-lg font-bold text-primary mb-3">
-                  Esta lacuna não é técnica. É organizacional.
-                </p>
-                <p className="text-premium leading-relaxed">
-                  O Método RNS surge precisamente para ocupar este espaço: organizar o raciocínio
-                  clínico a partir de uma leitura sistémica da má oclusão.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Diferenciais Estratégicos */}
-      <section className="section-premium container-premium py-8 lg:py-12">
-        <div
-          ref={differentialsRef.elementRef}
-          className={`text-center mb-10 transition-all duration-1000 ${
-            differentialsRef.isVisible ? 'opacity-100' : 'opacity-0'
-          }`}
-        >
-          <div className="inline-block mb-4 subheading-premium text-primary">
-            Diferenciais Estratégicos
-          </div>
-          <h2 className="heading-premium text-3xl lg:text-5xl mb-6">
-            O que diferencia Leonardo Machado
-          </h2>
-          <p className="text-premium text-lg max-w-3xl mx-auto">
-            Não compete por preço. Não compete por volume. Compete por profundidade e impacto.
-          </p>
-        </div>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-          {differentials.map((item, index) => (
-            <Card
-              key={index}
-              className={`glass-premium border-l-4 border-l-secondary hover:shadow-premium transition-all duration-1000 hover-lift ${
-                differentialsRef.isVisible
-                  ? 'opacity-100 translate-y-0'
-                  : 'opacity-0 translate-y-10'
-              }`}
-              style={{ transitionDelay: `${index * 100}ms` }}
-            >
-              <CardContent className="p-6">
-                <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-8 h-8 rounded-full gradient-navy-gold flex items-center justify-center mt-0.5 shadow-gold">
-                    <CheckCircle2 className="w-5 h-5 text-white" />
-                  </div>
-                  <p className="font-medium text-foreground leading-relaxed">
-                    {item}
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </section>
-
-      {/* CTA Final */}
-      <section className="container-premium py-6">
-        <div className="gradient-navy-gold rounded-[3rem] p-10 lg:p-14 text-center text-white space-y-8 relative overflow-hidden shadow-premium hover-glow-gold">
-          <div className="absolute inset-0 pattern-dots opacity-20"></div>
-
-          <div className="relative z-10">
-            <div className="inline-block mb-6 badge-premium bg-white/10 backdrop-blur-sm border border-white/30">
-              <span className="font-semibold text-white">Visão & Missão</span>
-            </div>
-            <h2 className="heading-premium text-3xl lg:text-5xl mb-6 leading-tight text-white">
-              Consolidar o Método RNS como referência internacional
-            </h2>
-            <p className="text-lg lg:text-xl mb-10 text-white/90 max-w-2xl mx-auto leading-relaxed font-light">
-              Formar profissionais capazes de conduzir tratamentos com maior coerência,
-              previsibilidade e valor clínico através da compreensão sistémica da má oclusão.
-            </p>
-            <Button
-              asChild
-              size="lg"
-              className="rounded-full bg-white text-primary hover:bg-white/90 shadow-premium hover:scale-105 transition-all text-lg px-12 py-7 font-bold hover-lift"
-            >
-              <Link to="/formacao">
-                Conheça a Formação RNS
-              </Link>
-            </Button>
-            <p className="mt-6 text-sm text-white/80 font-light">
-              Profundidade Clínica • Autoridade Conceptual • Impacto Real
+            <p className="mt-8 text-base text-white/70 font-light">
+              Entrevista diagnóstica e seletiva — Não é uma sessão comercial
             </p>
           </div>
 
