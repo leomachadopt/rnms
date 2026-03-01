@@ -90,7 +90,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/agenterns',
-        element: <AgentRNS />,
+        element: <Navigate to="/elegibilidade" replace />,
       },
       {
         path: '/agente',
