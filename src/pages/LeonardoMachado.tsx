@@ -50,7 +50,7 @@ const LeonardoMachado = () => {
             {/* Coluna de Texto */}
             <div className="space-y-8 text-lg lg:text-xl leading-relaxed text-foreground/90">
               <p className="text-2xl lg:text-3xl font-light">
-                Eu não criei um curso.<br />
+                Eu não criei apenas uma formação.<br />
                 <strong className="text-gradient-gold font-semibold">Criei uma estrutura de decisão.</strong>
               </p>
 
