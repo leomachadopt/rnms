@@ -96,25 +96,25 @@ export default function Agenda() {
               <CheckCircle2 className="w-10 h-10 text-secondary" />
             </div>
 
-            <h1 className="heading-premium text-2xl lg:text-3xl mb-4 text-foreground">
+            <h1 className="heading-premium text-3xl lg:text-4xl mb-6 text-foreground">
               Aplicação <span className="text-gradient-gold">Recebida</span>
             </h1>
 
-            <p className="text-premium text-lg mb-6">
+            <p className="text-premium text-xl lg:text-2xl mb-8">
               O teu perfil está alinhado com o Programa RNS de Integração Ortodôntica.
             </p>
 
-            <div className="bg-secondary/10 border-2 border-secondary rounded-xl p-6 mb-8">
-              <h3 className="font-bold text-lg mb-3 text-foreground">
+            <div className="bg-secondary/10 border-2 border-secondary rounded-xl p-8 mb-8">
+              <h3 className="font-bold text-xl lg:text-2xl mb-4 text-foreground">
                 📅 Próximo Passo: Entrevista Estratégica de Elegibilidade
               </h3>
-              <p className="text-sm text-muted-foreground mb-4">
+              <p className="text-base lg:text-lg text-muted-foreground mb-4">
                 Agenda agora a tua <strong>Entrevista Estratégica</strong> de 45 minutos com o Dr. Leonardo Machado.
               </p>
-              <p className="text-sm text-muted-foreground mb-4">
+              <p className="text-base lg:text-lg text-muted-foreground mb-4">
                 Nesta sessão, vamos:
               </p>
-              <ul className="text-sm text-muted-foreground text-left list-disc list-inside space-y-1 mb-6">
+              <ul className="text-base lg:text-lg text-muted-foreground text-left list-disc list-inside space-y-2 mb-8">
                 <li>Analisar em profundidade o estado actual da tua clínica</li>
                 <li>Mapear os bloqueios específicos ao crescimento ortodôntico</li>
                 <li>Validar se o Programa RNS é adequado ao teu momento</li>
@@ -123,24 +123,24 @@ export default function Agenda() {
 
               <Button
                 onClick={() => window.open(calendlyUrl, '_blank')}
-                className="w-full btn-gold hover-glow-gold"
+                className="w-full btn-gold hover-glow-gold text-lg"
                 size="lg"
               >
-                <Calendar className="w-5 h-5 mr-2" />
+                <Calendar className="w-6 h-6 mr-2" />
                 Agendar Entrevista Estratégica (45 min)
               </Button>
             </div>
 
             <div className="bg-muted/50 border border-border rounded-xl p-6">
-              <p className="text-xs text-muted-foreground mb-2">
+              <p className="text-sm lg:text-base text-muted-foreground mb-3">
                 ⚠️ <strong>Capacidade limitada:</strong> O Programa pode integrar apenas <strong>mais 2 clínicas</strong> neste momento para garantir qualidade de implementação.
               </p>
-              <p className="text-xs text-muted-foreground">
+              <p className="text-sm lg:text-base text-muted-foreground">
                 <strong>Entrevista diagnóstica e seletiva.</strong> Não é uma sessão comercial — é uma avaliação mútua de alinhamento.
               </p>
             </div>
 
-            <p className="text-xs text-muted-foreground mt-6">
+            <p className="text-sm lg:text-base text-muted-foreground mt-6">
               Não consegues agendar agora? Sem problema — vais receber um email com o link de agendamento.
             </p>
 
