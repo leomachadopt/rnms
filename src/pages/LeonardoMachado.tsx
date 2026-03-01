@@ -244,6 +244,10 @@ const LeonardoMachado = () => {
           <div className="absolute inset-0 pattern-dots opacity-20"></div>
 
           <div className="relative z-10 max-w-3xl mx-auto">
+            <p className="text-2xl lg:text-3xl mb-10 text-white/90 leading-relaxed font-light">
+              O Programa RNS é aplicado de forma <strong className="text-white">criteriosamente selectiva</strong>.
+            </p>
+
             <Button
               asChild
               size="lg"
