@@ -86,6 +86,9 @@ export default function Conversations() {
         return 'Diagnóstico'
       case 'programa_rns':
         return 'Programa RNS'
+      case 'eligibility_chat':
+      case 'eligibility': // Compatibilidade com registros antigos
+        return 'Elegibilidade'
       default:
         return type
     }
@@ -130,6 +133,7 @@ export default function Conversations() {
                 <SelectItem value="all">Todos</SelectItem>
                 <SelectItem value="diagnostic">Diagnóstico</SelectItem>
                 <SelectItem value="programa_rns">Programa RNS</SelectItem>
+                <SelectItem value="eligibility_chat">Elegibilidade</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -186,6 +190,19 @@ export default function Conversations() {
                 </p>
               </div>
               <MessageSquare className="w-8 h-8 text-secondary" />
+            </div>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent className="pt-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium text-muted-foreground">Elegibilidade</p>
+                <p className="text-2xl font-bold">
+                  {conversations.filter(c => c.chat_type === 'eligibility_chat' || c.chat_type === 'eligibility').length}
+                </p>
+              </div>
+              <MessageSquare className="w-8 h-8 text-green-500" />
             </div>
           </CardContent>
         </Card>

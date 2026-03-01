@@ -93,7 +93,7 @@ export type NewTrackingEvent = typeof trackingEvents.$inferInsert
 export const agentConversations = pgTable('agent_conversations', {
   id: serial('id').primaryKey(),
   sessionId: varchar('session_id', { length: 255 }).notNull().unique(), // UUID da sessão
-  chatType: varchar('chat_type', { length: 50 }).notNull(), // 'diagnostic' | 'programa_rns'
+  chatType: varchar('chat_type', { length: 50 }).notNull(), // 'diagnostic' | 'programa_rns' | 'eligibility_chat'
   userEmail: varchar('user_email', { length: 255 }), // Email fornecido pelo utilizador (se disponível)
   userName: varchar('user_name', { length: 255 }), // Nome fornecido pelo utilizador (se disponível)
   // Informações do utilizador

@@ -146,7 +146,7 @@ export function EligibilityChat({ onQualified }: EligibilityChatProps) {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             sessionId,
-            chatType: 'eligibility',
+            chatType: 'eligibility_chat',
             messages: updatedMessages.map((m) => ({
               role: m.role,
               content: m.content,
