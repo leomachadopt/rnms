@@ -158,14 +158,14 @@ const Index = () => {
               <Button
                 asChild
                 size="lg"
-                className="btn-gold text-base sm:text-lg px-10 py-7 hover-glow-gold relative z-20"
+                className="rounded-xl text-base sm:text-lg px-10 py-7 font-semibold bg-secondary text-[hsl(0,0%,8%)] hover:bg-secondary/90 shadow-lg hover:scale-105 transition-all duration-300 relative z-20"
               >
                 <Link to="/formacao">Formação RNS</Link>
               </Button>
               <Button
                 asChild
                 size="lg"
-                className="rounded-xl text-base sm:text-lg px-10 py-7 border-2 border-white bg-white/95 text-foreground hover:bg-white hover:border-secondary hover:scale-105 transition-all duration-300 font-semibold relative z-20 shadow-lg"
+                className="rounded-xl text-base sm:text-lg px-10 py-7 font-semibold border-2 border-white bg-white/95 text-foreground hover:bg-white hover:border-secondary hover:scale-105 transition-all duration-300 relative z-20 shadow-lg"
               >
                 <Link to="/programa-rns">Programa RNS</Link>
               </Button>
