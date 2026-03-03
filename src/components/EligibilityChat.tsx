@@ -74,6 +74,22 @@ export function EligibilityChat({ onQualified }: EligibilityChatProps) {
     }
   }, [messages, isLoading])
 
+  // Prevenir zoom no iOS quando o input recebe foco
+  useEffect(() => {
+    const preventZoom = (e: TouchEvent) => {
+      if ((e.target as HTMLElement).tagName === 'TEXTAREA' || (e.target as HTMLElement).tagName === 'INPUT') {
+        e.preventDefault()
+      }
+    }
+
+    // Adicionar listener para prevenir zoom com duplo toque
+    document.addEventListener('touchstart', preventZoom, { passive: false })
+
+    return () => {
+      document.removeEventListener('touchstart', preventZoom)
+    }
+  }, [])
+
   // Detecta se a conversa chegou ao diagnóstico final (qualificado)
   useEffect(() => {
     const lastAssistantMsg = [...messages]
@@ -184,7 +200,7 @@ export function EligibilityChat({ onQualified }: EligibilityChatProps) {
 
   return (
     <div className="flex flex-col w-full max-w-3xl mx-auto bg-white rounded-2xl shadow-premium border border-border overflow-hidden"
-         style={{ minHeight: '600px', maxHeight: '85vh', height: 'clamp(600px, 80vh, 900px)' }}>
+         style={{ minHeight: '500px', maxHeight: 'calc(100vh - 200px)', height: 'clamp(500px, 70vh, 800px)' }}>
 
       {/* Header */}
       <div className="bg-[hsl(0,0%,8%)] p-4 text-white flex items-center gap-3 border-b-2 border-secondary/60 flex-shrink-0">
@@ -324,15 +340,16 @@ export function EligibilityChat({ onQualified }: EligibilityChatProps) {
       </ScrollArea>
 
       {/* Input */}
-      <div className="p-4 bg-muted/30 border-t border-border flex-shrink-0">
+      <div className="p-3 sm:p-4 bg-muted/30 border-t border-border flex-shrink-0">
         <div className="flex gap-2 items-end">
           <Textarea
             ref={inputRef}
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder={activeOptions.length > 0 ? 'Ou escreve a tua resposta... (Shift+Enter para nova linha)' : 'Escreve a tua mensagem... (Shift+Enter para nova linha)'}
-            className="flex-1 bg-white text-sm min-h-[44px] max-h-[120px] resize-none"
+            placeholder={activeOptions.length > 0 ? 'Ou escreve a tua resposta...' : 'Escreve a tua mensagem...'}
+            className="flex-1 bg-white text-base min-h-[44px] max-h-[120px] resize-none"
+            style={{ fontSize: '16px' }}
             disabled={isLoading}
             maxLength={600}
             rows={1}
