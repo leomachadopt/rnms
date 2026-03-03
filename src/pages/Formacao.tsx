@@ -104,20 +104,14 @@ const Formacao = () => {
                 className="btn-gold text-base sm:text-lg px-10 py-7 hover-glow-gold"
               >
                 <a
-                  href="mailto:formacao@metodorns.pt"
+                  href="https://wa.me/351967798664?text=Gostava%20de%20saber%20mais%20sobre%20a%20forma%C3%A7%C3%A3o%20RNS."
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="flex items-center"
                 >
                   <MessageCircle className="mr-2 w-5 h-5" />
                   Solicitar Informações
                 </a>
-              </Button>
-              <Button
-                asChild
-                variant="outline"
-                size="lg"
-                className="glass-premium text-base sm:text-lg px-10 py-7 border-2 border-white/30 text-white hover:bg-white hover:text-primary hover:scale-105 transition-all font-semibold"
-              >
-                <Link to={PRIMARY_CTA_ROUTE}>Avaliar Elegibilidade</Link>
               </Button>
             </div>
           </div>
@@ -260,20 +254,14 @@ const Formacao = () => {
                 size="lg"
                 className="rounded-full bg-white text-primary hover:bg-white/90 shadow-premium hover:scale-105 transition-all text-lg px-12 py-7 font-bold hover-lift"
               >
-                <a href="mailto:formacao@metodorns.pt">
+                <a
+                  href="https://wa.me/351967798664?text=Gostava%20de%20saber%20mais%20sobre%20a%20forma%C3%A7%C3%A3o%20RNS."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <MessageCircle className="mr-2 w-5 h-5" />
                   Solicitar Informações
                 </a>
-              </Button>
-              <Button
-                asChild
-                size="lg"
-                variant="outline"
-                className="glass-premium border-2 border-white/30 text-white hover:bg-white hover:text-primary shadow-premium hover:scale-105 transition-all text-lg px-12 py-7 font-semibold"
-              >
-                <Link to="/leonardo">
-                  Conheça o Fundador
-                </Link>
               </Button>
             </div>
             <p className="mt-6 text-sm text-white/80 font-light">

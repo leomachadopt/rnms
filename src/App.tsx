@@ -11,6 +11,7 @@ import Layout from './components/Layout'
 import AdminLayout from './components/AdminLayout'
 import Index from './pages/Index'
 import LeonardoMachado from './pages/LeonardoMachado'
+import Leonardo2 from './pages/Leonardo2'
 import Formacao from './pages/Formacao'
 import ProgramaRNS from './pages/ProgramaRNS'
 import ProgramaRNSQualificacao from './pages/ProgramaRNSQualificacao'
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
       {
         path: '/leonardo',
         element: <LeonardoMachado />,
+      },
+      {
+        path: '/leonardo-2',
+        element: <Leonardo2 />,
       },
       {
         path: '/formacao',

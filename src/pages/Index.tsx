@@ -151,27 +151,23 @@ const Index = () => {
               O Método RNS organiza a interpretação sistêmica do corpo a partir da dinâmica adaptativa entre oclusão e função, promovendo segurança decisória fundamentada e maior previsibilidade clínica.
             </p>
             <div className={`flex flex-col sm:flex-row gap-4 sm:gap-5 pt-4 transition-all duration-1000 ${
-              heroRef.isVisible 
-                ? 'animate-fade-in-up animate-stagger-2 opacity-100' 
+              heroRef.isVisible
+                ? 'animate-fade-in-up animate-stagger-2 opacity-100'
                 : 'opacity-100'
             }`}>
               <Button
                 asChild
                 size="lg"
-                className="btn-gold text-base sm:text-lg hover-glow-gold relative z-20"
+                className="btn-gold text-base sm:text-lg px-10 py-7 hover-glow-gold relative z-20"
               >
-                <Link to="/formacao" className="flex items-center">
-                  Formação Método RNS
-                  <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </Link>
+                <Link to="/formacao">Formação RNS</Link>
               </Button>
               <Button
                 asChild
-                variant="outline"
                 size="lg"
-                className="rounded-xl text-base sm:text-lg px-8 sm:px-10 py-6 sm:py-7 border-2 border-white bg-white/95 text-foreground hover:bg-white hover:border-secondary hover:scale-105 transition-all duration-300 font-semibold relative z-20 shadow-lg"
+                className="rounded-xl text-base sm:text-lg px-10 py-7 border-2 border-white bg-white/95 text-foreground hover:bg-white hover:border-secondary hover:scale-105 transition-all duration-300 font-semibold relative z-20 shadow-lg"
               >
-                <Link to={PRIMARY_CTA_ROUTE}>Avaliar Elegibilidade da Minha Clínica</Link>
+                <Link to="/programa-rns">Programa RNS</Link>
               </Button>
             </div>
           </div>
