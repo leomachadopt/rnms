@@ -60,20 +60,28 @@ export default function Login() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-blue-50 p-4">
-      <div className="w-full max-w-md animate-fade-in">
+    <div className="min-h-screen flex items-center justify-center gradient-luxury p-4 relative overflow-hidden">
+      {/* Background Effects */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(250,204,21,0.15),transparent_50%)]"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(0,0,0,0.5),transparent_60%)]"></div>
+      <div className="absolute inset-0 pattern-dots opacity-20"></div>
+
+      <div className="w-full max-w-md animate-fade-in relative z-10">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-primary mb-2">
-            Respiração Oral
+          <div className="inline-block mb-4 badge-premium">
+            Método RNS
+          </div>
+          <h1 className="heading-premium text-4xl text-white mb-2">
+            Acesso Administrativo
           </h1>
-          <p className="text-muted-foreground">Área Administrativa</p>
+          <p className="text-white/80 text-lg">Painel de gestão e controle</p>
         </div>
 
-        <Card className="shadow-lg">
-          <CardHeader className="space-y-1">
-            <CardTitle className="text-2xl text-center">Entrar</CardTitle>
-            <CardDescription className="text-center">
-              Faça login para acessar o painel administrativo
+        <Card className="glass-premium border-gradient shadow-premium">
+          <CardHeader className="space-y-1 pb-6">
+            <CardTitle className="text-2xl text-center text-foreground font-bold">Autenticação</CardTitle>
+            <CardDescription className="text-center text-base">
+              Acesso restrito a administradores autorizados
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -127,19 +135,19 @@ export default function Login() {
 
                 <Button
                   type="submit"
-                  className="w-full"
+                  className="w-full btn-gold hover-glow-gold text-lg"
                   size="lg"
                   disabled={isLoading}
                 >
                   {isLoading ? (
                     <>
-                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
-                      Entrando...
+                      <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin mr-2" />
+                      Autenticando...
                     </>
                   ) : (
                     <>
-                      <LogIn className="w-4 h-4 mr-2" />
-                      Entrar
+                      <LogIn className="w-5 h-5 mr-2" />
+                      Acessar Painel
                     </>
                   )}
                 </Button>
@@ -148,8 +156,13 @@ export default function Login() {
           </CardContent>
         </Card>
 
-        <div className="mt-6 text-center text-sm text-muted-foreground">
-          <p>© 2025 Respiração Oral. Todos os direitos reservados.</p>
+        <div className="mt-8 text-center">
+          <p className="text-white/70 text-sm font-light">
+            Sistema seguro e criptografado
+          </p>
+          <p className="text-white/50 text-xs mt-2">
+            © 2025 Método RNS. Todos os direitos reservados.
+          </p>
         </div>
       </div>
     </div>
