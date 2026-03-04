@@ -29,7 +29,7 @@ export function Header() {
     { name: 'Formação RNS', path: '/formacao' },
     { name: 'Programa RNS', path: '/programa-rns' },
     { name: 'O Fundador', path: '/leonardo' },
-    { name: 'Publicações', path: '/blog' },
+    { name: 'Publicações', path: '/publicacoes' },
   ]
 
   return (

@@ -72,7 +72,7 @@ export function Footer() {
                 { path: '/leonardo', label: 'Leonardo Machado' },
                 { path: '/formacao', label: 'Formação' },
                 { path: '/programa-rns', label: 'Programa RNS' },
-                { path: '/blog', label: 'Blog' },
+                { path: '/publicacoes', label: 'Publicações' },
               ].map((link, idx) => (
                 <li
                   key={link.path}
