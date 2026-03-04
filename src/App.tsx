@@ -19,7 +19,7 @@ import Elegibilidade from './pages/Elegibilidade'
 import Aplicacao from './pages/Aplicacao'
 import Agenda from './pages/Agenda'
 import Problema from './pages/Problema'
-import Blog from './pages/Blog'
+import Publicacoes from './pages/Publicacoes'
 import BlogPost from './pages/BlogPost'
 import AgentRNS from './pages/AgentRNS'
 import Agente from './pages/Agente'
@@ -87,7 +87,11 @@ const router = createBrowserRouter([
       },
       {
         path: '/blog',
-        element: <Blog />,
+        element: <Publicacoes />,
+      },
+      {
+        path: '/publicacoes',
+        element: <Publicacoes />,
       },
       {
         path: '/blog/:slug',

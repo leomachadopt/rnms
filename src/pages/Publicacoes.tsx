@@ -4,16 +4,16 @@ import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import useAppStore from '@/stores/useAppStore'
 
-const Blog = () => {
+const Publicacoes = () => {
   const { blogPosts } = useAppStore()
 
   return (
     <div className="flex flex-col gap-6 pb-16">
       <section className="bg-slate-50 py-16">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl font-bold mb-4">Blog & Artigos</h1>
+          <h1 className="text-4xl font-bold mb-4">Publicações</h1>
           <p className="text-muted-foreground text-lg">
-            Informação confiável para pais e cuidadores.
+            Artigos científicos e conteúdos técnicos do Método RNS.
           </p>
         </div>
       </section>
@@ -70,4 +70,4 @@ const Blog = () => {
   )
 }
 
-export default Blog
+export default Publicacoes
