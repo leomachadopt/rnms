@@ -7,6 +7,7 @@ import { ScrollArea } from '@/components/ui/scroll-area'
 import { cn } from '@/lib/utils'
 import { toast } from 'sonner'
 import ReactMarkdown from 'react-markdown'
+import { useMetaPixel } from '@/hooks/use-meta-pixel'
 
 type ChatMessage = {
   id: string
@@ -41,6 +42,8 @@ type EligibilityChatProps = {
 
 export function EligibilityChat({ onQualified }: EligibilityChatProps) {
   const navigate = useNavigate()
+  const { trackChatMessage, trackEligibilityComplete, trackButtonClick } = useMetaPixel()
+
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: 'init',
@@ -98,9 +101,10 @@ export function EligibilityChat({ onQualified }: EligibilityChatProps) {
 
     if (lastAssistantMsg && lastAssistantMsg.content.includes('Preencher Formulário de Pré-Elegibilidade')) {
       setIsQualified(true)
+      trackEligibilityComplete()
       if (onQualified) onQualified()
     }
-  }, [messages, onQualified])
+  }, [messages, onQualified, trackEligibilityComplete])
 
   const sendMessage = useCallback(async (userText: string) => {
     if (!userText.trim() || isLoading) return
@@ -117,6 +121,10 @@ export function EligibilityChat({ onQualified }: EligibilityChatProps) {
     setMessages((prev) => [...prev, userMsg])
     setInputValue('')
     setIsLoading(true)
+
+    // Track chat interaction
+    const messageCount = messages.filter(m => m.role === 'user').length + 1
+    trackChatMessage(`message_${messageCount}`)
 
     // Prepara histórico para API — usa rawContent
     const history = [...messages, userMsg]
@@ -180,7 +188,7 @@ export function EligibilityChat({ onQualified }: EligibilityChatProps) {
       setIsLoading(false)
       setTimeout(() => inputRef.current?.focus(), 100)
     }
-  }, [messages, isLoading, sessionId, isQualified])
+  }, [messages, isLoading, sessionId, isQualified, trackChatMessage])
 
   const handleSend = () => sendMessage(inputValue)
 
@@ -329,7 +337,10 @@ export function EligibilityChat({ onQualified }: EligibilityChatProps) {
                 Entrevista Estratégica com o Dr. Leonardo Machado.
               </p>
               <Button
-                onClick={() => navigate('/aplicacao')}
+                onClick={() => {
+                  trackButtonClick('Preencher Formulário', '/aplicacao')
+                  navigate('/aplicacao')
+                }}
                 className="w-full btn-gold hover-glow-gold"
               >
                 Preencher Formulário de Pré-Elegibilidade

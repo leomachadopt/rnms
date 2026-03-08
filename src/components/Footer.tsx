@@ -38,12 +38,12 @@ export function Footer() {
                 {
                   icon: Facebook,
                   label: 'Facebook',
-                  href: 'https://www.facebook.com/clinicacristianemartins'
+                  href: 'https://www.facebook.com/profile.php?id=61564204820537'
                 },
                 {
                   icon: Instagram,
                   label: 'Instagram',
-                  href: 'https://www.instagram.com/dracristianemartins'
+                  href: 'https://www.instagram.com/eusouleonardomachado/'
                 },
               ].map(({ icon: Icon, label, href }, idx) => (
                 <a

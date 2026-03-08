@@ -10,12 +10,19 @@ import {
   MessageCircle
 } from 'lucide-react'
 import { useScrollAnimation } from '@/hooks/use-scroll-animation'
+import { useMetaPixel } from '@/hooks/use-meta-pixel'
 import { PRIMARY_CTA_ROUTE } from '@/config/routes'
 
 const Formacao = () => {
   const heroRef = useScrollAnimation({ threshold: 0.2, triggerOnce: true })
   const formationRef = useScrollAnimation({ threshold: 0.2, triggerOnce: true })
   const benefitsRef = useScrollAnimation({ threshold: 0.2, triggerOnce: true })
+  const { trackViewContent, trackButtonClick, trackContact } = useMetaPixel()
+
+  const handleWhatsAppClick = (location: string) => {
+    trackButtonClick('Solicitar Informações WhatsApp', location)
+    trackContact({ method: 'whatsapp', page: 'formacao' })
+  }
 
   const formationBenefits = [
     'Ampliar leitura clínica sistêmica da má oclusão',
@@ -108,6 +115,7 @@ const Formacao = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center"
+                  onClick={() => handleWhatsAppClick('hero')}
                 >
                   <MessageCircle className="mr-2 w-5 h-5" />
                   Solicitar Informações
@@ -258,6 +266,7 @@ const Formacao = () => {
                   href="https://wa.me/351967798664?text=Gostava%20de%20saber%20mais%20sobre%20a%20forma%C3%A7%C3%A3o%20RNS."
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => handleWhatsAppClick('cta-final')}
                 >
                   <MessageCircle className="mr-2 w-5 h-5" />
                   Solicitar Informações

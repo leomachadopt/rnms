@@ -5,10 +5,13 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
 import useAppStore from '@/stores/useAppStore'
 import { useScrollAnimation } from '@/hooks/use-scroll-animation'
+import { useMetaPixel } from '@/hooks/use-meta-pixel'
 import { PRIMARY_CTA_ROUTE } from '@/config/routes'
 
 const Index = () => {
   const { testimonials } = useAppStore()
+  const { trackButtonClick, trackViewContent } = useMetaPixel()
+
   const heroRef = useScrollAnimation({ threshold: 0.2, triggerOnce: true })
   const problemRef = useScrollAnimation({ threshold: 0.2, triggerOnce: true })
   const whatIsRef = useScrollAnimation({ threshold: 0.2, triggerOnce: true })
@@ -18,6 +21,10 @@ const Index = () => {
   const ecosystemRef = useScrollAnimation({ threshold: 0.1, triggerOnce: true })
   const testimonialsRef = useScrollAnimation({ threshold: 0.1, triggerOnce: true })
   const ctaRef = useScrollAnimation({ threshold: 0.2, triggerOnce: true })
+
+  const handleCTAClick = (ctaName: string, destination: string) => {
+    trackButtonClick(ctaName, destination)
+  }
 
   // Filtrar apenas depoimentos em destaque, ou mostrar todos se não houver destaques
   const displayTestimonials = testimonials.filter(t => t.featured).length > 0
@@ -160,14 +167,14 @@ const Index = () => {
                 size="lg"
                 className="rounded-xl text-base sm:text-lg px-10 py-7 font-semibold bg-secondary text-[hsl(0,0%,8%)] hover:bg-secondary/90 shadow-lg hover:scale-105 transition-all duration-300 relative z-20"
               >
-                <Link to="/formacao">Formação RNS</Link>
+                <Link to="/formacao" onClick={() => handleCTAClick('Formação RNS - Hero', '/formacao')}>Formação RNS</Link>
               </Button>
               <Button
                 asChild
                 size="lg"
                 className="rounded-xl text-base sm:text-lg px-10 py-7 font-semibold border-2 border-white bg-white/95 text-foreground hover:bg-white hover:border-secondary hover:scale-105 transition-all duration-300 relative z-20 shadow-lg"
               >
-                <Link to="/programa-rns">Programa RNS</Link>
+                <Link to="/programa-rns" onClick={() => handleCTAClick('Programa RNS - Hero', '/programa-rns')}>Programa RNS</Link>
               </Button>
             </div>
           </div>
@@ -487,7 +494,10 @@ const Index = () => {
                     asChild
                     className="btn-gold w-full hover-glow-gold"
                   >
-                    <Link to={index === 2 ? "/programa-rns" : "/formacao"}>
+                    <Link
+                      to={index === 2 ? "/programa-rns" : "/formacao"}
+                      onClick={() => handleCTAClick(`Saiba Mais - ${service.title}`, index === 2 ? "/programa-rns" : "/formacao")}
+                    >
                       Saiba Mais
                     </Link>
                   </Button>
@@ -588,7 +598,7 @@ const Index = () => {
               size="lg"
               className="rounded-full bg-white text-primary font-bold text-lg px-12 py-7 hover:bg-white/90 shadow-premium hover:shadow-2xl transition-all duration-300 hover:scale-105 hover-lift"
             >
-              <Link to="/formacao">Conheça a Formação RNS</Link>
+              <Link to="/formacao" onClick={() => handleCTAClick('Conheça a Formação RNS - CTA Final', '/formacao')}>Conheça a Formação RNS</Link>
             </Button>
           </div>
           {/* Decorative circles */}

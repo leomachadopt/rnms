@@ -53,7 +53,7 @@ const LeonardoMachado = () => {
               <Button
                 asChild
                 size="lg"
-                className="glass-premium text-lg px-12 py-7 border-2 border-white/30 text-white hover:bg-white hover:text-primary hover:scale-105 transition-all font-semibold"
+                className="bg-primary/90 backdrop-blur-sm text-lg px-12 py-7 border-2 border-secondary text-white hover:bg-primary hover:border-secondary hover:scale-105 transition-all font-semibold shadow-lg"
               >
                 <Link to="/programa-rns">Programa RNS</Link>
               </Button>
@@ -459,7 +459,7 @@ const LeonardoMachado = () => {
               <Button
                 asChild
                 size="lg"
-                className="rounded-full glass-premium border-2 border-white/30 text-white hover:bg-white hover:text-primary shadow-premium hover:scale-105 transition-all text-lg px-12 py-7 font-semibold"
+                className="rounded-full bg-white/20 backdrop-blur-md border-2 border-white text-white hover:bg-white hover:text-primary shadow-premium hover:scale-105 transition-all text-lg px-12 py-7 font-bold"
               >
                 <Link to="/programa-rns">Programa RNS</Link>
               </Button>
