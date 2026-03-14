@@ -15,8 +15,10 @@ import Leonardo2 from './pages/Leonardo2'
 import Formacao from './pages/Formacao'
 import ProgramaRNS from './pages/ProgramaRNS'
 import ProgramaRNSQualificacao from './pages/ProgramaRNSQualificacao'
+import OdontoGrowth from './pages/OdontoGrowth'
 import Elegibilidade from './pages/Elegibilidade'
 import Aplicacao from './pages/Aplicacao'
+import AplicacaoBr from './pages/AplicacaoBr'
 import Agenda from './pages/Agenda'
 import Problema from './pages/Problema'
 import Publicacoes from './pages/Publicacoes'
@@ -70,12 +72,20 @@ const router = createBrowserRouter([
         element: <ProgramaRNSQualificacao />,
       },
       {
+        path: '/odontogrowth',
+        element: <OdontoGrowth />,
+      },
+      {
         path: '/elegibilidade',
         element: <Elegibilidade />,
       },
       {
         path: '/aplicacao',
         element: <Aplicacao />,
+      },
+      {
+        path: '/aplicacao-br',
+        element: <AplicacaoBr />,
       },
       {
         path: '/agenda',
