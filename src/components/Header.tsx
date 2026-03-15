@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { Menu, X, MessageCircle } from 'lucide-react'
+import { Menu, X, MessageCircle, Send } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
   Sheet,
@@ -16,6 +16,12 @@ export function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
   const location = useLocation()
+
+  // Detectar se está na página OdontoGrowth
+  const isOdontoGrowthPage = location.pathname === '/odontogrowth'
+  const ctaRoute = isOdontoGrowthPage ? '/aplicacao-br' : PRIMARY_CTA_ROUTE
+  const ctaText = isOdontoGrowthPage ? 'Aplicar para o programa' : 'Avaliar Elegibilidade'
+  const ctaIcon = isOdontoGrowthPage ? Send : MessageCircle
 
   useEffect(() => {
     const handleScroll = () => {
@@ -80,9 +86,13 @@ export function Header() {
             asChild
             className="btn-gold hover-glow-gold px-6"
           >
-            <Link to={PRIMARY_CTA_ROUTE} className="group">
-              <MessageCircle className="w-4 h-4 mr-2 group-hover:rotate-12 transition-transform duration-300" />
-              Avaliar Elegibilidade
+            <Link to={ctaRoute} className="group">
+              {ctaIcon === Send ? (
+                <Send className="w-4 h-4 mr-2 group-hover:translate-x-1 transition-transform duration-300" />
+              ) : (
+                <MessageCircle className="w-4 h-4 mr-2 group-hover:rotate-12 transition-transform duration-300" />
+              )}
+              {ctaText}
             </Link>
           </Button>
         </div>
@@ -131,9 +141,13 @@ export function Header() {
                   asChild
                   className="mt-4 w-full btn-gold hover-glow-gold"
                 >
-                  <Link to={PRIMARY_CTA_ROUTE} onClick={() => setIsOpen(false)}>
-                    <MessageCircle className="w-4 h-4 mr-2" />
-                    Avaliar Elegibilidade
+                  <Link to={ctaRoute} onClick={() => setIsOpen(false)}>
+                    {ctaIcon === Send ? (
+                      <Send className="w-4 h-4 mr-2" />
+                    ) : (
+                      <MessageCircle className="w-4 h-4 mr-2" />
+                    )}
+                    {ctaText}
                   </Link>
                 </Button>
               </nav>

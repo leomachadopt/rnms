@@ -51,10 +51,10 @@ const OdontoGrowth = () => {
 
   const timeline = [
     { month: 'Mês 1', title: 'Ajustes rápidos de receita', description: 'Implementação de melhorias imediatas na geração de receita' },
-    { month: 'Mês 2', title: 'Estrutura comercial', description: 'Construção do processo comercial estruturado' },
-    { month: 'Mês 3', title: 'Gestão por indicadores', description: 'Implementação do Painel KPI e métricas essenciais' },
-    { month: 'Mês 4', title: 'Organização operacional', description: 'Otimização da jornada do paciente e agenda' },
-    { month: 'Mês 5', title: 'Posicionamento e estratégia', description: 'Definição de posicionamento e estratégia de crescimento' },
+    { month: 'Mês 2', title: 'Posicionamento e estratégia', description: 'Definição de posicionamento e estratégia de crescimento' },
+    { month: 'Mês 3', title: 'Estrutura comercial', description: 'Construção do processo comercial estruturado' },
+    { month: 'Mês 4', title: 'Gestão por indicadores', description: 'Implementação do Painel KPI e métricas essenciais' },
+    { month: 'Mês 5', title: 'Jornada do paciente e retenção', description: 'Estruturação da experiência completa para aumentar retenção e indicações' },
     { month: 'Mês 6', title: 'Governança e crescimento', description: 'Implementação de processos e sistema de governança' }
   ]
 
@@ -136,8 +136,8 @@ const OdontoGrowth = () => {
           >
             <div className="absolute inset-0 bg-gradient-to-r from-secondary/20 to-primary/30 rounded-[3rem] blur-3xl transform translate-x-10 translate-y-10 animate-pulse-slow"></div>
             <img
-              src="/leonardotransparente (1).png"
-              alt="Leonardo Machado - Método RNS"
+              src="/front.jpg"
+              alt="OdontoGrowth 360 - Estruturação de Clínicas"
               className="relative rounded-[3rem] shadow-2xl w-full object-cover aspect-square transform hover:scale-105 transition-transform duration-700 border-4 border-white/20 hover-glow"
             />
           </div>
@@ -292,11 +292,22 @@ const OdontoGrowth = () => {
               <span className="font-bold text-foreground">Crescem quando quatro dimensões do negócio passam a funcionar juntas:</span>
             </p>
             <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-              {['Geração de receita', 'Operação clínica', 'Gestão por indicadores', 'Governança e escala'].map((item, i) => (
-                <div key={i} className="p-4 glass-premium rounded-xl">
-                  <p className="font-semibold text-foreground">{item}</p>
-                </div>
-              ))}
+              {[
+                { text: 'Geração de receita', icon: TrendingUp },
+                { text: 'Operação clínica', icon: Target },
+                { text: 'Gestão por indicadores', icon: LineChart },
+                { text: 'Governança e escala', icon: Users }
+              ].map((item, i) => {
+                const Icon = item.icon
+                return (
+                  <div key={i} className="p-6 glass-premium rounded-xl flex flex-col items-center gap-3">
+                    <div className="w-12 h-12 rounded-full gradient-navy-gold flex items-center justify-center shadow-gold">
+                      <Icon className="w-6 h-6 text-white" />
+                    </div>
+                    <p className="font-semibold text-foreground">{item.text}</p>
+                  </div>
+                )
+              })}
             </div>
           </div>
         </div>
@@ -559,18 +570,15 @@ const OdontoGrowth = () => {
               <h2 className="heading-premium text-3xl lg:text-4xl mb-6">
                 Leonardo Machado
               </h2>
-              <div className="space-y-4 text-premium text-lg">
-                <p className="flex items-start gap-3">
-                  <CheckCircle2 className="w-6 h-6 text-secondary flex-shrink-0 mt-1" />
-                  <span>Ortodontista com sólida autoridade clínica</span>
+              <div className="space-y-6 text-premium text-lg leading-relaxed">
+                <p>
+                  Com experiência clínica reconhecida na área da oclusão e fundador do Método RNS, Leonardo especializou-se em transformar clínicas odontológicas em negócios estruturados e previsíveis.
                 </p>
-                <p className="flex items-start gap-3">
-                  <CheckCircle2 className="w-6 h-6 text-secondary flex-shrink-0 mt-1" />
-                  <span>Experiência em gestão de clínicas odontológicas</span>
+                <p>
+                  Ao longo dos últimos anos, desenvolveu uma metodologia comprovada que ajudou dezenas de clínicas a <span className="font-bold text-foreground">dobrarem seus faturamentos</span> através da implementação de processos comerciais claros, gestão por indicadores e governança operacional eficiente.
                 </p>
-                <p className="flex items-start gap-3">
-                  <CheckCircle2 className="w-6 h-6 text-secondary flex-shrink-0 mt-1" />
-                  <span>Criador do Método RNS</span>
+                <p>
+                  O OdontoGrowth 360 reúne toda essa experiência em um programa intensivo de 6 meses, desenhado para donos de clínicas que desejam crescer com estrutura, previsibilidade e sem dependência exclusiva do fundador.
                 </p>
               </div>
             </div>
