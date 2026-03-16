@@ -606,7 +606,7 @@ const OdontoGrowth = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
             {[
               { icon: Calendar, title: 'Duração', detail: '6 meses' },
-              { icon: Users, title: 'Formato', detail: 'Encontros semanais online' },
+              { icon: Users, title: 'Formato', detail: 'Encontros quinzenais online' },
               { icon: Target, title: 'Grupo', detail: 'Limitado de clínicas' },
               { icon: Sparkles, title: 'Acompanhamento', detail: 'Direto e individual' }
             ].map((item, index) => {
