@@ -17,14 +17,19 @@ export function Header() {
   const [isOpen, setIsOpen] = useState(false)
   const location = useLocation()
 
-  // Detectar se está na página OdontoGrowth ou Aplicação BR
+  // Detectar páginas do funil OdontoGrowth
   const isOdontoGrowthPage = location.pathname === '/odontogrowth'
   const isAplicacaoBrPage = location.pathname === '/aplicacao-br'
-  const hideMenu = isOdontoGrowthPage || isAplicacaoBrPage
+  const isAgendaPage = location.pathname === '/agenda' && location.search.includes('status=eligible')
+  const hideMenu = isOdontoGrowthPage || isAplicacaoBrPage || isAgendaPage
 
+  // Configurar CTA baseado na página
   const ctaRoute = isOdontoGrowthPage ? '/aplicacao-br' : PRIMARY_CTA_ROUTE
   const ctaText = isOdontoGrowthPage ? 'Aplicar para o programa' : 'Avaliar Elegibilidade'
   const ctaIcon = isOdontoGrowthPage ? Send : MessageCircle
+
+  // Ocultar CTA nas páginas de aplicação e agendamento
+  const hideCTA = isAplicacaoBrPage || isAgendaPage
 
   useEffect(() => {
     const handleScroll = () => {
@@ -87,21 +92,23 @@ export function Header() {
         </nav>
 
         {/* Desktop CTA */}
-        <div className="hidden lg:block">
-          <Button
-            asChild
-            className="btn-gold hover-glow-gold px-6"
-          >
-            <Link to={ctaRoute} className="group">
-              {ctaIcon === Send ? (
-                <Send className="w-4 h-4 mr-2 group-hover:translate-x-1 transition-transform duration-300" />
-              ) : (
-                <MessageCircle className="w-4 h-4 mr-2 group-hover:rotate-12 transition-transform duration-300" />
-              )}
-              {ctaText}
-            </Link>
-          </Button>
-        </div>
+        {!hideCTA && (
+          <div className="hidden lg:block">
+            <Button
+              asChild
+              className="btn-gold hover-glow-gold px-6"
+            >
+              <Link to={ctaRoute} className="group">
+                {ctaIcon === Send ? (
+                  <Send className="w-4 h-4 mr-2 group-hover:translate-x-1 transition-transform duration-300" />
+                ) : (
+                  <MessageCircle className="w-4 h-4 mr-2 group-hover:rotate-12 transition-transform duration-300" />
+                )}
+                {ctaText}
+              </Link>
+            </Button>
+          </div>
+        )}
 
         {/* Mobile Menu */}
         <div className="lg:hidden">
@@ -143,19 +150,21 @@ export function Header() {
                     {link.name}
                   </Link>
                 ))}
-                <Button
-                  asChild
-                  className="mt-4 w-full btn-gold hover-glow-gold"
-                >
-                  <Link to={ctaRoute} onClick={() => setIsOpen(false)}>
-                    {ctaIcon === Send ? (
-                      <Send className="w-4 h-4 mr-2" />
-                    ) : (
-                      <MessageCircle className="w-4 h-4 mr-2" />
-                    )}
-                    {ctaText}
-                  </Link>
-                </Button>
+                {!hideCTA && (
+                  <Button
+                    asChild
+                    className="mt-4 w-full btn-gold hover-glow-gold"
+                  >
+                    <Link to={ctaRoute} onClick={() => setIsOpen(false)}>
+                      {ctaIcon === Send ? (
+                        <Send className="w-4 h-4 mr-2" />
+                      ) : (
+                        <MessageCircle className="w-4 h-4 mr-2" />
+                      )}
+                      {ctaText}
+                    </Link>
+                  </Button>
+                )}
               </nav>
             </SheetContent>
           </Sheet>
