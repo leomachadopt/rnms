@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { useEffect } from 'react'
 import { CheckCircle2, TrendingUp, Target, Users, LineChart, FileCheck, Calendar, AlertCircle, ArrowRight, Sparkles } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -6,7 +7,15 @@ import { useScrollAnimation } from '@/hooks/use-scroll-animation'
 import { useMetaPixel } from '@/hooks/use-meta-pixel'
 
 const OdontoGrowth = () => {
-  const { trackButtonClick } = useMetaPixel()
+  const { trackButtonClick, trackViewContent } = useMetaPixel()
+
+  // Rastrear visualização da página
+  useEffect(() => {
+    trackViewContent({
+      content_name: 'OdontoGrowth 360 Landing Page',
+      content_category: 'Landing Page'
+    })
+  }, [])
 
   const heroRef = useScrollAnimation({ threshold: 0.2, triggerOnce: true })
   const realityRef = useScrollAnimation({ threshold: 0.2, triggerOnce: true })

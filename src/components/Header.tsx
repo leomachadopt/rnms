@@ -38,6 +38,11 @@ export function Header() {
     { name: 'Publicações', path: '/publicacoes' },
   ]
 
+  // Filtrar links na página OdontoGrowth
+  const filteredNavLinks = isOdontoGrowthPage
+    ? navLinks.filter(link => link.path === '/programa-rns')
+    : navLinks
+
   return (
     <header
       className={cn(
@@ -62,7 +67,7 @@ export function Header() {
 
         {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center gap-8">
-          {navLinks.map((link, idx) => (
+          {filteredNavLinks.map((link, idx) => (
             <Link
               key={link.path}
               to={link.path}
@@ -121,7 +126,7 @@ export function Header() {
                 Navegação principal
               </SheetDescription>
               <nav className="flex flex-col gap-6 mt-8">
-                {navLinks.map((link, idx) => (
+                {filteredNavLinks.map((link, idx) => (
                   <Link
                     key={link.path}
                     to={link.path}

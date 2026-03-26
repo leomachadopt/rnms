@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { ArrowLeft, Send, Loader2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -6,10 +6,20 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { toast } from 'sonner'
+import { useMetaPixel } from '@/hooks/use-meta-pixel'
 
 export default function AplicacaoBr() {
   const navigate = useNavigate()
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const { trackViewContent, trackLead, trackCustom } = useMetaPixel()
+
+  // Rastrear visualização da página de aplicação
+  useEffect(() => {
+    trackViewContent({
+      content_name: 'Formulário Aplicação OdontoGrowth 360',
+      content_category: 'Application Form'
+    })
+  }, [])
 
   const [formData, setFormData] = useState({
     name: '',
@@ -45,6 +55,22 @@ export default function AplicacaoBr() {
         const err = await response.json().catch(() => ({}))
         throw new Error(err.error || `Erro ${response.status}`)
       }
+
+      // Rastrear conversão - Lead
+      trackLead({
+        content_name: 'OdontoGrowth 360 - Aplicação Enviada',
+        value: formData.monthlyRevenue,
+        currency: 'BRL',
+        status: formData.readyToInvest
+      })
+
+      // Rastrear evento customizado de aplicação
+      trackCustom('ApplicationSubmitted', {
+        program: 'OdontoGrowth 360',
+        monthly_revenue: formData.monthlyRevenue,
+        goal: formData.goal12m,
+        ready_to_invest: formData.readyToInvest
+      })
 
       // Redirecionar baseado na resposta Q5
       if (formData.readyToInvest === 'Não, neste momento') {
