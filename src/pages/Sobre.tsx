@@ -127,7 +127,7 @@ const Sobre = () => {
             Sobre o Método
           </div>
           <h1 className="heading-premium text-4xl lg:text-6xl mb-6 leading-tight text-white">
-            Reequilíbrio Neuro-Oclusal<br />
+            Reequilíbrio Neuromuscular<br />
             <span className="text-gradient-gold">Sistêmico</span>
           </h1>
           <p className="text-xl lg:text-2xl mb-8 text-white/90 leading-relaxed font-light">

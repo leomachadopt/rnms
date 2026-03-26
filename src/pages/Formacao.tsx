@@ -102,7 +102,7 @@ const Formacao = () => {
               </span>
             </h1>
             <p className="text-lg sm:text-xl text-white/90 max-w-3xl mx-auto leading-relaxed mb-10 font-light">
-              Formação estruturada em Reequilíbrio Neuro-Oclusal Sistêmico. Para profissionais que procuram coerência, previsibilidade e diferenciação clínica baseada em critério — não apenas em técnica.
+              Formação estruturada em Reequilíbrio Neuromuscular Sistêmico. Para profissionais que procuram coerência, previsibilidade e diferenciação clínica baseada em critério — não apenas em técnica.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 sm:gap-5 justify-center">
               <Button
