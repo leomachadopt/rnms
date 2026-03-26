@@ -17,8 +17,11 @@ export function Header() {
   const [isOpen, setIsOpen] = useState(false)
   const location = useLocation()
 
-  // Detectar se está na página OdontoGrowth
+  // Detectar se está na página OdontoGrowth ou Aplicação BR
   const isOdontoGrowthPage = location.pathname === '/odontogrowth'
+  const isAplicacaoBrPage = location.pathname === '/aplicacao-br'
+  const hideMenu = isOdontoGrowthPage || isAplicacaoBrPage
+
   const ctaRoute = isOdontoGrowthPage ? '/aplicacao-br' : PRIMARY_CTA_ROUTE
   const ctaText = isOdontoGrowthPage ? 'Aplicar para o programa' : 'Avaliar Elegibilidade'
   const ctaIcon = isOdontoGrowthPage ? Send : MessageCircle
@@ -38,10 +41,8 @@ export function Header() {
     { name: 'Publicações', path: '/publicacoes' },
   ]
 
-  // Filtrar links na página OdontoGrowth
-  const filteredNavLinks = isOdontoGrowthPage
-    ? navLinks.filter(link => link.path === '/programa-rns')
-    : navLinks
+  // Filtrar links - ocultar todos em /odontogrowth e /aplicacao-br
+  const filteredNavLinks = hideMenu ? [] : navLinks
 
   return (
     <header
