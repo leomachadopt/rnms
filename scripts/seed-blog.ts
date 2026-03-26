@@ -55,7 +55,7 @@ O SNC coordena e regula todas as funções oclusais através de feedback contín
 O corpo adapta-se constantemente às condições oclusais através de mecanismos neuroplásticos.
 
 ### 3. Previsibilidade Clínica
-Com a lente neuro-oclusal, conseguimos prever o comportamento do sistema antes de intervir.
+Com a lente neuromuscular, conseguimos prever o comportamento do sistema antes de intervir.
 
 ## Método RNS
 
