@@ -147,6 +147,11 @@ export const applications = pgTable('applications', {
   userAgent: text('user_agent'),
   // Status do processo
   status: varchar('status', { length: 50 }).default('submitted'), // 'submitted' | 'interview_scheduled' | 'approved' | 'rejected'
+  // Controle de follow-up e agendamento
+  calendlyEventUri: varchar('calendly_event_uri', { length: 255 }), // URI do evento agendado no Calendly
+  scheduledAt: timestamp('scheduled_at'), // Quando agendou no Calendly
+  followUpSentAt: timestamp('follow_up_sent_at'), // Quando enviamos email de lembrete
+  followUpScheduledFor: timestamp('follow_up_scheduled_for'), // Quando deve enviar follow-up (30min após aplicação)
   // Timestamps
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at').defaultNow().notNull(),

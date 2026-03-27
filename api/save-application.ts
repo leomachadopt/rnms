@@ -69,6 +69,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       sessionId: sessionId || null,
     }
 
+    // Calcular quando enviar follow-up (30 minutos a partir de agora)
+    const followUpScheduledFor = new Date(Date.now() + 30 * 60 * 1000) // 30 minutos
+
     // Salvar aplicação na base de dados
     const [newApplication] = await db
       .insert(applications)
@@ -87,6 +90,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         ipAddress,
         userAgent,
         status: 'submitted',
+        followUpScheduledFor: email ? followUpScheduledFor : null, // Só agendar se tiver email
       })
       .returning()
 
