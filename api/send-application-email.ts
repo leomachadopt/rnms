@@ -1,27 +1,29 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
-import { drizzle } from 'drizzle-orm/neon-http'
-import { neon } from '@neondatabase/serverless'
-import { applications } from './db/schema.js'
 import { Resend } from 'resend'
 
-const DATABASE_URL = process.env.DATABASE_URL || process.env.VITE_DATABASE_URL
 const RESEND_API_KEY = process.env.RESEND_API_KEY
 
-if (!DATABASE_URL) {
-  throw new Error('DATABASE_URL não está definida')
+if (!RESEND_API_KEY) {
+  throw new Error('RESEND_API_KEY não está definida')
 }
 
-const sql = neon(DATABASE_URL)
-const db = drizzle(sql)
+const resend = new Resend(RESEND_API_KEY)
 
-// Inicializar Resend apenas se a API key estiver disponível
-const resend = RESEND_API_KEY ? new Resend(RESEND_API_KEY) : null
+interface ApplicationEmailData {
+  name: string
+  email?: string
+  whatsapp?: string
+  monthlyRevenue: string
+  goal12m: string
+  readyToInvest: string
+  applicationId: number
+}
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   // CORS headers
   res.setHeader('Access-Control-Allow-Credentials', 'true')
   res.setHeader('Access-Control-Allow-Origin', '*')
-  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,POST')
+  res.setHeader('Access-Control-Allow-Methods', 'POST,OPTIONS')
   res.setHeader(
     'Access-Control-Allow-Headers',
     'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version',
@@ -36,115 +38,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
-    const {
-      name,
-      email,
-      whatsapp,
-      monthlyRevenue,
-      goal12m,
-      readyToInvest,
-      sessionId,
-      source,
-    } = req.body
+    const applicationData: ApplicationEmailData = req.body
 
-    // Validação básica (apenas campos obrigatórios)
-    if (!name || !monthlyRevenue || !goal12m || !readyToInvest) {
-      return res.status(400).json({ error: 'Campos obrigatórios em falta' })
-    }
-
-    // Captura metadados
-    const ipAddress =
-      (req.headers['x-forwarded-for'] as string)?.split(',')[0] ||
-      (req.headers['x-real-ip'] as string) ||
-      req.socket?.remoteAddress ||
-      null
-
-    const userAgent = req.headers['user-agent'] || null
-
-    // Metadata adicional
-    const metadata = {
-      source: source || 'direct_url',
-      timestamp: new Date().toISOString(),
-      userAgent,
-      sessionId: sessionId || null,
-    }
-
-    // Salvar aplicação na base de dados
-    const [newApplication] = await db
-      .insert(applications)
-      .values({
-        name,
-        email: email || null,
-        whatsapp: whatsapp || null,
-        orthoCount: null, // Removido do formulário (já perguntado no chat de elegibilidade)
-        activeCases: null, // Removido do formulário (já perguntado no chat de elegibilidade)
-        monthlyRevenue,
-        goal12m,
-        readyToInvest,
-        metadata,
-        sessionId: sessionId || null,
-        source: source || 'direct_url',
-        ipAddress,
-        userAgent,
-        status: 'submitted',
-      })
-      .returning()
-
-    console.log('✅ Aplicação salva:', newApplication.id)
-
-    // Enviar emails (não bloqueia a resposta se falhar)
-    if (resend) {
-      try {
-        await sendApplicationEmails({
-          name,
-          email: email || undefined,
-          whatsapp: whatsapp || undefined,
-          monthlyRevenue,
-          goal12m,
-          readyToInvest,
-          applicationId: newApplication.id,
-        })
-        console.log('📧 Emails enviados com sucesso')
-      } catch (emailError: any) {
-        console.error('⚠️ Erro ao enviar emails (aplicação salva com sucesso):', emailError.message)
-        // Não falha a requisição se emails falharem
-      }
-    } else {
-      console.warn('⚠️ RESEND_API_KEY não configurada - emails não enviados')
-    }
-
-    return res.status(200).json({
-      success: true,
-      applicationId: newApplication.id,
-      readyToInvest: readyToInvest, // Para frontend redirecionar condicionalmente
-    })
-  } catch (error: any) {
-    console.error('❌ Erro ao salvar aplicação:', error)
-    return res.status(500).json({
-      error: 'Erro ao salvar aplicação',
-      details: error.message,
-    })
-  }
-}
-
-// Função auxiliar para enviar emails
-interface ApplicationEmailData {
-  name: string
-  email?: string
-  whatsapp?: string
-  monthlyRevenue: string
-  goal12m: string
-  readyToInvest: string
-  applicationId: number
-}
-
-async function sendApplicationEmails(data: ApplicationEmailData) {
-  if (!resend) {
-    throw new Error('Resend não está inicializado')
-  }
-
-  // Email para o admin
-  const adminEmailHtml = `
+    // Email para o admin
+    const adminEmailHtml = `
 <!DOCTYPE html>
 <html>
 <head>
@@ -170,7 +67,7 @@ async function sendApplicationEmails(data: ApplicationEmailData) {
   <div class="container">
     <div class="header">
       <h1>🎯 Nova Aplicação - OdontoGrowth 360</h1>
-      <div class="badge">ID: #${data.applicationId}</div>
+      <div class="badge">ID: #${applicationData.applicationId}</div>
     </div>
 
     <div class="content">
@@ -178,18 +75,18 @@ async function sendApplicationEmails(data: ApplicationEmailData) {
         <h2>📋 Dados do Candidato</h2>
         <div class="info-row">
           <span class="info-label">Nome:</span>
-          <span class="info-value">${data.name}</span>
+          <span class="info-value">${applicationData.name}</span>
         </div>
-        ${data.email ? `
+        ${applicationData.email ? `
         <div class="info-row">
           <span class="info-label">Email:</span>
-          <span class="info-value">${data.email}</span>
+          <span class="info-value">${applicationData.email}</span>
         </div>
         ` : ''}
-        ${data.whatsapp ? `
+        ${applicationData.whatsapp ? `
         <div class="info-row">
           <span class="info-label">WhatsApp:</span>
-          <span class="info-value">${data.whatsapp}</span>
+          <span class="info-value">${applicationData.whatsapp}</span>
         </div>
         ` : ''}
       </div>
@@ -198,18 +95,18 @@ async function sendApplicationEmails(data: ApplicationEmailData) {
         <h2>💼 Informações da Clínica</h2>
         <div class="info-row">
           <span class="info-label">Faturamento Mensal:</span>
-          <span class="info-value"><strong>${data.monthlyRevenue}</strong></span>
+          <span class="info-value"><strong>${applicationData.monthlyRevenue}</strong></span>
         </div>
         <div class="info-row">
           <span class="info-label">Objetivo 12 meses:</span>
-          <span class="info-value">${data.goal12m}</span>
+          <span class="info-value">${applicationData.goal12m}</span>
         </div>
       </div>
 
       <div class="highlight">
         <strong>Prontidão para investir:</strong><br>
-        <span style="font-size: 18px; color: ${data.readyToInvest === 'Sim, estou pronto' ? '#16a34a' : data.readyToInvest === 'Preciso avaliar internamente' ? '#ea580c' : '#dc2626'};">
-          ${data.readyToInvest}
+        <span style="font-size: 18px; color: ${applicationData.readyToInvest === 'Sim, estou pronto' ? '#16a34a' : applicationData.readyToInvest === 'Preciso avaliar internamente' ? '#ea580c' : '#dc2626'};">
+          ${applicationData.readyToInvest}
         </span>
       </div>
     </div>
@@ -221,10 +118,10 @@ async function sendApplicationEmails(data: ApplicationEmailData) {
   </div>
 </body>
 </html>
-  `
+    `
 
-  // Email de confirmação para o candidato
-  const candidateEmailHtml = `
+    // Email de confirmação para o candidato
+    const candidateEmailHtml = `
 <!DOCTYPE html>
 <html>
 <head>
@@ -243,6 +140,7 @@ async function sendApplicationEmails(data: ApplicationEmailData) {
     .step { padding: 10px 0; }
     .step-number { display: inline-block; width: 30px; height: 30px; background: #1e293b; color: white; border-radius: 50%; text-align: center; line-height: 30px; margin-right: 10px; font-weight: bold; }
     .footer { text-align: center; padding: 30px; color: #64748b; font-size: 14px; background: #f8fafc; border-radius: 0 0 8px 8px; }
+    .cta-button { display: inline-block; background: #f59e0b; color: white; padding: 15px 30px; text-decoration: none; border-radius: 8px; font-weight: bold; margin-top: 20px; }
   </style>
 </head>
 <body>
@@ -256,7 +154,7 @@ async function sendApplicationEmails(data: ApplicationEmailData) {
       <div class="checkmark">✓</div>
 
       <p style="text-align: center; font-size: 18px; color: #1e293b;">
-        Olá <strong>${data.name}</strong>,
+        Olá <strong>${applicationData.name}</strong>,
       </p>
 
       <p>
@@ -302,32 +200,47 @@ async function sendApplicationEmails(data: ApplicationEmailData) {
   </div>
 </body>
 </html>
-  `
+    `
 
-  const emails = []
+    const emails = []
 
-  // Enviar email para o admin
-  emails.push(
-    resend.emails.send({
-      from: 'OdontoGrowth 360 <noreply@metodorns.pt>',
-      to: 'leomachadopt@gmail.com',
-      subject: `🎯 Nova Aplicação - ${data.name} (#${data.applicationId})`,
-      html: adminEmailHtml,
-    })
-  )
-
-  // Enviar email de confirmação para o candidato (se tiver email)
-  if (data.email) {
+    // Enviar email para o admin
     emails.push(
       resend.emails.send({
-        from: 'Leonardo Machado - Método RNS <noreply@metodorns.pt>',
-        to: data.email,
-        subject: '✅ Aplicação Recebida - OdontoGrowth 360',
-        html: candidateEmailHtml,
+        from: 'OdontoGrowth 360 <noreply@metodorns.pt>',
+        to: 'leomachadopt@gmail.com',
+        subject: `🎯 Nova Aplicação - ${applicationData.name} (#${applicationData.applicationId})`,
+        html: adminEmailHtml,
       })
     )
-  }
 
-  // Aguardar envio de todos os emails
-  await Promise.all(emails)
+    // Enviar email de confirmação para o candidato (se tiver email)
+    if (applicationData.email) {
+      emails.push(
+        resend.emails.send({
+          from: 'Leonardo Machado - Método RNS <noreply@metodorns.pt>',
+          to: applicationData.email,
+          subject: '✅ Aplicação Recebida - OdontoGrowth 360',
+          html: candidateEmailHtml,
+        })
+      )
+    }
+
+    // Aguardar envio de todos os emails
+    const results = await Promise.allSettled(emails)
+
+    console.log('📧 Emails enviados:', results)
+
+    return res.status(200).json({
+      success: true,
+      emailsSent: results.filter(r => r.status === 'fulfilled').length,
+      emailsFailed: results.filter(r => r.status === 'rejected').length,
+    })
+  } catch (error: any) {
+    console.error('❌ Erro ao enviar emails:', error)
+    return res.status(500).json({
+      error: 'Erro ao enviar emails',
+      details: error.message,
+    })
+  }
 }
