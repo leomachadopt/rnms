@@ -297,7 +297,7 @@ async function sendApplicationEmails(data: ApplicationEmailData) {
     <div class="footer">
       <p><strong>Método RNS</strong><br>
       Reequilíbrio Neuromuscular Sistêmico<br>
-      formacao@metodorns.pt</p>
+      formacao@metodorns.com</p>
     </div>
   </div>
 </body>
@@ -309,7 +309,7 @@ async function sendApplicationEmails(data: ApplicationEmailData) {
   // Enviar email para o admin
   emails.push(
     resend.emails.send({
-      from: 'OdontoGrowth 360 <noreply@metodorns.pt>',
+      from: 'OdontoGrowth 360 <noreply@metodorns.com>',
       to: 'leomachadopt@gmail.com',
       subject: `🎯 Nova Aplicação - ${data.name} (#${data.applicationId})`,
       html: adminEmailHtml,
@@ -320,7 +320,7 @@ async function sendApplicationEmails(data: ApplicationEmailData) {
   if (data.email) {
     emails.push(
       resend.emails.send({
-        from: 'Leonardo Machado - Método RNS <noreply@metodorns.pt>',
+        from: 'Leonardo Machado - Método RNS <noreply@metodorns.com>',
         to: data.email,
         subject: '✅ Aplicação Recebida - OdontoGrowth 360',
         html: candidateEmailHtml,
