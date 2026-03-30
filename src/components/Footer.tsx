@@ -29,7 +29,7 @@ export function Footer() {
               </span>
             </div>
             <p className="text-sm text-white/80 leading-relaxed font-light">
-              Reequilíbrio Neuro-Oclusal Sistémico. Um modelo de raciocínio clínico
+              Reequilíbrio Neuromuscular Sistêmico. Um modelo de raciocínio clínico
               que integra sistema nervoso, oclusão e organização funcional do corpo
               na compreensão e tratamento da má oclusão.
             </p>
