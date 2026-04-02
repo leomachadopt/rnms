@@ -101,7 +101,7 @@ export default function Agenda() {
             </h1>
 
             <p className="text-premium text-xl lg:text-2xl mb-8">
-              Parabéns! O teu perfil está qualificado para implementar o Sistema de Alinhadores Invisíveis.
+              Parabéns! O teu perfil está qualificado para implementar o Sistema Odontogrowth.
             </p>
 
             <div className="bg-secondary/10 border-2 border-secondary rounded-xl p-8 mb-8">
@@ -109,13 +109,13 @@ export default function Agenda() {
                 📅 Próximo Passo: Entrevista Estratégica
               </h3>
               <p className="text-base lg:text-lg text-muted-foreground mb-4">
-                Agenda agora a tua <strong>Entrevista Estratégica</strong> de 30 minutos com o Dr. Leonardo Machado.
+                Agenda agora a tua <strong>Entrevista Estratégica</strong> de 45 minutos com o Dr. Leonardo Machado e equipa.
               </p>
               <p className="text-base lg:text-lg text-muted-foreground mb-4">
                 Nesta sessão, vamos:
               </p>
               <ul className="text-base lg:text-lg text-muted-foreground text-left list-disc list-inside space-y-2 mb-8">
-                <li>Validar se a tua clínica está pronta para aumentar a conversão de alinhadores</li>
+                <li>Validar se a tua clínica está pronta para aumentar a conversão de mais tratamentos com alinhadores</li>
                 <li>Apresentar o sistema completo: scripts, processos e ferramentas</li>
                 <li>Alinhar expectativas de resultados e cronograma de implementação</li>
                 <li>Esclarecer investimento e condições de participação</li>
@@ -127,13 +127,13 @@ export default function Agenda() {
                 size="lg"
               >
                 <Calendar className="w-6 h-6 mr-2" />
-                Agendar Entrevista Estratégica (30 min)
+                Agendar Entrevista Estratégica (45 min)
               </Button>
             </div>
 
             <div className="bg-muted/50 border border-border rounded-xl p-6">
               <p className="text-sm lg:text-base text-muted-foreground mb-3">
-                ⚠️ <strong>Vagas limitadas:</strong> Trabalhamos com apenas <strong>15 clínicas por turma</strong> para garantir acompanhamento personalizado e resultados consistentes.
+                ⚠️ <strong>Vagas limitadas:</strong> Trabalhamos com apenas <strong>1 clínica por cidade</strong> para garantir exclusividade estratégica e resultados consistentes.
               </p>
               <p className="text-sm lg:text-base text-muted-foreground">
                 <strong>Esta não é uma sessão de vendas.</strong> É uma entrevista seletiva para validar se o sistema é adequado ao momento da tua clínica.
