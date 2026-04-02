@@ -40,6 +40,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       name,
       email,
       whatsapp,
+      orthoCount,
+      activeCases,
       monthlyRevenue,
       goal12m,
       readyToInvest,
@@ -79,8 +81,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         name,
         email: email || null,
         whatsapp: whatsapp || null,
-        orthoCount: null, // Removido do formulário (já perguntado no chat de elegibilidade)
-        activeCases: null, // Removido do formulário (já perguntado no chat de elegibilidade)
+        orthoCount: orthoCount || 'N/A', // Aceita valor do formulário ou padrão N/A
+        activeCases: activeCases || 'N/A', // Aceita valor do formulário ou padrão N/A
         monthlyRevenue,
         goal12m,
         readyToInvest,
