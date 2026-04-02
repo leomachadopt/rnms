@@ -97,28 +97,28 @@ export default function Agenda() {
             </div>
 
             <h1 className="heading-premium text-3xl lg:text-4xl mb-6 text-foreground">
-              Aplicação <span className="text-gradient-gold">Recebida</span>
+              Aplicação <span className="text-gradient-gold">Aprovada</span>
             </h1>
 
             <p className="text-premium text-xl lg:text-2xl mb-8">
-              O teu perfil está alinhado com o Programa RNS de Integração Ortodôntica.
+              Parabéns! O teu perfil está qualificado para implementar o Sistema de Alinhadores Invisíveis.
             </p>
 
             <div className="bg-secondary/10 border-2 border-secondary rounded-xl p-8 mb-8">
               <h3 className="font-bold text-xl lg:text-2xl mb-4 text-foreground">
-                📅 Próximo Passo: Entrevista Estratégica de Elegibilidade
+                📅 Próximo Passo: Entrevista Estratégica
               </h3>
               <p className="text-base lg:text-lg text-muted-foreground mb-4">
-                Agenda agora a tua <strong>Entrevista Estratégica</strong> de 45 minutos com o Dr. Leonardo Machado.
+                Agenda agora a tua <strong>Entrevista Estratégica</strong> de 30 minutos com o Dr. Leonardo Machado.
               </p>
               <p className="text-base lg:text-lg text-muted-foreground mb-4">
                 Nesta sessão, vamos:
               </p>
               <ul className="text-base lg:text-lg text-muted-foreground text-left list-disc list-inside space-y-2 mb-8">
-                <li>Analisar em profundidade o estado actual da tua clínica</li>
-                <li>Mapear os bloqueios específicos ao crescimento ortodôntico</li>
-                <li>Validar se o Programa RNS é adequado ao teu momento</li>
-                <li>Apresentar o investimento e estrutura de implementação</li>
+                <li>Validar se a tua clínica está pronta para aumentar a conversão de alinhadores</li>
+                <li>Apresentar o sistema completo: scripts, processos e ferramentas</li>
+                <li>Alinhar expectativas de resultados e cronograma de implementação</li>
+                <li>Esclarecer investimento e condições de participação</li>
               </ul>
 
               <Button
@@ -127,21 +127,21 @@ export default function Agenda() {
                 size="lg"
               >
                 <Calendar className="w-6 h-6 mr-2" />
-                Agendar Entrevista Estratégica (45 min)
+                Agendar Entrevista Estratégica (30 min)
               </Button>
             </div>
 
             <div className="bg-muted/50 border border-border rounded-xl p-6">
               <p className="text-sm lg:text-base text-muted-foreground mb-3">
-                ⚠️ <strong>Capacidade limitada:</strong> O Programa pode integrar apenas <strong>mais 2 clínicas</strong> neste momento para garantir qualidade de implementação.
+                ⚠️ <strong>Vagas limitadas:</strong> Trabalhamos com apenas <strong>15 clínicas por turma</strong> para garantir acompanhamento personalizado e resultados consistentes.
               </p>
               <p className="text-sm lg:text-base text-muted-foreground">
-                <strong>Entrevista diagnóstica e seletiva.</strong> Não é uma sessão comercial — é uma avaliação mútua de alinhamento.
+                <strong>Esta não é uma sessão de vendas.</strong> É uma entrevista seletiva para validar se o sistema é adequado ao momento da tua clínica.
               </p>
             </div>
 
             <p className="text-sm lg:text-base text-muted-foreground mt-6">
-              Não consegues agendar agora? Sem problema — vais receber um email com o link de agendamento.
+              Não consegues agendar agora? Sem problema — vais receber um email com o link de agendamento nas próximas horas.
             </p>
 
             <div className="mt-8">
