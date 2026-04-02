@@ -90,8 +90,8 @@ export default function FunnelAlinhadores() {
             {/* Stats superiores */}
             <div className="flex items-center justify-center gap-8 mb-4 text-white text-xs">
               <div className="text-center">
-                <div className="font-bold text-lg">600+</div>
-                <div className="text-[10px] uppercase tracking-wide opacity-90">Clínicas Dentárias</div>
+                <div className="font-bold text-lg">10+</div>
+                <div className="text-[10px] uppercase tracking-wide opacity-90">Anos de Atuação</div>
               </div>
               <div className="h-8 w-px bg-white opacity-20"></div>
               <div className="text-center">
@@ -118,7 +118,7 @@ export default function FunnelAlinhadores() {
                 Sem descontos ou consultas gratuitas
               </div>
               <p className="text-xs text-white opacity-75 mt-3">
-                Sessão de crescimento gratuita de 30 min • Sem pitch • Sem compromisso
+                Planeamento estratégico gratuito de 45 min • Sem pitch • Sem compromisso
               </p>
             </div>
           </div>
