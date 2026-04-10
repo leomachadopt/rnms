@@ -23,15 +23,14 @@ export default function FunnelCrescimento() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // Cálculos para o resultado
+  // Cálculos para o resultado (crescimento sustentável total em 12 meses)
   const calcMetrics = () => {
-    const monthlyGrowth = state.revenue * (state.growth / 100);
-    const newRevenue = state.revenue + monthlyGrowth;
-    const annualGrowth = monthlyGrowth * 12;
-    const revenueIn12m = state.revenue * Math.pow(1 + (state.growth / 100), 12);
-    const totalGrowth = revenueIn12m - state.revenue;
+    const monthlyGrowth = state.revenue * (state.growth / 100); // Ex: 45k × 20% = 9k
+    const newRevenue = state.revenue + monthlyGrowth; // Ex: 54k/mês
+    const totalGrowth = monthlyGrowth * 12; // Ex: 9k × 12 = 108k/ano
+    const revenueIn12m = newRevenue; // Faturamento mensal no mês 12
 
-    return { monthlyGrowth, newRevenue, annualGrowth, revenueIn12m, totalGrowth };
+    return { monthlyGrowth, newRevenue, totalGrowth, revenueIn12m };
   };
 
   // Estado para controlar se usuário não está qualificado
@@ -478,7 +477,7 @@ function Step3({
       {/* Painel de resultado */}
       <div className="p-5 bg-primary rounded-xl space-y-4">
         <div className="text-xs uppercase tracking-wider text-secondary font-semibold">
-          Projeção com sistema OdontoGrowth ({state.growth}% crescimento mensal)
+          Projeção com sistema OdontoGrowth (+{state.growth}% de crescimento total)
         </div>
 
         {/* Bloco: crescimento mensal */}
@@ -489,13 +488,13 @@ function Step3({
               <span className="text-lg font-bold text-white">{formatCurrency(state.revenue)}/mês</span>
             </div>
             <div className="flex justify-between items-baseline">
-              <span className="text-sm text-white/80">Com sistema ({state.growth}%):</span>
+              <span className="text-sm text-white/80">Com sistema (+{state.growth}%):</span>
               <span className="text-lg font-bold text-white">{formatCurrency(m.newRevenue)}/mês</span>
             </div>
             <div className="pt-2 border-t border-white border-opacity-10">
               <div className="flex justify-between items-baseline">
-                <span className="text-sm font-semibold text-white">Ganho mensal:</span>
-                <span className="text-xl font-bold text-secondary">+{formatCurrency(m.monthlyGrowth)}</span>
+                <span className="text-sm font-semibold text-white">Aumento no faturamento:</span>
+                <span className="text-xl font-bold text-secondary">+{formatCurrency(m.monthlyGrowth)}/mês</span>
               </div>
             </div>
           </div>
@@ -504,12 +503,12 @@ function Step3({
         {/* Projeção 12 meses */}
         <div className="p-4 bg-secondary/10 border border-secondary/20 rounded-lg">
           <div className="text-center">
-            <div className="text-sm text-secondary mb-2">Faturamento projetado em 12 meses</div>
+            <div className="text-sm text-secondary mb-2">Faturamento mensal após 12 meses</div>
             <div className="text-3xl font-bold text-secondary mb-2">
-              {formatCurrency(m.revenueIn12m)}
+              {formatCurrency(m.revenueIn12m)}/mês
             </div>
             <div className="text-xs text-white/80">
-              Crescimento total: <span className="font-bold text-secondary">+{formatCurrency(m.totalGrowth)}</span>
+              Ganho anual total: <span className="font-bold text-secondary">+{formatCurrency(m.totalGrowth)}</span>
             </div>
           </div>
         </div>
