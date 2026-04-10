@@ -359,17 +359,17 @@ function Step1({ goNext }: { goNext: (updates?: Partial<FunnelState>) => void })
           <div className="flex items-start gap-3">
             <img
               src="/testimonial-placeholder.jpg"
-              alt="Dr. Carlos"
+              alt="Dra. Cristiane"
               className="w-12 h-12 rounded-full object-cover flex-shrink-0"
               onError={(e) => {
-                (e.target as HTMLImageElement).src = "https://ui-avatars.com/api/?name=Carlos+Santos&background=1a56db&color=fff";
+                (e.target as HTMLImageElement).src = "https://ui-avatars.com/api/?name=Cristiane+Martins&background=1a56db&color=fff";
               }}
             />
             <div>
               <p className="text-sm italic text-gray-700 mb-2">
-                "Aumentei de 45.000€ para 78.000€ por mês em 6 meses — sem aumentar um cêntimo no orçamento de marketing. Tudo através de conversão, retenção e indicações."
+                "Tivemos uma procura de 46 leads qualificados para o tratamento com alinhadores em apenas 30 dias. O sistema de fecho mudou completamente a forma como conduzo as consultas de alinhadores."
               </p>
-              <div className="text-xs font-semibold text-primary">Dr. Carlos Santos</div>
+              <div className="text-xs font-semibold text-primary">Dra. Cristiane Martins</div>
             </div>
           </div>
         </div>
@@ -380,8 +380,8 @@ function Step1({ goNext }: { goNext: (updates?: Partial<FunnelState>) => void })
             Porque é que isto importa
           </div>
           <div className="text-sm leading-relaxed text-white/90">
-            A maioria das clínicas <span className="font-bold text-secondary">perde 50–70% do potencial de receita</span> por
-            baixa conversão, ticket médio reduzido e falta de retenção. O sistema corrige isso de forma sistemática.
+            A maioria das clínicas <span className="font-bold text-secondary">perde 60% das oportunidades</span> entre
+            a consulta inicial e o início do tratamento. O sistema OdontoGrowth inverte esta lógica.
           </div>
         </div>
       </div>
@@ -621,20 +621,20 @@ function Step3({
         <div className="flex items-start gap-3">
           <img
             src="/testimonial-placeholder-2.jpg"
-            alt="Dra. Ana Rita"
+            alt="Dra. Joana Matos"
             className="w-12 h-12 rounded-full object-cover flex-shrink-0"
             onError={(e) => {
-              (e.target as HTMLImageElement).src = "https://ui-avatars.com/api/?name=Ana+Rita&background=042C53&color=fff";
+              (e.target as HTMLImageElement).src = "https://ui-avatars.com/api/?name=Joana+Matos&background=042C53&color=fff";
             }}
           />
           <div>
             <p className="text-sm text-gray-700 mb-2">
-              "Dobrei o faturamento em 8 meses sem gastar em marketing. O sistema me ensinou a converter melhor, vender tratamentos de maior valor e reter pacientes de forma previsível."
+              "Em 90 dias a implementar o sistema, tive um aumento de 120% na faturação em relação ao mesmo mês do ano anterior. O mais impressionante é que não precisei gastar nada com marketing e campanhas."
             </p>
             <div className="flex items-center gap-2">
-              <div className="text-xs font-semibold text-primary">Dra. Ana Rita Carvalho</div>
+              <div className="text-xs font-semibold text-primary">Dra. Joana Matos</div>
               <div className="px-2 py-0.5 bg-accent text-secondary text-[10px] font-semibold rounded">
-                +110% faturamento
+                Dobro de faturação
               </div>
             </div>
           </div>
