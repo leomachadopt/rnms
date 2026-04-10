@@ -675,7 +675,7 @@ function Step4({
             <div>
               <div className="font-bold text-sm text-primary mb-1">Formação de equipa comercial</div>
               <div className="text-[13px] text-gray-600">
-                Coordenadores e secretárias aprendem a qualificar leads, agendar consultas premium e fazer follow-up estruturado
+                Coordenadores e rececionistas aprendem a qualificar leads, marcar consultas premium e fazer follow-up estruturado
               </div>
             </div>
           </div>
@@ -862,7 +862,7 @@ function Step5({ state, goNext }: { state: FunnelState; goNext: (updates?: Parti
             Última etapa: reserve a sua vaga para entrevista
           </h2>
           <p className="text-sm text-gray-500">
-            Vagas limitadas a apenas 1 clínica por cidade. Após preencher, agendará uma entrevista estratégica gratuita (45min).
+            Vagas limitadas a apenas 1 clínica por cidade. Após preencher, marcará uma entrevista estratégica gratuita (45min).
           </p>
         </div>
 
@@ -1001,7 +1001,7 @@ function Step5({ state, goNext }: { state: FunnelState; goNext: (updates?: Parti
         </button>
 
         <p className="text-xs text-center text-gray-500">
-          Ao clicar acima, concorda em receber contacto da equipa OdontoGrowth para agendamento da entrevista
+          Ao clicar acima, concorda em receber contacto da equipa OdontoGrowth para marcação da entrevista
         </p>
       </form>
       </div>
@@ -1024,7 +1024,7 @@ function Step6() {
           Inscrição confirmada!
         </h2>
         <p className="text-base text-gray-700">
-          Em até 24h receberá um email com o link para agendar a sua entrevista estratégica.
+          Em até 24h receberá um email com o link para marcar a sua entrevista estratégica.
         </p>
       </div>
 
@@ -1043,7 +1043,7 @@ function Step6() {
           </li>
           <li className="flex items-start gap-2">
             <span className="font-bold text-secondary flex-shrink-0">2.</span>
-            <span>Receberá um email com link para agendar entrevista estratégica de 30min</span>
+            <span>Receberá um email com link para marcar entrevista estratégica de 30min</span>
           </li>
           <li className="flex items-start gap-2">
             <span className="font-bold text-secondary flex-shrink-0">3.</span>
