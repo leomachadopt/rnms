@@ -30,11 +30,11 @@ function parseOptions(raw: string): { text: string; options: string[] } {
   }
 }
 
-const INITIAL_MESSAGE = `Olá! Bem-vindo ao processo de elegibilidade para o Programa RNS de Integração Ortodôntica.
+const INITIAL_MESSAGE = `Olá! Bem-vindo à pré-qualificação para o Programa RNS.
 
-Vou fazer-te algumas perguntas para entender se o Programa se adequa ao momento da tua clínica.
+Esta é uma conversa rápida (2-3 minutos) para confirmar se faz sentido agendarmos uma Entrevista Estratégica com o Dr. Leonardo Machado.
 
-Para começar: qual é o teu nome?`
+Para começar, qual é o teu nome?`
 
 type EligibilityChatProps = {
   onQualified?: () => void  // Callback quando qualificado

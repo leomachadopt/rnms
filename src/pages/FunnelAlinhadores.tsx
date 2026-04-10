@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Check, ArrowRight, Lock, Shield, TrendingUp, Users, Award, Sparkles, ChevronRight } from "lucide-react";
+import { useMetaPixel } from "@/hooks/use-meta-pixel";
 
 // Estado global do funil
 interface FunnelState {
@@ -85,36 +86,36 @@ export default function FunnelAlinhadores() {
     <div className="min-h-screen bg-white">
       {/* Header customizado tipo PurpleFire */}
       {state.page < 6 && (
-        <div className="fixed top-0 left-0 right-0 bg-[#2C4A6B] z-50">
+        <div className="fixed top-0 left-0 right-0 bg-primary z-50">
           <div className="max-w-7xl mx-auto px-4 py-4">
             {/* Stats superiores */}
             <div className="flex items-center justify-center gap-8 mb-4 text-white text-xs">
               <div className="text-center">
-                <div className="font-bold text-lg">10+</div>
+                <div className="font-bold text-lg text-secondary">10+</div>
                 <div className="text-[10px] uppercase tracking-wide opacity-90">Anos de Atuação</div>
               </div>
-              <div className="h-8 w-px bg-white opacity-20"></div>
+              <div className="h-8 w-px bg-secondary opacity-30"></div>
               <div className="text-center">
-                <div className="font-bold text-lg">20–30</div>
+                <div className="font-bold text-lg text-secondary">20–30</div>
                 <div className="text-[10px] uppercase tracking-wide opacity-90">Casos/Mês</div>
               </div>
-              <div className="h-8 w-px bg-white opacity-20"></div>
+              <div className="h-8 w-px bg-secondary opacity-30"></div>
               <div className="text-center">
-                <div className="font-bold text-lg">30 dias</div>
+                <div className="font-bold text-lg text-secondary">30 dias</div>
                 <div className="text-[10px] uppercase tracking-wide opacity-90">Até Resultados</div>
               </div>
             </div>
 
             {/* Título principal */}
             <div className="text-center">
-              <div className="text-xs uppercase tracking-wider text-[#B5D4F4] font-semibold mb-2">
+              <div className="text-xs uppercase tracking-wider text-secondary font-semibold mb-2">
                 OdontoGrowth
               </div>
               <h1 className="text-2xl md:text-3xl font-bold text-white mb-2">
                 Obtenha 20–30 Novos Pacientes<br />de Alinhadores Invisíveis Todos os Meses
               </h1>
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#0F6E56] rounded-full text-white text-xs font-medium">
-                <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-secondary/10 border border-secondary/20 rounded-full text-secondary text-xs font-medium">
+                <div className="w-2 h-2 bg-secondary rounded-full"></div>
                 Sem descontos ou consultas gratuitas
               </div>
               <p className="text-xs text-white opacity-75 mt-3">
@@ -127,12 +128,12 @@ export default function FunnelAlinhadores() {
           <div className="bg-white border-t border-gray-200">
             <div className="max-w-[580px] mx-auto px-4 py-3">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-xs font-medium text-[#042C53]">{stepLabel}</span>
+                <span className="text-xs font-medium text-primary">{stepLabel}</span>
                 <span className="text-xs text-gray-500">{progress}%</span>
               </div>
               <div className="h-1.5 bg-gray-200 rounded-full overflow-hidden">
                 <div
-                  className="h-full bg-[#1a56db] transition-all duration-500 ease-out"
+                  className="h-full bg-secondary transition-all duration-500 ease-out"
                   style={{ width: `${progress}%` }}
                 />
               </div>
@@ -160,21 +161,21 @@ function StepDisqualified() {
       <div className="space-y-6 text-center">
         {/* Ícone de sucesso */}
         <div className="flex justify-center">
-          <div className="w-24 h-24 rounded-full bg-blue-50 border-4 border-blue-200 flex items-center justify-center">
-            <Check className="w-12 h-12 text-[#1a56db]" />
+          <div className="w-24 h-24 rounded-full bg-accent border-4 border-secondary/30 flex items-center justify-center">
+            <Check className="w-12 h-12 text-secondary" />
           </div>
         </div>
 
         {/* Título */}
         <div>
-          <h2 className="text-3xl font-bold text-[#0F172A] mb-3">
+          <h2 className="text-3xl font-bold text-primary mb-3">
             Ótimo — continue a fazer o que está a funcionar
           </h2>
         </div>
 
         {/* Mensagem */}
         <div className="max-w-[500px] mx-auto">
-          <p className="text-base text-gray-600 leading-relaxed">
+          <p className="text-base text-primary/70 leading-relaxed">
             Se a sua agenda de alinhadores já está cheia, está no top 5% das clínicas dentárias.
             Quando estiver pronto para expandir a capacidade ou abrir uma segunda localização,
             adoraríamos conversar.
@@ -185,7 +186,7 @@ function StepDisqualified() {
         <div className="pt-4">
           <button
             onClick={() => window.location.href = '/alinhadores'}
-            className="inline-flex items-center gap-2 px-8 py-4 bg-[#1a56db] text-white font-semibold text-base rounded-xl hover:bg-[#1547c0] transition-all shadow-lg hover:shadow-xl"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-secondary text-primary font-semibold text-base rounded-xl hover:bg-secondary/90 transition-all shadow-lg hover:shadow-xl"
           >
             Recomeçar
           </button>
@@ -216,8 +217,8 @@ function Step0({ goNext }: { goNext: (disqualify?: boolean) => void }) {
             <div className="absolute bottom-1 right-1 w-4 h-4 bg-green-500 border-2 border-white rounded-full"></div>
           </div>
           <div className="flex-1">
-            <h1 className="text-[28px] font-bold text-[#0F172A] mb-2 leading-tight">
-              Está a tentar ativamente aumentar a receita de <span className="text-[#1a56db]">alinhadores invisíveis</span> da sua clínica?
+            <h1 className="text-[28px] font-bold text-primary mb-2 leading-tight">
+              Está a tentar ativamente aumentar a receita de <span className="text-secondary">alinhadores invisíveis</span> da sua clínica?
             </h1>
             <p className="text-sm text-gray-500">
               Leonardo Machado, Fundador da OdontoGrowth
@@ -236,35 +237,35 @@ function Step0({ goNext }: { goNext: (disqualify?: boolean) => void }) {
         <div className="space-y-3">
           <button
             onClick={() => goNext(false)}
-            className="w-full text-left p-5 bg-white border-2 border-gray-200 rounded-2xl hover:border-[#1a56db] hover:shadow-xl transition-all group"
+            className="w-full text-left p-5 bg-white border-2 border-gray-200 rounded-2xl hover:border-secondary hover:shadow-xl transition-all group"
           >
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-full bg-gray-100 border-2 border-gray-200 flex items-center justify-center flex-shrink-0 text-gray-400 font-bold text-base group-hover:border-[#1a56db] group-hover:bg-blue-50 group-hover:text-[#1a56db] transition-all">
+              <div className="w-12 h-12 rounded-full bg-gray-100 border-2 border-gray-200 flex items-center justify-center flex-shrink-0 text-gray-400 font-bold text-base group-hover:border-secondary group-hover:bg-accent group-hover:text-secondary transition-all">
                 A
               </div>
               <div className="flex-1">
-                <div className="font-semibold text-[17px] text-[#0F172A]">
+                <div className="font-semibold text-[17px] text-primary">
                   Sim — quero mais pacientes de alinhadores e estou pronto para investir
                 </div>
               </div>
-              <ArrowRight className="w-5 h-5 text-gray-300 group-hover:text-[#1a56db] group-hover:translate-x-1 transition-all flex-shrink-0" />
+              <ArrowRight className="w-5 h-5 text-gray-300 group-hover:text-secondary group-hover:translate-x-1 transition-all flex-shrink-0" />
             </div>
           </button>
 
           <button
             onClick={() => goNext(true)}
-            className="w-full text-left p-5 bg-white border-2 border-gray-200 rounded-2xl hover:border-[#1a56db] hover:shadow-xl transition-all group"
+            className="w-full text-left p-5 bg-white border-2 border-gray-200 rounded-2xl hover:border-secondary hover:shadow-xl transition-all group"
           >
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-full bg-gray-100 border-2 border-gray-200 flex items-center justify-center flex-shrink-0 text-gray-400 font-bold text-base group-hover:border-[#1a56db] group-hover:bg-blue-50 group-hover:text-[#1a56db] transition-all">
+              <div className="w-12 h-12 rounded-full bg-gray-100 border-2 border-gray-200 flex items-center justify-center flex-shrink-0 text-gray-400 font-bold text-base group-hover:border-secondary group-hover:bg-accent group-hover:text-secondary transition-all">
                 B
               </div>
               <div className="flex-1">
-                <div className="font-semibold text-[17px] text-[#0F172A]">
+                <div className="font-semibold text-[17px] text-primary">
                   Não agora — a minha agenda de alinhadores já está cheia
                 </div>
               </div>
-              <ArrowRight className="w-5 h-5 text-gray-300 group-hover:text-[#1a56db] group-hover:translate-x-1 transition-all flex-shrink-0" />
+              <ArrowRight className="w-5 h-5 text-gray-300 group-hover:text-secondary group-hover:translate-x-1 transition-all flex-shrink-0" />
             </div>
           </button>
         </div>
@@ -284,24 +285,24 @@ function Step0({ goNext }: { goNext: (disqualify?: boolean) => void }) {
           ))}
         </div>
 
-        {/* Box verde */}
-        <div className="p-4 bg-[#E6F5F0] border border-[#0F6E56] rounded-lg">
+        {/* Box dourado */}
+        <div className="p-4 bg-accent border border-secondary/20 rounded-lg">
           <div className="flex gap-2">
-            <Check className="w-5 h-5 text-[#0F6E56] flex-shrink-0 mt-0.5" />
-            <div className="text-sm text-gray-800">
+            <Check className="w-5 h-5 text-secondary flex-shrink-0 mt-0.5" />
+            <div className="text-sm text-primary">
               <span className="font-semibold">Já tem o conhecimento clínico.</span> Este sistema foca em
               <span className="font-semibold"> conversão comercial, fluxo de decisão e fecho</span> — não em técnica ortodôntica.
             </div>
           </div>
         </div>
 
-        {/* Box azul escuro */}
-        <div className="p-4 bg-[#042C53] rounded-lg">
-          <div className="text-xs uppercase tracking-wider text-[#B5D4F4] font-semibold mb-1.5">
+        {/* Box preto */}
+        <div className="p-4 bg-primary rounded-lg">
+          <div className="text-xs uppercase tracking-wider text-secondary font-semibold mb-1.5">
             Dado de contexto
           </div>
-          <div className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.9)' }}>
-            Clínicas que implementam o sistema OdontoGrowth para alinhadores aumentam em média <span className="font-bold text-white">2,3× a sua taxa de conversão</span> —
+          <div className="text-sm leading-relaxed text-white/90">
+            Clínicas que implementam o sistema OdontoGrowth para alinhadores <span className="font-bold text-secondary">aumentam em média a faturação em 30% ao mês</span> —
             sem aumentar o orçamento de marketing.
           </div>
         </div>
@@ -325,7 +326,7 @@ function Step1({ goNext }: { goNext: (updates?: Partial<FunnelState>) => void })
     <div className="bg-white rounded-3xl shadow-xl border border-gray-100 p-8 max-w-[580px] mx-auto">
       <div className="space-y-6">
         <div>
-          <h2 className="text-xl font-bold text-[#042C53] mb-2">
+          <h2 className="text-xl font-bold text-primary mb-2">
             Quantos casos de alinhadores quer iniciar por mês?
           </h2>
           <p className="text-sm text-gray-500">
@@ -338,21 +339,21 @@ function Step1({ goNext }: { goNext: (updates?: Partial<FunnelState>) => void })
             <button
               key={opt.badge}
               onClick={() => goNext({ goal: opt.value })}
-              className="w-full text-left p-5 bg-gray-50 border-2 border-gray-200 rounded-2xl hover:border-[#1a56db] hover:bg-blue-50 hover:shadow-lg transition-all group"
+              className="w-full text-left p-5 bg-gray-50 border-2 border-gray-200 rounded-2xl hover:border-secondary hover:bg-accent hover:shadow-lg transition-all group"
             >
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-[#1a56db] text-white font-bold text-sm flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                <div className="w-12 h-12 rounded-full bg-secondary text-primary font-bold text-sm flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
                   {opt.badge}
                 </div>
                 <div className="flex-1">
-                  <div className="font-bold text-[16px] text-[#042C53] mb-0.5">
+                  <div className="font-bold text-[16px] text-primary mb-0.5">
                     {opt.title}
                   </div>
                   <div className="text-sm text-gray-600">
                     {opt.subtitle}
                   </div>
                 </div>
-                <ArrowRight className="w-6 h-6 text-gray-300 group-hover:text-[#1a56db] group-hover:translate-x-1 transition-all flex-shrink-0" />
+                <ArrowRight className="w-6 h-6 text-gray-300 group-hover:text-secondary group-hover:translate-x-1 transition-all flex-shrink-0" />
               </div>
             </button>
           ))}
@@ -363,33 +364,28 @@ function Step1({ goNext }: { goNext: (updates?: Partial<FunnelState>) => void })
           <div className="flex items-start gap-3">
             <img
               src="/testimonial-placeholder.jpg"
-              alt="Dra. Ana Paula"
+              alt="Dra. Cristiane"
               className="w-12 h-12 rounded-full object-cover flex-shrink-0"
               onError={(e) => {
-                (e.target as HTMLImageElement).src = "https://ui-avatars.com/api/?name=Ana+Paula&background=1a56db&color=fff";
+                (e.target as HTMLImageElement).src = "https://ui-avatars.com/api/?name=Cristiane+Martins&background=1a56db&color=fff";
               }}
             />
             <div>
               <p className="text-sm italic text-gray-700 mb-2">
-                "Passei de 8 para 22 casos/mês em 4 meses. O sistema de fecho mudou completamente a forma como conduzo as consultas de alinhadores."
+                "Tivemos uma procura de 46 leads qualificados para o tratamento com alinhadores em apenas 30 dias. O sistema de fecho mudou completamente a forma como conduzo as consultas de alinhadores."
               </p>
-              <div className="flex items-center gap-2">
-                <div className="text-xs font-semibold text-[#042C53]">Dra. Ana Paula Correia</div>
-                <div className="px-2 py-0.5 bg-[#E6F1FB] text-[#1a56db] text-[10px] font-semibold rounded">
-                  +175% casos
-                </div>
-              </div>
+              <div className="text-xs font-semibold text-primary">Dra. Cristiane Martins</div>
             </div>
           </div>
         </div>
 
-        {/* Box azul escuro */}
-        <div className="p-4 bg-[#042C53] rounded-lg">
-          <div className="text-xs uppercase tracking-wider text-[#B5D4F4] font-semibold mb-1.5">
+        {/* Box preto */}
+        <div className="p-4 bg-primary rounded-lg">
+          <div className="text-xs uppercase tracking-wider text-secondary font-semibold mb-1.5">
             Porque é que isto importa
           </div>
-          <div className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.9)' }}>
-            A maioria das clínicas <span className="font-bold text-white">perde 60% das oportunidades</span> entre
+          <div className="text-sm leading-relaxed text-white/90">
+            A maioria das clínicas <span className="font-bold text-secondary">perde 60% das oportunidades</span> entre
             a consulta inicial e o início do tratamento. O sistema OdontoGrowth inverte esta lógica.
           </div>
         </div>
@@ -414,7 +410,7 @@ function Step2({ goNext }: { goNext: (updates?: Partial<FunnelState>) => void })
     <div className="bg-white rounded-3xl shadow-xl border border-gray-100 p-8 max-w-[580px] mx-auto">
       <div className="space-y-6">
         <div>
-          <h2 className="text-xl font-bold text-[#042C53] mb-2">
+          <h2 className="text-xl font-bold text-primary mb-2">
             Qual a sua taxa de conversão actual em alinhadores?
           </h2>
           <p className="text-sm text-gray-500">
@@ -427,26 +423,26 @@ function Step2({ goNext }: { goNext: (updates?: Partial<FunnelState>) => void })
             <button
               key={i}
               onClick={() => goNext({ conv: opt.value })}
-              className="w-full text-left p-5 bg-gray-50 border-2 border-gray-200 rounded-2xl hover:border-[#1a56db] hover:bg-blue-50 hover:shadow-lg transition-all group"
+              className="w-full text-left p-5 bg-gray-50 border-2 border-gray-200 rounded-2xl hover:border-secondary hover:bg-accent hover:shadow-lg transition-all group"
             >
               <div className="flex items-center justify-between">
-                <div className="font-medium text-[16px] text-[#042C53]">
+                <div className="font-medium text-[16px] text-primary">
                   {opt.label}
                 </div>
-                <ArrowRight className="w-6 h-6 text-gray-300 group-hover:text-[#1a56db] group-hover:translate-x-1 transition-all flex-shrink-0" />
+                <ArrowRight className="w-6 h-6 text-gray-300 group-hover:text-secondary group-hover:translate-x-1 transition-all flex-shrink-0" />
               </div>
             </button>
           ))}
         </div>
 
-        {/* Box azul escuro */}
-        <div className="p-4 bg-[#042C53] rounded-lg">
-          <div className="text-xs uppercase tracking-wider text-[#B5D4F4] font-semibold mb-1.5">
+        {/* Box preto */}
+        <div className="p-4 bg-primary rounded-lg">
+          <div className="text-xs uppercase tracking-wider text-secondary font-semibold mb-1.5">
             Benchmark do mercado
           </div>
-          <div className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.9)' }}>
-            A média nacional é <span className="font-bold text-white">15–18%</span>.
-            Clínicas com sistema estruturado alcançam <span className="font-bold text-white">35–45%</span> de forma consistente.
+          <div className="text-sm leading-relaxed text-white/90">
+            A média nacional é <span className="font-bold text-secondary">15–18%</span>.
+            Clínicas com sistema estruturado alcançam <span className="font-bold text-secondary">35–45%</span> de forma consistente.
           </div>
         </div>
       </div>
@@ -473,19 +469,13 @@ function Step3({ goNext }: { goNext: (updates?: Partial<FunnelState>) => void })
         {/* Depoimento lateral */}
         <div className="p-4 bg-gray-50 border-l-4 border-[#1a56db] rounded-r-lg">
           <p className="text-sm italic text-gray-700 mb-2">
-            "Aumentei o meu valor médio de 3.500€ para 5.500€ — não porque subi o preço, mas porque aprendi a apresentar valor e
-            fazer upsell de procedimentos complementares no momento certo."
+            "Aumentei o meu valor médio de 1.000€ para 2.800€ — não porque subi o preço, mas porque aprendi a apresentar valor de forma agregada a procedimentos complementares no momento certo."
           </p>
-          <div className="flex items-center gap-2">
-            <div className="text-xs font-semibold text-[#042C53]">Dr. Ricardo Ferraz</div>
-            <div className="px-2 py-0.5 bg-[#E6F1FB] text-[#1a56db] text-[10px] font-semibold rounded">
-              +57% valor
-            </div>
-          </div>
+          <div className="text-xs font-semibold text-primary">Dra. Marilia Pessoa</div>
         </div>
 
         <div>
-          <h2 className="text-xl font-bold text-[#042C53] mb-2">
+          <h2 className="text-xl font-bold text-primary mb-2">
             Qual o valor médio dos seus casos de alinhadores?
           </h2>
           <p className="text-sm text-gray-500">
@@ -498,21 +488,21 @@ function Step3({ goNext }: { goNext: (updates?: Partial<FunnelState>) => void })
             <button
               key={opt.badge}
               onClick={() => goNext({ caseVal: opt.value })}
-              className="w-full text-left p-5 bg-gray-50 border-2 border-gray-200 rounded-2xl hover:border-[#1a56db] hover:bg-blue-50 hover:shadow-lg transition-all group"
+              className="w-full text-left p-5 bg-gray-50 border-2 border-gray-200 rounded-2xl hover:border-secondary hover:bg-accent hover:shadow-lg transition-all group"
             >
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-[#042C53] text-white font-bold text-sm flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                <div className="w-12 h-12 rounded-full bg-primary text-secondary font-bold text-sm flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
                   {opt.badge}
                 </div>
                 <div className="flex-1">
-                  <div className="font-bold text-[16px] text-[#042C53] mb-0.5">
+                  <div className="font-bold text-[16px] text-primary mb-0.5">
                     {opt.title}
                   </div>
                   <div className="text-sm text-gray-600">
                     {opt.subtitle}
                   </div>
                 </div>
-                <ArrowRight className="w-6 h-6 text-gray-300 group-hover:text-[#1a56db] group-hover:translate-x-1 transition-all flex-shrink-0" />
+                <ArrowRight className="w-6 h-6 text-gray-300 group-hover:text-secondary group-hover:translate-x-1 transition-all flex-shrink-0" />
               </div>
             </button>
           ))}
@@ -544,7 +534,7 @@ function Step4({
     <div className="bg-white rounded-3xl shadow-xl border border-gray-100 p-8 max-w-[620px] mx-auto">
       <div className="space-y-6">
         <div>
-          <h2 className="text-2xl font-bold text-[#042C53] mb-2">
+          <h2 className="text-2xl font-bold text-primary mb-2">
             A oportunidade real da sua clínica em alinhadores
           </h2>
           <p className="text-sm text-gray-500">
@@ -553,55 +543,55 @@ function Step4({
         </div>
 
       {/* Painel de resultado */}
-      <div className="p-5 bg-[#042C53] rounded-xl space-y-4">
-        <div className="text-xs uppercase tracking-wider text-[#B5D4F4] font-semibold">
+      <div className="p-5 bg-primary rounded-xl space-y-4">
+        <div className="text-xs uppercase tracking-wider text-secondary font-semibold">
           Simulação com sistema OdontoGrowth (conversão 40%)
         </div>
 
         {/* 3 métricas */}
         <div className="grid grid-cols-3 gap-3">
           <div className="p-3 bg-white bg-opacity-5 rounded-lg">
-            <div className="text-2xl font-bold text-white mb-1">{state.goal}</div>
-            <div className="text-[11px] text-[#B5D4F4] uppercase tracking-wide">Consultas/mês</div>
+            <div className="text-2xl font-bold text-secondary mb-1">{state.goal}</div>
+            <div className="text-[11px] text-white/70 uppercase tracking-wide">Consultas/mês</div>
           </div>
           <div className="p-3 bg-white bg-opacity-5 rounded-lg">
-            <div className="text-2xl font-bold text-white mb-1">{m.newCases}</div>
-            <div className="text-[11px] text-[#B5D4F4] uppercase tracking-wide">Casos iniciados</div>
+            <div className="text-2xl font-bold text-secondary mb-1">{m.newCases}</div>
+            <div className="text-[11px] text-white/70 uppercase tracking-wide">Casos iniciados</div>
           </div>
           <div className="p-3 bg-white bg-opacity-5 rounded-lg">
-            <div className="text-2xl font-bold text-white mb-1">40%</div>
-            <div className="text-[11px] text-[#B5D4F4] uppercase tracking-wide">Taxa conversão</div>
+            <div className="text-2xl font-bold text-secondary mb-1">40%</div>
+            <div className="text-[11px] text-white/70 uppercase tracking-wide">Taxa conversão</div>
           </div>
         </div>
 
         {/* Bloco: sua meta */}
         <div className="p-4 bg-white bg-opacity-[0.06] rounded-lg border border-white border-opacity-10">
-          <div className="text-sm text-[#B5D4F4] mb-2">Com a sua meta de {state.goal} consultas/mês:</div>
+          <div className="text-sm text-secondary mb-2">Com a sua meta de {state.goal} consultas/mês:</div>
           <div className="space-y-2">
             <div className="flex justify-between items-baseline">
-              <span className="text-sm" style={{ color: 'rgba(255,255,255,0.8)' }}>Hoje (conversão {(state.conv * 100).toFixed(0)}%):</span>
+              <span className="text-sm text-white/80">Hoje (conversão {(state.conv * 100).toFixed(0)}%):</span>
               <span className="text-lg font-bold text-white">{formatCurrency(m.currentRevenue)}/mês</span>
             </div>
             <div className="flex justify-between items-baseline">
-              <span className="text-sm" style={{ color: 'rgba(255,255,255,0.8)' }}>Com o sistema (40%):</span>
+              <span className="text-sm text-white/80">Com o sistema (40%):</span>
               <span className="text-lg font-bold text-white">{formatCurrency(m.newRevenue)}/mês</span>
             </div>
             <div className="pt-2 border-t border-white border-opacity-10">
               <div className="flex justify-between items-baseline">
                 <span className="text-sm font-semibold text-white">Ganho mensal:</span>
-                <span className="text-xl font-bold text-[#4ADE80]">+{formatCurrency(m.lift)}</span>
+                <span className="text-xl font-bold text-secondary">+{formatCurrency(m.lift)}</span>
               </div>
             </div>
           </div>
         </div>
 
         {/* Garantia 5x */}
-        <div className="p-4 bg-[#0F6E56] rounded-lg">
+        <div className="p-4 bg-secondary/10 border border-secondary/20 rounded-lg">
           <div className="flex items-start gap-3">
-            <Shield className="w-6 h-6 text-white flex-shrink-0 mt-0.5" />
+            <Shield className="w-6 h-6 text-secondary flex-shrink-0 mt-0.5" />
             <div>
-              <div className="font-bold text-white mb-1">Garantia de resultado 5×</div>
-              <div className="text-sm" style={{ color: 'rgba(255,255,255,0.9)' }}>
+              <div className="font-bold text-primary mb-1">Garantia de resultado 5×</div>
+              <div className="text-sm text-primary/90">
                 Se em 6 meses o sistema não gerar no mínimo <span className="font-bold">5× o valor do investimento</span> em
                 receita adicional, devolvemos 100% do valor pago.
               </div>
@@ -611,27 +601,27 @@ function Step4({
 
         {/* Receita anual */}
         <div className="text-center py-3">
-          <div className="text-sm text-[#B5D4F4] mb-1">Potencial de crescimento anual</div>
-          <div className="text-3xl font-bold text-white">
+          <div className="text-sm text-secondary mb-1">Potencial de crescimento anual</div>
+          <div className="text-3xl font-bold text-secondary">
             {formatCurrency(m.annualLift)}
           </div>
         </div>
       </div>
 
       {/* Bloco de decisão */}
-      <div className="p-5 bg-[#E6F1FB] border border-[#B5D4F4] rounded-xl">
+      <div className="p-5 bg-accent border border-secondary/20 rounded-xl">
         <div className="text-center mb-4">
-          <h3 className="text-lg font-bold text-[#042C53] mb-1">
+          <h3 className="text-lg font-bold text-primary mb-1">
             Isto faz sentido para a sua clínica?
           </h3>
-          <p className="text-sm text-gray-700">
+          <p className="text-sm text-primary/70">
             Se a resposta é <span className="font-semibold">sim</span>, vamos para o próximo passo
           </p>
         </div>
         <div className="space-y-2">
           <button
             onClick={() => goNext()}
-            className="w-full py-4 bg-[#1a56db] text-white font-semibold rounded-lg hover:bg-[#1547c0] transition-all shadow-lg hover:shadow-xl hover:scale-[1.02] flex items-center justify-center gap-2"
+            className="w-full py-4 bg-secondary text-primary font-semibold rounded-lg hover:bg-secondary/90 transition-all shadow-lg hover:shadow-xl hover:scale-[1.02] flex items-center justify-center gap-2"
           >
             Sim, quero saber como funciona
             <ArrowRight className="w-5 h-5" />
@@ -647,15 +637,15 @@ function Step4({
 
       {/* 4 cards - como funciona */}
       <div className="space-y-3">
-        <h3 className="text-lg font-bold text-[#042C53]">Como o sistema funciona</h3>
+        <h3 className="text-lg font-bold text-primary">Como o sistema funciona</h3>
 
         <div className="p-4 bg-white border border-gray-200 rounded-lg">
           <div className="flex gap-3">
-            <div className="w-9 h-9 rounded-lg bg-[#E6F1FB] flex items-center justify-center flex-shrink-0">
-              <TrendingUp className="w-5 h-5 text-[#1a56db]" />
+            <div className="w-9 h-9 rounded-lg bg-accent flex items-center justify-center flex-shrink-0">
+              <TrendingUp className="w-5 h-5 text-secondary" />
             </div>
             <div>
-              <div className="font-bold text-sm text-[#042C53] mb-1">Fluxo de decisão estruturado</div>
+              <div className="font-bold text-sm text-primary mb-1">Fluxo de decisão estruturado</div>
               <div className="text-[13px] text-gray-600">
                 Roteiro passo a passo para conduzir a consulta do diagnóstico ao fecho, eliminando objeções antes que apareçam
               </div>
@@ -665,11 +655,11 @@ function Step4({
 
         <div className="p-4 bg-white border border-gray-200 rounded-lg">
           <div className="flex gap-3">
-            <div className="w-9 h-9 rounded-lg bg-[#FEF3C7] flex items-center justify-center flex-shrink-0">
-              <Sparkles className="w-5 h-5 text-[#F59E0B]" />
+            <div className="w-9 h-9 rounded-lg bg-secondary/20 flex items-center justify-center flex-shrink-0">
+              <Sparkles className="w-5 h-5 text-secondary" />
             </div>
             <div>
-              <div className="font-bold text-sm text-[#042C53] mb-1">Apresentação de valor + ancoragem</div>
+              <div className="font-bold text-sm text-primary mb-1">Apresentação de valor + ancoragem</div>
               <div className="text-[13px] text-gray-600">
                 Framework de preços que posiciona o tratamento como investimento, não como custo — aumentando o valor e aceitação
               </div>
@@ -679,11 +669,11 @@ function Step4({
 
         <div className="p-4 bg-white border border-gray-200 rounded-lg">
           <div className="flex gap-3">
-            <div className="w-9 h-9 rounded-lg bg-[#E6F5F0] flex items-center justify-center flex-shrink-0">
-              <Users className="w-5 h-5 text-[#0F6E56]" />
+            <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+              <Users className="w-5 h-5 text-primary" />
             </div>
             <div>
-              <div className="font-bold text-sm text-[#042C53] mb-1">Formação de equipa comercial</div>
+              <div className="font-bold text-sm text-primary mb-1">Formação de equipa comercial</div>
               <div className="text-[13px] text-gray-600">
                 Coordenadores e secretárias aprendem a qualificar leads, agendar consultas premium e fazer follow-up estruturado
               </div>
@@ -693,11 +683,11 @@ function Step4({
 
         <div className="p-4 bg-white border border-gray-200 rounded-lg">
           <div className="flex gap-3">
-            <div className="w-9 h-9 rounded-lg bg-[#FEE2E2] flex items-center justify-center flex-shrink-0">
-              <Award className="w-5 h-5 text-[#DC2626]" />
+            <div className="w-9 h-9 rounded-lg bg-secondary/20 flex items-center justify-center flex-shrink-0">
+              <Award className="w-5 h-5 text-secondary" />
             </div>
             <div>
-              <div className="font-bold text-sm text-[#042C53] mb-1">Métricas e optimização contínua</div>
+              <div className="font-bold text-sm text-primary mb-1">Métricas e optimização contínua</div>
               <div className="text-[13px] text-gray-600">
                 Dashboard de acompanhamento semanal: consultas → orçamentos → fechos. Identifica gargalos e ajusta o sistema
               </div>
@@ -711,21 +701,20 @@ function Step4({
         <div className="flex items-start gap-3">
           <img
             src="/testimonial-placeholder-2.jpg"
-            alt="Dr. Marcos Lima"
+            alt="Dra. Joana Matos"
             className="w-12 h-12 rounded-full object-cover flex-shrink-0"
             onError={(e) => {
-              (e.target as HTMLImageElement).src = "https://ui-avatars.com/api/?name=Marcos+Lima&background=042C53&color=fff";
+              (e.target as HTMLImageElement).src = "https://ui-avatars.com/api/?name=Joana+Matos&background=042C53&color=fff";
             }}
           />
           <div>
             <p className="text-sm text-gray-700 mb-2">
-              "Em 90 dias a implementar o sistema, fui de 12% para 38% de conversão. O mais impressionante é que não precisei
-              aumentar marketing — só aprendi a fechar melhor as oportunidades que já chegavam."
+              "Em 90 dias a implementar o sistema, tive um aumento de 120% na faturação em relação ao mesmo mês do ano anterior. O mais impressionante é que não precisei gastar nada com marketing e campanhas."
             </p>
             <div className="flex items-center gap-2">
-              <div className="text-xs font-semibold text-[#042C53]">Dr. Marcos Lima</div>
-              <div className="px-2 py-0.5 bg-[#E6F1FB] text-[#1a56db] text-[10px] font-semibold rounded">
-                +217% conversão
+              <div className="text-xs font-semibold text-primary">Dra. Joana Matos</div>
+              <div className="px-2 py-0.5 bg-accent text-secondary text-[10px] font-semibold rounded">
+                Dobro de faturação
               </div>
             </div>
           </div>
@@ -741,6 +730,7 @@ function Step4({
 // ============================================================================
 function Step5({ state, goNext }: { state: FunnelState; goNext: (updates?: Partial<FunnelState>) => void }) {
   const navigate = useNavigate();
+  const { trackLead, trackCustom } = useMetaPixel();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -813,6 +803,29 @@ function Step5({ state, goNext }: { state: FunnelState; goNext: (updates?: Parti
         throw new Error(err.error || `Erro ${response.status}`);
       }
 
+      // ✅ CONVERSÃO: Rastrear Lead (evento padrão do Meta Pixel)
+      trackLead({
+        content_name: 'Funil Alinhadores - Formulário Completo',
+        content_category: 'Sistema Alinhadores Invisíveis',
+        value: monthlyRevenue,
+        currency: 'EUR',
+        predicted_ltv: monthlyRevenue * 12,
+      });
+
+      // ✅ CONVERSÃO: Evento customizado com dados detalhados
+      trackCustom('AlignersApplicationSubmitted', {
+        name: formData.name,
+        email: formData.email,
+        clinic_name: formData.clinicName,
+        city: formData.city,
+        goal_cases: state.goal,
+        current_conversion: state.conv,
+        avg_case_value: state.caseVal,
+        monthly_revenue: monthlyRevenue,
+        program: 'Sistema Alinhadores Invisíveis',
+        source: 'Funil Alinhadores',
+      });
+
       // Redirecionar para Calendly (página /agenda)
       navigate('/agenda?status=eligible', {
         state: {
@@ -845,18 +858,18 @@ function Step5({ state, goNext }: { state: FunnelState; goNext: (updates?: Parti
     <div className="bg-white rounded-3xl shadow-xl border border-gray-100 p-8 max-w-[620px] mx-auto">
       <div className="space-y-6">
         <div>
-          <h2 className="text-2xl font-bold text-[#042C53] mb-2">
+          <h2 className="text-2xl font-bold text-primary mb-2">
             Última etapa: reserve a sua vaga para entrevista
           </h2>
           <p className="text-sm text-gray-500">
-            Vagas limitadas a 8 clínicas por mês. Após preencher, receberá link para agendamento de entrevista estratégica (30min).
+            Vagas limitadas a apenas 1 clínica por cidade. Após preencher, agendará uma entrevista estratégica gratuita (45min).
           </p>
         </div>
 
       {/* Box de exclusividade */}
-      <div className="p-3 bg-[#E6F1FB] border border-[#B5D4F4] rounded-lg flex items-center gap-2">
-        <Lock className="w-4 h-4 text-[#185FA5] flex-shrink-0" />
-        <p className="text-xs text-[#185FA5] font-medium">
+      <div className="p-3 bg-accent border border-secondary/20 rounded-lg flex items-center gap-2">
+        <Lock className="w-4 h-4 text-secondary flex-shrink-0" />
+        <p className="text-xs text-primary font-medium">
           Programa de implementação exclusivo — aceitamos apenas clínicas com perfil alinhado aos resultados esperados
         </p>
       </div>
@@ -864,7 +877,7 @@ function Step5({ state, goNext }: { state: FunnelState; goNext: (updates?: Parti
       {/* Formulário */}
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label className="block text-sm font-semibold text-[#042C53] mb-1.5">
+          <label className="block text-sm font-semibold text-primary mb-1.5">
             O seu nome completo *
           </label>
           <input
@@ -880,7 +893,7 @@ function Step5({ state, goNext }: { state: FunnelState; goNext: (updates?: Parti
         </div>
 
         <div>
-          <label className="block text-sm font-semibold text-[#042C53] mb-1.5">
+          <label className="block text-sm font-semibold text-primary mb-1.5">
             Email profissional *
           </label>
           <input
@@ -896,7 +909,7 @@ function Step5({ state, goNext }: { state: FunnelState; goNext: (updates?: Parti
         </div>
 
         <div>
-          <label className="block text-sm font-semibold text-[#042C53] mb-1.5">
+          <label className="block text-sm font-semibold text-primary mb-1.5">
             WhatsApp (com indicativo) *
           </label>
           <input
@@ -912,7 +925,7 @@ function Step5({ state, goNext }: { state: FunnelState; goNext: (updates?: Parti
         </div>
 
         <div>
-          <label className="block text-sm font-semibold text-[#042C53] mb-1.5">
+          <label className="block text-sm font-semibold text-primary mb-1.5">
             Nome da clínica *
           </label>
           <input
@@ -929,7 +942,7 @@ function Step5({ state, goNext }: { state: FunnelState; goNext: (updates?: Parti
 
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <label className="block text-sm font-semibold text-[#042C53] mb-1.5">
+            <label className="block text-sm font-semibold text-primary mb-1.5">
               Cidade *
             </label>
             <input
@@ -945,7 +958,7 @@ function Step5({ state, goNext }: { state: FunnelState; goNext: (updates?: Parti
           </div>
 
           <div>
-            <label className="block text-sm font-semibold text-[#042C53] mb-1.5">
+            <label className="block text-sm font-semibold text-primary mb-1.5">
               Distrito
             </label>
             <input
@@ -959,7 +972,7 @@ function Step5({ state, goNext }: { state: FunnelState; goNext: (updates?: Parti
         </div>
 
         <div>
-          <label className="block text-sm font-semibold text-[#042C53] mb-1.5">
+          <label className="block text-sm font-semibold text-primary mb-1.5">
             Site da clínica (se tiver)
           </label>
           <input
@@ -975,7 +988,7 @@ function Step5({ state, goNext }: { state: FunnelState; goNext: (updates?: Parti
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full py-4 bg-[#1a56db] text-white font-bold text-base rounded-lg hover:bg-[#1547c0] transition-all shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+          className="w-full py-4 bg-secondary text-primary font-bold text-base rounded-lg hover:bg-secondary/90 transition-all shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
         >
           {isSubmitting ? (
             "A enviar..."
@@ -1002,12 +1015,12 @@ function Step5({ state, goNext }: { state: FunnelState; goNext: (updates?: Parti
 function Step6() {
   return (
     <div className="space-y-6 text-center py-12">
-      <div className="w-16 h-16 mx-auto bg-[#0F6E56] rounded-full flex items-center justify-center">
-        <Check className="w-8 h-8 text-white" />
+      <div className="w-16 h-16 mx-auto bg-secondary rounded-full flex items-center justify-center">
+        <Check className="w-8 h-8 text-primary" />
       </div>
 
       <div>
-        <h2 className="text-2xl font-bold text-[#042C53] mb-2">
+        <h2 className="text-2xl font-bold text-primary mb-2">
           Inscrição confirmada!
         </h2>
         <p className="text-base text-gray-700">
@@ -1015,29 +1028,29 @@ function Step6() {
         </p>
       </div>
 
-      {/* Box verde */}
-      <div className="p-5 bg-[#E6F5F0] border border-[#0F6E56] rounded-xl text-left">
-        <div className="font-bold text-[#042C53] mb-3 flex items-center gap-2">
-          <div className="w-6 h-6 bg-[#0F6E56] rounded-full flex items-center justify-center text-white text-sm font-bold">
+      {/* Box dourado */}
+      <div className="p-5 bg-accent border border-secondary/20 rounded-xl text-left">
+        <div className="font-bold text-primary mb-3 flex items-center gap-2">
+          <div className="w-6 h-6 bg-secondary rounded-full flex items-center justify-center text-primary text-sm font-bold">
             ✓
           </div>
           O que acontece agora
         </div>
-        <ol className="space-y-2 text-sm text-gray-800">
+        <ol className="space-y-2 text-sm text-primary">
           <li className="flex items-start gap-2">
-            <span className="font-bold text-[#0F6E56] flex-shrink-0">1.</span>
+            <span className="font-bold text-secondary flex-shrink-0">1.</span>
             <span>A nossa equipa analisa o perfil da sua clínica e os dados que forneceu</span>
           </li>
           <li className="flex items-start gap-2">
-            <span className="font-bold text-[#0F6E56] flex-shrink-0">2.</span>
+            <span className="font-bold text-secondary flex-shrink-0">2.</span>
             <span>Receberá um email com link para agendar entrevista estratégica de 30min</span>
           </li>
           <li className="flex items-start gap-2">
-            <span className="font-bold text-[#0F6E56] flex-shrink-0">3.</span>
+            <span className="font-bold text-secondary flex-shrink-0">3.</span>
             <span>Na entrevista, desenhamos o plano de implementação específico para a sua clínica</span>
           </li>
           <li className="flex items-start gap-2">
-            <span className="font-bold text-[#0F6E56] flex-shrink-0">4.</span>
+            <span className="font-bold text-secondary flex-shrink-0">4.</span>
             <span>Se houver encaixe mútuo, receberá proposta comercial e cronograma de implementação</span>
           </li>
         </ol>
@@ -1049,7 +1062,7 @@ function Step6() {
         </p>
         <a
           href="/"
-          className="inline-flex items-center gap-2 px-6 py-3 bg-white border border-gray-300 text-[#042C53] font-semibold rounded-lg hover:bg-gray-50 transition-all"
+          className="inline-flex items-center gap-2 px-6 py-3 bg-white border border-gray-300 text-primary font-semibold rounded-lg hover:bg-gray-50 transition-all"
         >
           Voltar ao site
           <ArrowRight className="w-4 h-4" />

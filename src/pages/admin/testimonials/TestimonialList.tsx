@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Plus, Pencil, Trash2, Search, Star } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -30,6 +30,11 @@ export default function TestimonialList() {
   const { testimonials, refreshTestimonials } = useAppStore()
   const [searchTerm, setSearchTerm] = useState('')
   const [deletingId, setDeletingId] = useState<number | null>(null)
+
+  // Atualizar lista quando a página carregar
+  useEffect(() => {
+    refreshTestimonials()
+  }, [])
 
   const handleDelete = async (id: number) => {
     setDeletingId(id)

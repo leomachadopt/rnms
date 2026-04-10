@@ -27,6 +27,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import useAppStore from '@/stores/useAppStore'
 
 const formSchema = z.object({
   name: z.string().min(3, 'Nome deve ter pelo menos 3 caracteres'),
@@ -44,6 +45,7 @@ type FormValues = z.infer<typeof formSchema>
 export default function TestimonialForm() {
   const { id } = useParams()
   const navigate = useNavigate()
+  const { refreshTestimonials } = useAppStore()
   const isEditing = !!id
   const [isLoading, setIsLoading] = useState(false)
 
@@ -67,8 +69,12 @@ export default function TestimonialForm() {
       const loadTestimonial = async () => {
         setIsLoading(true)
         try {
-          const response = await fetch(`/api/testimonials/${id}`)
-          if (!response.ok) throw new Error('Falha ao carregar depoimento')
+          const response = await fetch(`/api/testimonials?id=${id}`)
+          if (!response.ok) {
+            const errorText = await response.text()
+            console.error('Erro ao carregar depoimento:', response.status, errorText)
+            throw new Error('Falha ao carregar depoimento')
+          }
           const data = await response.json()
 
           form.reset({
@@ -82,6 +88,7 @@ export default function TestimonialForm() {
             featured: !!data.featured,
           })
         } catch (error) {
+          console.error('Erro completo:', error)
           toast.error('Erro ao carregar depoimento')
           navigate('/admin/testimonials')
         } finally {
@@ -96,7 +103,7 @@ export default function TestimonialForm() {
     setIsLoading(true)
     try {
       const endpoint = isEditing
-        ? `/api/testimonials/${id}`
+        ? `/api/testimonials?id=${id}`
         : '/api/testimonials'
       const method = isEditing ? 'PUT' : 'POST'
 
@@ -109,15 +116,23 @@ export default function TestimonialForm() {
         }),
       })
 
-      if (!response.ok) throw new Error('Falha ao salvar depoimento')
+      if (!response.ok) {
+        const errorText = await response.text()
+        console.error('Erro ao salvar depoimento:', response.status, errorText)
+        throw new Error('Falha ao salvar depoimento')
+      }
 
       toast.success(
         isEditing
           ? 'Depoimento atualizado com sucesso!'
           : 'Depoimento criado com sucesso!',
       )
+
+      // Atualizar a lista de depoimentos antes de navegar
+      await refreshTestimonials()
       navigate('/admin/testimonials')
     } catch (error) {
+      console.error('Erro completo ao salvar:', error)
       toast.error('Erro ao salvar depoimento')
     } finally {
       setIsLoading(false)

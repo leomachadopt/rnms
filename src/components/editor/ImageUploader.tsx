@@ -4,7 +4,6 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { toast } from 'sonner'
-import { put } from '@vercel/blob'
 
 interface ImageUploaderProps {
   onImageSelect: (url: string) => void
@@ -39,25 +38,41 @@ export function ImageUploader({
     setIsUploading(true)
 
     try {
-      const token = import.meta.env.VITE_BLOB_READ_WRITE_TOKEN
-      console.log('Token disponível:', !!token)
-
-      if (!token) {
-        throw new Error('Token do Vercel Blob não configurado')
-      }
-
-      // Upload para Vercel Blob
-      const blob = await put(`blog/${Date.now()}-${file.name}`, file, {
-        access: 'public',
-        token: token,
+      // Converter file para base64
+      const reader = new FileReader()
+      const base64Promise = new Promise<string>((resolve, reject) => {
+        reader.onload = () => resolve(reader.result as string)
+        reader.onerror = reject
+        reader.readAsDataURL(file)
       })
 
-      setPreview(blob.url)
-      onImageSelect(blob.url)
+      const base64 = await base64Promise
+
+      // Upload via API
+      const response = await fetch('/api/upload-image', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          file: base64,
+          filename: file.name,
+        }),
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(errorData.message || 'Falha no upload')
+      }
+
+      const data = await response.json()
+
+      setPreview(data.url)
+      onImageSelect(data.url)
       toast.success('Imagem enviada com sucesso!')
     } catch (error) {
       console.error('Erro ao fazer upload:', error)
-      toast.error('Erro ao fazer upload da imagem')
+      toast.error(error instanceof Error ? error.message : 'Erro ao fazer upload da imagem')
     } finally {
       setIsUploading(false)
     }

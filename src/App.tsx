@@ -26,6 +26,7 @@ import BlogPost from './pages/BlogPost'
 import AgentRNS from './pages/AgentRNS'
 import Agente from './pages/Agente'
 import Agendamento from './pages/Agendamento'
+import FunnelAlinhadores from './pages/FunnelAlinhadores'
 import Login from './pages/Login'
 import NotFound from './pages/NotFound'
 import Users from './pages/Users'
@@ -120,6 +121,10 @@ const router = createBrowserRouter([
         element: <Agendamento />,
       },
     ],
+  },
+  {
+    path: '/alinhadores',
+    element: <FunnelAlinhadores />,
   },
   {
     path: '/login',

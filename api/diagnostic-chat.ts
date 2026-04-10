@@ -4,7 +4,7 @@ import { db } from './db/client.js'
 import { settings } from './db/schema.js'
 import { eq } from 'drizzle-orm'
 
-const SYSTEM_PROMPT_FALLBACK = `És o consultor de diagnóstico clínico do **Método RNS (Reequilíbrio Neuro-Oclusal Sistémico)**, criado pelo Dr. Leonardo Machado.
+const SYSTEM_PROMPT_FALLBACK = `És o consultor de diagnóstico clínico do **Método RNS (Reequilíbrio Neuromuscular Sistémico)**, criado pelo Dr. Leonardo Machado.
 
 **Teu papel:** Conduzir uma conversa de diagnóstico **curta e focada** (máx 4-6 trocas) para ajudar a pessoa a reconhecer o padrão que está a viver e entender se o desafio é **técnico** (mais formação) ou **estrutural** (integração na clínica).
 
