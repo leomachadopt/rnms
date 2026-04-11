@@ -6,13 +6,13 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { useScrollAnimation } from '@/hooks/use-scroll-animation'
 import { useMetaPixel } from '@/hooks/use-meta-pixel'
 
-const OdontoGrowth = () => {
+const DentalGrowth = () => {
   const { trackButtonClick, trackViewContent } = useMetaPixel()
 
   // Rastrear visualização da página
   useEffect(() => {
     trackViewContent({
-      content_name: 'OdontoGrowth 360 Landing Page',
+      content_name: 'DentalGrowth 360 Landing Page',
       content_category: 'Landing Page'
     })
   }, [])
@@ -112,7 +112,7 @@ const OdontoGrowth = () => {
             }`}
           >
             <div className="inline-block mb-6 badge-premium animate-fade-in">
-              OdontoGrowth 360
+              DentalGrowth 360
             </div>
             <h1 className="heading-premium text-4xl sm:text-5xl lg:text-6xl xl:text-7xl leading-[1.1] text-white mb-6">
               Programa avançado de estruturação e <span className="text-gradient-gold">crescimento</span> para donos de clínicas odontológicas
@@ -146,7 +146,7 @@ const OdontoGrowth = () => {
             <div className="absolute inset-0 bg-gradient-to-r from-secondary/20 to-primary/30 rounded-[3rem] blur-3xl transform translate-x-10 translate-y-10 animate-pulse-slow"></div>
             <img
               src="/front.jpg"
-              alt="OdontoGrowth 360 - Estruturação de Clínicas"
+              alt="DentalGrowth 360 - Estruturação de Clínicas"
               className="relative rounded-[3rem] shadow-2xl w-full object-cover aspect-square transform hover:scale-105 transition-transform duration-700 border-4 border-white/20 hover-glow"
             />
           </div>
@@ -244,7 +244,7 @@ const OdontoGrowth = () => {
               A Solução
             </div>
             <h2 className="heading-premium text-3xl lg:text-5xl mb-6">
-              O que é o OdontoGrowth 360
+              O que é o DentalGrowth 360
             </h2>
             <p className="text-premium text-lg leading-relaxed">
               O programa foi criado para estruturar clínicas como <span className="font-bold text-foreground">negócios previsíveis</span>.
@@ -334,7 +334,7 @@ const OdontoGrowth = () => {
             Estrutura do Programa
           </div>
           <h2 className="heading-premium text-3xl lg:text-5xl mb-6">
-            Os 4 Pilares do OdontoGrowth 360
+            Os 4 Pilares do DentalGrowth 360
           </h2>
         </div>
 
@@ -468,7 +468,7 @@ const OdontoGrowth = () => {
               Transformação
             </div>
             <h2 className="heading-premium text-3xl lg:text-5xl mb-6">
-              O que muda em uma clínica após o OdontoGrowth 360
+              O que muda em uma clínica após o DentalGrowth 360
             </h2>
           </div>
 
@@ -587,7 +587,7 @@ const OdontoGrowth = () => {
                   Ao longo dos últimos anos, desenvolveu uma metodologia comprovada que ajudou dezenas de clínicas a <span className="font-bold text-foreground">dobrarem seus faturamentos</span> através da implementação de processos comerciais claros, gestão por indicadores e governança operacional eficiente.
                 </p>
                 <p>
-                  O OdontoGrowth 360 reúne toda essa experiência em um programa intensivo de 6 meses, desenhado para donos de clínicas que desejam crescer com estrutura, previsibilidade e sem dependência exclusiva do fundador.
+                  O DentalGrowth 360 reúne toda essa experiência em um programa intensivo de 6 meses, desenhado para donos de clínicas que desejam crescer com estrutura, previsibilidade e sem dependência exclusiva do fundador.
                 </p>
               </div>
             </div>
@@ -666,7 +666,7 @@ const OdontoGrowth = () => {
               Pronto para estruturar sua clínica?
             </h2>
             <p className="text-xl text-white/95 mb-10 leading-relaxed max-w-2xl mx-auto font-light">
-              Transforme sua clínica em um negócio previsível e escalável. Aplique agora para o OdontoGrowth 360.
+              Transforme sua clínica em um negócio previsível e escalável. Aplique agora para o DentalGrowth 360.
             </p>
             <Button
               asChild
@@ -689,4 +689,4 @@ const OdontoGrowth = () => {
   )
 }
 
-export default OdontoGrowth
+export default DentalGrowth

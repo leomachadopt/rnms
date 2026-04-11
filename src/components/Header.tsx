@@ -17,16 +17,16 @@ export function Header() {
   const [isOpen, setIsOpen] = useState(false)
   const location = useLocation()
 
-  // Detectar páginas do funil OdontoGrowth
-  const isOdontoGrowthPage = location.pathname === '/odontogrowth'
+  // Detectar páginas do funil DentalGrowth
+  const isDentalGrowthPage = location.pathname === '/odontogrowth'
   const isAplicacaoBrPage = location.pathname === '/aplicacao-br'
   const isAgendaPage = location.pathname === '/agenda' && location.search.includes('status=eligible')
-  const hideMenu = isOdontoGrowthPage || isAplicacaoBrPage || isAgendaPage
+  const hideMenu = isDentalGrowthPage || isAplicacaoBrPage || isAgendaPage
 
   // Configurar CTA baseado na página
-  const ctaRoute = isOdontoGrowthPage ? '/aplicacao-br' : PRIMARY_CTA_ROUTE
-  const ctaText = isOdontoGrowthPage ? 'Aplicar para o programa' : 'Avaliar Elegibilidade'
-  const ctaIcon = isOdontoGrowthPage ? Send : MessageCircle
+  const ctaRoute = isDentalGrowthPage ? '/aplicacao-br' : PRIMARY_CTA_ROUTE
+  const ctaText = isDentalGrowthPage ? 'Aplicar para o programa' : 'Avaliar Elegibilidade'
+  const ctaIcon = isDentalGrowthPage ? Send : MessageCircle
 
   // Ocultar CTA nas páginas de aplicação e agendamento
   const hideCTA = isAplicacaoBrPage || isAgendaPage

@@ -145,7 +145,7 @@ https://metodorns.com/alinhadores?utm_source=facebook&utm_medium=paid&utm_campai
 
 ### Mensagens Principais:
 1. **Problema:** "Taxa de conversão baixa em alinhadores?"
-2. **Solução:** "Sistema OdontoGrowth aumenta conversão em 30%"
+2. **Solução:** "Sistema DentalGrowth aumenta conversão em 30%"
 3. **Prova:** Depoimentos de Dra. Cristiane (46 leads) e Dra. Joana (120% faturação)
 4. **CTA:** "Planeamento estratégico gratuito de 45min"
 

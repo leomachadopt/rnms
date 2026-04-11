@@ -109,7 +109,7 @@ export default function FunnelAlinhadores() {
             {/* Título principal */}
             <div className="text-center">
               <div className="text-xs uppercase tracking-wider text-secondary font-semibold mb-2">
-                OdontoGrowth
+                DentalGrowth
               </div>
               <h1 className="text-2xl md:text-3xl font-bold text-white mb-2">
                 Obtenha 20–30 Novos Pacientes<br />de Alinhadores Invisíveis Todos os Meses
@@ -221,7 +221,7 @@ function Step0({ goNext }: { goNext: (disqualify?: boolean) => void }) {
               Está a tentar ativamente aumentar a receita de <span className="text-secondary">alinhadores invisíveis</span> da sua clínica?
             </h1>
             <p className="text-sm text-gray-500">
-              Leonardo Machado, Fundador da OdontoGrowth
+              Leonardo Machado, Fundador da DentalGrowth
             </p>
           </div>
         </div>
@@ -302,7 +302,7 @@ function Step0({ goNext }: { goNext: (disqualify?: boolean) => void }) {
             Dado de contexto
           </div>
           <div className="text-sm leading-relaxed text-white/90">
-            Clínicas que implementam o sistema OdontoGrowth para alinhadores <span className="font-bold text-secondary">aumentam em média a faturação em 30% ao mês</span> —
+            Clínicas que implementam o sistema DentalGrowth para alinhadores <span className="font-bold text-secondary">aumentam em média a faturação em 30% ao mês</span> —
             sem aumentar o orçamento de marketing.
           </div>
         </div>
@@ -386,7 +386,7 @@ function Step1({ goNext }: { goNext: (updates?: Partial<FunnelState>) => void })
           </div>
           <div className="text-sm leading-relaxed text-white/90">
             A maioria das clínicas <span className="font-bold text-secondary">perde 60% das oportunidades</span> entre
-            a consulta inicial e o início do tratamento. O sistema OdontoGrowth inverte esta lógica.
+            a consulta inicial e o início do tratamento. O sistema DentalGrowth inverte esta lógica.
           </div>
         </div>
       </div>
@@ -538,14 +538,14 @@ function Step4({
             A oportunidade real da sua clínica em alinhadores
           </h2>
           <p className="text-sm text-gray-500">
-            Baseado nos dados que forneceu, veja o potencial de crescimento implementando o sistema OdontoGrowth
+            Baseado nos dados que forneceu, veja o potencial de crescimento implementando o sistema DentalGrowth
           </p>
         </div>
 
       {/* Painel de resultado */}
       <div className="p-5 bg-primary rounded-xl space-y-4">
         <div className="text-xs uppercase tracking-wider text-secondary font-semibold">
-          Simulação com sistema OdontoGrowth (conversão 40%)
+          Simulação com sistema DentalGrowth (conversão 40%)
         </div>
 
         {/* 3 métricas */}
@@ -1001,7 +1001,7 @@ function Step5({ state, goNext }: { state: FunnelState; goNext: (updates?: Parti
         </button>
 
         <p className="text-xs text-center text-gray-500">
-          Ao clicar acima, concorda em receber contacto da equipa OdontoGrowth para marcação da entrevista
+          Ao clicar acima, concorda em receber contacto da equipa DentalGrowth para marcação da entrevista
         </p>
       </form>
       </div>

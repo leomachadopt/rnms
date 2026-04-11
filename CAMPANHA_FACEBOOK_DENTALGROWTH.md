@@ -1,10 +1,10 @@
-# Guia de Configuração - Campanha Facebook OdontoGrowth 360
+# Guia de Configuração - Campanha Facebook DentalGrowth 360
 
 ## 📊 Visão Geral da Campanha
 
-**Objetivo:** Gerar leads qualificados para o programa OdontoGrowth 360
+**Objetivo:** Gerar leads qualificados para o programa DentalGrowth 360
 **Pixel ID:** 25922671647391965
-**Landing Page:** https://rnos.vercel.app/odontogrowth
+**Landing Page:** https://rnos.vercel.app/dentalgrowth
 **Formulário:** https://rnos.vercel.app/aplicacao-br
 
 ---
@@ -12,16 +12,16 @@
 ## 🎯 Eventos de Rastreamento Implementados
 
 ### 1. **ViewContent** (Visualização da Landing Page)
-- **Quando:** Usuário acessa /odontogrowth
+- **Quando:** Usuário acessa /dentalgrowth
 - **Dados rastreados:**
-  - `content_name`: "OdontoGrowth 360 Landing Page"
+  - `content_name`: "DentalGrowth 360 Landing Page"
   - `content_category`: "Landing Page"
 - **Uso:** Medir alcance e interesse inicial
 
 ### 2. **ViewContent** (Visualização do Formulário)
 - **Quando:** Usuário acessa /aplicacao-br
 - **Dados rastreados:**
-  - `content_name`: "Formulário Aplicação OdontoGrowth 360"
+  - `content_name`: "Formulário Aplicação DentalGrowth 360"
   - `content_category`: "Application Form"
 - **Uso:** Medir quantos clicaram para aplicar
 
@@ -35,7 +35,7 @@
 ### 4. **Lead** (Conversão Principal) ⭐
 - **Quando:** Formulário enviado com sucesso
 - **Dados rastreados:**
-  - `content_name`: "OdontoGrowth 360 - Aplicação Enviada"
+  - `content_name`: "DentalGrowth 360 - Aplicação Enviada"
   - `value`: Faixa de faturamento mensal
   - `currency`: "BRL"
   - `status`: Prontidão para investir
@@ -44,7 +44,7 @@
 ### 5. **ApplicationSubmitted** (Evento Customizado)
 - **Quando:** Formulário enviado com sucesso
 - **Dados rastreados:**
-  - `program`: "OdontoGrowth 360"
+  - `program`: "DentalGrowth 360"
   - `monthly_revenue`: Faturamento mensal
   - `goal`: Objetivo 12 meses
   - `ready_to_invest`: Prontidão para investir
@@ -59,7 +59,7 @@
 1. Acesse **Gerenciador de Eventos** no Facebook
 2. Verifique se o Pixel **25922671647391965** está ativo
 3. Use a extensão **Meta Pixel Helper** para testar:
-   - Acesse https://rnos.vercel.app/odontogrowth
+   - Acesse https://rnos.vercel.app/dentalgrowth
    - Verifique se dispara o evento `ViewContent`
    - Clique em "Aplicar para o programa"
    - Verifique se dispara `ButtonClick`
@@ -71,7 +71,7 @@
 1. No **Gerenciador de Eventos**, vá em **Eventos Personalizados**
 2. Clique em **+ Criar Evento Personalizado**
 3. Configure:
-   - **Nome:** Aplicação OdontoGrowth 360
+   - **Nome:** Aplicação DentalGrowth 360
    - **Fonte de dados:** Pixel 25922671647391965
    - **Parâmetros de correspondência:**
      - URL contém: `/aplicacao-br`
@@ -81,7 +81,7 @@
 
 #### 3.1 Nível da Campanha
 ```
-Nome: OdontoGrowth 360 - Geração de Leads
+Nome: DentalGrowth 360 - Geração de Leads
 Objetivo: Leads (ou Vendas se preferir otimizar para valor)
 Categoria: Negócios e B2B
 ```
@@ -120,10 +120,10 @@ Texto principal: Copy persuasiva focando em:
   - Prova: Método comprovado, clínicas dobraram faturamento
   - CTA: Candidatar-se agora (vagas limitadas)
 
-Título: "OdontoGrowth 360 - Estruturação para Clínicas"
+Título: "DentalGrowth 360 - Estruturação para Clínicas"
 Descrição: "6 meses de implementação. Processos, gestão e crescimento previsível."
 Botão de CTA: "Aplicar agora" ou "Saiba mais"
-URL de destino: https://rnos.vercel.app/odontogrowth
+URL de destino: https://rnos.vercel.app/dentalgrowth
 ```
 
 ### PASSO 4: Configurar Rastreamento de Conversões
@@ -138,7 +138,7 @@ URL de destino: https://rnos.vercel.app/odontogrowth
      ```
      utm_source=facebook
      utm_medium=paid_social
-     utm_campaign=odontogrowth_360
+     utm_campaign=dentalgrowth_360
      utm_content={{ad.name}}
      ```
 
@@ -146,7 +146,7 @@ URL de destino: https://rnos.vercel.app/odontogrowth
 
 1. **Visitantes da Landing Page** (não converteram)
    - Evento: ViewContent
-   - URL contém: `/odontogrowth`
+   - URL contém: `/dentalgrowth`
    - Excluir: Pessoas que dispararam evento Lead
    - Período: Últimos 30 dias
 
@@ -183,7 +183,7 @@ URL de destino: https://rnos.vercel.app/odontogrowth
 ```
 100% - Visualizaram o anúncio
  ↓ 3-5% CTR
-3-5% - Clicaram e acessaram /odontogrowth
+3-5% - Clicaram e acessaram /dentalgrowth
  ↓ 10-20% conversão
 0.3-1% - Preencheram formulário (Lead)
 ```
@@ -209,7 +209,7 @@ URL de destino: https://rnos.vercel.app/odontogrowth
 - Processos desorganizados
 
 **15-30 seg:** Solução
-- OdontoGrowth 360: programa de 6 meses
+- DentalGrowth 360: programa de 6 meses
 - Estruturação completa: comercial, gestão, processos
 
 **30-50 seg:** Benefícios
@@ -256,7 +256,7 @@ URL de destino: https://rnos.vercel.app/odontogrowth
 - [ ] Público-alvo definido e salvo
 - [ ] Vídeo uploaded e com legendas
 - [ ] Copy e CTA revisados
-- [ ] URL de destino testada (https://rnos.vercel.app/odontogrowth)
+- [ ] URL de destino testada (https://rnos.vercel.app/dentalgrowth)
 - [ ] Parâmetros UTM configurados (opcional)
 - [ ] Orçamento diário/total definido
 - [ ] Públicos de remarketing criados
@@ -298,8 +298,8 @@ URL de destino: https://rnos.vercel.app/odontogrowth
 
 | Página | Evento | Quando Dispara | Objetivo |
 |--------|--------|----------------|----------|
-| /odontogrowth | ViewContent | Ao carregar página | Medir interesse inicial |
-| /odontogrowth | ButtonClick | Click "Aplicar para o programa" | Medir intenção |
+| /dentalgrowth | ViewContent | Ao carregar página | Medir interesse inicial |
+| /dentalgrowth | ButtonClick | Click "Aplicar para o programa" | Medir intenção |
 | /aplicacao-br | ViewContent | Ao carregar página | Medir início de aplicação |
 | /aplicacao-br | Lead | Formulário enviado | **CONVERSÃO PRINCIPAL** |
 | /aplicacao-br | ApplicationSubmitted | Formulário enviado | Dados detalhados |
@@ -318,7 +318,7 @@ Sem processo comercial claro, a receita fica instável.
 Sem gestão por indicadores, as decisões ficam no "achismo".
 Sem governança, tudo depende de você.
 
-O OdontoGrowth 360 é um programa de 6 meses que estrutura sua clínica como um negócio previsível e escalável.
+O DentalGrowth 360 é um programa de 6 meses que estrutura sua clínica como um negócio previsível e escalável.
 
 ✅ Processo comercial estruturado
 ✅ Gestão por indicadores (Painel KPI)
@@ -338,7 +338,7 @@ Clínicas odontológicas dobraram seu faturamento em 12 meses.
 
 Como? Estruturação empresarial completa.
 
-O OdontoGrowth 360 é um programa intensivo de 6 meses para donos de clínicas que querem crescer com previsibilidade.
+O DentalGrowth 360 é um programa intensivo de 6 meses para donos de clínicas que querem crescer com previsibilidade.
 
 Durante o programa, você implementa:
 → Processo comercial estruturado
@@ -370,7 +370,7 @@ Processo seletivo. Vagas limitadas.
 
 2. **Teste de Eventos no Facebook**
    - Gerenciador de Eventos > Teste de Eventos
-   - Cole a URL: https://rnos.vercel.app/odontogrowth
+   - Cole a URL: https://rnos.vercel.app/dentalgrowth
    - Realize ações (navegar, clicar, preencher formulário)
    - Confirme que eventos aparecem em tempo real
 
@@ -397,7 +397,7 @@ Crie um painel personalizado no Ads Manager com:
   - CPC (custo por clique no link)
 
 - **Conversões:**
-  - Leads (OdontoGrowth 360)
+  - Leads (DentalGrowth 360)
   - Custo por lead
   - Taxa de conversão
   - ROAS (se tiver valor atribuído)

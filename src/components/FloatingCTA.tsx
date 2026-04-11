@@ -9,13 +9,13 @@ export function FloatingCTA() {
   // Don't show on the eligibility page itself
   if (location.pathname === PRIMARY_CTA_ROUTE) return null
 
-  // Don't show on OdontoGrowth funnel pages
-  const isOdontoGrowthFunnel =
+  // Don't show on DentalGrowth funnel pages
+  const isDentalGrowthFunnel =
     location.pathname === '/odontogrowth' ||
     location.pathname === '/aplicacao-br' ||
     (location.pathname === '/agenda' && location.search.includes('status=eligible'))
 
-  if (isOdontoGrowthFunnel) return null
+  if (isDentalGrowthFunnel) return null
 
   return (
     <Link

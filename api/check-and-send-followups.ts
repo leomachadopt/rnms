@@ -201,7 +201,7 @@ async function sendFollowUpEmail(application: any) {
   <div class="container">
     <div class="header">
       <h1>Próximo Passo: Agendar Entrevista</h1>
-      <p>OdontoGrowth 360</p>
+      <p>DentalGrowth 360</p>
     </div>
 
     <div class="content">
@@ -212,7 +212,7 @@ async function sendFollowUpEmail(application: any) {
       </p>
 
       <p>
-        Recebemos sua aplicação para o <strong>OdontoGrowth 360</strong> há alguns minutos e estamos prontos para o próximo passo!
+        Recebemos sua aplicação para o <strong>DentalGrowth 360</strong> há alguns minutos e estamos prontos para o próximo passo!
       </p>
 
       <div class="highlight-box">

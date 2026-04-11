@@ -101,7 +101,7 @@ export default function Agenda() {
             </h1>
 
             <p className="text-premium text-xl lg:text-2xl mb-8">
-              Parabéns! O teu perfil está qualificado para implementar o Sistema Odontogrowth.
+              Parabéns! O teu perfil está qualificado para implementar o Sistema DentalGrowth.
             </p>
 
             <div className="bg-secondary/10 border-2 border-secondary rounded-xl p-8 mb-8">

@@ -66,7 +66,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 <body>
   <div class="container">
     <div class="header">
-      <h1>🎯 Nova Aplicação - OdontoGrowth 360</h1>
+      <h1>🎯 Nova Aplicação - DentalGrowth 360</h1>
       <div class="badge">ID: #${applicationData.applicationId}</div>
     </div>
 
@@ -112,7 +112,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     </div>
 
     <div class="footer">
-      <p>Aplicação recebida via OdontoGrowth 360<br>
+      <p>Aplicação recebida via DentalGrowth 360<br>
       Método RNS © 2026</p>
     </div>
   </div>
@@ -147,7 +147,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   <div class="container">
     <div class="header">
       <h1>Aplicação Recebida!</h1>
-      <p>OdontoGrowth 360</p>
+      <p>DentalGrowth 360</p>
     </div>
 
     <div class="content">
@@ -158,7 +158,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       </p>
 
       <p>
-        Recebemos sua aplicação para o <strong>OdontoGrowth 360</strong> e agradecemos seu interesse em estruturar sua clínica com previsibilidade e escala.
+        Recebemos sua aplicação para o <strong>DentalGrowth 360</strong> e agradecemos seu interesse em estruturar sua clínica com previsibilidade e escala.
       </p>
 
       <div class="highlight-box">
@@ -207,7 +207,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     // Enviar email para o admin
     emails.push(
       resend.emails.send({
-        from: 'OdontoGrowth 360 <noreply@metodorns.pt>',
+        from: 'DentalGrowth 360 <noreply@metodorns.pt>',
         to: 'leomachadopt@gmail.com',
         subject: `🎯 Nova Aplicação - ${applicationData.name} (#${applicationData.applicationId})`,
         html: adminEmailHtml,
@@ -220,7 +220,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         resend.emails.send({
           from: 'Leonardo Machado - Método RNS <noreply@metodorns.pt>',
           to: applicationData.email,
-          subject: '✅ Aplicação Recebida - OdontoGrowth 360',
+          subject: '✅ Aplicação Recebida - DentalGrowth 360',
           html: candidateEmailHtml,
         })
       )

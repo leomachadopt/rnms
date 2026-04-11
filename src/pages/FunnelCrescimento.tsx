@@ -103,7 +103,7 @@ export default function FunnelCrescimento() {
             {/* Título principal */}
             <div className="text-center">
               <div className="text-xs uppercase tracking-wider text-secondary font-semibold mb-2">
-                OdontoGrowth
+                DentalGrowth
               </div>
               <h1 className="text-2xl md:text-3xl font-bold text-white mb-2">
                 Aumente o Faturamento da Sua Clínica em 20–30%<br />Sem Gastar um Euro em Marketing
@@ -215,7 +215,7 @@ function Step0({ goNext }: { goNext: (disqualify?: boolean) => void }) {
               Quer aumentar o <span className="text-secondary">faturamento da sua clínica</span> sem depender de marketing?
             </h1>
             <p className="text-sm text-gray-500">
-              Leonardo Machado, Fundador da OdontoGrowth
+              Leonardo Machado, Fundador da DentalGrowth
             </p>
           </div>
         </div>
@@ -296,7 +296,7 @@ function Step0({ goNext }: { goNext: (disqualify?: boolean) => void }) {
             Dado de contexto
           </div>
           <div className="text-sm leading-relaxed text-white/90">
-            Clínicas que implementam o sistema OdontoGrowth <span className="font-bold text-secondary">aumentam o faturamento em 20–30% ao mês</span> —
+            Clínicas que implementam o sistema DentalGrowth <span className="font-bold text-secondary">aumentam o faturamento em 20–30% ao mês</span> —
             sem gastar um euro adicional em anúncios ou campanhas.
           </div>
         </div>
@@ -381,7 +381,7 @@ function Step1({ goNext }: { goNext: (updates?: Partial<FunnelState>) => void })
           </div>
           <div className="text-sm leading-relaxed text-white/90">
             A maioria das clínicas <span className="font-bold text-secondary">perde 60% das oportunidades</span> entre
-            a consulta inicial e o início do tratamento. O sistema OdontoGrowth inverte esta lógica.
+            a consulta inicial e o início do tratamento. O sistema DentalGrowth inverte esta lógica.
           </div>
         </div>
       </div>
@@ -435,7 +435,7 @@ function Step2({ goNext }: { goNext: (updates?: Partial<FunnelState>) => void })
             Benchmark do mercado
           </div>
           <div className="text-sm leading-relaxed text-white/90">
-            Clínicas que implementam o sistema OdontoGrowth alcançam <span className="font-bold text-secondary">crescimento médio de 25–30% ao mês</span> nos
+            Clínicas que implementam o sistema DentalGrowth alcançam <span className="font-bold text-secondary">crescimento médio de 25–30% ao mês</span> nos
             primeiros 6 meses, mantendo margens saudáveis e sem aumento de custos de aquisição.
           </div>
         </div>
@@ -470,14 +470,14 @@ function Step3({
             O potencial real de crescimento da sua clínica
           </h2>
           <p className="text-sm text-gray-500">
-            Baseado nos dados que forneceu, veja a projeção de crescimento implementando o sistema OdontoGrowth
+            Baseado nos dados que forneceu, veja a projeção de crescimento implementando o sistema DentalGrowth
           </p>
         </div>
 
       {/* Painel de resultado */}
       <div className="p-5 bg-primary rounded-xl space-y-4">
         <div className="text-xs uppercase tracking-wider text-secondary font-semibold">
-          Projeção com sistema OdontoGrowth (+{state.growth}% de crescimento total)
+          Projeção com sistema DentalGrowth (+{state.growth}% de crescimento total)
         </div>
 
         {/* Bloco: crescimento mensal */}
@@ -706,7 +706,7 @@ function Step4({ state, goNext }: { state: FunnelState; goNext: (updates?: Parti
         monthlyRevenue: `${state.revenue.toLocaleString('pt-PT')}€/mês atual`,
         goal12m: `Crescimento de ${state.growth}% ao mês através de conversão interna, ticket médio e retenção (sem marketing)`,
         readyToInvest: "Sim, estou pronto",
-        program: "OdontoGrowth - Crescimento Sem Marketing",
+        program: "DentalGrowth - Crescimento Sem Marketing",
         source: "Funil Crescimento Sem Marketing",
       };
 
@@ -724,7 +724,7 @@ function Step4({ state, goNext }: { state: FunnelState; goNext: (updates?: Parti
       // ✅ CONVERSÃO: Rastrear Lead
       trackLead({
         content_name: 'Funil Crescimento Sem Marketing - Formulário Completo',
-        content_category: 'OdontoGrowth - Crescimento Orgânico',
+        content_category: 'DentalGrowth - Crescimento Orgânico',
         value: state.revenue,
         currency: 'EUR',
         predicted_ltv: state.revenue * 12,
@@ -738,7 +738,7 @@ function Step4({ state, goNext }: { state: FunnelState; goNext: (updates?: Parti
         city: formData.city,
         current_revenue: state.revenue,
         growth_target: state.growth,
-        program: 'OdontoGrowth - Crescimento Sem Marketing',
+        program: 'DentalGrowth - Crescimento Sem Marketing',
         source: 'Funil Crescimento Sem Marketing',
       });
 
@@ -916,7 +916,7 @@ function Step4({ state, goNext }: { state: FunnelState; goNext: (updates?: Parti
         </button>
 
         <p className="text-xs text-center text-gray-500">
-          Ao clicar acima, concorda em receber contacto da equipa OdontoGrowth para marcação da entrevista
+          Ao clicar acima, concorda em receber contacto da equipa DentalGrowth para marcação da entrevista
         </p>
       </form>
       </div>

@@ -15,7 +15,7 @@ import Leonardo2 from './pages/Leonardo2'
 import Formacao from './pages/Formacao'
 import ProgramaRNS from './pages/ProgramaRNS'
 import ProgramaRNSQualificacao from './pages/ProgramaRNSQualificacao'
-import OdontoGrowth from './pages/OdontoGrowth'
+import DentalGrowth from './pages/DentalGrowth'
 import Elegibilidade from './pages/Elegibilidade'
 import Aplicacao from './pages/Aplicacao'
 import AplicacaoBr from './pages/AplicacaoBr'
@@ -75,7 +75,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/odontogrowth',
-        element: <OdontoGrowth />,
+        element: <DentalGrowth />,
       },
       {
         path: '/elegibilidade',

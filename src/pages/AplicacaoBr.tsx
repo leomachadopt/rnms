@@ -16,7 +16,7 @@ export default function AplicacaoBr() {
   // Rastrear visualização da página de aplicação
   useEffect(() => {
     trackViewContent({
-      content_name: 'Formulário Aplicação OdontoGrowth 360',
+      content_name: 'Formulário Aplicação DentalGrowth 360',
       content_category: 'Application Form'
     })
   }, [])
@@ -47,7 +47,7 @@ export default function AplicacaoBr() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ...formData,
-          program: 'OdontoGrowth 360'
+          program: 'DentalGrowth 360'
         }),
       })
 
@@ -58,7 +58,7 @@ export default function AplicacaoBr() {
 
       // Rastrear conversão - Lead
       trackLead({
-        content_name: 'OdontoGrowth 360 - Aplicação Enviada',
+        content_name: 'DentalGrowth 360 - Aplicação Enviada',
         value: formData.monthlyRevenue,
         currency: 'BRL',
         status: formData.readyToInvest
@@ -66,7 +66,7 @@ export default function AplicacaoBr() {
 
       // Rastrear evento customizado de aplicação
       trackCustom('ApplicationSubmitted', {
-        program: 'OdontoGrowth 360',
+        program: 'DentalGrowth 360',
         monthly_revenue: formData.monthlyRevenue,
         goal: formData.goal12m,
         ready_to_invest: formData.readyToInvest
@@ -102,7 +102,7 @@ export default function AplicacaoBr() {
             className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
-            Voltar ao OdontoGrowth 360
+            Voltar ao DentalGrowth 360
           </Link>
         </div>
 
@@ -110,7 +110,7 @@ export default function AplicacaoBr() {
         <div className="text-center mb-8">
           <h1 className="heading-premium text-3xl lg:text-4xl mb-4 text-foreground">
             Aplicação —<br />
-            <span className="text-gradient-gold">OdontoGrowth 360</span>
+            <span className="text-gradient-gold">DentalGrowth 360</span>
           </h1>
           <p className="text-premium text-base max-w-xl mx-auto">
             Para garantir alinhamento e proteger a qualidade da implementação,
@@ -266,7 +266,7 @@ export default function AplicacaoBr() {
 
           {/* Nota de Privacidade */}
           <p className="text-xs text-muted-foreground text-center mt-4">
-            Seus dados são tratados com confidencialidade e utilizados exclusivamente para avaliação de elegibilidade ao OdontoGrowth 360.
+            Seus dados são tratados com confidencialidade e utilizados exclusivamente para avaliação de elegibilidade ao DentalGrowth 360.
           </p>
         </form>
       </div>
